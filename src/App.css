@@ -1,0 +1,586 @@
+/*
+Coming here later*/
+/*"StockPile" and s"STOCKPILE" is going to be our domain name and the logo as well*/
+* {
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  font-family: Helvetica;
+}
+/* NAVIGATION-LINKS */
+.navigation-link {
+  text-decoration: none;
+  color: hsl(240, 100%, 100%);
+}
+/*THE HOME PAGE*/
+.home-page-wrapper {
+  position: absolute;
+  width: 100%;
+  /* height: 800px; */
+  height: auto;
+  background-color: hsl(240, 100%, 10%);
+}
+.home-header-wrapper {
+  /* position: fixed; */
+  position: absolute;
+  display: flex;
+  padding: 3%;
+  background-color: hsl(240, 100%, 15%);
+  color: hsl(240, 100%, 98%);
+  font-size: 100%;
+  height: 5%;
+}
+.desktop-home-header-links {
+  margin-left: 30%;
+}
+.mobile-home-header-links {
+  display: none;
+}
+.header-link {
+  text-decoration: none;
+  color: hsl(240, 100%, 98%);
+  margin-right: 0%;
+  padding: 1.5%;
+}
+.header-link:hover {
+  transition: 0.35s;
+  border-bottom: 2px solid hsl(240, 100%, 98%);
+}
+.bootstrap-list-icon-wrapper,
+.close-menu-bar {
+  display: none;
+}
+.link {
+  color: hsl(240, 100%, 80%);
+}
+.home-page-content {
+  /* position: inherit; */
+  position: relative;
+  text-align: center;
+  width: 80%;
+  margin: 18% 13% 0% 7%;
+  padding: 20px;
+  border: 1px solid hsl(240, 80%, 15%);
+  border-radius: 10px;
+  background-color: hsl(240, 80%, 15%);
+  color: hsl(240, 100%, 93%);
+}
+.home-footer-wrapper {
+  width: 80%;
+  margin: 10% 13% 0% 7%;
+  position: relative;
+  border: 1px solid hsl(240, 100%, 10%);
+  border-radius: 10px;
+  padding: 20px;
+  background-color: hsl(240, 100%, 10%);
+}
+.footer-wrapper {
+  text-align: center;
+  width: 80%;
+  margin: 0% 13% 0% 7%;
+  color: hsl(240, 100%, 98%);
+  border: 1px solid hsl(360, 100%, 8%);
+  border-radius: 10px;
+  background-color: hsl(360, 100%, 8%);
+  height: auto;
+}
+/* THE LOGIN AND REGISTRATION FORM */
+/* THE LOGIN FORM */
+.login-page-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 800px;
+  background-color: hsl(240, 100%, 10%);
+}
+.login-header-wrapper {
+  background-color: hsl(240, 100%, 15%);
+  height: 8%;
+}
+.login-home-link {
+  padding: 20px;
+  margin-left: 5%;
+}
+.login-form {
+  margin: 8% 30% 0% 30%;
+  padding: 10px;
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  width: 40%;
+}
+.login-input-field {
+  height: 30px;
+  width: 80%;
+  margin: 1% 30% 1% 10%;
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 10%);
+  border: 1px solid hsl(240, 100%, 10%);
+  border-radius: 4px;
+}
+.login-btn {
+  width: 50%;
+  height: 25px;
+  margin: 1% 25% 1% 25%;
+  padding: 5px;
+  background-color: hsl(240, 100%, 30%);
+  border: 1px solid hsl(240, 100%, 30%);
+  border-radius: 5px;
+  color: hsl(240, 100%, 93%);
+}
+.login-btn:hover {
+  background-color: hsl(240, 100%, 40%);
+}
+.display-login-status {
+  text-align: center;
+}
+.display-login-errors {
+  color: red;
+  font-weight: bold;
+}
+.display-login-success {
+  color: green;
+  font-weight: bold;
+}
+.beat-loader-component {
+  padding: 20px;
+}
+/* THE REGISTRATION FORM */
+.signup-page-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 1500px;
+  background-color: hsl(240, 100%, 10%);
+  color: hsl(240, 100%, 90%);
+}
+.signup-header-wrapper {
+  background-color: hsl(240, 100%, 15%);
+  height: 5%;
+}
+.signup-home-link {
+  padding: 25px;
+  margin-left: 8%;
+}
+.registration-form {
+  width: 40%;
+  margin: 3% 30% 0% 30%;
+  padding: 10px;
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+}
+.signup-input-field {
+  height: 30px;
+  width: 80%;
+  margin: 1% 10% 1% 10%;
+  padding: 4px;
+  color: hsl(240, 100%, 90%);
+  background-color: hsl(240, 100%, 10%);
+  border: 1px solid hsl(240, 100%, 10%);
+  border-radius: 10px;
+}
+.signup-btn {
+  color: hsl(240, 100%, 90%);
+  background-color: hsl(240, 100%, 30%);
+  border: 1px solid hsl(240, 100%, 30%);
+  border-radius: 5px;
+  width: 50%;
+  height: 30px;
+  margin: 0% 25% 0% 25%;
+}
+.signup-btn:hover {
+  background-color: hsl(240, 100%, 40%);
+}
+.display-register-info-wrapper-1 {
+  color: white;
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  background-color: hsl(240, 100%, 15%);
+  padding: 10px;
+  width: 40%;
+  margin: 5% 30% 0% 30%;
+}
+.registration-email,
+.registration-password {
+  text-decoration: underline;
+  color: hsl(120, 100%, 75%);
+}
+.success-message {
+  color: hsl(120, 100%, 75%);
+}
+.check-email-status-error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+.check-password-match {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+}
+.first-display-on-sigup-page {
+  text-align: center;
+}
+.beat-loader-component-signup {
+  padding: 10px;
+  width: 20%;
+  margin: 0% 40% 0% 40%;
+}
+
+/* THE LOGOUT COMPONENT */
+.logout-wrapper {
+  position: absolute;
+  text-align: center;
+  background-color: hsl(240, 100%, 15%);
+  width: 100%;
+  height: 800px;
+}
+.logout-message {
+  padding-top: 80px;
+  color: hsl(240, 100%, 98%);
+  font-weight: bold;
+}
+
+/* THE MYPILE COMPONENT */
+.file-uploader {
+  margin-top: 8%;
+}
+
+.mypile-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 800px;
+  background-color: hsl(240, 100%, 10%);
+}
+.mypile-header-wrapper {
+  width: 100%;
+  height: 6%;
+  background-color: hsl(240, 100%, 15%);
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+.mypile-home-link,
+.mypile-viewpile-link,
+.mypile-logout-link {
+  padding: 10px;
+}
+.mypile-content-wrapper {
+  width: 50%;
+  height: auto;
+  padding: 5px;
+  margin: 5% 25% 5% 25%;
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  background-color: hsl(240, 100%, 15%);
+  color: hsl(240, 100%, 93%);
+}
+.mypile-input-field {
+  border: 1px solid hsl(240, 100%, 10%);
+  border-radius: 5px;
+  background-color: hsl(240, 100%, 10%);
+  color: hsl(240, 100%, 93%);
+  width: 80%;
+  margin: 0% 0% 0% -20%;
+}
+.pile-description-input-field {
+  height: 80px;
+}
+.pile-title-input-field {
+  height: 25px;
+}
+.mypile-btn {
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 30%);
+  border: 1px solid hsl(240, 100%, 30%);
+  border-radius: 5px;
+  width: 40%;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+.mypile-btn:hover {
+  background-color: hsl(240, 100%, 40%);
+}
+.pile-added-successfully {
+  background-color: hsl(240, 100%, 85%);
+  border: 1px solid hsl(240, 100%, 85%);
+  border-radius: 20px;
+  width: 80%;
+  margin: 5% 10% 5% 10%;
+  padding: 10px;
+  text-align: center;
+}
+.pile-added-successfully .pile-added {
+  color: green;
+}
+.beat-loader-component-mypile-wrapper {
+  width: 100%;
+  margin: 1% 0% 3% -30%;
+}
+.beat-loader-component-mypile-inner {
+  padding: 10px;
+  width: 20%;
+  margin-right: 45%;
+  margin-left: 35%;
+}
+
+/* USER PROFILE */
+.user-profile {
+  margin: 14% 45% 0% 35%;
+  color: white;
+}
+.user-profile-picture {
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+  text-align: center;
+  padding: 5px;
+  margin-top: 40px;
+  background-color: hsl(240, 100%, 15%);
+  width: 100px;
+  height: 90px;
+}
+.user-profile .user-name {
+  text-align: center;
+  color: lightseagreen;
+  width: 20%;
+}
+
+/* THE PILE INPUT FIELDS */
+.display-when-not-logged-in {
+  padding-top: 12%;
+  text-align: center;
+}
+
+.display-when-not-logged-in h3 {
+  color: rgb(226, 19, 19);
+}
+
+.pile-form {
+  margin-top: 10%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+/* THE VIEW MYPILE HERE */
+.view-pile-wrapper {
+  position: absolute;
+  width: 100%;
+  min-height: 700px;
+  height: auto;
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 25%);
+  /* padding: 20px; */
+}
+.viewpile-header-wrapper {
+  margin-top: 0%;
+  margin-bottom: 30px;
+  background-color: hsl(240, 100%, 15%);
+  display: flex;
+}
+.viewpile-home-link,
+.viewpile-mypile-link,
+.viewpile-logout-link {
+  padding: 20px;
+}
+.view-link {
+  color: hsl(240, 100%, 85%);
+}
+.pile-wrapper {
+  display: block;
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  width: 40%;
+  margin: 3% 30% 2% 30%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.pile-date-time {
+  color: hsl(120, 100%, 95%);
+  background-color: hsl(240, 100%, 12%);
+  background-color: lightseagreen;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: italic;
+  margin: 1% 20% 0.5% 20%;
+  padding: 0.5%;
+  width: 60%;
+}
+.pile-title {
+  background-color: hsl(240, 100%, 25%);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 1% 10% 0.5% 10%;
+  padding-top: 50px;
+  padding: 1%;
+  width: 80%;
+}
+.pile-description {
+  background-color: hsl(240, 100%, 25%);
+  border: 1px solid transparent;
+  border-radius: 10px;
+  margin: 1% 10% 4% 10%;
+  padding: 1%;
+  width: 80%;
+}
+.view-pile-heading {
+  width: 40%;
+  margin: 2% 30% 2% 30%;
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 15px;
+  text-align: center;
+}
+.view-pile-when-not-loggedin {
+  text-align: center;
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  width: 40%;
+  margin: 5% 30% 2% 30%;
+}
+/* THE ABOUT COMPONENT */
+.about-page-wrapper {
+  width: 100%;
+  height: 800px;
+  background-color: hsl(240, 100%, 10%);
+  color: hsl(120, 100%, 95%);
+}
+.about-header-wrapper {
+  background-color: hsl(240, 100%, 15%);
+  height: 65px;
+  display: flex;
+  align-items: center;
+}
+.about-home-link,
+.about-viewpile-link {
+  padding: 20px;
+  margin: 0% 10% 0% 10%;
+}
+.about-page-content-wrapper {
+  margin-top: 50px;
+  padding: 10px;
+  text-align: center;
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 5%;
+  margin-right: 15%;
+}
+
+/* MEDIA QUERIES FOR MOBILE VIEW */
+@media screen and (max-width: 480px) {
+  /* THE HOME PAGE */
+  .home-page-content {
+    width: 70%;
+    margin: 63% 23% 0% 7%;
+  }
+  .header-nav-links {
+    background-color: hsl(240, 100%, 25%);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    width: 100%;
+    padding: 5px;
+    padding-bottom: 10px;
+  }
+  .header-link {
+    text-align: center;
+    border-bottom: 1px solid white;
+  }
+  .header-link:hover {
+    transition: 0.35s;
+    background-color: hsl(240, 100%, 15%);
+  }
+  .desktop-home-header-links {
+    display: none;
+  }
+  .mobile-home-header-links {
+    display: inline;
+    top: 67px;
+    position: absolute;
+    width: 30%;
+    margin-left: 60%;
+    margin-right: 10%;
+    transition: 0.55s;
+  }
+  .bootstrap-list-icon-wrapper {
+    display: inline;
+  }
+  .bootstrap-list-icon {
+    margin-left: 32%;
+    width: 100px;
+  }
+  .bootstrap-x-icon {
+    width: 100%;
+    background-color: hsl(360, 100%, 15%);
+    padding: 5px;
+  }
+  .bootstrap-x-icon:hover {
+    transition: 0.2s;
+    background-color: hsl(360, 100%, 25%);
+  }
+  /* THE SIGNUP PAGE */
+  .registration-form {
+    width: 70%;
+    margin: 9% 20% 0% 10%;
+  }
+  .display-register-info-wrapper-1 {
+    width: 70%;
+    margin: 20% 20% 0% 10%;
+  }
+  /* THE LOGIN PAGE */
+  .login-form {
+    margin: 8% 18% 0% 12%;
+    width: 70%;
+  }
+  /* THE  MYPILE PAGE */
+  .mypile-content-wrapper {
+    width: 80%;
+    margin: 5% 10% 5% 10%;
+  }
+  .user-profile-picture {
+    width: 40%;
+    margin: 0% 0% 0% -10%;
+  }
+
+  /* THE MY PILE VIEW PAGE */
+  .pile-wrapper {
+    width: 80%;
+    margin: 3% 12% 0% 8%;
+  }
+  .view-pile-heading,
+  .view-pile-when-not-loggedin {
+    width: 80%;
+    margin: 2% 12% 2% 8%;
+  }
+
+  /* THE LOGOUT PAGE */
+  .logout-message {
+    width: 80%;
+    margin: 10% 10% 1% 10%;
+    font-size: large;
+  }
+  /* THE ABOUT PAGE */
+  .about-home-link,
+  .about-viewpile-link {
+    margin: 0% 1% 0% 1%;
+  }
+}
+
+/*  at 400px pduh the home content further down */
+@media screen and (max-width: 350px) {
+  /* THE HOME PAGE */
+  .home-page-content {
+    margin-top: 86%;
+  }
+}
+
+/* FOR THE SCREEN FROM 480PX TO 1000PX */
+@media screen and (min-width: 480px) and (max-width: 1000px) {
+}
