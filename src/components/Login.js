@@ -83,11 +83,11 @@ const Login = (isLoggedIn) => {
               <p className="display-login-errors">{displayLoginErrors}</p>
               <p className="display-login-success">{displayLoginSuccess}</p>
             </div>
-            <div className="beat-loader-component">
+            <div className="beat-loader-component-wrapper">
               {displayBeatLoader ? (
                 <div>
                   {" "}
-                  <BeatLoader loading color="lightseagreen" />
+                  <BeatLoader className="beat-loader" color="lightseagreen" />
                 </div>
               ) : null}
             </div>

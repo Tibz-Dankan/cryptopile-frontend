@@ -143,9 +143,12 @@ Coming here later*/
   color: green;
   font-weight: bold;
 }
-.beat-loader-component {
-  padding: 20px;
+.beat-loader-component-wrapper {
+  position: relative;
+  left: 35%;
+  padding: 20px 0px 20px 0px;
 }
+
 /* THE REGISTRATION FORM */
 .signup-page-wrapper {
   position: absolute;
@@ -223,9 +226,9 @@ Coming here later*/
   text-align: center;
 }
 .beat-loader-component-signup {
-  padding: 10px;
-  width: 20%;
-  margin: 0% 40% 0% 40%;
+  width: 40%;
+  margin: 1% 30% 1% 30%;
+  padding: 20px 0px 20px 120px;
 }
 
 /* THE LOGOUT COMPONENT */
@@ -533,6 +536,11 @@ Coming here later*/
   .display-register-info-wrapper-1 {
     width: 70%;
     margin: 20% 20% 0% 10%;
+  }
+  .beat-loader-component-signup {
+    width: 80%;
+    margin: 1% 10% 1% 21%;
+    padding: 20px 0px 20px 60px;
   }
   /* THE LOGIN PAGE */
   .login-form {
