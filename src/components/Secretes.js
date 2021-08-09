@@ -26,22 +26,30 @@ const Secretes = () => {
   // submit the secretes
   const submitSecretePileInfo = async (e) => {
     e.preventDefault();
-    const response = await axiosApi.post(
-      `/secretepile/${localStorage.getItem("userId")}`,
-      {
-        title: secretePile.title,
-        description: secretePile.description,
-      }
-    );
-    console.log(response);
+    try {
+      const response = await axiosApi.post(
+        `/secretepile/${localStorage.getItem("userId")}`,
+        {
+          title: secretePile.title,
+          description: secretePile.description,
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
   //the get secretes
   const getSecretes = async () => {
-    const response = await axiosApi.get(
-      `/getsecretepile/${localStorage.getItem("userId")}`
-    );
-    console.log(response);
-    setGetMySecrete(response);
+    try {
+      const response = await axiosApi.get(
+        `/getsecretepile/${localStorage.getItem("userId")}`
+      );
+      console.log(response);
+      setGetMySecrete(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Fragment>
