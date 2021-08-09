@@ -9,8 +9,8 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import ViewMypile from "./components/ViewMypile";
 import ScrollToTop from "./components/ScrollToTop";
+import Secretes from "./components/Secretes";
 import { TokenContext } from "./components/context/TokenContext";
-// visit some websites for design and what to go with man isn't !
 const App = () => {
   const [globalUserId, setGlobalUserId] = useState("");
 
@@ -28,6 +28,7 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/mypile" component={Mypile} />
             <Route path="/viewmypile" component={ViewMypile} />
+            <Route path="/secretes" component={Secretes} />
           </TokenContext.Provider>
         </Switch>
       </BrowserRouter>
