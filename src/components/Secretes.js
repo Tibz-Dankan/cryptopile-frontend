@@ -30,8 +30,8 @@ const Secretes = () => {
       const response = await axiosApi.post(
         `/secretepile/${localStorage.getItem("userId")}`,
         {
-          title: secretePile.title,
-          description: secretePile.description,
+          secrete_title: secretePile.title,
+          secrete_description: secretePile.description,
         }
       );
       console.log(response);
