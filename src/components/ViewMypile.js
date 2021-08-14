@@ -9,6 +9,7 @@ import "./../App.css";
 const ViewMypile = () => {
   const [renderAllPile, setRenderAllPile] = useState([]);
   const [displayWhenNoToken, setDisplayWhenNoToken] = useState(false);
+  const [catchError, setCatchError] = useState("");
 
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
 
@@ -30,9 +31,11 @@ const ViewMypile = () => {
         const arrPile = getMypile.data.rows;
         console.log(arrPile);
         setRenderAllPile(arrPile);
+        setCatchError("");
       }
     } catch (err) {
       console.log(err);
+      setCatchError("Sorry, something went wrong!");
     }
   };
 
@@ -87,8 +90,9 @@ const ViewMypile = () => {
           <LogoutLink />
         </div>
       </div>
-      <div className="view-pile-heading">
-        <h3> checks pile here </h3>
+      <div className="view-pile-heading" style={{ textAlign: "center" }}>
+        <h3> check pile here </h3>
+        <p style={{ color: "lightyellow" }}>{catchError}</p>
       </div>
       {/* trying this and it works i will push it into production */}
       {displayWhenNoToken ? (

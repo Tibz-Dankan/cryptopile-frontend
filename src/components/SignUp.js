@@ -57,6 +57,7 @@ const SignUp = () => {
   const [hideRegistrationForm, setHideRegstrationForm] = useState(false);
   // show the beat loader
   const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
+  const [catchError, setCatchError] = useState("");
 
   const submitRegisterInfo = async (e) => {
     e.preventDefault();
@@ -65,7 +66,7 @@ const SignUp = () => {
     // show the beat loader
     setDisplayBeatLoader(true);
     try {
-      const response = await axios.post("http://localhost:5000/register", {
+      const response = await axios.post("http://localhost:500/register", {
         firstname: registerInfo.firstname,
         lastname: registerInfo.lastname,
         email: registerInfo.email,
@@ -117,6 +118,8 @@ const SignUp = () => {
       }
     } catch (err) {
       console.log(err);
+      setCatchError("sorry, something went wrong!");
+      setDisplayBeatLoader(false);
     }
   };
 
@@ -174,7 +177,12 @@ const SignUp = () => {
               <p className="check-password-match">{checkPasswordMatch}</p>
             </div>
           ) : (
-            <p className="first-display-on-sigup-page">{firsDisplayMessage}</p>
+            <div style={{ textAlign: "center" }}>
+              <p className="first-display-on-sigup-page">
+                {firsDisplayMessage}
+              </p>
+              <p style={{ color: "lightyellow" }}>{catchError}</p>
+            </div>
           )}
         </div>
         <div className="beat-loader-component-signup">

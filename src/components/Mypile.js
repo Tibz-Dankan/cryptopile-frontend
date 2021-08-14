@@ -9,9 +9,6 @@ import "./../App.css";
 import { BeatLoader } from "react-spinners";
 // import { TokenContext } from "./context/TokenContext";
 const Mypile = () => {
-  // State for the file uplaod
-  const [file, setFile] = useState("");
-  const [filename, setFilename] = useState("");
   //state for pile
   const [pile, setPile] = useState({ title: "", description: "" });
   const [displayWhenTokenError, setDisplayWhenTokenError] = useState("");
@@ -23,6 +20,8 @@ const Mypile = () => {
     useState(false);
   // display the beat loader
   const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
+  //catch somw errors
+  const [catchError, setCatchError] = useState("");
 
   const axiosApi = axios.create({
     baseURL: "http://localhost:5000/api",
@@ -50,7 +49,7 @@ const Mypile = () => {
   // Post or submit the pile
   const submitPile = async (e) => {
     e.preventDefault();
-    // display  the beat loader
+    // display  the beat loaders
     setDisplayBeatLoader(true);
     try {
       const postPile = await axiosApi.post(
@@ -69,6 +68,7 @@ const Mypile = () => {
         if (postPile.data.messageCheck === "error") {
           setDisplayWhenTokenError(postPile.data.messageDisplay);
           setDisplayWhenUserNotLoggedIn(true);
+          setCatchError("");
         } else {
           // if The pile was successful posted the make input fields the empty
           setPile({ title: "", description: "" });
@@ -78,6 +78,8 @@ const Mypile = () => {
       }
     } catch (err) {
       console.log(err);
+      setCatchError("Sorry, something went wrong!");
+      setDisplayBeatLoader(false);
     }
   };
 
@@ -127,9 +129,13 @@ const Mypile = () => {
           </div>
         </div>
         <div className="mypile-content-wrapper">
+          <div className="mypile-catch-error" style={{ textAlign: "center" }}>
+            <p style={{ color: "lightyellow" }}>{catchError}</p>
+          </div>
           {displayWhenUserNotLoggedIn ? (
             <div className="display-when-not-logged-in">
               <h3>{displayWhenTokenError}</h3>
+              <p>{catchError}</p>
               <div>
                 <LoginLink />
               </div>

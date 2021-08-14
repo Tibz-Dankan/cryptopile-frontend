@@ -17,6 +17,7 @@ const Login = (isLoggedIn) => {
   const [displayLoginSuccess, SetDisplayLoginSuccess] = useState("");
   const [hideLoginForm, setHideLoginForm] = useState(false);
   const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
+  const [catchError, setCatchError] = useState("");
   // const [isloggedIn, setIsLoggedIn] = useState(false)
   // const { globalUserId, setGlobalUserId } = useContext(TokenContext);
 
@@ -30,34 +31,41 @@ const Login = (isLoggedIn) => {
   // submit the user login details
   const submitLoginInfo = async (e) => {
     e.preventDefault();
-    // on submitting display the beatloader
-    setDisplayBeatLoader(true);
-    //hide the error and success messages
-    SetDisplayLoginSuccess("");
-    SetDisplayLoginErrors("");
-    const response = await axios.post("http://localhost:5000/login", {
-      email: userLoginInfo.email,
-      password: userLoginInfo.password,
-    });
-    console.log(response);
-    // if the login is a success then make the input fields empty
-    if (response.status === 200) {
-      // stop the loading indicator
-      setDisplayBeatLoader(false);
-      // alert the user input anything geoes wrong
-      SetDisplayLoginErrors(response.data.msg);
-      SetDisplayLoginSuccess(response.data.success);
-      if (response.data.success === "You have successfully logged in") {
-        // hide login form
-        setHideLoginForm(true);
+    try {
+      // on submitting display the beatloader
+      setDisplayBeatLoader(true);
+      //hide the error and success messages
+      SetDisplayLoginSuccess("");
+      SetDisplayLoginErrors("");
+      const response = await axios.post("http://localhost:5000/login", {
+        email: userLoginInfo.email,
+        password: userLoginInfo.password,
+      });
+      console.log(response);
+      // if the login is a success then make the input fields empty
+      if (response.status === 200) {
+        // stop the loading indicator
+        setDisplayBeatLoader(false);
+        // alert the user input anything geoes wrong
+        SetDisplayLoginErrors(response.data.msg);
+        SetDisplayLoginSuccess(response.data.success);
+        setCatchError(""); // should not display
+        if (response.data.success === "You have successfully logged in") {
+          // hide login form
+          setHideLoginForm(true);
 
-        setUserLoginInfo({ email: "", password: "" }); //makes the input fields empty
-        // set the token to the local storage
-        localStorage.setItem("accessToken", response.data.accessToken);
-        // store the userid in the local storage
-        localStorage.setItem("userId", response.data.userId);
-        history.push("/mypile");
+          setUserLoginInfo({ email: "", password: "" }); //makes the input fields empty
+          // set the token to the local storage
+          localStorage.setItem("accessToken", response.data.accessToken);
+          // store the userid in the local storage
+          localStorage.setItem("userId", response.data.userId);
+          history.push("/mypile");
+        }
       }
+    } catch (error) {
+      console.log(error);
+      setCatchError("Sorry, something went wrong!");
+      setDisplayBeatLoader(false);
     }
   };
   // pass the token from the accessToken to the context hook
@@ -82,6 +90,9 @@ const Login = (isLoggedIn) => {
             <div className="display-login-status">
               <p className="display-login-errors">{displayLoginErrors}</p>
               <p className="display-login-success">{displayLoginSuccess}</p>
+            </div>
+            <div className="login-catch-error" style={{ textAlign: "center" }}>
+              <p style={{ color: "lightyellow" }}>{catchError}</p>
             </div>
             <div className="beat-loader-component-wrapper">
               {displayBeatLoader ? (
