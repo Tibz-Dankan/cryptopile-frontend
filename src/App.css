@@ -31,6 +31,9 @@ Coming here later*/
   font-size: 100%;
   height: 5%;
 }
+.logo-wrapper {
+  padding-top: 15px;
+}
 .desktop-home-header-links {
   margin-left: 30%;
 }
@@ -516,6 +519,7 @@ Coming here later*/
     display: inline;
   }
   .bootstrap-list-icon {
+    padding-top: 15px;
     margin-left: 32%;
     width: 100px;
   }
