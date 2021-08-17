@@ -7,9 +7,11 @@ const Secretes = () => {
     description: "",
   });
   const [getMySecerete, setGetMySecrete] = useState([]);
+  const [catchError, setCatchError] = useState("");
   // get the token from the local storage
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
   //request along the token
+  //https://stockpile-backend.herokuapp.com/
   const axiosApi = axios.create({
     baseURL: "http://localhost:5000/api",
     headers: {
@@ -37,6 +39,7 @@ const Secretes = () => {
       console.log(response);
     } catch (error) {
       console.log(error);
+      setCatchError(" sorry, some thing went wrong!");
     }
   };
   //the get secretes
@@ -49,6 +52,7 @@ const Secretes = () => {
       setGetMySecrete(response);
     } catch (error) {
       console.log(error);
+      setCatchError("sorry, some thing went wrong!");
     }
   };
   return (
@@ -70,6 +74,7 @@ const Secretes = () => {
               id="title"
               value={secretePile.title}
               onChange={(e) => handleChange(e)}
+              required
             />
             <label htmlFor="description">Description</label>
             <input
@@ -79,13 +84,17 @@ const Secretes = () => {
               id="description"
               value={secretePile.description}
               onChange={(e) => handleChange(e)}
+              required
             />
             <button className="secrete-btn">submit</button>
           </form>
         </div>
         <div className="get-secretes-wrapper">
           <button onClick={getSecretes}>See my secretes</button>
-          <p>{getMySecerete}</p>
+          {/* <p>{getMySecerete}</p> */}
+        </div>
+        <div className="catch-error" style={{ color: "red" }}>
+          <p>{catchError}</p>
         </div>
       </div>
     </Fragment>

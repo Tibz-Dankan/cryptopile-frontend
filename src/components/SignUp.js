@@ -66,6 +66,7 @@ const SignUp = () => {
     // show the beat loader
     setDisplayBeatLoader(true);
     try {
+      //https://stockpile-backend.herokuapp.com/
       const response = await axios.post("http://localhost:500/register", {
         firstname: registerInfo.firstname,
         lastname: registerInfo.lastname,
