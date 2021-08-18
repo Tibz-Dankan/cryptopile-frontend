@@ -38,10 +38,13 @@ const Login = (isLoggedIn) => {
       SetDisplayLoginSuccess("");
       SetDisplayLoginErrors("");
       // https://stockpile-backend.herokuapp.com/
-      const response = await axios.post("http://localhost:5000/login", {
-        email: userLoginInfo.email,
-        password: userLoginInfo.password,
-      });
+      const response = await axios.post(
+        "https://stockpile-backend.herokuapp.com/login",
+        {
+          email: userLoginInfo.email,
+          password: userLoginInfo.password,
+        }
+      );
       console.log(response);
       // if the login is a success then make the input fields empty
       if (response.status === 200) {

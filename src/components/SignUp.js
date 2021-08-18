@@ -67,14 +67,17 @@ const SignUp = () => {
     setDisplayBeatLoader(true);
     try {
       //https://stockpile-backend.herokuapp.com/
-      const response = await axios.post("http://localhost:500/register", {
-        firstname: registerInfo.firstname,
-        lastname: registerInfo.lastname,
-        email: registerInfo.email,
-        gender: registerInfo.gender, // some changes made here
-        password: registerInfo.password,
-        confirm_password: registerInfo.confirm_password,
-      });
+      const response = await axios.post(
+        "https://stockpile-backend.herokuapp.com/register",
+        {
+          firstname: registerInfo.firstname,
+          lastname: registerInfo.lastname,
+          email: registerInfo.email,
+          gender: registerInfo.gender, // some changes made here
+          password: registerInfo.password,
+          confirm_password: registerInfo.confirm_password,
+        }
+      );
       console.log(response);
       if (response.status === 200) {
         // successful request stop the beat loader
