@@ -25,12 +25,13 @@ const Mypile = () => {
 
   //https://stockpile-backend.herokuapp.com/
   const axiosApi = axios.create({
-    baseURL: "https://stockpile-backend.herokuapp.com/api",
+    // baseURL: "https://stockpile-backend.herokuapp.com/api",
+    baseURL: "http://localhost:5000/api",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     },
   });
-
+  // get the usrer profile
   const getUserProfile = async (e) => {
     try {
       const response = await axiosApi.get(
@@ -42,9 +43,12 @@ const Mypile = () => {
       console.log(error);
     }
   };
-  // render and upadate
+
   useEffect(() => {
-    getUserProfile();
+    if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
+      // Render the user profile on  mounting nd after every  update
+      getUserProfile();
+    }
   }, []);
 
   // Post or submit the pile

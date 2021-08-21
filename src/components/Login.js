@@ -18,7 +18,7 @@ const Login = (isLoggedIn) => {
   const [hideLoginForm, setHideLoginForm] = useState(false);
   const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
   const [catchError, setCatchError] = useState("");
-  // const [isloggedIn, setIsLoggedIn] = useState(false)
+  const [isloggedIn, setIsLoggedIn] = useState(false);
   // const { globalUserId, setGlobalUserId } = useContext(TokenContext);
 
   let history = useHistory();
@@ -39,7 +39,8 @@ const Login = (isLoggedIn) => {
       SetDisplayLoginErrors("");
       // https://stockpile-backend.herokuapp.com/
       const response = await axios.post(
-        "https://stockpile-backend.herokuapp.com/login",
+        // "https://stockpile-backend.herokuapp.com/login",
+        "http://localhost:5000/login",
         {
           email: userLoginInfo.email,
           password: userLoginInfo.password,
@@ -59,6 +60,9 @@ const Login = (isLoggedIn) => {
           setHideLoginForm(true);
 
           setUserLoginInfo({ email: "", password: "" }); //makes the input fields empty
+          setIsLoggedIn(true);
+          //store the state in the local storage
+          localStorage.setItem("isLoggedIn", "isLoggedIn");
           // set the token to the local storage
           localStorage.setItem("accessToken", response.data.accessToken);
           // store the userid in the local storage
