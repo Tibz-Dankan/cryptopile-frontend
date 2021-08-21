@@ -8,6 +8,7 @@ const Logout = () => {
   const logoutUser = async () => {
     await localStorage.removeItem("accessToken");
     await localStorage.removeItem("userId");
+    await localStorage.removeItem("isLoggedIn");
     //direct to the login page
     history.push("/login");
   };
