@@ -19,9 +19,6 @@ const Header = () => {
           <NavLink to="/login" className="header-link">
             Login
           </NavLink>
-          {/* <NavLink to="/logout" className="header-link">
-            Logout
-          </NavLink> */}
         </div>
       </nav>
     </div>

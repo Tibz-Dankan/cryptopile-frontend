@@ -4,12 +4,10 @@ import "./../../App.css";
 
 const LogoutLink = () => {
   return (
-    <div>
-      <nav>
-        <NavLink to="/logout" className="navigation-link">
-          Logout
-        </NavLink>
-      </nav>
+    <div className="logout-header-link">
+      <NavLink to="/Logout" className="header-link">
+        Logout
+      </NavLink>
     </div>
   );
 };

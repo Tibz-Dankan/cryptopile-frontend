@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+// import HomeHeaderLogoutLink from "./links/HomeHeaderLogoutLink";
 import "./../App.css";
 import { Link } from "react-router-dom";
 import { List, X } from "react-bootstrap-icons";
@@ -13,6 +14,9 @@ const Home = () => {
         <div className="logo-wrapper">STOCKPILE</div>
         <div className="desktop-home-header-links">
           <Header />
+        </div>
+        <div className="logout-header-link">
+          {/* <HomeHeaderLogoutLink /> */}
         </div>
         <div className="menu-icon-wrapper" onClick={setShowMenuBar}>
           {showMenuBar ? (

@@ -13,9 +13,9 @@ const ViewMypile = () => {
 
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
 
-  //https://stockpile-backend.herokuapp.com/
   const axiosApi = axios.create({
     baseURL: "https://stockpile-backend.herokuapp.com/api",
+    // baseURL: "http://localhost:5000/api",
     headers: {
       Authorization: "Bearer " + tokenFromLocalStorage,
     },
@@ -75,7 +75,9 @@ const ViewMypile = () => {
 
   // show pile on rendering and after every update
   useEffect(() => {
-    getpile();
+    if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
+      getpile();
+    }
   }, []);
 
   return (
