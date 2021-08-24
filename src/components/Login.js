@@ -146,10 +146,12 @@ const Login = (isLoggedIn) => {
             </button>
           </form>
           {/* <p>{storeAccessTokenGloabally}</p> for trail purposes */}
-          <p>Is this your first time here? </p>
-          <Link to="/signup" className="link">
-            signup
-          </Link>
+          <p>
+            Is this your first time here?{" "}
+            <Link to="/signup" className="link">
+              signup
+            </Link>
+          </p>
         </div>
       </div>
     </Fragment>

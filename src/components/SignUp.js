@@ -289,10 +289,12 @@ const SignUp = () => {
               <br />
               <button className="signup-btn">Create</button>
             </form>
-            <p>Do you already have an account?</p>
-            <Link to="/login" className="link">
-              login
-            </Link>
+            <p>
+              Do you already have an account?{" "}
+              <Link to="/login" className="link">
+                login
+              </Link>
+            </p>
           </div>
         )}
       </div>
