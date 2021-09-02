@@ -10,6 +10,9 @@ const Header = () => {
           <NavLink to="/mypile" className="header-link">
             MyPile
           </NavLink>
+          <NavLink to="/viewmypile" className="header-link">
+            ViewPile
+          </NavLink>
           <NavLink to="/about" className="header-link">
             About
           </NavLink>

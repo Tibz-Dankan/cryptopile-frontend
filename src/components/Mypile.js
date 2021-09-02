@@ -7,6 +7,7 @@ import LogoutLink from "./links/LogoutLink";
 import axios from "axios";
 import "./../App.css";
 import { BeatLoader } from "react-spinners";
+import NotLoggedIn from "./NotLoggedIn";
 // import { TokenContext } from "./context/TokenContext";
 const Mypile = () => {
   //state for pile
@@ -22,10 +23,11 @@ const Mypile = () => {
   const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
   //catch somw errors
   const [catchError, setCatchError] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const axiosApi = axios.create({
-    baseURL: "https://stockpile-backend.herokuapp.com/api",
-    // baseURL: "http://localhost:5000/api",
+    // baseURL: "https://stockpile-backend.herokuapp.com/api",
+    baseURL: "http://localhost:5000/api",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     },
@@ -47,6 +49,7 @@ const Mypile = () => {
     if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
       // Render the user profile on  mounting nd after every  update
       getUserProfile();
+      setIsLoggedIn(true);
     }
   }, []);
 
@@ -120,95 +123,100 @@ const Mypile = () => {
 
   return (
     <Fragment>
-      <div className="mypile-wrapper">
-        <div className="mypile-header-wrapper">
-          <div className="mypile-home-link">
-            <HomeLink />
-          </div>
-          <div className="mypile-viewpile-link">
-            <ViewPileLink />
-          </div>
-          <div className="mypile-logout-link">
-            <LogoutLink />
-          </div>
-        </div>
-        <div className="mypile-content-wrapper">
-          <div className="mypile-catch-error" style={{ textAlign: "center" }}>
-            <p style={{ color: "lightyellow" }}>{catchError}</p>
-          </div>
-          {displayWhenUserNotLoggedIn ? (
-            <div className="display-when-not-logged-in">
-              <h3>{displayWhenTokenError}</h3>
-              <p>{catchError}</p>
-              <div>
-                <LoginLink />
+      <div>
+        {isLoggedIn ? (
+          <div className="mypile-wrapper">
+            <div className="mypile-header-wrapper">
+              <div className="mypile-home-link">
+                <HomeLink />
+              </div>
+              <div className="mypile-viewpile-link">
+                <ViewPileLink />
+              </div>
+              <div className="mypile-logout-link">
+                <LogoutLink />
               </div>
             </div>
-          ) : (
-            /* display user profile */
-            <div className="user-profile">
-              <div className="user-profile-picture">
-                <h4>Your Profile pic</h4>
+            <div className="mypile-content-wrapper">
+              <div
+                className="mypile-catch-error"
+                style={{ textAlign: "center" }}
+              >
+                <p style={{ color: "lightyellow" }}>{catchError}</p>
               </div>
-              <div className="user-name">
-                <h3>
-                  {userName.firstname} {userName.lastname}
-                </h3>
-              </div>
-            </div>
-          )}
-          {/* hide the pile form when the pile has been added to the database */}
-          {hidePileFormWhenAddedToDb ? (
-            <div className="pile-added-successfully">
-              <div className="pile-added">
-                <p> Your pile has been added sucessfully</p>
-                <p> click to checkout pile to see the pile</p>
-              </div>
-              <div className="view-pile-link-in-mypile">
-                <ViewLink />
-              </div>
-            </div>
-          ) : (
-            <div className="pile-form">
-              {/* THE PILE FORM */}
-              <form onSubmit={(e) => submitPile(e)}>
-                <label htmlFor="Title">Title:</label> <br />
-                <input
-                  type="text"
-                  value={pile.title}
-                  onChange={(e) => handlePileChanges(e)}
-                  id="title"
-                  placeholder="Title"
-                  className="input-field mypile-input-field pile-title-input-field"
-                  required
-                />
-                <br />
-                <br />
-                <label htmlFor="description">Description:</label>
-                <br />
-                <textarea
-                  className="mypile-input-field pile-description-input-field"
-                  value={pile.description}
-                  onChange={(e) => handlePileChanges(e)}
-                  id="description"
-                  placeholder="Short Description"
-                  required
-                ></textarea>
-                <br />
-                <br />
-                <div className="beat-loader-component-mypile-wrapper">
-                  {displayBeatLoader ? (
-                    <div className="beat-loader-component-mypile-inner">
-                      <BeatLoader color="lightseagreen" />{" "}
-                    </div>
-                  ) : null}
+              {displayWhenUserNotLoggedIn ? (
+                <div className="display-when-not-logged-in">
+                  <h3>{displayWhenTokenError}</h3>
+                  <p>{catchError}</p>
+                  <div>
+                    <LoginLink />
+                  </div>
                 </div>
-                <button className="btn mypile-btn">Add</button>
-              </form>
+              ) : (
+                /* display user profile */
+                <div className="user-profile">
+                  <div className="user-profile-picture">
+                    <h4>Your Profile pic</h4>
+                  </div>
+                  <div className="user-name">
+                    <h3>
+                      {userName.firstname} {userName.lastname}
+                    </h3>
+                  </div>
+                </div>
+              )}
+              {/* hide the pile form when the pile has been added to the database */}
+              {hidePileFormWhenAddedToDb ? (
+                <div className="pile-added-successfully">
+                  <div className="pile-added">
+                    <p> Your pile has been added sucessfully</p>
+                    <p> click to checkout pile to see the pile</p>
+                  </div>
+                  <div className="view-pile-link-in-mypile">
+                    <ViewLink />
+                  </div>
+                </div>
+              ) : (
+                <div className="pile-form">
+                  {/* THE PILE FORM */}
+                  <form onSubmit={(e) => submitPile(e)}>
+                    <label htmlFor="Title">Title:</label> <br />
+                    <input
+                      type="text"
+                      value={pile.title}
+                      onChange={(e) => handlePileChanges(e)}
+                      id="title"
+                      placeholder="Title"
+                      className="input-field mypile-input-field pile-title-input-field"
+                      required
+                    />
+                    <br />
+                    <br />
+                    <label htmlFor="description">Description:</label>
+                    <br />
+                    <textarea
+                      className="mypile-input-field pile-description-input-field"
+                      value={pile.description}
+                      onChange={(e) => handlePileChanges(e)}
+                      id="description"
+                      placeholder="Short Description"
+                      required
+                    ></textarea>
+                    <br />
+                    <br />
+                    <div className="beat-loader-component-mypile-wrapper">
+                      {displayBeatLoader ? (
+                        <div className="beat-loader-component-mypile-inner">
+                          <BeatLoader color="lightseagreen" />{" "}
+                        </div>
+                      ) : null}
+                    </div>
+                    <button className="btn mypile-btn">Add</button>
+                  </form>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        {/* <div className="file-uploader">
+            {/* <div className="file-uploader">
         <h1>File Uploader Here</h1>
         <input
         type="file"
@@ -219,6 +227,10 @@ const Mypile = () => {
         Upload
         </button>
       </div> */}
+          </div>
+        ) : (
+          <NotLoggedIn />
+        )}
       </div>
     </Fragment>
   );

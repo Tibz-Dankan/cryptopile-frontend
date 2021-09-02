@@ -9,7 +9,8 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import ViewMypile from "./components/ViewMypile";
 import ScrollToTop from "./components/ScrollToTop";
-import Secretes from "./components/Secretes";
+import AddSecretePile from "./components/AddSecretePile";
+import ViewSecretePile from "./components/ViewSecretePile";
 import { TokenContext } from "./components/context/TokenContext";
 const App = () => {
   const [globalUserId, setGlobalUserId] = useState("");
@@ -28,7 +29,8 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/mypile" component={Mypile} />
             <Route path="/viewmypile" component={ViewMypile} />
-            <Route path="/secretes" component={Secretes} />
+            <Route path="/addsecretepile" component={AddSecretePile} />
+            <Route path="/viewsecretepile" component={ViewSecretePile} />
           </TokenContext.Provider>
         </Switch>
       </BrowserRouter>

@@ -22,7 +22,9 @@ const Home = () => {
           {showMenuBar ? (
             <div className="mobile-home-header-links">
               <X size={30} className="bootstrap-x-icon" />
-              <Header />
+              <div className="mobile-home-header-component">
+                <Header />
+              </div>
             </div>
           ) : (
             <div className="bootstrap-list-icon-wrapper">

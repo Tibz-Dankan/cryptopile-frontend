@@ -17,12 +17,10 @@ Coming here later*/
 .home-page-wrapper {
   position: absolute;
   width: 100%;
-  /* height: 800px; */
   height: auto;
   background-color: hsl(240, 100%, 10%);
 }
 .home-header-wrapper {
-  /* position: fixed; */
   position: absolute;
   display: flex;
   padding: 3%;
@@ -248,6 +246,13 @@ Coming here later*/
   font-weight: bold;
 }
 .not-logged-in-message {
+  position: absolute;
+  text-align: center;
+  /* width: 100%; */
+  height: 700px;
+  top: 0%;
+  left: 0%;
+  background-color: hsl(240, 100%, 15%);
   color: hsl(240, 100%, 98%);
 }
 .links-in-logout-component {
@@ -518,30 +523,33 @@ Coming here later*/
   }
   .mobile-home-header-links {
     display: inline;
-    top: 67px;
+    top: 15px;
     position: absolute;
     width: 30%;
-    margin-left: 60%;
-    margin-right: 10%;
+    margin-left: 58%;
+    margin-right: 12%;
     transition: 0.55s;
+  }
+  .mobile-home-header-component {
+    /* more to be done here 
+    so take note os that */
+    /* border: 1px solid hsl(240, 100%, 40%); */
+    border-radius: 5px;
   }
   .bootstrap-list-icon-wrapper {
     display: inline;
   }
   .bootstrap-list-icon {
     padding-top: 15px;
-    margin-left: 32%;
+    margin-left: 10%;
     width: 100px;
   }
   .bootstrap-x-icon {
     width: 100%;
-    background-color: hsl(360, 100%, 15%);
     padding: 5px;
+    margin-bottom: 12px;
   }
-  .bootstrap-x-icon:hover {
-    transition: 0.2s;
-    background-color: hsl(360, 100%, 25%);
-  }
+
   /* THE SIGNUP PAGE */
   .registration-form {
     width: 70%;
