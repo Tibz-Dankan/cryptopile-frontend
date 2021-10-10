@@ -4,9 +4,8 @@ Coming here later*/
 * {
   width: 100%;
   top: 0px;
-  left: 0px;
-  right: 0px;
   font-family: Helvetica;
+  color: white;
 }
 /* NAVIGATION-LINKS */
 .navigation-link {
@@ -15,39 +14,42 @@ Coming here later*/
 }
 /*THE HOME PAGE*/
 .home-page-wrapper {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  background-color: hsl(240, 100%, 10%);
+  position: relative;
+  background-color: hsl(240, 40%, 30%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .home-header-wrapper {
-  position: absolute;
+  position: sticky;
+  top: 0px;
   display: flex;
-  padding: 3%;
-  background-color: hsl(240, 100%, 15%);
-  color: hsl(240, 100%, 98%);
-  font-size: 100%;
-  height: 5%;
+  max-width: 100%;
+  align-items: center;
+  background-color: hsl(240, 40%, 30%);
+  border-bottom: 1px solid hsl(240, 40%, 30%);
+  box-shadow: 1px 1px 4px hsl(240, 40%, 10%);
+  z-index: 2;
+}
+.logo-wrapper {
+  padding: 1.5rem;
+  margin-left: 1em;
+}
+.header-link {
+  text-decoration: none;
+  padding: 0.3rem;
+}
+.header-link:hover {
+  border-bottom: 2px solid white;
+  transition: 0.35s;
 }
 .desktop-home-header-links {
-  margin-left: 30%;
+  margin-left: 4em;
 }
 .mobile-home-header-links {
   display: none;
 }
-.header-link {
-  text-decoration: none;
-  color: hsl(240, 100%, 98%);
-  margin-right: 0%;
-  padding: 1.5%;
-}
-.header-link:hover {
-  transition: 0.35s;
-  border-bottom: 2px solid hsl(240, 100%, 98%);
-}
-/* .logout-header-link {
-  background-color: hsl(240, 100%, 80%);
-} */
+
 .bootstrap-list-icon-wrapper,
 .close-menu-bar {
   display: none;
@@ -55,8 +57,7 @@ Coming here later*/
 .link {
   color: hsl(240, 100%, 80%);
 }
-.home-page-content {
-  /* position: inherit; */
+/* .home-page-content {
   position: relative;
   text-align: center;
   width: 80%;
@@ -66,6 +67,15 @@ Coming here later*/
   border-radius: 10px;
   background-color: hsl(240, 80%, 15%);
   color: hsl(240, 100%, 93%);
+  z-index: 1;
+} */
+.home-page-content {
+  position: relative;
+  width: 50%;
+}
+.home-page-welcome-heading {
+  text-align: center;
+  /* background-color: yellow; */
 }
 .home-footer-wrapper {
   width: 80%;
@@ -490,8 +500,19 @@ Coming here later*/
   margin-right: 15%;
 }
 
+/* MORE MEDIA QUERIES */
+@media screen and (min-width: 700px) {
+  .logo-wrapper {
+    margin-left: 6em;
+  }
+}
+@media screen and (min-width: 900px) {
+  .logo-wrapper {
+    margin-left: 9em;
+  }
+}
 /* MEDIA QUERIES FOR MOBILE VIEW */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 540px) {
   /* THE HOME PAGE */
   .logo-wrapper {
     padding-top: 15px;

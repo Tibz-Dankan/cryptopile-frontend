@@ -11,12 +11,9 @@ const Home = () => {
   return (
     <div className="home-page-wrapper">
       <div className="home-header-wrapper">
-        <div className="logo-wrapper">STOCKPILE</div>
+        <div className="logo-wrapper">CRYPTOPILE</div>
         <div className="desktop-home-header-links">
           <Header />
-        </div>
-        <div className="logout-header-link">
-          {/* <HomeHeaderLogoutLink /> */}
         </div>
         <div className="menu-icon-wrapper" onClick={setShowMenuBar}>
           {showMenuBar ? (
@@ -35,7 +32,7 @@ const Home = () => {
       </div>
       <div className="home-page-content">
         <div className="home-page-welcome-heading">
-          <h2>welcome to stockpile.com </h2>
+          <h2>Welcome To Cryptopile </h2>
         </div>
         <p>This is a place where everything you store with us is called pile</p>
         <p>

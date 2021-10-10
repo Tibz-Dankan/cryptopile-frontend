@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div>
       <nav>
-        <div className="header-nav-links">
+        <header className="header-nav-links">
           <NavLink to="/mypile" className="header-link">
             MyPile
           </NavLink>
@@ -22,7 +22,7 @@ const Header = () => {
           <NavLink to="/login" className="header-link">
             Login
           </NavLink>
-        </div>
+        </header>
       </nav>
     </div>
   );
