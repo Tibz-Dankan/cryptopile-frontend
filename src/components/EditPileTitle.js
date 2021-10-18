@@ -9,7 +9,7 @@ import { X } from "react-bootstrap-icons";
 
 const EditPileTitle = ({ pile }) => {
   const [pileTitle, setPileTitle] = useState([pile.title]);
-  const [displayClipLoader, setDisplayClipLoader] = useState(false);
+  // const [displayClipLoader, setDisplayClipLoader] = useState(false);
 
   // console.log(pileTitle);
   let subtitle;
@@ -48,11 +48,12 @@ const EditPileTitle = ({ pile }) => {
     },
   });
   // function to update data in the database
-  const updatePile = async (e) => {
+  const updatePileTitle = async (e) => {
     e.preventDefault();
     // start the spinner here
-    setDisplayClipLoader(true);
+    // setDisplayClipLoader(true);
     try {
+      console.log(pile.pile_id);
       const response = await axiosApi.put(`/edit-pile-title/${pile.pile_id}`, {
         title: pileTitle,
       });
@@ -97,7 +98,7 @@ const EditPileTitle = ({ pile }) => {
             onChange={(e) => setPileTitle(e.target.value)}
             value={pileTitle}
           />
-          <button onClick={updatePile}>Edit</button>
+          <button onClick={updatePileTitle}>Edit</button>
         </form>
       </Modal>
     </div>
