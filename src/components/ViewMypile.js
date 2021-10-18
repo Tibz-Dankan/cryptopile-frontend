@@ -5,6 +5,9 @@ import HomeLink from "./links/HomeLink";
 import MypileLink from "./links/MypileLink";
 import LogoutLink from "./links/LogoutLink";
 import NotLoggedIn from "./NotLoggedIn";
+import EditPileDescription from "./EditPileDescription";
+import EditPileTitle from "./EditPileTitle";
+import DeletePile from "./DeletePile";
 import "./../App.css";
 
 const ViewMypile = () => {
@@ -22,7 +25,7 @@ const ViewMypile = () => {
       Authorization: "Bearer " + tokenFromLocalStorage,
     },
   });
-  const getpile = async () => {
+  const getPile = async () => {
     try {
       const getMypile = await axiosApi.get(
         `/getpile/${localStorage.getItem("userId")}`
@@ -42,45 +45,12 @@ const ViewMypile = () => {
     }
   };
 
-  // // edit pile title
-  // const editPileTitle = async (pile_id, title) => {
-  //   try {
-  //     const response = await axiosApi.put(`editpile/${pile_id}`, {
-  //       title: title,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // // edit pile description
-  // const editPileDescription = async (pile_id, description) => {
-  //   try {
-  //     const response = await axiosApi.put(`editdescription/${pile_id}`, {
-  //       description: description,
-  //       setRenderAllPile,
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  //edit the pile (both the title and description)
-  // const deletePile = async (pile_id) => {
-  //   try {
-  //     const response = await axiosApi.delete(`/deletepile/${pile_id}`);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   // show pile on rendering and after every update
   useEffect(() => {
     let isActive = true;
     if (isActive) {
       if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
-        getpile();
+        getPile();
         setIsLoggedIn(true);
       }
     }
@@ -132,24 +102,20 @@ const ViewMypile = () => {
                     {" "}
                     {pile.date_of_add} {pile.time_of_add}{" "}
                   </div>
-                  <div className="pile-title">
+                  <div className="pile-title user-pile" id="pile-title-id">
                     {pile.title}{" "}
-                    {/* <button onClick={editPileTitle(pile.pile_id, pile.title)}>
-                  Edit
-                </button> */}
                   </div>
-                  <div className="pile-description">
+                  <EditPileTitle pile={pile} />
+
+                  <div
+                    className="pile-description user-pile"
+                    id="pile-description-id"
+                  >
                     {" "}
-                    {pile.description}
-                    {/* <button
-                  onClick={editPileDescription(pile.pile_id, pile.description)}
-                >
-                  Edit
-                </button>{" "} */}
+                    {pile.description}{" "}
                   </div>
-                  {/* <div className="delete-pile-button">
-                <button onClick={deletePile(pile.pile_id)}>delete</button>
-              </div> */}
+                  <EditPileDescription pile={pile} />
+                  <DeletePile pile={pile} />
                 </div>
               ))}
             </div>
