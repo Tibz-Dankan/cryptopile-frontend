@@ -6,12 +6,15 @@ import LoginLink from "./links/LoginLink";
 import LogoutLink from "./links/LogoutLink";
 import axios from "axios";
 import "./../App.css";
-import { BeatLoader } from "react-spinners";
+import { PacmanLoader } from "react-spinners";
 import NotLoggedIn from "./NotLoggedIn";
 // import { TokenContext } from "./context/TokenContext";
 const Mypile = () => {
-  //state for pile
   const [pile, setPile] = useState({ title: "", description: "" });
+  // const date = new Date();
+  const dateOfPileStorage = new Date();
+  // const dateOfPileStorage = date.toString();
+
   const [displayWhenTokenError, setDisplayWhenTokenError] = useState("");
   const [displayWhenUserNotLoggedIn, setDisplayWhenUserNotLoggedIn] =
     useState(false);
@@ -20,8 +23,8 @@ const Mypile = () => {
   const [hidePileFormWhenAddedToDb, setHidePileFormWhenAddedToDb] =
     useState(false);
   // display the beat loader
-  const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
-  //catch somw errors
+  const [displayPacmanLoader, setDisplayPacmanLoader] = useState(false);
+  //catch some errors
   const [catchError, setCatchError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -32,7 +35,7 @@ const Mypile = () => {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     },
   });
-  // get the usrer profile
+  // get the user profile
   const getUserProfile = async (e) => {
     try {
       const response = await axiosApi.get(
@@ -57,20 +60,23 @@ const Mypile = () => {
   const submitPile = async (e) => {
     e.preventDefault();
     // display  the beat loaders
-    setDisplayBeatLoader(true);
+    setDisplayPacmanLoader(true);
     try {
+      // to be removed
+      console.log(dateOfPileStorage); // this line will be removed
       const postPile = await axiosApi.post(
         `/pile/${localStorage.getItem("userId")}`,
         {
           title: pile.title,
           description: pile.description,
+          // storageDate: dateOfPileStorage, // more research here
         }
       );
       console.log(postPile);
 
       if (postPile.status === 200) {
         // stop displaying the beat loader
-        setDisplayBeatLoader(false);
+        setDisplayPacmanLoader(false);
         // display msg if not logged in
         if (postPile.data.messageCheck === "error") {
           setDisplayWhenTokenError(postPile.data.messageDisplay);
@@ -86,7 +92,7 @@ const Mypile = () => {
     } catch (err) {
       console.log(err);
       setCatchError("Sorry, something went wrong!");
-      setDisplayBeatLoader(false);
+      setDisplayPacmanLoader(false);
     }
   };
 
@@ -165,6 +171,14 @@ const Mypile = () => {
                   </div>
                 </div>
               )}
+              <div className="beat-loader-component-mypile-wrapper">
+                {displayPacmanLoader ? (
+                  <div className="beat-loader-component-mypile-inner">
+                    <PacmanLoader color="lightseagreen" />
+                    <h1>...</h1>
+                  </div>
+                ) : null}
+              </div>
               {/* hide the pile form when the pile has been added to the database */}
               {hidePileFormWhenAddedToDb ? (
                 <div className="pile-added-successfully">
@@ -204,13 +218,6 @@ const Mypile = () => {
                     ></textarea>
                     <br />
                     <br />
-                    <div className="beat-loader-component-mypile-wrapper">
-                      {displayBeatLoader ? (
-                        <div className="beat-loader-component-mypile-inner">
-                          <BeatLoader color="lightseagreen" />{" "}
-                        </div>
-                      ) : null}
-                    </div>
                     <button className="btn mypile-btn">Add</button>
                   </form>
                 </div>
