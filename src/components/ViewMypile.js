@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import HomeLink from "./links/HomeLink";
 import MypileLink from "./links/MypileLink";
@@ -15,7 +16,7 @@ const ViewMypile = () => {
   const [displayWhenNoToken, setDisplayWhenNoToken] = useState(false);
   const [catchError, setCatchError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [displayPropagateLoader, setDisplayPropagateLoader] = useState(false);
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
 
   const axiosApi = axios.create({
@@ -27,12 +28,14 @@ const ViewMypile = () => {
   });
   const getPile = async () => {
     try {
+      setDisplayPropagateLoader(true);
       const getMypile = await axiosApi.get(
         `/getpile/${localStorage.getItem("userId")}`
       );
       if (!tokenFromLocalStorage) {
         setDisplayWhenNoToken(true);
       } else {
+        setDisplayPropagateLoader(false);
         console.log(getMypile);
         const arrayPile = getMypile.data.rows;
         console.log(arrayPile);
@@ -73,10 +76,10 @@ const ViewMypile = () => {
             </div>
           </div>
           <div className="view-pile-heading" style={{ textAlign: "center" }}>
-            <h3> check pile here </h3>
+            {/* display an error to user wen backend has the problem */}
             <p style={{ color: "lightyellow" }}>{catchError}</p>
           </div>
-          {/* trying this and it works i will push it into production */}
+          {/* trying this and if works i will push it into production */}
           {displayWhenNoToken ? (
             <div className="view-pile-when-not-loggedin">
               <p>You have no token!</p>
@@ -95,7 +98,15 @@ const ViewMypile = () => {
               </p>
             </div>
           ) : (
+            // display the react spinner
+
             <div className="pile-wrapper">
+              {displayPropagateLoader ? (
+                <div className="propagate-loader-wrapper">
+                  <PropagateLoader color="red" color="lightseagreen" />
+                  <h5>Loading...</h5>
+                </div>
+              ) : null}
               {renderAllPile.map((pile) => (
                 <div key={pile.pile_id}>
                   <div className="pile-date-time">
