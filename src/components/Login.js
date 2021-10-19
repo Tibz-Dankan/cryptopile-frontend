@@ -5,7 +5,7 @@ import axios from "axios";
 // import {Redirect} from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import { TokenContext } from "./context/TokenContext";
-import { BeatLoader } from "react-spinners";
+import { FadeLoader } from "react-spinners";
 import { css } from "@emotion/react";
 
 const Login = (isLoggedIn) => {
@@ -16,7 +16,7 @@ const Login = (isLoggedIn) => {
   const [displayLoginErrors, SetDisplayLoginErrors] = useState("");
   const [displayLoginSuccess, SetDisplayLoginSuccess] = useState("");
   const [hideLoginForm, setHideLoginForm] = useState(false);
-  const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
+  const [displayFadeLoader, setDisplayFadeLoader] = useState(false);
   const [catchError, setCatchError] = useState("");
   const [isloggedIn, setIsLoggedIn] = useState(false);
   // const { globalUserId, setGlobalUserId } = useContext(TokenContext);
@@ -33,7 +33,7 @@ const Login = (isLoggedIn) => {
     e.preventDefault();
     try {
       // on submitting display the beatloader
-      setDisplayBeatLoader(true);
+      setDisplayFadeLoader(true);
       //hide the error and success messages
       SetDisplayLoginSuccess("");
       SetDisplayLoginErrors("");
@@ -49,7 +49,7 @@ const Login = (isLoggedIn) => {
       // if the login is a success then make the input fields empty
       if (response.status === 200) {
         // stop the loading indicator
-        setDisplayBeatLoader(false);
+        setDisplayFadeLoader(false);
         // alert the user input anything geoes wrong
         SetDisplayLoginErrors(response.data.msg);
         SetDisplayLoginSuccess(response.data.success);
@@ -72,7 +72,7 @@ const Login = (isLoggedIn) => {
     } catch (error) {
       console.log(error);
       setCatchError("Sorry, something went wrong!");
-      setDisplayBeatLoader(false);
+      setDisplayFadeLoader(false);
     }
   };
   // pass the token from the accessToken to the context hook
@@ -102,10 +102,14 @@ const Login = (isLoggedIn) => {
               <p style={{ color: "lightyellow" }}>{catchError}</p>
             </div>
             <div className="beat-loader-component-wrapper">
-              {displayBeatLoader ? (
-                <div>
-                  {" "}
-                  <BeatLoader className="beat-loader" color="lightseagreen" />
+              {displayFadeLoader ? (
+                <div className="beat-loader-component-wrapper">
+                  <FadeLoader
+                    className="beat-loader"
+                    color="lightseagreen"
+                    size={5}
+                  />
+                  <h5 className="authenticate-msg">Authenticating...</h5>
                 </div>
               ) : null}
             </div>
