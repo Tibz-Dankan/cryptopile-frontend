@@ -155,10 +155,17 @@ Coming here later*/
   font-weight: bold;
 }
 .beat-loader-component-wrapper {
-  position: relative;
-  left: 35%;
-  padding: 20px 0px 20px 0px;
+  /* background-color: blueviolet; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 0.5em;
 }
+/* .authenticate-msg {
+  margin-top: 2em;
+} */
 
 /* THE REGISTRATION FORM */
 .signup-page-wrapper {
