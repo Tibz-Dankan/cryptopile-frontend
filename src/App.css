@@ -473,6 +473,12 @@ Coming here later*/
   width: 40%;
   margin: 5% 30% 2% 30%;
 }
+.propagate-loader-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
 /* THE ABOUT COMPONENT */
 .about-page-wrapper {
   width: 100%;
