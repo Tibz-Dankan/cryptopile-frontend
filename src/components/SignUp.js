@@ -58,6 +58,7 @@ const SignUp = () => {
   // show the beat loader
   const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
   const [catchError, setCatchError] = useState("");
+  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
 
   const submitRegisterInfo = async (e) => {
     e.preventDefault();
@@ -66,9 +67,10 @@ const SignUp = () => {
     // show the beat loader
     setDisplayBeatLoader(true);
     try {
-      //https://stockpile-backend.herokuapp.com/
+      console.log(isVerifiedEmail); // to be removed
       const response = await axios.post(
-        "https://stockpile-backend.herokuapp.com/register",
+        // "https://stockpile-backend.herokuapp.com/register",
+        "http://localhost:5000/register",
         {
           firstname: registerInfo.firstname,
           lastname: registerInfo.lastname,
@@ -76,6 +78,7 @@ const SignUp = () => {
           gender: registerInfo.gender, // some changes made here
           password: registerInfo.password,
           confirm_password: registerInfo.confirm_password,
+          is_verified_email: isVerifiedEmail,
         }
       );
       console.log(response);
