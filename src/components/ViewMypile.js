@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import HomeLink from "./links/HomeLink";
 import MypileLink from "./links/MypileLink";
 import LogoutLink from "./links/LogoutLink";
@@ -9,6 +10,7 @@ import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
 import EditPileTitle from "./EditPileTitle";
 import DeletePile from "./DeletePile";
+import CopyPileTitle from "./CopyPileTitle";
 import "./../App.css";
 
 const ViewMypile = () => {
@@ -18,6 +20,7 @@ const ViewMypile = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayPropagateLoader, setDisplayPropagateLoader] = useState(false);
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
+  const [isCopied, setIsCopied] = useState(false);
 
   const axiosApi = axios.create({
     // baseURL: "https://stockpile-backend.herokuapp.com/api",
@@ -60,6 +63,30 @@ const ViewMypile = () => {
     return (isActive = false);
   }, []);
 
+  //copy text tol the clipboard
+  const titleToBeCopied = renderAllPile.title;
+  const copyTextToClipboard = async (titleToBeCopied) => {
+    if ("clipboard" in navigator) {
+      return await navigator.clipboard.writeText(titleToBeCopied);
+    } else {
+      document.execCommand("copy", true, titleToBeCopied);
+    }
+  };
+  // function to handle onclick
+  const handleOnclick = () => {
+    console.log(titleToBeCopied); // to be removed
+    copyTextToClipboard(titleToBeCopied)
+      .then(() => {
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(true);
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       {isLoggedIn ? (
@@ -99,7 +126,6 @@ const ViewMypile = () => {
             </div>
           ) : (
             // display the react spinner
-
             <div className="pile-wrapper">
               {displayPropagateLoader ? (
                 <div className="propagate-loader-wrapper">
@@ -117,7 +143,20 @@ const ViewMypile = () => {
                     {pile.title}{" "}
                   </div>
                   <EditPileTitle pile={pile} />
-
+                  <button onClick={handleOnclick(pile.title)}>copy text</button>
+                  {/* <button onClick={copyText(pile.title)}>copying text</button> */}
+                  {/* <div>
+                    <CopyPileTitle pile={pile} />
+                  </div> */}
+                  {/* copy the pile title */}
+                  {/* <div className="copy-pile-title"> */}
+                  {/* <CopyToClipboard
+                    text={pile.title}
+                    onCopy={() => setIsCopied(true)}
+                  >
+                    Copy Title
+                  </CopyToClipboard> */}
+                  {/* </div> */}
                   <div
                     className="pile-description user-pile"
                     id="pile-description-id"
