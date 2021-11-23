@@ -4,8 +4,9 @@ Coming here later*/
 * {
   width: 100%;
   top: 0px;
+  bottom: 0px;
   font-family: Helvetica;
-  /* color: white; */
+  color: white;
 }
 /* NAVIGATION-LINKS */
 .navigation-link {
@@ -57,43 +58,27 @@ Coming here later*/
 .link {
   color: hsl(240, 100%, 80%);
 }
-/* .home-page-content {
-  position: relative;
-  text-align: center;
-  width: 80%;
-  margin: 18% 13% 0% 7%;
-  padding: 20px;
-  border: 1px solid hsl(240, 80%, 15%);
-  border-radius: 10px;
-  background-color: hsl(240, 80%, 15%);
-  color: hsl(240, 100%, 93%);
-  z-index: 1;
-} */
+
 .home-page-content {
   position: relative;
   width: 50%;
 }
 .home-page-welcome-heading {
   text-align: center;
-  /* background-color: yellow; */
 }
 .home-footer-wrapper {
-  width: 80%;
-  margin: 10% 13% 0% 7%;
+  width: 100%;
   position: relative;
-  border: 1px solid hsl(240, 100%, 10%);
-  border-radius: 10px;
-  padding: 20px;
   background-color: hsl(240, 100%, 10%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0px;
 }
 .footer-wrapper {
   text-align: center;
   width: 80%;
-  margin: 0% 13% 0% 7%;
   color: hsl(240, 100%, 98%);
-  border: 1px solid hsl(360, 100%, 8%);
-  border-radius: 10px;
-  background-color: hsl(360, 100%, 8%);
   height: auto;
 }
 /* THE LOGIN AND REGISTRATION FORM */
@@ -523,12 +508,9 @@ Coming here later*/
 /* MEDIA QUERIES FOR MOBILE VIEW */
 @media screen and (max-width: 540px) {
   /* THE HOME PAGE */
-  .logo-wrapper {
-    padding-top: 15px;
-  }
+
   .home-page-content {
     width: 70%;
-    margin: 63% 23% 0% 7%;
   }
   .header-nav-links {
     background-color: hsl(240, 100%, 25%);
@@ -553,11 +535,9 @@ Coming here later*/
   }
   .mobile-home-header-links {
     display: inline;
-    top: 15px;
+    top: 8px;
     position: absolute;
     width: 30%;
-    margin-left: 58%;
-    margin-right: 12%;
     transition: 0.55s;
   }
   .mobile-home-header-component {
@@ -570,13 +550,14 @@ Coming here later*/
     display: inline;
   }
   .bootstrap-list-icon {
-    padding-top: 15px;
+    padding-top: 9px;
     margin-left: 10%;
     width: 100px;
   }
   .bootstrap-x-icon {
     width: 100%;
-    padding: 5px;
+    /* top: 20px; */
+    padding-top: 10px;
     margin-bottom: 12px;
   }
 
@@ -631,16 +612,4 @@ Coming here later*/
   .about-viewpile-link {
     margin: 0% 1% 0% 1%;
   }
-}
-
-/*  at 400px pduh the home content further down */
-@media screen and (max-width: 350px) {
-  /* THE HOME PAGE */
-  .home-page-content {
-    margin-top: 86%;
-  }
-}
-
-/* FOR THE SCREEN FROM 480PX TO 1000PX */
-@media screen and (min-width: 480px) and (max-width: 1000px) {
 }
