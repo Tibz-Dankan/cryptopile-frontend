@@ -1,16 +1,18 @@
 /*
 Coming here later*/
 /*"StockPile" and s"STOCKPILE" is going to be our domain name and the logo as well*/
-* {
-  width: 100%;
-  top: 0px;
-  bottom: 0px;
+
+body {
   font-family: Helvetica;
   color: white;
+  margin: 0px 0px 0px 0px;
 }
+
 /* NAVIGATION-LINKS */
 .navigation-link {
   text-decoration: none;
+}
+.header-link {
   color: hsl(240, 100%, 100%);
 }
 /*THE HOME PAGE*/
@@ -20,13 +22,15 @@ Coming here later*/
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 800px;
 }
 .home-header-wrapper {
-  position: sticky;
   top: 0px;
+  position: sticky;
   display: flex;
-  max-width: 100%;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
   background-color: hsl(240, 40%, 30%);
   border-bottom: 1px solid hsl(240, 40%, 30%);
   box-shadow: 1px 1px 4px hsl(240, 40%, 10%);
@@ -78,7 +82,7 @@ Coming here later*/
 .footer-wrapper {
   text-align: center;
   width: 80%;
-  color: hsl(240, 100%, 98%);
+  /* color: hsl(240, 100%, 98%); */
   height: auto;
 }
 /* THE LOGIN AND REGISTRATION FORM */
@@ -513,12 +517,12 @@ Coming here later*/
     width: 70%;
   }
   .header-nav-links {
-    background-color: hsl(240, 100%, 25%);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    flex-direction: column;
     height: auto;
-    width: 100%;
+    width: 50%;
     padding: 5px;
     padding-bottom: 10px;
   }
@@ -528,37 +532,49 @@ Coming here later*/
   }
   .header-link:hover {
     transition: 0.35s;
-    background-color: hsl(240, 100%, 15%);
+    background-color: hsl(240, 40%, 30%);
   }
   .desktop-home-header-links {
     display: none;
   }
+  /* Header on mobile devices */
+  .home-header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+  }
+  .menu-icon-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 50%;
+  }
   .mobile-home-header-links {
-    display: inline;
-    top: 8px;
+    display: inherit; /*flex*/
+    flex-direction: column;
+    align-items: center;
+    top: 17.5px;
     position: absolute;
-    width: 30%;
-    transition: 0.55s;
+    /* transition: 0.55s; */
   }
   .mobile-home-header-component {
-    /* more to be done here 
-    so take note os that */
-    /* border: 1px solid hsl(240, 100%, 40%); */
+    position: absolute;
+    top: 52px;
+    background-color: hsl(240, 80%, 15%);
+    border: 1px solid hsl(240, 100%, 12%);
     border-radius: 5px;
+    padding: 0px 5px 0px 5px;
   }
   .bootstrap-list-icon-wrapper {
-    display: inline;
+    display: flex;
+    flex-direction: row;
   }
   .bootstrap-list-icon {
-    padding-top: 9px;
-    margin-left: 10%;
-    width: 100px;
+    width: 100%;
   }
   .bootstrap-x-icon {
     width: 100%;
-    /* top: 20px; */
-    padding-top: 10px;
-    margin-bottom: 12px;
   }
 
   /* THE SIGNUP PAGE */
