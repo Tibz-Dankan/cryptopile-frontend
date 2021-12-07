@@ -4,7 +4,7 @@ Coming here later*/
 
 body {
   font-family: Helvetica;
-  color: white;
+  color: black;
   margin: 0px 0px 0px 0px;
 }
 
@@ -18,7 +18,7 @@ body {
 /*THE HOME PAGE*/
 .home-page-wrapper {
   position: relative;
-  background-color: hsl(240, 40%, 30%);
+  background-color: hsl(240, 100%, 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,9 +31,9 @@ body {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  background-color: hsl(240, 40%, 30%);
-  border-bottom: 1px solid hsl(240, 40%, 30%);
-  box-shadow: 1px 1px 4px hsl(240, 40%, 10%);
+  color: white;
+  background-color: hsl(240, 100%, 10%);
+  box-shadow: 1px 1px 2px hsl(240, 40%, 15%);
   z-index: 2;
 }
 .logo-wrapper {
@@ -60,7 +60,7 @@ body {
   display: none;
 }
 .link {
-  color: hsl(240, 100%, 80%);
+  color: hsl(240, 100%, 50%);
 }
 
 .home-page-content {
@@ -70,6 +70,7 @@ body {
 .home-page-welcome-heading {
   text-align: center;
 }
+/* THE FOOTER */
 .home-footer-wrapper {
   width: 100%;
   position: relative;
@@ -82,8 +83,8 @@ body {
 .footer-wrapper {
   text-align: center;
   width: 80%;
-  /* color: hsl(240, 100%, 98%); */
   height: auto;
+  color: hsl(240, 100%, 100%);
 }
 /* THE LOGIN AND REGISTRATION FORM */
 /* THE LOGIN FORM */
@@ -390,7 +391,6 @@ body {
   height: auto;
   color: hsl(240, 100%, 93%);
   background-color: hsl(240, 100%, 25%);
-  /* padding: 20px; */
 }
 .viewpile-header-wrapper {
   margin-top: 0%;
@@ -404,7 +404,7 @@ body {
   padding: 20px;
 }
 .view-link {
-  color: hsl(240, 100%, 85%);
+  color: hsl(240, 100%, 50%);
 }
 .pile-wrapper {
   display: block;
@@ -556,14 +556,15 @@ body {
     align-items: center;
     top: 17.5px;
     position: absolute;
-    /* transition: 0.55s; */
+    transition: 0.55s;
   }
   .mobile-home-header-component {
     position: absolute;
     top: 52px;
-    background-color: hsl(240, 80%, 15%);
-    border: 1px solid hsl(240, 100%, 12%);
+    background-color: hsl(240, 100%, 10%);
+    border: 1px solid hsl(240, 100%, 10%);
     border-radius: 5px;
+    box-shadow: 1px 1px 6px hsl(240, 40%, 15%);
     padding: 0px 5px 0px 5px;
   }
   .bootstrap-list-icon-wrapper {
