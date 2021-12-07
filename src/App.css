@@ -1,6 +1,9 @@
 /*
 Coming here later*/
 /*"StockPile" and s"STOCKPILE" is going to be our domain name and the logo as well*/
+:root {
+  --steelblue: hsl(207, 44%, 33%);
+}
 
 body {
   font-family: Helvetica;
@@ -32,7 +35,7 @@ body {
   justify-content: space-between;
   width: 100%;
   color: white;
-  background-color: hsl(240, 100%, 10%);
+  background-color: var(--steelblue);
   box-shadow: 1px 1px 2px hsl(240, 40%, 15%);
   z-index: 2;
 }
@@ -74,7 +77,7 @@ body {
 .home-footer-wrapper {
   width: 100%;
   position: relative;
-  background-color: hsl(240, 100%, 10%);
+  background-color: var(--steelblue);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -561,8 +564,8 @@ body {
   .mobile-home-header-component {
     position: absolute;
     top: 52px;
-    background-color: hsl(240, 100%, 10%);
-    border: 1px solid hsl(240, 100%, 10%);
+    background-color: var(--steelblue);
+    border: 1px solid var(--steelblue);
     border-radius: 5px;
     box-shadow: 1px 1px 6px hsl(240, 40%, 15%);
     padding: 0px 5px 0px 5px;
