@@ -1,0 +1,36 @@
+/* THE ABOUT COMPONENT */
+.about-page-wrapper {
+  width: 100%;
+  height: 800px;
+  background-color: hsl(240, 100%, 10%);
+  color: hsl(120, 100%, 95%);
+}
+.about-header-wrapper {
+  background-color: hsl(240, 100%, 15%);
+  height: 65px;
+  display: flex;
+  align-items: center;
+}
+.about-home-link,
+.about-viewpile-link {
+  padding: 20px;
+  margin: 0% 10% 0% 10%;
+}
+.about-page-content-wrapper {
+  margin-top: 50px;
+  padding: 10px;
+  text-align: center;
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  width: 80%;
+  margin-left: 5%;
+  margin-right: 15%;
+}
+
+@media screen and (max-width: 540px) {
+  .about-home-link,
+  .about-viewpile-link {
+    margin: 0% 1% 0% 1%;
+  }
+}

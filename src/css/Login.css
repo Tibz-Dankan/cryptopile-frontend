@@ -1,0 +1,78 @@
+/* THE LOGIN FORM */
+.login-page-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 800px;
+  background-color: hsl(240, 100%, 10%);
+}
+.login-header-wrapper {
+  background-color: hsl(240, 100%, 15%);
+  height: 8%;
+}
+.login-home-link {
+  padding: 20px;
+  margin-left: 5%;
+}
+.login-form {
+  margin: 8% 30% 0% 30%;
+  padding: 10px;
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 15%);
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  width: 40%;
+}
+.login-input-field {
+  height: 30px;
+  width: 80%;
+  margin: 1% 30% 1% 10%;
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 10%);
+  border: 1px solid hsl(240, 100%, 10%);
+  border-radius: 4px;
+}
+.login-btn {
+  width: 50%;
+  height: 25px;
+  margin: 1% 25% 1% 25%;
+  padding: 5px;
+  background-color: hsl(240, 100%, 30%);
+  border: 1px solid hsl(240, 100%, 30%);
+  border-radius: 5px;
+  color: hsl(240, 100%, 93%);
+}
+.login-btn:hover {
+  background-color: hsl(240, 100%, 40%);
+}
+.display-login-status {
+  text-align: center;
+}
+.display-login-errors {
+  color: red;
+  font-weight: bold;
+}
+.display-login-success {
+  color: green;
+  font-weight: bold;
+}
+.beat-loader-component-wrapper {
+  /* background-color: blueviolet; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+/* .authenticate-msg {
+  margin-top: 2em;
+} */
+
+/* MEDIA QUERY */
+@media screen and (max-width: 540px) {
+  /* THE LOGIN PAGE */
+  .login-form {
+    margin: 8% 18% 0% 12%;
+    width: 70%;
+  }
+}

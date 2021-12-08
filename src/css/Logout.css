@@ -1,0 +1,23 @@
+/* THE LOGOUT COMPONENT */
+.logout-wrapper {
+  position: absolute;
+  text-align: center;
+  background-color: hsl(240, 100%, 15%);
+  width: 100%;
+  height: 800px;
+}
+.logout-message {
+  padding-top: 80px;
+  color: hsl(240, 100%, 98%);
+  font-weight: bold;
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 540px) {
+  /* THE LOGOUT PAGE */
+  .logout-message {
+    width: 80%;
+    margin: 10% 10% 1% 10%;
+    font-size: large;
+  }
+}

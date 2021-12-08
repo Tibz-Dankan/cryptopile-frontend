@@ -1,0 +1,129 @@
+/* THE MYPILE COMPONENT */
+.file-uploader {
+  margin-top: 8%;
+}
+
+.mypile-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 800px;
+  background-color: hsl(240, 100%, 10%);
+}
+.mypile-header-wrapper {
+  width: 100%;
+  height: 6%;
+  background-color: hsl(240, 100%, 15%);
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+.mypile-home-link,
+.mypile-viewpile-link,
+.mypile-logout-link {
+  padding: 10px;
+}
+.mypile-content-wrapper {
+  width: 50%;
+  height: auto;
+  padding: 5px;
+  margin: 5% 25% 5% 25%;
+  border: 1px solid hsl(240, 100%, 15%);
+  border-radius: 10px;
+  background-color: hsl(240, 100%, 15%);
+  color: hsl(240, 100%, 93%);
+}
+.mypile-input-field {
+  border: 1px solid hsl(240, 100%, 10%);
+  border-radius: 5px;
+  background-color: hsl(240, 100%, 10%);
+  color: hsl(240, 100%, 93%);
+  width: 80%;
+  margin: 0% 0% 0% -20%;
+}
+.pile-description-input-field {
+  height: 80px;
+}
+.pile-title-input-field {
+  height: 25px;
+}
+.mypile-btn {
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(240, 100%, 30%);
+  border: 1px solid hsl(240, 100%, 30%);
+  border-radius: 5px;
+  width: 40%;
+  padding: 8px;
+  margin-bottom: 20px;
+}
+.mypile-btn:hover {
+  background-color: hsl(240, 100%, 40%);
+}
+.pile-added-successfully {
+  background-color: hsl(240, 100%, 85%);
+  border: 1px solid hsl(240, 100%, 85%);
+  border-radius: 20px;
+  width: 80%;
+  margin: 5% 10% 5% 10%;
+  padding: 10px;
+  text-align: center;
+}
+.pile-added-successfully .pile-added {
+  color: green;
+}
+.beat-loader-component-mypile-wrapper {
+  margin-bottom: 3em;
+}
+.beat-loader-component-mypile-inner {
+  position: relative;
+  left: 35%;
+}
+
+/* USER PROFILE */
+.user-profile {
+  margin: 14% 45% 0% 35%;
+  color: white;
+}
+.user-profile-picture {
+  border: 1px solid lightgrey;
+  border-radius: 20px;
+  text-align: center;
+  padding: 5px;
+  margin-top: 40px;
+  background-color: hsl(240, 100%, 15%);
+  width: 100px;
+  height: 90px;
+}
+.user-profile .user-name {
+  text-align: center;
+  color: lightseagreen;
+  width: 20%;
+}
+
+/* THE PILE INPUT FIELDS */
+.display-when-not-logged-in {
+  padding-top: 12%;
+  text-align: center;
+}
+
+.display-when-not-logged-in h3 {
+  color: rgb(226, 19, 19);
+}
+
+.pile-form {
+  margin-top: 10%;
+  margin-right: 30%;
+  margin-left: 30%;
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 540px) {
+  /* THE  MYPILE PAGE */
+  .mypile-content-wrapper {
+    width: 80%;
+    margin: 5% 10% 5% 10%;
+  }
+  .user-profile-picture {
+    width: 40%;
+    margin: 0% 0% 0% -10%;
+  }
+}
