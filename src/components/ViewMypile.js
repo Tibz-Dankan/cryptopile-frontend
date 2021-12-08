@@ -11,7 +11,7 @@ import EditPileDescription from "./EditPileDescription";
 import EditPileTitle from "./EditPileTitle";
 import DeletePile from "./DeletePile";
 import CopyPileTitle from "./CopyPileTitle";
-import "./../App.css";
+import "./../css/Viewpile.css";
 
 const ViewMypile = () => {
   const [renderAllPile, setRenderAllPile] = useState([]);

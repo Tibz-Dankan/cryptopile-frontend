@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import NotLoggedIn from "./NotLoggedIn";
-import "./../App.css";
+import "./../css/Logout.css";
 
 const Logout = () => {
   let history = useHistory();

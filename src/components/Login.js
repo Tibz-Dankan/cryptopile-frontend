@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 import { TokenContext } from "./context/TokenContext";
 import { FadeLoader } from "react-spinners";
 import { css } from "@emotion/react";
+import "./../css/Login.css";
 
 const Login = (isLoggedIn) => {
   const [userLoginInfo, setUserLoginInfo] = useState({

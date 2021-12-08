@@ -2,7 +2,7 @@ import React, { useState, useCallback } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 // import HomeHeaderLogoutLink from "./links/HomeHeaderLogoutLink";
-import "./../App.css";
+import "./../css/Home.css";
 import { Link } from "react-router-dom";
 import { List, X } from "react-bootstrap-icons";
 
@@ -11,14 +11,14 @@ const Home = () => {
   return (
     <div className="home-page-wrapper">
       <div className="home-header-wrapper">
-        <div className="logo-wrapper">CRYPTOPILE</div>
+        <div className="logo-wrapper">CrytoPile</div>
         <div className="desktop-home-header-links">
           <Header />
         </div>
         <div className="menu-icon-wrapper" onClick={setShowMenuBar}>
           {showMenuBar ? (
             <div className="mobile-home-header-links">
-              <X size={30} className="bootstrap-x-icon" />
+              <X size={32} className="bootstrap-x-icon" />
               <div className="mobile-home-header-component">
                 <Header />
               </div>

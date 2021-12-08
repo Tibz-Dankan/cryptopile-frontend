@@ -1,7 +1,7 @@
 import React from "react";
 import HomeLink from "./links/HomeLink";
 import ViewPileLink from "./links/ViewPileLink";
-
+import "./../css/About.css";
 const About = () => {
   return (
     <div className="about-page-wrapper">

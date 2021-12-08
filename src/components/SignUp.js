@@ -6,6 +6,7 @@ import axios from "axios";
 import { BeatLoader } from "react-spinners";
 // import { css } from "@emotion/react";
 import { Link } from "react-router-dom";
+import "./../css/Signup.css";
 
 const SignUp = () => {
   const [registerInfo, setRegisterInfo] = useState({
@@ -18,6 +19,7 @@ const SignUp = () => {
   });
   // state for the gender options
   const [gender, setGender] = useState("");
+  const [verificationCode, setVerificationCode] = useState(0);
   // function to handle the gender changes
   const handleGenderChange = (e) => {
     const selectGender = e.target.value;
@@ -67,7 +69,6 @@ const SignUp = () => {
     // show the beat loader
     setDisplayBeatLoader(true);
     try {
-      console.log(isVerifiedEmail); // to be removed
       const response = await axios.post(
         // "https://stockpile-backend.herokuapp.com/register",
         "http://localhost:5000/register",
@@ -137,7 +138,17 @@ const SignUp = () => {
     setRegisterInfo(newRegisterInfo);
     console.log(newRegisterInfo);
   };
-
+  //function to verify the user code
+  const sendVerificationCode = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/verify-user-email",
+        { verificationCode: verificationCode }
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Fragment>
       <div className="signup-page-wrapper">
@@ -173,6 +184,15 @@ const SignUp = () => {
                   continue
                 </Link>
               </div>
+              {/* form with one input for the verification code */}
+              <form>
+                <input
+                  type="number"
+                  value={verificationCode}
+                  onChange={(e) => setVerificationCode(e.target.value)}
+                />
+                <button onClick={sendVerificationCode}>Send code</button>
+              </form>
             </div>
           ) : null}
           {displayEmailOrPasswordError ? (
