@@ -1,5 +1,6 @@
 :root {
   --steelblue: hsl(207, 44%, 33%);
+  --steelblue-2: hsl(207, 60%, 20%);
 }
 
 body {
