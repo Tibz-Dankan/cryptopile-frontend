@@ -10,9 +10,12 @@ body {
 }
 
 /* NAVIGATION-LINKS */
+/* Links shared anywhere across the whole app */
 .navigation-link {
   text-decoration: none;
+  color: hsl(240, 100%, 100%);
 }
+/* Links in the header on the home page */
 .header-link {
   color: hsl(240, 100%, 100%);
 }

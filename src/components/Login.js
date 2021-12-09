@@ -93,8 +93,11 @@ const Login = (isLoggedIn) => {
             <HomeLink />
           </div>
         </div>
-        <div className="login-form">
+        <div className="login-form-wrapper">
           <form onSubmit={(e) => submitLoginInfo(e)}>
+            <div className="login-form-heading">
+              <h3>Log Into Your Account</h3>
+            </div>
             <div className="display-login-status">
               <p className="display-login-errors">{displayLoginErrors}</p>
               <p className="display-login-success">{displayLoginSuccess}</p>

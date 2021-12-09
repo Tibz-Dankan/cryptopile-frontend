@@ -1,34 +1,55 @@
 /* THE LOGIN FORM */
 .login-page-wrapper {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 800px;
-  background-color: hsl(240, 100%, 10%);
+  background-color: hsl(207, 60%, 99%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .login-header-wrapper {
-  background-color: hsl(240, 100%, 15%);
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  background-color: var(--steelblue);
   height: 8%;
 }
 .login-home-link {
   padding: 20px;
   margin-left: 5%;
 }
-.login-form {
-  margin: 8% 30% 0% 30%;
-  padding: 10px;
-  color: hsl(240, 100%, 93%);
-  background-color: hsl(240, 100%, 15%);
-  border: 1px solid hsl(240, 100%, 15%);
-  border-radius: 10px;
+.login-form-wrapper {
+  padding: 5px;
+  color: hsl(240, 100%, 10%);
+  background-color: hsl(240, 100%, 100%);
+  border: 1px solid hsl(240, 100%, 100%);
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px hsl(0, 0%, 80%);
   width: 40%;
 }
+
+.login-form-heading {
+  display: grid;
+  grid-template-columns: 1;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: hsl(180, 100%, 30%);
+  background-color: var(--steelblue-2);
+  border: 1px solid var(--steelblue-2);
+  border-radius: 5px;
+  height: 90px;
+  margin-top: 0px;
+}
 .login-input-field {
-  height: 30px;
+  height: 25px;
   width: 80%;
   margin: 1% 30% 1% 10%;
-  color: hsl(240, 100%, 93%);
-  background-color: hsl(240, 100%, 10%);
-  border: 1px solid hsl(240, 100%, 10%);
+  color: hsl(240, 100%, 10%);
+  background-color: hsl(207, 44%, 95%);
+  border: 1px solid hsl(207, 44%, 95%);
   border-radius: 4px;
 }
 .login-btn {
@@ -36,13 +57,18 @@
   height: 25px;
   margin: 1% 25% 1% 25%;
   padding: 5px;
-  background-color: hsl(240, 100%, 30%);
-  border: 1px solid hsl(240, 100%, 30%);
-  border-radius: 5px;
+  background-color: hsl(180, 100%, 25%);
+  border: 1px solid hsl(180, 100%, 25%);
+  box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
+  border-radius: 3px;
   color: hsl(240, 100%, 93%);
 }
 .login-btn:hover {
-  background-color: hsl(240, 100%, 40%);
+  color: white;
+  background-color: hsl(180, 100%, 40%);
+  border: 1px solid hsl(180, 100%, 40%);
+  box-shadow: 1px 1px 8px 1px hsl(180, 100%, 20%);
+  transition: 0.35s;
 }
 .display-login-status {
   text-align: center;
@@ -56,7 +82,6 @@
   font-weight: bold;
 }
 .beat-loader-component-wrapper {
-  /* background-color: blueviolet; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +96,7 @@
 /* MEDIA QUERY */
 @media screen and (max-width: 540px) {
   /* THE LOGIN PAGE */
-  .login-form {
+  .login-form-wrapper {
     margin: 8% 18% 0% 12%;
     width: 70%;
   }

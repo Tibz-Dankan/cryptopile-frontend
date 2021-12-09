@@ -204,10 +204,8 @@ const SignUp = () => {
               <p className="check-password-match">{checkPasswordMatch}</p>
             </div>
           ) : (
+            // To be removed because it is unnecessary
             <div style={{ textAlign: "center" }}>
-              <p className="first-display-on-sigup-page">
-                {firsDisplayMessage}
-              </p>
               <p style={{ color: "lightyellow" }}>{catchError}</p>
             </div>
           )}
@@ -220,6 +218,7 @@ const SignUp = () => {
         {hideRegistrationForm ? null : (
           <div className="registration-form">
             <form onSubmit={(e) => submitRegisterInfo(e)}>
+              <h3 className="registration-form-heading">Create An Account</h3>
               <label>Firstname:</label>
               <br />
               <input
