@@ -67,7 +67,7 @@ const Login = (isLoggedIn) => {
           localStorage.setItem("accessToken", response.data.accessToken);
           // store the userid in the local storage
           localStorage.setItem("userId", response.data.userId);
-          history.push("/mypile");
+          history.push("/addpile");
         }
       }
     } catch (error) {
