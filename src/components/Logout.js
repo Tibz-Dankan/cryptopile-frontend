@@ -16,7 +16,7 @@ const Logout = () => {
   };
   // logout user on loading the component
   useEffect(() => {
-    // firt check whetther the user is logged in
+    // first check whether the user is logged in
     if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
       // logout the user
       logoutUser();

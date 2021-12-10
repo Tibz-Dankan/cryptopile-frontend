@@ -6,10 +6,10 @@ const About = () => {
   return (
     <div className="about-page-wrapper">
       <div className="about-header-wrapper">
-        <div className="about-home-link">
+        <div className="about-home-link header-link">
           <HomeLink />
         </div>
-        <div className="about-viewpile-link">
+        <div className="about-viewpile-link header-link">
           <ViewPileLink />
         </div>
       </div>

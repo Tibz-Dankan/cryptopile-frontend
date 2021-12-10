@@ -1,17 +1,25 @@
-.not-logged-in-message {
-  position: absolute;
-  text-align: center;
-  /* width: 100%; */
+.not-logged-in-wrapper {
+  display: relative;
+  background-color: var(--steelblue);
   height: 700px;
-  top: 0%;
-  left: 0%;
-  background-color: hsl(240, 100%, 15%);
-  color: hsl(240, 100%, 98%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.links-in-logout-component {
-  color: hsl(240, 100%, 75%);
+.not-logged-in-message {
+  position: relative;
+  text-align: center;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  color: hsl(0, 100%, 35%);
+  background-color: var(--steelblue);
+  border: 1px solid var(--steelblue);
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px 1px hsl(207, 44%, 20%);
 }
 
 /* MEDIA QUERY */
 @media screen and (max-width: 540px) {
+  /* some code for mobile devices */
 }

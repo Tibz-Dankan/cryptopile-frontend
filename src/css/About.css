@@ -2,35 +2,41 @@
 .about-page-wrapper {
   width: 100%;
   height: 800px;
-  background-color: hsl(240, 100%, 10%);
-  color: hsl(120, 100%, 95%);
+  background-color: hsl(207, 60%, 99%);
+  color: hsl(240, 100%, 10%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .about-header-wrapper {
-  background-color: hsl(240, 100%, 15%);
-  height: 65px;
+  background-color: var(--steelblue);
+  width: 100%;
+  height: 70px;
   display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 .about-home-link,
 .about-viewpile-link {
-  padding: 20px;
-  margin: 0% 10% 0% 10%;
+  margin: 0% 25% 0% 25%;
 }
 .about-page-content-wrapper {
   margin-top: 50px;
   padding: 10px;
   text-align: center;
-  background-color: hsl(240, 100%, 15%);
-  border: 1px solid hsl(240, 100%, 15%);
-  border-radius: 10px;
-  width: 80%;
-  margin-left: 5%;
-  margin-right: 15%;
+  background-color: hsl(240, 100%, 100%);
+  border: 1px solid hsl(240, 100%, 100%);
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px hsl(0, 0%, 80%);
+  width: 40%;
 }
 
 @media screen and (max-width: 540px) {
   .about-home-link,
   .about-viewpile-link {
     margin: 0% 1% 0% 1%;
+  }
+  .header-link {
+    border-bottom: 1px solid var(--steelblue);
   }
 }

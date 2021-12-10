@@ -29,10 +29,10 @@
 }
 .header-link:hover {
   background-color: var(--steelblue-2);
-  transition: 0.3s;
   border: 1px solid var(--steelblue-2);
   border-radius: 5px;
   box-shadow: 1px 1px 4px var(--steelblue-2);
+  transition: 0.3s;
 }
 .desktop-home-header-links {
   margin-left: 4em;
@@ -94,8 +94,8 @@
   .header-nav-links {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     height: auto;
     width: 50%;
     padding: 5px;

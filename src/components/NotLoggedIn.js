@@ -1,29 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./../css/NotLoggedIn.css";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 const NotLoggedIn = () => {
+  const [notLoggedIn, setNotLoggedIn] = useState(false);
+  let history = useHistory();
+  const redirectToHomePage = () => {
+    history.push("/");
+  };
+
+  useEffect(() => {
+    setNotLoggedIn(true);
+    if (localStorage.getItem("isLoggedIn") === null) {
+      setTimeout(() => {
+        redirectToHomePage();
+      }, 2000);
+    }
+  }, []);
   return (
-    <div className="not-logged-in-message">
-      <p> You are not logged in</p>
-      <p>
-        Don't have an account,{" "}
-        <Link to="/signup" className="links-in-logout-component">
-          signup
-        </Link>
-      </p>
-      <p>
-        Have an account,{" "}
-        <Link to="/login" className="links-in-logout-component">
-          Login
-        </Link>
-      </p>
-      <p>
-        Go{" "}
-        <Link to="/" className="links-in-logout-component">
-          home
-        </Link>
-      </p>
+    <div className="not-logged-in-wrapper">
+      {notLoggedIn ? (
+        <div className="not-logged-in-message">
+          <h1>Not Logged In !</h1>
+        </div>
+      ) : null}
     </div>
   );
 };
