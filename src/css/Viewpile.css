@@ -1,21 +1,25 @@
-* THE VIEW MYPILE HERE */ .view-pile-wrapper {
-  position: absolute;
+/* THE VIEW MYPILE HERE */
+.view-pile-wrapper {
+  position: relative;
   width: 100%;
   min-height: 700px;
   height: auto;
-  color: hsl(240, 100%, 93%);
-  background-color: hsl(240, 100%, 25%);
+  color: hsl(240, 100%, 10%);
+  background-color: var(--backgroundColor-1);
 }
 .viewpile-header-wrapper {
-  margin-top: 0%;
   margin-bottom: 30px;
-  background-color: hsl(240, 100%, 15%);
+  height: 70px;
+  width: 100%;
+  background-color: var(--steelblue);
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .viewpile-home-link,
 .viewpile-mypile-link,
 .viewpile-logout-link {
-  padding: 20px;
+  margin: 0% 5% 0% 5%;
 }
 .view-link {
   color: hsl(240, 100%, 100%);

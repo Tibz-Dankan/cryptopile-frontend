@@ -92,10 +92,10 @@ const ViewMypile = () => {
       {isLoggedIn ? (
         <div className="view-pile-wrapper">
           <div className="viewpile-header-wrapper">
-            <div className="viewpile-home-link">
+            <div className="viewpile-home-link header-link">
               <HomeLink />
             </div>
-            <div className="viewpile-mypile-link">
+            <div className="viewpile-mypile-link header-link">
               <AddPileLink />
             </div>
             <div className="viewpile-logout-link">
