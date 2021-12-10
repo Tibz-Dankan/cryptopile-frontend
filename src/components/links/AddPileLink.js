@@ -6,7 +6,7 @@ const MypileLink = () => {
   return (
     <div>
       <nav>
-        <NavLink to="/mypile" className="navigation-link">
+        <NavLink to="/addpile" className="navigation-link">
           AddPile
         </NavLink>
       </nav>
