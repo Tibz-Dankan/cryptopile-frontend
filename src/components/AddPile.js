@@ -104,39 +104,16 @@ const AddPile = () => {
     console.log(newpile);
   };
 
-  // // select the file to be uploaded
-  // const Handleselectfile = (event) => {
-  //   setFile(event.target.files[0]);
-  //   setFilename(event.target.files[0].name);
-  // };
-  // // upload the selected file
-  // const Handlefileupload = () => {
-  //   const formData = new FormData();
-  //   formData.append("file", file, filename);
-
-  //   axios.post("/uploads", formData, {
-  //     //  upload progress
-  //     onUploadProgress: (progressEvent) => {
-  //       console.log(
-  //         "upload progress: " +
-  //           Math.round((progressEvent.load / progressEvent.total) * 100) +
-  //           "%"
-  //       );
-  //       // to add  html progress bar
-  //     },
-  //   });
-  // };
-
   return (
     <Fragment>
       <div>
         {isLoggedIn ? (
           <div className="mypile-wrapper">
             <div className="mypile-header-wrapper">
-              <div className="mypile-home-link">
+              <div className="mypile-home-link header-link">
                 <HomeLink />
               </div>
-              <div className="mypile-viewpile-link">
+              <div className="mypile-viewpile-link header-link">
                 <ViewPileLink />
               </div>
               <div className="mypile-logout-link">
@@ -201,7 +178,7 @@ const AddPile = () => {
                       onChange={(e) => handlePileChanges(e)}
                       id="title"
                       placeholder="Title"
-                      className="input-field mypile-input-field pile-title-input-field"
+                      className=" mypile-input-field pile-title-input-field"
                       required
                     />
                     <br />
@@ -223,17 +200,6 @@ const AddPile = () => {
                 </div>
               )}
             </div>
-            {/* <div className="file-uploader">
-        <h1>File Uploader Here</h1>
-        <input
-        type="file"
-        onChange={Handleselectfile}
-        className="input-field"
-        />
-        <button onClick={Handlefileupload} className="btn">
-        Upload
-        </button>
-      </div> */}
           </div>
         ) : (
           <NotLoggedIn />
