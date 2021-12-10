@@ -133,43 +133,36 @@ const ViewMypile = () => {
                   <h5>Loading...</h5>
                 </div>
               ) : null}
-              {renderAllPile.map((pile) => (
-                <div key={pile.pile_id}>
-                  <div className="pile-date-time">
-                    {" "}
-                    {pile.date_of_add} {pile.time_of_add}{" "}
-                  </div>
-                  <div className="pile-title user-pile" id="pile-title-id">
-                    {pile.title}{" "}
-                  </div>
-                  <EditPileTitle pile={pile} />
-                  <button onClick={handleOnclick(pile.title)}>copy text</button>
-                  {/* <button onClick={copyText(pile.title)}>copying text</button> */}
-                  {/* <div>
-                    <CopyPileTitle pile={pile} />
-                  </div> */}
-                  {/* copy the pile title */}
-                  {/* <div className="copy-pile-title"> */}
-                  {/* <CopyToClipboard
-                    text={pile.title}
-                    onCopy={() => setIsCopied(true)}
-                  >
-                    Copy Title
-                  </CopyToClipboard> */}
-                  {/* </div> */}
-                  <div
-                    className="pile-description user-pile"
-                    id="pile-description-id"
-                  >
-                    {" "}
-                    {pile.description}{" "}
-                  </div>
-                  <EditPileDescription pile={pile} />
-                  <DeletePile pile={pile} />
-                </div>
-              ))}
             </div>
           )}
+          {/* table here */}
+          <table>
+            <tr>
+              {/* <th>Date</th> */}
+              {/* <th>Time</th> */}
+              <th>Title</th>
+              <th>Description</th>
+              <th>Edit Title</th>
+              <th>Edit Description</th>
+              <th>Delete</th>
+            </tr>
+            {/* map method here */}
+            {renderAllPile.map((pile) => {
+              return (
+                <tr key={pile.pile_id}>
+                  {/* <td>{pile.date_of_add}</td> */}
+                  {/* <td>{pile.time_of_add}</td> */}
+                  <td>{pile.title}</td>
+                  <td>{pile.description}</td>
+                  <td id="pile-title-id">{<EditPileTitle pile={pile} />}</td>
+                  <td id="pile-description-id">
+                    {<EditPileDescription pile={pile} />}
+                  </td>
+                  <td>{<DeletePile pile={pile} />}</td>
+                </tr>
+              );
+            })}
+          </table>
         </div>
       ) : (
         <NotLoggedIn />
