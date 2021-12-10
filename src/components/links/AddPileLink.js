@@ -7,7 +7,7 @@ const MypileLink = () => {
     <div>
       <nav>
         <NavLink to="/mypile" className="navigation-link">
-          Add Pile
+          AddPile
         </NavLink>
       </nav>
     </div>
