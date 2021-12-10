@@ -3,7 +3,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import About from "./components/About";
-import Mypile from "./components/Mypile";
+import AddPile from "./components/AddPile";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
@@ -30,7 +30,7 @@ const App = () => {
           <Route path="/logout" component={Logout} />
           {/* <TokenContext.Provider value={{ globalUserId, setGlobalUserId }}> */}
           <Route path="/login" component={Login} />
-          <Route path="/mypile" component={Mypile} />
+          <Route path="/addpile" component={AddPile} />
           <Route path="/viewmypile" component={ViewMypile} />
           <Route path="/addsecretepile" component={AddSecretePile} />
           <Route path="/viewsecretepile" component={ViewSecretePile} />
