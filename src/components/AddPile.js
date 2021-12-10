@@ -5,7 +5,7 @@ import ViewLink from "./links/ViewLink";
 import LoginLink from "./links/LoginLink";
 import LogoutLink from "./links/LogoutLink";
 import axios from "axios";
-import "./../css/Mypile.css";
+import "./../css/AddPile.css";
 import { PacmanLoader } from "react-spinners";
 import NotLoggedIn from "./NotLoggedIn";
 // import { TokenContext } from "./context/TokenContext";

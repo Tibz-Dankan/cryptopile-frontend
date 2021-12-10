@@ -7,7 +7,7 @@ const Header = () => {
     <div>
       <nav>
         <header className="header-nav-links">
-          <NavLink to="/mypile" className="header-link">
+          <NavLink to="/addpile" className="header-link">
             MyPile
           </NavLink>
           <NavLink to="/viewmypile" className="header-link">
