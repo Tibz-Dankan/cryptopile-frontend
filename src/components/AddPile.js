@@ -9,7 +9,7 @@ import "./../css/Mypile.css";
 import { PacmanLoader } from "react-spinners";
 import NotLoggedIn from "./NotLoggedIn";
 // import { TokenContext } from "./context/TokenContext";
-const Mypile = () => {
+const AddPile = () => {
   const [pile, setPile] = useState({ title: "", description: "" });
   // const date = new Date();
   const dateOfPileStorage = new Date();
@@ -243,4 +243,4 @@ const Mypile = () => {
   );
 };
 
-export default Mypile;
+export default AddPile;
