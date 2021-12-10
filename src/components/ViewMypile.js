@@ -4,7 +4,7 @@ import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import HomeLink from "./links/HomeLink";
-import MypileLink from "./links/MypileLink";
+import AddPileLink from "./links/AddPileLink";
 import LogoutLink from "./links/LogoutLink";
 import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
@@ -96,7 +96,7 @@ const ViewMypile = () => {
               <HomeLink />
             </div>
             <div className="viewpile-mypile-link">
-              <MypileLink />
+              <AddPileLink />
             </div>
             <div className="viewpile-logout-link">
               <LogoutLink />
