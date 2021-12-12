@@ -1,0 +1,49 @@
+.modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-wrapper h4 {
+  text-align: center;
+  width: 100%;
+  color: hsl(0, 100%, 20%);
+  background-color: hsl(0, 100%, 90%);
+  border: 1px solid hsl(0, 100%, 90%);
+  border-radius: 3px;
+  padding: 5px 0px 5px 0px;
+}
+.modal-wrapper.close-modal {
+  padding: 10px;
+}
+
+.delete-button {
+  color: white;
+}
+.delete-button-1 {
+  --reddish: hsl(0, 100%, 40%);
+  width: 100%;
+  background-color: var(--reddish);
+  border: 1px solid var(--reddish);
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 1px hsl(0, 100%, 25%);
+  padding: 5px;
+}
+.delete-button-1:hover {
+  --reddish: hsl(0, 100%, 50%);
+  box-shadow: 1px 1px 8px 2px hsl(0, 100%, 25%);
+  transition: 0.35s;
+}
+.delete-button-2 {
+  --reddish: hsl(0, 100%, 40%);
+  width: 100%;
+  background-color: var(--reddish);
+  border: 1px solid var(--reddish);
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 1px hsl(0, 100%, 20%);
+  padding: 5px;
+}
+.delete-button-2:hover {
+  --reddish: hsl(0, 100%, 60%);
+  box-shadow: 1px 1px 8px 2px hsl(0, 100%, 20%);
+  transition: 0.35s;
+}
