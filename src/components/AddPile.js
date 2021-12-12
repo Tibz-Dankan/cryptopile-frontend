@@ -61,6 +61,7 @@ const AddPile = () => {
     e.preventDefault();
     // display  the beat loaders
     setDisplayPacmanLoader(true);
+    setCatchError("");
     try {
       // to be removed
       console.log(dateOfPileStorage); // this line will be removed
@@ -75,17 +76,15 @@ const AddPile = () => {
       console.log(postPile);
 
       if (postPile.status === 200) {
-        // stop displaying the beat loader
         setDisplayPacmanLoader(false);
-        // display msg if not logged in
-        if (postPile.data.messageCheck === "error") {
-          setDisplayWhenTokenError(postPile.data.messageDisplay);
+        if (!localStorage.getItem("accessToken")) {
           setDisplayWhenUserNotLoggedIn(true);
-          setCatchError("");
-        } else {
-          // if The pile was successful posted the make input fields the empty
+        }
+        // else if (postPile.data.Error.name === "JsonWebTokenError") {
+        //   // display msg jwt is tampered with
+        //   setDisplayWhenTokenError(postPile.data.Error.message);
+        else {
           setPile({ title: "", description: "" });
-          // display some cool msg
           setHidePileFormWhenAddedToDb(true);
         }
       }
@@ -125,7 +124,7 @@ const AddPile = () => {
                 className="mypile-catch-error"
                 style={{ textAlign: "center" }}
               >
-                <p style={{ color: "lightyellow" }}>{catchError}</p>
+                <p style={{ color: "black" }}>{catchError}</p>
               </div>
               {displayWhenUserNotLoggedIn ? (
                 <div className="display-when-not-logged-in">

@@ -10,17 +10,16 @@ import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
 import EditPileTitle from "./EditPileTitle";
 import DeletePile from "./DeletePile";
-import CopyPileTitle from "./CopyPileTitle";
 import "./../css/Viewpile.css";
 
 const ViewMypile = () => {
   const [renderAllPile, setRenderAllPile] = useState([]);
   const [displayWhenNoToken, setDisplayWhenNoToken] = useState(false);
-  const [catchError, setCatchError] = useState("");
+  const [displayCatchError, setDisplayCatchError] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayPropagateLoader, setDisplayPropagateLoader] = useState(false);
+  const [displayTable, setDisplayTable] = useState(false);
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
-  const [isCopied, setIsCopied] = useState(false);
 
   const axiosApi = axios.create({
     // baseURL: "https://stockpile-backend.herokuapp.com/api",
@@ -32,22 +31,28 @@ const ViewMypile = () => {
   const getPile = async () => {
     try {
       setDisplayPropagateLoader(true);
-      const getMypile = await axiosApi.get(
+      const getMyPile = await axiosApi.get(
         `/getpile/${localStorage.getItem("userId")}`
       );
       if (!tokenFromLocalStorage) {
         setDisplayWhenNoToken(true);
       } else {
         setDisplayPropagateLoader(false);
-        console.log(getMypile);
-        const arrayPile = getMypile.data.rows;
+        console.log(getMyPile); // to be removed
+        const arrayPile = getMyPile.data.rows;
         console.log(arrayPile);
         setRenderAllPile(arrayPile);
-        setCatchError("");
+        setDisplayCatchError(false);
+        window.scrollTo(0, 0); // scrolling to the top
+        if (getMyPile.status === 200) {
+          setDisplayTable(true);
+        }
       }
     } catch (err) {
       console.log(err);
-      setCatchError("Sorry, something went wrong!");
+      window.scrollTo(0, 0); // scrolling to the top
+      setDisplayCatchError(true);
+      setDisplayPropagateLoader(false);
     }
   };
 
@@ -63,30 +68,6 @@ const ViewMypile = () => {
     return (isActive = false);
   }, []);
 
-  //copy text tol the clipboard
-  const titleToBeCopied = renderAllPile.title;
-  const copyTextToClipboard = async (titleToBeCopied) => {
-    if ("clipboard" in navigator) {
-      return await navigator.clipboard.writeText(titleToBeCopied);
-    } else {
-      document.execCommand("copy", true, titleToBeCopied);
-    }
-  };
-  // function to handle onclick
-  const handleOnclick = () => {
-    console.log(titleToBeCopied); // to be removed
-    copyTextToClipboard(titleToBeCopied)
-      .then(() => {
-        setIsCopied(true);
-        setTimeout(() => {
-          setIsCopied(true);
-        }, 2000);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   return (
     <div>
       {isLoggedIn ? (
@@ -98,15 +79,16 @@ const ViewMypile = () => {
             <div className="viewpile-mypile-link header-link">
               <AddPileLink />
             </div>
-            <div className="viewpile-logout-link">
+            <div className="viewpile-logout-link header-link">
               <LogoutLink />
             </div>
           </div>
-          <div className="view-pile-heading" style={{ textAlign: "center" }}>
-            {/* display an error to user wen backend has the problem */}
-            <p style={{ color: "lightyellow" }}>{catchError}</p>
-          </div>
-          {/* trying this and if works i will push it into production */}
+          {/* display an error to user wen backend has the problem */}
+          {displayCatchError ? (
+            <div className="view-pile-error-msg">
+              <p>Sorry, something went wrong!</p>
+            </div>
+          ) : null}
           {displayWhenNoToken ? (
             <div className="view-pile-when-not-loggedin">
               <p>You have no token!</p>
@@ -129,40 +111,41 @@ const ViewMypile = () => {
             <div className="pile-wrapper">
               {displayPropagateLoader ? (
                 <div className="propagate-loader-wrapper">
-                  <PropagateLoader color="red" color="lightseagreen" />
+                  <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />
                   <h5>Loading...</h5>
                 </div>
               ) : null}
             </div>
           )}
-          {/* table here */}
-          <table>
-            <tr>
-              {/* <th>Date</th> */}
-              {/* <th>Time</th> */}
-              <th>Title</th>
-              <th>Description</th>
-              {/* <th>Edit Title</th> */}
-              {/* <th>Edit Description</th> */}
-              <th>Delete</th>
-            </tr>
-            {/* map method here */}
-            {renderAllPile.map((pile) => {
-              return (
-                <tr key={pile.pile_id}>
-                  {/* <td>{pile.date_of_add}</td> */}
-                  {/* <td>{pile.time_of_add}</td> */}
-                  <td id="pile-title-id">
-                    {pile.title} {<EditPileTitle pile={pile} />}
-                  </td>
-                  <td id="pile-description-id">
-                    {pile.description} {<EditPileDescription pile={pile} />}
-                  </td>
-                  <td>{<DeletePile pile={pile} />}</td>
-                </tr>
-              );
-            })}
-          </table>
+          {displayTable ? (
+            <table>
+              <tr>
+                {/* <th>Date</th> */}
+                {/* <th>Time</th> */}
+                <th>Title</th>
+                <th>Description</th>
+                {/* <th>Edit Title</th> */}
+                {/* <th>Edit Description</th> */}
+                <th>Delete</th>
+              </tr>
+              {/* map method here */}
+              {renderAllPile.map((pile) => {
+                return (
+                  <tr key={pile.pile_id}>
+                    {/* <td>{pile.date_of_add}</td> */}
+                    {/* <td>{pile.time_of_add}</td> */}
+                    <td id="pile-title-id">
+                      {pile.title} {<EditPileTitle pile={pile} />}
+                    </td>
+                    <td id="pile-description-id">
+                      {pile.description} {<EditPileDescription pile={pile} />}
+                    </td>
+                    <td>{<DeletePile pile={pile} />}</td>
+                  </tr>
+                );
+              })}
+            </table>
+          ) : null}
         </div>
       ) : (
         <NotLoggedIn />

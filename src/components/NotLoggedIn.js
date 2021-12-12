@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./../css/NotLoggedIn.css";
-import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 
 const NotLoggedIn = () => {
@@ -11,8 +10,8 @@ const NotLoggedIn = () => {
   };
 
   useEffect(() => {
-    setNotLoggedIn(true);
     if (localStorage.getItem("isLoggedIn") === null) {
+      setNotLoggedIn(true);
       setTimeout(() => {
         redirectToHomePage();
       }, 2000);
