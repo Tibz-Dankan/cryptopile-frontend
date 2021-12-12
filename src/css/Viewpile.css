@@ -22,7 +22,7 @@
 .viewpile-home-link,
 .viewpile-mypile-link,
 .viewpile-logout-link {
-  margin: 0% 5% 0% 5%;
+  margin: 0% 10% 0% 10%;
 }
 .view-link {
   color: hsl(240, 100%, 100%);
@@ -71,6 +71,7 @@ th {
   background-color: var(--steelblue-2);
   border: 1px solid var(--steelblue-2);
   border-radius: 5px;
+  box-shadow: 1px 1px 10px 1px hsl(207, 60%, 20%);
   text-align: center;
   padding: 5px;
   height: 85px;
@@ -82,7 +83,7 @@ td {
   background-color: hsl(240, 100%, 100%);
   border: 1px solid hsl(240, 100%, 98%);
   border-radius: 5px;
-  box-shadow: 1px 1px 8px 1px hsl(180, 100%, 5%);
+  /* box-shadow: 1px 1px 8px 1px hsl(180, 100%, 5%); */
   box-shadow: 1px 1px 10px 1px hsl(0, 0%, 70%);
 }
 
@@ -98,7 +99,9 @@ td {
     width: 80%;
     margin: 2% 12% 2% 8%;
   }
-  /* table {
-    width: 80%;
-  } */
+  .viewpile-home-link,
+  .viewpile-mypile-link,
+  .viewpile-logout-link {
+    margin: 0% 5% 0% 5%;
+  }
 }
