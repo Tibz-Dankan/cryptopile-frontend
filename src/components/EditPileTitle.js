@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 // import { ClipLoader, PropagateLoader } from "react-spinners";
 import { X } from "react-bootstrap-icons";
+import "./../css/EditPileTitle.css";
 
 // More features to be added here
 // Look for appropriate react spinners for react modal
@@ -22,7 +23,7 @@ const EditPileTitle = ({ pile }) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       color: "black",
-      width: "60%",
+      width: "50%",
     },
   };
   const [isModalOpen, setIsOpenModal] = useState(false);
@@ -36,12 +37,12 @@ const EditPileTitle = ({ pile }) => {
   };
   // On opening the modal function
   const afterOpenModal = () => {
-    subtitle.style.color = "black";
+    // subtitle.style.color = "black";
   };
 
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
   const axiosApi = axios.create({
-    // baseURL: "https://stockpile-backend.herokuapp.com/api",s
+    // baseURL: "https://stockpile-backend.herokuapp.com/api",
     baseURL: "http://localhost:5000/api",
     headers: {
       Authorization: "Bearer " + tokenFromLocalStorage,
@@ -61,7 +62,8 @@ const EditPileTitle = ({ pile }) => {
         // stop the spinner
         // setDisplayClipLoader(false);
         // And end the close modal
-        // closeModal();
+        closeModal();
+        // also refresh automatically the whole page for a user to visualize the changes
       } else {
         // when some thing goes wrong
       }
@@ -76,31 +78,39 @@ const EditPileTitle = ({ pile }) => {
   Modal.setAppElement(document.getElementById("pile-title-id")); // some bugs here
   return (
     <div>
-      <button onClick={openModal}>Edit title</button>
-      <Modal
-        isOpen={isModalOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Edit Pile"
-      >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Edit pile</h2>
-        <div onClick={closeModal} className="close-modal">
-          <X size={20} />
-        </div>
-        {/* {displayClipLoader ? <ClipLoader color="red" /> : null} */}
-        {/* <PropagateLoader color="red" /> */}
-        <form>
-          {/* <button onClick={closeModal}>close</button> */}
-          {/* should an x sign to close the modal */}
-          <input
-            type="text"
-            onChange={(e) => setPileTitle(e.target.value)}
-            value={pileTitle}
-          />
-          <button onClick={updatePileTitle}>Edit</button>
-        </form>
-      </Modal>
+      <button className="edit-button edit-button-1" onClick={openModal}>
+        edit
+      </button>
+      <div className="modal-wrapper">
+        <Modal
+          isOpen={isModalOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Edit Pile Title"
+        >
+          {/* {displayClipLoader ? <ClipLoader color="red" /> : null} */}
+          {/* <PropagateLoader color="red" /> */}
+          <form className="edit-form">
+            <h4>Edit Pile Title</h4>
+            <div onClick={closeModal} className="close-modal">
+              <X size={30} />
+            </div>
+            <textarea
+              className="textarea"
+              type="text"
+              onChange={(e) => setPileTitle(e.target.value)}
+              value={pileTitle}
+            />
+            <button
+              className="edit-button edit-button-2"
+              onClick={updatePileTitle}
+            >
+              Edit
+            </button>
+          </form>
+        </Modal>
+      </div>
     </div>
   );
 };

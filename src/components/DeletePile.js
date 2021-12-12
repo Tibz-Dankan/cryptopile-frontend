@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Modal from "react-modal";
 import { X } from "react-bootstrap-icons";
+import "./../css/DeletePile.css";
 
 const DeletePile = ({ pile }) => {
   // the modal state
@@ -17,7 +18,7 @@ const DeletePile = ({ pile }) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       color: "black",
-      width: "60%",
+      width: "40%",
     },
   };
   // open modal
@@ -30,7 +31,7 @@ const DeletePile = ({ pile }) => {
   };
   // onAfterOpen modal
   const afterOpenModal = () => {
-    subtitle.style.color = "green";
+    // subtitle.style.color = "green";
   };
   // the modal element
   Modal.setAppElement(document.getElementsByClassName("user-pile"));
@@ -53,6 +54,13 @@ const DeletePile = ({ pile }) => {
       // console.log(renderAllPile.pile_id);
       console.log(pileId); // to test whether it is working properly
       const response = await axiosApi.delete(`/delete-pile/${pileId}`);
+      if (response.status === 200) {
+        // And end the close modal
+        closeModal();
+        // also refresh automatically the whole page for a user to visualize the changes
+      } else {
+        // when some thing goes wrong
+      }
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -62,7 +70,9 @@ const DeletePile = ({ pile }) => {
 
   return (
     <div>
-      <button onClick={openModal}>Delete</button>
+      <button className="delete-button delete-button-1" onClick={openModal}>
+        Delete
+      </button>
       <Modal
         isOpen={isModalOpen}
         onAfterOpen={afterOpenModal}
@@ -70,15 +80,18 @@ const DeletePile = ({ pile }) => {
         style={customStyles}
         contentLabel="Delete Pile"
       >
-        <h1 ref={(_subtitle) => (subtitle = _subtitle)}>
-          {/* Are you sure you want to delete this pile */}
-          This will be deleted permanently
-        </h1>
-        <div onClick={closeModal}>
-          <X />
-          {/*should be in the top right corner of the modal*/}
+        <div className="modal-wrapper">
+          <h4>This will be deleted permanently</h4>
+          <div className="close-modal" onClick={closeModal}>
+            <X size={30} />
+          </div>
+          <button
+            className="delete-button delete-button-2"
+            onClick={deletePile}
+          >
+            Delete
+          </button>
         </div>
-        <button onClick={deletePile}>Delete</button>
       </Modal>
     </div>
   );

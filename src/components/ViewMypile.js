@@ -142,8 +142,8 @@ const ViewMypile = () => {
               {/* <th>Time</th> */}
               <th>Title</th>
               <th>Description</th>
-              <th>Edit Title</th>
-              <th>Edit Description</th>
+              {/* <th>Edit Title</th> */}
+              {/* <th>Edit Description</th> */}
               <th>Delete</th>
             </tr>
             {/* map method here */}
@@ -152,11 +152,11 @@ const ViewMypile = () => {
                 <tr key={pile.pile_id}>
                   {/* <td>{pile.date_of_add}</td> */}
                   {/* <td>{pile.time_of_add}</td> */}
-                  <td>{pile.title}</td>
-                  <td>{pile.description}</td>
-                  <td id="pile-title-id">{<EditPileTitle pile={pile} />}</td>
+                  <td id="pile-title-id">
+                    {pile.title} {<EditPileTitle pile={pile} />}
+                  </td>
                   <td id="pile-description-id">
-                    {<EditPileDescription pile={pile} />}
+                    {pile.description} {<EditPileDescription pile={pile} />}
                   </td>
                   <td>{<DeletePile pile={pile} />}</td>
                 </tr>

@@ -31,42 +31,14 @@
   width: 40%;
 }
 
-.pile-date-time {
-  color: hsl(120, 100%, 95%);
-  background-color: hsl(240, 100%, 12%);
-  background-color: lightseagreen;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  font-weight: italic;
-  margin: 1% 20% 0.5% 20%;
-  padding: 0.5%;
-  width: 60%;
-}
-.pile-title {
-  background-color: hsl(240, 100%, 25%);
-  border: 1px solid transparent;
-  border-radius: 10px;
-  font-weight: bold;
-  margin: 1% 10% 0.5% 10%;
-  padding-top: 50px;
-  padding: 1%;
-  width: 80%;
-}
-.pile-description {
-  background-color: hsl(240, 100%, 25%);
-  border: 1px solid transparent;
-  border-radius: 10px;
-  margin: 1% 10% 4% 10%;
-  padding: 1%;
-  width: 80%;
-}
 .view-pile-heading {
   width: 40%;
   margin: 2% 30% 2% 30%;
-  background-color: hsl(240, 100%, 15%);
-  border: 1px solid hsl(240, 100%, 15%);
+  /* background-color: hsl(240, 100%, 15%); */
+  /* border: 1px solid hsl(240, 100%, 15%); */
   border-radius: 15px;
   text-align: center;
+  color: hsl(240, 100%, 15%);
 }
 .view-pile-when-not-loggedin {
   text-align: center;
@@ -126,7 +98,7 @@ td {
     width: 80%;
     margin: 2% 12% 2% 8%;
   }
-  table {
+  /* table {
     width: 80%;
-  }
+  } */
 }

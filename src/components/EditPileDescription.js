@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 // import { ClipLoader, PropagateLoader } from "react-spinners";
 import { X } from "react-bootstrap-icons";
+import "./../css/EditPileDescription.css";
 
 // More features to be added here
 // Look for appropriate react spinners for react modal
@@ -36,7 +37,7 @@ const EditPileDescription = ({ pile }) => {
   };
   // On opening the modal function
   const afterOpenModal = () => {
-    subtitle.style.color = "black";
+    // subtitle.style.color = "black";
   };
 
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
@@ -63,7 +64,7 @@ const EditPileDescription = ({ pile }) => {
         // stop the spinner
         // setDisplayClipLoader(false);
         // And end the close modal
-        // closeModal();
+        closeModal();
       } else {
         // when some thing goes wrong
       }
@@ -74,11 +75,13 @@ const EditPileDescription = ({ pile }) => {
   };
 
   // binding the modal to the app
-  //   Modal.setAppElement("#pile-title-id");
+  //   Modal.setAppElement("#pile-description-id");
   Modal.setAppElement(document.getElementById("pile-description-id")); // some bugs here
   return (
     <div>
-      <button onClick={openModal}>Edit description</button>
+      <button className="edit-button edit-button-1" onClick={openModal}>
+        edit
+      </button>
       <Modal
         isOpen={isModalOpen}
         onAfterOpen={afterOpenModal}
@@ -86,21 +89,25 @@ const EditPileDescription = ({ pile }) => {
         style={customStyles}
         contentLabel="Edit Pile"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Edit pile</h2>
-        <div onClick={closeModal} className="close-modal">
-          <X size={20} />
-        </div>
         {/* {displayClipLoader ? <ClipLoader color="red" /> : null} */}
         {/* <PropagateLoader color="red" /> */}
-        <form>
-          {/* <button onClick={closeModal}>close</button> */}
-          {/* should an x sign to close the modal */}
+        <form className="edit-form">
+          <h4>Edit pile Description</h4>
+          <div onClick={closeModal} className="close-modal">
+            <X size={30} />
+          </div>
           <textarea
+            className="textarea"
             type="text"
             onChange={(e) => setPileDescription(e.target.value)}
             value={pileDescription}
-          ></textarea>
-          <button onClick={updatePileDescription}>Edit</button>
+          />
+          <button
+            className="edit-button edit-button-2"
+            onClick={updatePileDescription}
+          >
+            Edit
+          </button>
         </form>
       </Modal>
     </div>
