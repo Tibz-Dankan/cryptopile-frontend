@@ -5,7 +5,7 @@ import "./../../App.css";
 const LogoutLink = () => {
   return (
     <div className="logout-header-link">
-      <NavLink to="/Logout" className="header-link">
+      <NavLink to="/Logout" className="navigation-link">
         Logout
       </NavLink>
     </div>
