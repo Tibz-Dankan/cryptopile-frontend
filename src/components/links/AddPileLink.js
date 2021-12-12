@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./../../App.css";
 
-const MypileLink = () => {
+const AddPileLink = () => {
   return (
     <div>
       <nav>
@@ -14,4 +14,4 @@ const MypileLink = () => {
   );
 };
 
-export default MypileLink;
+export default AddPileLink;
