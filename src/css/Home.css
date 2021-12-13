@@ -51,9 +51,12 @@
 
 .home-page-content {
   position: relative;
-  /* text-align: center; */
   width: 40%;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .home-page-welcome-heading {
   text-align: center;
