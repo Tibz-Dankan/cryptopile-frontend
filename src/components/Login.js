@@ -39,8 +39,8 @@ const Login = (isLoggedIn) => {
       SetDisplayLoginSuccess("");
       SetDisplayLoginErrors("");
       const response = await axios.post(
-        // "https://stockpile-backend.herokuapp.com/login",
-        "http://localhost:5000/login",
+        "https://stockpile-backend.herokuapp.com/login",
+        // "http://localhost:5000/login",
         {
           email: userLoginInfo.email,
           password: userLoginInfo.password,
@@ -110,7 +110,7 @@ const Login = (isLoggedIn) => {
                 <div className="beat-loader-component-wrapper">
                   <FadeLoader
                     className="beat-loader"
-                    color="lightseagreen"
+                    color="hsl(180, 100%, 30%)"
                     size={5}
                   />
                   <h5 className="authenticate-msg">Authenticating...</h5>

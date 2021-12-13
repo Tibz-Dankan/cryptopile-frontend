@@ -42,8 +42,8 @@ const EditPileTitle = ({ pile }) => {
 
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
   const axiosApi = axios.create({
-    // baseURL: "https://stockpile-backend.herokuapp.com/api",
-    baseURL: "http://localhost:5000/api",
+    baseURL: "https://stockpile-backend.herokuapp.com/api",
+    // baseURL: "http://localhost:5000/api",
     headers: {
       Authorization: "Bearer " + tokenFromLocalStorage,
     },
