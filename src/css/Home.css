@@ -51,7 +51,9 @@
 
 .home-page-content {
   position: relative;
-  width: 50%;
+  /* text-align: center; */
+  width: 40%;
+  height: 100vh;
 }
 .home-page-welcome-heading {
   text-align: center;
@@ -90,6 +92,7 @@
 
   .home-page-content {
     width: 70%;
+    height: auto;
   }
   .header-nav-links {
     display: flex;
