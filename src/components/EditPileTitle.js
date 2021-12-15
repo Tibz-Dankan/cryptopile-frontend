@@ -59,8 +59,6 @@ const EditPileTitle = ({ pile }) => {
         title: pileTitle,
       });
       if (response.status === 200) {
-        // stop the spinner
-        // setDisplayClipLoader(false);
         // And end the close modal
         closeModal();
         // also refresh automatically the whole page for a user to visualize the changes
@@ -89,8 +87,6 @@ const EditPileTitle = ({ pile }) => {
           style={customStyles}
           contentLabel="Edit Pile Title"
         >
-          {/* {displayClipLoader ? <ClipLoader color="red" /> : null} */}
-          {/* <PropagateLoader color="red" /> */}
           <form className="edit-form">
             <h4>Edit Pile Title</h4>
             <div onClick={closeModal} className="close-modal">
