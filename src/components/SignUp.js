@@ -26,16 +26,6 @@ const SignUp = () => {
     setGender(selectGender);
     console.log(gender);
   };
-  // object to store the options
-  // const genders = [ {option:"Female"} , {option:"Male"}]
-
-  // state to handle the gender select
-  // const [genderOption, setGenderOption] = useState(genders.option)
-  //handle the gender changes
-  // const handleGenderChange = (e)=>{
-  //   setGenderOption(e.option)
-  //   console.log(genderOption)
-  // }
   // upon successful regsitration
   const [successfullyRegisteredMsg, setSuccessfullyRegisteredMsg] = useState({
     email: "",
@@ -266,22 +256,6 @@ const SignUp = () => {
                 onChange={(e) => handleChange(e)}
                 required
               />
-              {/* Gender with only options */}
-
-              {/* <label>
-                <select
-                  className="input-field"
-                  onChange={(e) => handleGenderChange(e)}
-                >
-                  <option value="Female">Female</option>
-                  <option value="Male">Male</option>
-                </select>
-              </label> */}
-
-              {/* Another select trial */}
-              {/* <Select options = {genders} onChange={handleGenderChange} className="input-field"/> */}
-              {/* display for confirmation purposes */}
-              {/* <h1> {genderOption}</h1> */}
               <br />
               <br />
               {/* display password don't match */}

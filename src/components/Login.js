@@ -94,7 +94,7 @@ const Login = (isLoggedIn) => {
           </div>
         </div>
         <div className="login-form-wrapper">
-          <form onSubmit={(e) => submitLoginInfo(e)}>
+          <form onSubmit={(e) => submitLoginInfo(e)} className="login-form">
             <div className="login-form-heading">
               <h3>Log Into Your Account</h3>
             </div>

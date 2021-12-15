@@ -2,7 +2,6 @@
 .signup-page-wrapper {
   position: relative;
   width: 100%;
-  /* height: 1500px; */
   height: auto;
   background-color: hsl(207, 60%, 99%);
   color: hsl(240, 100%, 90%);
@@ -22,7 +21,6 @@
 }
 .registration-form {
   width: 40%;
-  /* margin: 3% 30% 0% 30%; */
   padding: 5px;
   color: hsl(240, 100%, 10%);
   background-color: hsl(240, 100%, 100%);
@@ -65,8 +63,9 @@
   box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
   border-radius: 3px;
   width: 50%;
-  height: 30px;
+  height: 28px;
   margin: 0% 25% 0% 25%;
+  padding: 4px;
 }
 .signup-btn:hover {
   color: white;
@@ -113,15 +112,20 @@
 @media screen and (max-width: 540px) {
   .registration-form {
     width: 70%;
-    margin: 9% 20% 0% 10%;
   }
   .display-register-info-wrapper-1 {
     width: 70%;
-    margin: 20% 20% 0% 10%;
   }
   .beat-loader-component-signup {
     width: 80%;
-    margin: 1% 10% 1% 21%;
     padding: 20px 0px 20px 60px;
+  }
+  .signup-input-field {
+    height: 20px;
+  }
+  .signup-btn {
+    width: 83%;
+    margin: 1% 10% 1% 10%;
+    padding: 4px;
   }
 }
