@@ -11,6 +11,7 @@ import ViewMypile from "./components/ViewMypile";
 import ScrollToTop from "./components/ScrollToTop";
 import AddSecretePile from "./components/AddSecretePile";
 import ViewSecretePile from "./components/ViewSecretePile";
+import VerifyEmail from "./components/VerifyEmail";
 import TestClient from "./components/TestClient"; // This is for testing purposes na should be removed
 import { TokenContext } from "./components/context/TokenContext";
 import NotFound from "./components/NotFound";
@@ -34,6 +35,10 @@ const App = () => {
           <Route path="/viewmypile" component={ViewMypile} />
           <Route path="/addsecretepile" component={AddSecretePile} />
           <Route path="/viewsecretepile" component={ViewSecretePile} />
+          <Route
+            path="/verify-user-email/:userId/:verificationCode"
+            component={VerifyEmail}
+          />
           <Route path="/testclient" component={TestClient} />
           <Route component={NotFound} /> {/*more research for this compoent*/}
           {/* </TokenContext.Provider> */}

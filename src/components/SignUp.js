@@ -151,38 +151,11 @@ const SignUp = () => {
         <div className="display-register-info-wrapper-1">
           {displaySuccessfullyRegistered ? (
             <div className="display-register-info-wrapper-2">
-              <p className="success-message">
-                Congragulations, you have been successfully registered!
-              </p>
+              {/* Tell the user that we have sent a verification link to his email of registration */}
               <p>
-                Your email is:{" "}
-                <b className="registration-email">
-                  {successfullyRegisteredMsg.email}
-                </b>{" "}
-                and your password is:{" "}
-                <b className="registration-password">
-                  {successfullyRegisteredMsg.password}
-                </b>
+                A confirmation link has been sent to{" "}
+                {successfullyRegisteredMsg.email}
               </p>
-              <p>
-                The above email and password will be required when logging into
-                your account
-              </p>
-              <p>Click continue to login into your account</p>
-              <div className="">
-                <Link to="/login" className="link">
-                  continue
-                </Link>
-              </div>
-              {/* form with one input for the verification code */}
-              <form>
-                <input
-                  type="number"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
-                />
-                <button onClick={sendVerificationCode}>Send code</button>
-              </form>
             </div>
           ) : null}
           {displayEmailOrPasswordError ? (
