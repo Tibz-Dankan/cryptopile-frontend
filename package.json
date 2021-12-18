@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Tibz-Dankan/Tibz-Dankan.github.io",
+  "homepage": "https://github.com/Tibz-Dankan/stockpile-frontend",
   "dependencies": {
     "@emotion/core": "^11.0.0",
     "@testing-library/jest-dom": "^5.12.0",
