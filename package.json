@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/Tibz-Dankan/todo.git",
   "dependencies": {
     "@emotion/core": "^11.0.0",
     "@testing-library/jest-dom": "^5.12.0",
@@ -17,7 +16,6 @@
     "react-modal": "^3.14.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "react-select": "^4.3.1",
     "react-spinners": "^0.11.0",
     "web-vitals": "^1.1.1"
   },
@@ -25,9 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
