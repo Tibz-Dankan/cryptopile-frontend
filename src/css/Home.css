@@ -56,7 +56,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .home-page-welcome-heading {
   text-align: center;
