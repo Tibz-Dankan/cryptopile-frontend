@@ -2,143 +2,100 @@ import { React, Fragment, useState } from "react";
 import "./../App.css";
 import HomeLink from "./links/HomeLink";
 import axios from "axios";
-// import Select from "react-select"
-import { BeatLoader } from "react-spinners";
-// import { css } from "@emotion/react";
+import { BarLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import "./../css/Signup.css";
 
 const SignUp = () => {
-  const [registerInfo, setRegisterInfo] = useState({
-    firstname: "",
-    lastname: "",
+  const [registrationInfo, setRegistrationInfo] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     gender: "",
     password: "",
-    confirm_password: "",
+    confirmPassword: "",
   });
-  // state for the gender options
-  const [gender, setGender] = useState("");
-  const [verificationCode, setVerificationCode] = useState(0);
-  // function to handle the gender changes
-  const handleGenderChange = (e) => {
-    const selectGender = e.target.value;
-    setGender(selectGender);
-    console.log(gender);
-  };
-  // upon successful regsitration
-  const [successfullyRegisteredMsg, setSuccessfullyRegisteredMsg] = useState({
-    email: "",
-    password: "",
-  });
-  // state to display successfuly regsitered user
-  const [displaySuccessfullyRegistered, setDisplaySuccessfullyRegistered] =
-    useState(false);
-  // submit the form
-  // checking the email to ensure that is unique
-  const [checkEmailStatusError, setCheckEmailStatusError] = useState("");
-  // display this a user first visits the signup page
-  const [firsDisplayMessage, setFirstDisplayMessage] = useState(
-    "Create an account from here"
-  );
-  const [displayEmailOrPasswordError, setDisplayEmailOrPasswordError] =
-    useState(false);
-  // check password
-  const [checkPasswordMatch, setCheckPasswordMatch] = useState("");
-  // hiding the registration form
-  const [hideRegistrationForm, setHideRegstrationForm] = useState(false);
-  // show the beat loader
-  const [displayBeatLoader, setDisplayBeatLoader] = useState(false);
-  const [catchError, setCatchError] = useState("");
-  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
 
-  const submitRegisterInfo = async (e) => {
+  const [showWhenSuccessfullyRegistered, setShowWhenSuccessfullyRegistered] =
+    useState(false);
+  const [successfullyRegisteredInfo, setSuccessfullyRegisteredInfo] =
+    useState("");
+  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
+  // checking the email to ensure that is unique
+  const [emailValidityMsg, setEmailValidityMsg] = useState("");
+  const [showCaughtError, setShowCaughtError] = useState(false);
+  // check password
+  const [checkPasswordMatch, setCheckPasswordMatch] = useState(""); // should be done on the frontend
+  const [hideRegistrationForm, setHideRegistrationForm] = useState(false);
+  const [showBarLoader, setShowBarLoader] = useState(false);
+  const [catchError, setCatchError] = useState("");
+
+  const submitRegistrationInfo = async (e) => {
     e.preventDefault();
-    // scroll to the top upon submitting
     window.scrollTo(0, 0);
-    // show the beat loader
-    setDisplayBeatLoader(true);
+    setShowBarLoader(true); // start beatLoader
+    setCatchError("");
+
     try {
       const response = await axios.post(
         // "https://stockpile-backend.herokuapp.com/register",
         "http://localhost:5000/register",
         {
-          firstname: registerInfo.firstname,
-          lastname: registerInfo.lastname,
-          email: registerInfo.email,
-          gender: registerInfo.gender, // some changes made here
-          password: registerInfo.password,
-          confirm_password: registerInfo.confirm_password,
-          is_verified_email: isVerifiedEmail,
+          firstName: registrationInfo.firstName,
+          lastName: registrationInfo.lastName,
+          email: registrationInfo.email,
+          gender: registrationInfo.gender, // to be dropped
+          password: registrationInfo.password,
+          confirmPassword: registrationInfo.confirmPassword,
+          isVerifiedEmail: isVerifiedEmail,
         }
       );
-      console.log(response);
+      console.log(response); // to be removed
       if (response.status === 200) {
-        // successful request stop the beat loader
-        setDisplayBeatLoader(false);
-        if (response.data.email === registerInfo.email) {
+        setShowBarLoader(false); // stop beatLoader
+        if (response.data.email === registrationInfo.email) {
           // frontend email === backend email
-          // make input fields empty
-          setRegisterInfo({
-            firstname: "",
-            lastname: "",
+          setRegistrationInfo({
+            firstName: "",
+            lastName: "",
             email: "",
             gender: "",
             password: "",
             confirm_password: "",
           });
-          // Alert the sucesssfully registered user informatiion(email and password)
-          setSuccessfullyRegisteredMsg({
-            email: registerInfo.email,
-            password: registerInfo.password,
-          });
-          //alert the successfully registered
-          setDisplaySuccessfullyRegistered(true);
-
+          //alert the user when successfully registered
+          setShowWhenSuccessfullyRegistered(true);
+          setSuccessfullyRegisteredInfo(response.data);
           // make the states for checking the errors empty
-          setCheckEmailStatusError("");
+          setEmailValidityMsg("");
           setCheckPasswordMatch("");
-
           //hide the registration form
-          setHideRegstrationForm(true);
+          setHideRegistrationForm(true);
         } else {
           // go back to the top after when displayin ght error
-          // window.scrollTo(0, 0);
+          window.scrollTo(0, 0);
           // Email check after a successful request
-          setCheckEmailStatusError(response.data.msgEmail);
+          setEmailValidityMsg(response.data.emailMsg);
           // Password check after a successful request
-          setCheckPasswordMatch(response.data.msgPassword);
-          // display when there is an error
-          setDisplayEmailOrPasswordError(true);
+          setCheckPasswordMatch(response.data.passwordMsg); // to be handled on the frontend
         }
-      } else {
-        // check the err if no success
       }
     } catch (err) {
+      setShowBarLoader(false);
+      window.scrollTo(0, 0); // scroll to top
       console.log(err);
+      setShowCaughtError(true);
       setCatchError("sorry, something went wrong!");
-      setDisplayBeatLoader(false);
     }
   };
 
   // Handle the changes
   const handleChange = (e) => {
-    const newRegisterInfo = { ...registerInfo };
-    newRegisterInfo[e.target.id] = e.target.value; // research for understanding purposes
-    setRegisterInfo(newRegisterInfo);
-    console.log(newRegisterInfo);
+    const newRegistrationInfo = { ...registrationInfo };
+    newRegistrationInfo[e.target.id] = e.target.value; // research for understanding purposes
+    setRegistrationInfo(newRegistrationInfo);
   };
-  //function to verify the user code
-  const sendVerificationCode = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/verify-user-email",
-        { verificationCode: verificationCode }
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   return (
     <Fragment>
       <div className="signup-page-wrapper">
@@ -147,48 +104,34 @@ const SignUp = () => {
             <HomeLink />
           </div>
         </div>
-        {/* { displaying the user email and password required after sucessful registering} */}
-        <div className="display-register-info-wrapper-1">
-          {displaySuccessfullyRegistered ? (
-            <div className="display-register-info-wrapper-2">
-              {/* Tell the user that we have sent a verification link to his email of registration */}
-              <p>
-                A confirmation link has been sent to{" "}
-                {successfullyRegisteredMsg.email}
-              </p>
-            </div>
-          ) : null}
-          {displayEmailOrPasswordError ? (
-            <div className="registration-errors">
-              <p className="check-email-status-error">
-                {" "}
-                {checkEmailStatusError}
-              </p>
-              <p className="check-password-match">{checkPasswordMatch}</p>
-            </div>
-          ) : (
-            // To be removed because it is unnecessary
-            <div style={{ textAlign: "center" }}>
-              <p style={{ color: "lightyellow" }}>{catchError}</p>
-            </div>
-          )}
-        </div>
-        <div className="beat-loader-component-signup">
-          {displayBeatLoader ? <BeatLoader color="lightseagreen" /> : null}
-        </div>
-        {/* hiding the registraton form after successful registration */}
-
+        {showWhenSuccessfullyRegistered ? (
+          <div className="show-when-successfully-registered">
+            <p>
+              A confirmation link has been sent to{" "}
+              {successfullyRegisteredInfo.email}
+            </p>
+          </div>
+        ) : null}
+        {showCaughtError ? (
+          <div className="catch-error">
+            <p>{catchError}</p>
+          </div>
+        ) : null}
+        {showBarLoader ? (
+          <BarLoader color="lightseagreen" style={{ marginTop: "20px" }} />
+        ) : null}
+        {/* hiding the registration form after successful registration */}
         {hideRegistrationForm ? null : (
           <div className="registration-form">
-            <form onSubmit={(e) => submitRegisterInfo(e)}>
+            <form onSubmit={(e) => submitRegistrationInfo(e)}>
               <h3 className="registration-form-heading">Create An Account</h3>
               <label>Firstname:</label>
               <br />
               <input
                 type="text"
-                id="firstname"
+                id="firstName"
                 className="signup-input-field"
-                value={registerInfo.firstname}
+                value={registrationInfo.firstName}
                 onChange={(e) => handleChange(e)}
                 required
               />
@@ -199,58 +142,73 @@ const SignUp = () => {
               <input
                 type="text"
                 className="signup-input-field"
-                id="lastname"
-                value={registerInfo.lastname}
+                id="lastName"
+                value={registrationInfo.lastName}
                 onChange={(e) => handleChange(e)}
                 required
               />
               <br />
               <br />
-              {/*display email exists */}
+              {/*display email exists an email validity here */}
+              <p
+                className="email-validity-msg"
+                // style={{ textAlign: "center", color: "red" }}
+              >
+                {emailValidityMsg}
+              </p>
+              {/* <br /> */}
               <label>Email Address:</label>
               <br />
               <input
                 type="email"
                 className="signup-input-field"
                 id="email"
-                value={registerInfo.email}
+                value={registrationInfo.email}
                 onChange={(e) => handleChange(e)}
                 required
               />
               <br />
               <br />
+              {/* to be removed */}
               <label>Gender:</label>
               <br />
               <input
                 type="text"
                 id="gender"
                 className="signup-input-field"
-                value={registerInfo.gender}
+                value={registrationInfo.gender}
                 onChange={(e) => handleChange(e)}
                 required
               />
               <br />
               <br />
-              {/* display password don't match */}
+              {/* display password don't match  and comment to be removed*/}
+              <p
+                className="check-password-match"
+                // style={{ textAlign: "center", color: "red" }}
+              >
+                {checkPasswordMatch}
+              </p>
               <label>Password:</label>
               <br />
               <input
                 type="password"
                 className="signup-input-field"
                 id="password"
-                value={registerInfo.password}
+                value={registrationInfo.password}
                 onChange={(e) => handleChange(e)}
                 required
               />
               <br />
               <br />
+              {/*password match msg here*/}
               <label>Confirm Password:</label>
               <br />
               <input
                 type="password"
                 className="signup-input-field"
-                id="confirm_password"
-                value={registerInfo.confirm_password}
+                id="confirmPassword"
+                value={registrationInfo.confirmPassword}
                 onChange={(e) => handleChange(e)}
                 required
               />
