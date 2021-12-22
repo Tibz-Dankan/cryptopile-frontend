@@ -22,8 +22,10 @@ const ForgotPassword = () => {
       );
       console.log(response); // to be removed wen in production
       setShowBarLoader(false); // stop BarLoader
-      if ((response.data.email = userEmail)) {
-        history.push("/password-reset");
+      if (response.data.email === userEmail) {
+        localStorage.setItem("userEmail", response.data.email);
+        localStorage.setItem("userId", response.data.id);
+        history.push("/password-reset-code");
       }
     } catch (error) {
       console.log(error);
@@ -39,20 +41,25 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password-wrapper">
+      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
       {showCaughtError ? (
         <div className="caught-error">
-          <p>Sorry something went wrong !</p>
+          <p>Sorry, something went wrong !</p>
         </div>
       ) : null}
-      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
       <form onSubmit={submitEmailToResetPassword} className="user-email-form">
+        <p className="form-heading">Enter Email Associated With Your Account</p>
+        <label className="email-label">Email Address:</label>
+        <br />
         <input
           type="email"
+          className="email-input-field"
           onChange={handleUserEmailChange}
           value={userEmail}
           required
         />
-        <button className="email-btn">send</button>
+        <br />
+        <button className="email-btn">Get Code</button>
       </form>
     </div>
   );
