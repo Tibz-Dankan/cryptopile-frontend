@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
@@ -12,13 +12,12 @@ import ScrollToTop from "./components/ScrollToTop";
 import AddSecretePile from "./components/AddSecretePile";
 import ViewSecretePile from "./components/ViewSecretePile";
 import VerifyEmail from "./components/VerifyEmail";
-import TestClient from "./components/TestClient"; // This is for testing purposes na should be removed
-import { TokenContext } from "./components/context/TokenContext";
+import ForgotPassword from "./components/ForgotPassword";
+import PasswordResetCode from "./components/PasswordResetCode";
+import ResetPassword from "./components/ResetPassword";
 import NotFound from "./components/NotFound";
 
 const App = () => {
-  const [globalUserId, setGlobalUserId] = useState("");
-
   return (
     <div>
       <HashRouter>
@@ -29,19 +28,16 @@ const App = () => {
           <Route path="/about" component={About} />
           <Route path="/signup" component={SignUp} />
           <Route path="/logout" component={Logout} />
-          {/* <TokenContext.Provider value={{ globalUserId, setGlobalUserId }}> */}
           <Route path="/login" component={Login} />
           <Route path="/addpile" component={AddPile} />
           <Route path="/viewmypile" component={ViewMypile} />
           <Route path="/addsecretepile" component={AddSecretePile} />
           <Route path="/viewsecretepile" component={ViewSecretePile} />
-          <Route
-            path="/verify-user-email/:userId/:verificationCode"
-            component={VerifyEmail}
-          />
-          <Route path="/testclient" component={TestClient} />
+          <Route path="/verify-user-email/" component={VerifyEmail} />
+          <Route path="/forgot-password" component={ForgotPassword} />
+          <Route path="/password-reset-code" component={PasswordResetCode} />
+          <Route path="/reset-password" component={ResetPassword} />
           <Route component={NotFound} /> {/*more research for this compoent*/}
-          {/* </TokenContext.Provider> */}
         </Switch>
       </HashRouter>
     </div>
