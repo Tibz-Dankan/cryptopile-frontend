@@ -3,6 +3,7 @@ import "./../App.css";
 import HomeLink from "./links/HomeLink";
 import axios from "axios";
 import { BarLoader } from "react-spinners";
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./../css/Signup.css";
 
@@ -30,6 +31,25 @@ const SignUp = () => {
 
   const [passwordMatch, setPasswordMatch] = useState("");
   const [passwordLength, setPasswordLength] = useState("");
+
+  const [showPasswordOne, setShowPasswordOne] = useState(false);
+  const [showPasswordTwo, setShowPasswordTwo] = useState(false);
+
+  //  function to show password first by changing the state to true
+  const showingPasswordOne = () => {
+    setShowPasswordOne(true);
+    setTimeout(() => {
+      setShowPasswordOne(false);
+    }, 1000);
+  };
+
+  //  function to show password second by changing the state to true
+  const showingPasswordTwo = () => {
+    setShowPasswordTwo(true);
+    setTimeout(() => {
+      setShowPasswordTwo(false);
+    }, 1000);
+  };
 
   //check password match
   const checkPasswordMatch = () => {
@@ -216,26 +236,36 @@ const SignUp = () => {
               <p className="check-password-length">{passwordLength}</p>
               <label>Password:</label>
               <br />
-              <input
-                type="password"
-                className="signup-input-field"
-                id="password"
-                value={registrationInfo.password}
-                onChange={(e) => handleRegistrationInfoChange(e)}
-                required
-              />
+              <div className="signup-input-field-wrapper-1">
+                <input
+                  type={showPasswordOne ? "text" : "password"}
+                  className="signup-input-field signup-input-field-password"
+                  id="password"
+                  value={registrationInfo.password}
+                  onChange={(e) => handleRegistrationInfoChange(e)}
+                  required
+                />
+                <div className="signup-eye-icon" onClick={showingPasswordOne}>
+                  {showPasswordOne ? <EyeSlash /> : <Eye />}
+                </div>
+              </div>
               <br />
               <br />
               <label>Confirm Password:</label>
               <br />
-              <input
-                type="password"
-                className="signup-input-field"
-                id="confirmPassword"
-                value={registrationInfo.confirmPassword}
-                onChange={(e) => handleRegistrationInfoChange(e)}
-                required
-              />
+              <div className="signup-input-field-wrapper-2">
+                <input
+                  type={showPasswordTwo ? "text" : "password"}
+                  className="signup-input-field signup-input-field-password"
+                  id="confirmPassword"
+                  value={registrationInfo.confirmPassword}
+                  onChange={(e) => handleRegistrationInfoChange(e)}
+                  required
+                />
+                <div className="signup-eye-icon" onClick={showingPasswordTwo}>
+                  {showPasswordTwo ? <EyeSlash /> : <Eye />}
+                </div>
+              </div>
               <br />
               <br />
               <button className="signup-btn">Create</button>

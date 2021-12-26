@@ -48,6 +48,26 @@
   border: 1px solid var(--steelblue-2);
   border-radius: 5px;
 }
+.signup-input-field-wrapper-1,
+.signup-input-field-wrapper-2 {
+  position: relative;
+  width: 85%;
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
+  background-color: hsl(0, 0%, 95%);
+  border: 1px solid hsl(207, 44%, 90%);
+  border-radius: 5px;
+}
+.signup-eye-icon {
+  position: absolute;
+  right: 1%;
+  color: hsl(0, 0%, 40%);
+}
+.signup-input-field-password {
+  width: 80%;
+  margin-left: 0%;
+}
 .signup-input-field {
   height: 25px;
   width: 80%;
@@ -55,7 +75,7 @@
   padding: 4px;
   color: hsl(240, 100%, 10%);
   background-color: hsl(207, 44%, 95%);
-  border: 1px solid hsl(207, 44%, 95%);
+  border: 1px solid hsl(207, 44%, 90%); /*to be added to other components*/
   border-radius: 3px;
 }
 .signup-input-field:focus {
