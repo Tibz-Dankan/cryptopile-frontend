@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BarLoader } from "react-spinners";
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 import axios from "axios";
 import "./../css/ResetPassword.css";
 
@@ -16,7 +17,25 @@ const ResetPassword = () => {
   const [passwordResetStatusMsg, setPasswordResetStatusMsg] = useState("");
   const [showWhenPasswordIsInvalid, setShowWhenPasswordIsInvalid] =
     useState(false);
+  const [showPasswordOne, setShowPasswordOne] = useState(false);
+  const [showPasswordTwo, setShowPasswordTwo] = useState(false);
   let history = useHistory();
+
+  //  function to show password first by changing the state to true
+  const showingPasswordOne = () => {
+    setShowPasswordOne(true);
+    setTimeout(() => {
+      setShowPasswordOne(false);
+    }, 1000);
+  };
+
+  //  function to show password second by changing the state to true
+  const showingPasswordTwo = () => {
+    setShowPasswordTwo(true);
+    setTimeout(() => {
+      setShowPasswordTwo(false);
+    }, 1000);
+  };
 
   //check password match
   const checkPasswordMatch = () => {
@@ -122,27 +141,35 @@ const ResetPassword = () => {
             <p className="password-length">{passwordResetStatusMsg}</p>{" "}
           </div>
         ) : null}
-        <label className="reset-password-label">New Password:</label>
+        <label className="reset-password-label">New Password</label>
+        <div className="input-field-wrapper-1">
+          <input
+            type={showPasswordOne ? "text" : "password"}
+            id="newPassword"
+            className="reset-password-input-field"
+            onChange={(e) => handlePasswordResetChange(e)}
+            value={passwordObject.newPassword}
+            required
+          />
+          <div className="eye-icon" onClick={showingPasswordOne}>
+            {showPasswordOne ? <EyeSlash /> : <Eye />}
+          </div>
+        </div>
         <br />
-        <input
-          type="password"
-          id="newPassword"
-          className="reset-password-input-field"
-          onChange={(e) => handlePasswordResetChange(e)}
-          value={passwordObject.newPassword}
-          required
-        />
-        <br />
-        <label className="reset-password-label">confirm Password:</label>
-        <br />
-        <input
-          type="password"
-          id="confirmPassword"
-          className="reset-password-input-field"
-          onChange={(e) => handlePasswordResetChange(e)}
-          value={passwordObject.confirmPassword}
-          required
-        />
+        <label className="reset-password-label">confirm Password</label>
+        <div className="input-field-wrapper-2">
+          <input
+            type={showPasswordTwo ? "text" : "password"}
+            id="confirmPassword"
+            className="reset-password-input-field"
+            onChange={(e) => handlePasswordResetChange(e)}
+            value={passwordObject.confirmPassword}
+            required
+          />
+          <div className="eye-icon" onClick={showingPasswordTwo}>
+            {showPasswordTwo ? <EyeSlash /> : <Eye />}
+          </div>
+        </div>
         <br />
         <button className="reset-password-btn">Get Code</button>
       </form>
