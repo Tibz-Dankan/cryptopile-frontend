@@ -43,7 +43,7 @@ const VerifyEmail = () => {
             verificationCode: parseInt(verificationCode),
           }
         );
-        setSuccessMsg(response.data.verificationMsg);
+        setSuccessMsg(response.data.verificationStatusMsg);
         console.log(response); //to be commented out
         if (response.status === 200) {
           setShowFadeLoader(false);

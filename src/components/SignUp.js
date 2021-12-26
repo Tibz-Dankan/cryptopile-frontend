@@ -24,19 +24,61 @@ const SignUp = () => {
   // checking the email to ensure that is unique
   const [emailValidityMsg, setEmailValidityMsg] = useState("");
   const [showCaughtError, setShowCaughtError] = useState(false);
-  // check password
-  const [checkPasswordMatch, setCheckPasswordMatch] = useState(""); // should be done on the frontend
   const [hideRegistrationForm, setHideRegistrationForm] = useState(false);
   const [showBarLoader, setShowBarLoader] = useState(false);
   const [catchError, setCatchError] = useState("");
 
-  const submitRegistrationInfo = async (e) => {
-    e.preventDefault();
-    window.scrollTo(0, 0);
-    setShowBarLoader(true); // start beatLoader
-    setCatchError("");
+  const [passwordMatch, setPasswordMatch] = useState("");
+  const [passwordLength, setPasswordLength] = useState("");
 
+  //check password match
+  const checkPasswordMatch = () => {
+    setShowCaughtError(false);
+    setPasswordLength("");
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    if (password === confirmPassword) {
+      return true;
+    } else {
+      setPasswordMatch("**Passwords don't match");
+      return false;
+    }
+  };
+
+  //check password length
+  const checkPasswordLength = () => {
+    setShowCaughtError(false);
+    setPasswordMatch("");
+    const password = document.getElementById("password").value;
+    if (password.length >= 6 && password.length <= 15) {
+      return true;
+    } else {
+      setPasswordLength(
+        "**Passwords must be at least 6 characters and must not exceed 15"
+      );
+      return false;
+    }
+  };
+
+  // function to ensure that password contains symbols here
+
+  // Handle the changes
+  const handleRegistrationInfoChange = (e) => {
+    const newRegistrationInfo = { ...registrationInfo };
+    newRegistrationInfo[e.target.id] = e.target.value; // research for understanding purposes
+    setRegistrationInfo(newRegistrationInfo);
+  };
+
+  // submit registration details
+  const submitRegistrationInfo = async (e) => {
     try {
+      // e.preventDefault();
+      window.scrollTo(0, 0);
+      setShowBarLoader(true);
+      setEmailValidityMsg("");
+      setPasswordMatch("");
+      setPasswordLength("");
+      setCatchError("");
       const response = await axios.post(
         // "https://stockpile-backend.herokuapp.com/register",
         "http://localhost:5000/register",
@@ -52,7 +94,7 @@ const SignUp = () => {
       );
       console.log(response); // to be removed
       if (response.status === 200) {
-        setShowBarLoader(false); // stop beatLoader
+        setShowBarLoader(false);
         if (response.data.email === registrationInfo.email) {
           // frontend email === backend email
           setRegistrationInfo({
@@ -63,21 +105,14 @@ const SignUp = () => {
             password: "",
             confirm_password: "",
           });
-          //alert the user when successfully registered
           setShowWhenSuccessfullyRegistered(true);
           setSuccessfullyRegisteredInfo(response.data);
-          // make the states for checking the errors empty
-          setEmailValidityMsg("");
-          setCheckPasswordMatch("");
-          //hide the registration form
           setHideRegistrationForm(true);
         } else {
-          // go back to the top after when displayin ght error
           window.scrollTo(0, 0);
           // Email check after a successful request
-          setEmailValidityMsg(response.data.emailMsg);
+          setEmailValidityMsg(response.data.emailValidationMsg);
           // Password check after a successful request
-          setCheckPasswordMatch(response.data.passwordMsg); // to be handled on the frontend
         }
       }
     } catch (err) {
@@ -89,11 +124,10 @@ const SignUp = () => {
     }
   };
 
-  // Handle the changes
-  const handleChange = (e) => {
-    const newRegistrationInfo = { ...registrationInfo };
-    newRegistrationInfo[e.target.id] = e.target.value; // research for understanding purposes
-    setRegistrationInfo(newRegistrationInfo);
+  // checking password validity on submitting the form
+  const validatePasswordOnSubmittingForm = (e) => {
+    e.preventDefault();
+    checkPasswordLength() && checkPasswordMatch() && submitRegistrationInfo(); // short hand for if statement
   };
 
   return (
@@ -118,12 +152,14 @@ const SignUp = () => {
           </div>
         ) : null}
         {showBarLoader ? (
-          <BarLoader color="lightseagreen" style={{ marginTop: "20px" }} />
+          <div className="bar-loader">
+            <BarLoader color="lightseagreen" />
+            <h4>checking email existence...</h4>
+          </div>
         ) : null}
-        {/* hiding the registration form after successful registration */}
         {hideRegistrationForm ? null : (
           <div className="registration-form">
-            <form onSubmit={(e) => submitRegistrationInfo(e)}>
+            <form onSubmit={validatePasswordOnSubmittingForm}>
               <h3 className="registration-form-heading">Create An Account</h3>
               <label>Firstname:</label>
               <br />
@@ -132,7 +168,7 @@ const SignUp = () => {
                 id="firstName"
                 className="signup-input-field"
                 value={registrationInfo.firstName}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
               <br />
@@ -144,18 +180,12 @@ const SignUp = () => {
                 className="signup-input-field"
                 id="lastName"
                 value={registrationInfo.lastName}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
               <br />
               <br />
-              {/*display email exists an email validity here */}
-              <p
-                className="email-validity-msg"
-                // style={{ textAlign: "center", color: "red" }}
-              >
-                {emailValidityMsg}
-              </p>
+              <p className="email-validity-msg">{emailValidityMsg}</p>
               {/* <br /> */}
               <label>Email Address:</label>
               <br />
@@ -164,7 +194,7 @@ const SignUp = () => {
                 className="signup-input-field"
                 id="email"
                 value={registrationInfo.email}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
               <br />
@@ -177,18 +207,13 @@ const SignUp = () => {
                 id="gender"
                 className="signup-input-field"
                 value={registrationInfo.gender}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
               <br />
               <br />
-              {/* display password don't match  and comment to be removed*/}
-              <p
-                className="check-password-match"
-                // style={{ textAlign: "center", color: "red" }}
-              >
-                {checkPasswordMatch}
-              </p>
+              <p className="check-password-match">{passwordMatch}</p>
+              <p className="check-password-length">{passwordLength}</p>
               <label>Password:</label>
               <br />
               <input
@@ -196,12 +221,11 @@ const SignUp = () => {
                 className="signup-input-field"
                 id="password"
                 value={registrationInfo.password}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
               <br />
               <br />
-              {/*password match msg here*/}
               <label>Confirm Password:</label>
               <br />
               <input
@@ -209,7 +233,7 @@ const SignUp = () => {
                 className="signup-input-field"
                 id="confirmPassword"
                 value={registrationInfo.confirmPassword}
-                onChange={(e) => handleChange(e)}
+                onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
               <br />

@@ -20,6 +20,11 @@
   padding: 25px;
   margin-left: 8%;
 }
+
+.bar-loader {
+  color: hsl(180, 100%, 30%);
+}
+
 .registration-form {
   margin-top: 30px;
   width: 40%;
@@ -68,8 +73,10 @@
   height: 28px;
   margin: 0% 25% 0% 25%;
   padding: 4px;
+  outline: none;
 }
-.signup-btn:hover {
+.signup-btn:hover,
+.signup-btn:focus {
   color: white;
   background-color: hsl(180, 100%, 40%);
   border: 1px solid hsl(180, 100%, 40%);
@@ -92,10 +99,6 @@
   margin-top: 10px;
   text-align: center;
   color: hsl(0, 100%, 70%);
-  /* background-color: hsl(207, 44%, 99%);
-  border: 1px solid hsl(207, 44%, 99%); */
-  /* box-shadow: 0px 0px 4px 0px lightgrey; */
-  /* border-radius: 40px; */
   padding: 0px 5px 0px 10px;
 }
 
@@ -103,7 +106,8 @@
   color: hsl(0, 100%, 70%);
   text-align: center;
 }
-.check-password-match {
+.check-password-match,
+.check-password-length {
   color: hsl(0, 100%, 70%);
   text-align: center;
 }

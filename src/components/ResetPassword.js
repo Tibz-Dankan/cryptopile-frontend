@@ -11,28 +11,37 @@ const ResetPassword = () => {
   });
   const [showBarLoader, setShowBarLoader] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
+  const [passwordMatch, setPasswordMatch] = useState("");
+  const [passwordLength, setPasswordLength] = useState("");
+  const [passwordResetStatusMsg, setPasswordResetStatusMsg] = useState("");
   let history = useHistory();
-  // function to submit user email
-  const submitNewPassword = async (e) => {
-    e.preventDefault();
-    setShowBarLoader(true);
-    try {
-      const response = await axios.post(
-        "http://localhost:5000/reset-password",
-        {
-          newPassword: passwordObject.newPassword,
-        }
+
+  //check password match
+  const checkPasswordMatch = () => {
+    setShowCaughtError(false);
+    setPasswordLength("");
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    if (newPassword === confirmPassword) {
+      return true;
+    } else {
+      setPasswordMatch("**Passwords don't match");
+      return false;
+    }
+  };
+
+  //check password length
+  const checkPasswordLength = () => {
+    setShowCaughtError(false);
+    setPasswordMatch("");
+    const newPassword = document.getElementById("newPassword").value;
+    if (newPassword.length >= 6 && newPassword.length <= 15) {
+      return true;
+    } else {
+      setPasswordLength(
+        "**Passwords must be at least 6 characters and must not exceed 15"
       );
-      console.log(response); // to be removed wen in production
-      setShowBarLoader(false); // stop BarLoader
-      if (response.data.passwordResetMsg === "reset-successful") {
-        //   alert the user about successful reset of pswd
-        history.push("/login");
-      }
-    } catch (error) {
-      console.log(error);
-      setShowCaughtError(true);
-      setShowBarLoader(false);
+      return false;
     }
   };
 
@@ -43,6 +52,49 @@ const ResetPassword = () => {
     setPasswordObject(newPasswordObject);
   };
 
+  // function to submit user email
+  const submitNewPassword = async (e) => {
+    try {
+      const userEmail = localStorage.getItem("userEmail");
+      const userId = localStorage.getItem("userId");
+      if (userEmail == null || userId == null)
+        return setPasswordResetStatusMsg("**Cannot reset password !");
+      setShowCaughtError(false);
+      setPasswordMatch("");
+      setPasswordLength("");
+      setShowBarLoader(true);
+      setPasswordResetStatusMsg("");
+      const response = await axios.post(
+        ` http://localhost:5000/reset-password/${userId}`,
+        {
+          userEmail: userEmail,
+          newPassword: passwordObject.newPassword,
+        }
+      );
+      console.log(response); // to be removed wen in production
+      setShowBarLoader(false);
+      if (response.data.passwordResetMsg === "password-reset-successful") {
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userId");
+        //   alert the user about successful reset of password
+        setPasswordResetStatusMsg("The password has been successfully changed");
+        history.push("/login");
+      } else {
+        setPasswordResetStatusMsg(response.data.passwordResetMsg);
+      }
+    } catch (error) {
+      console.log(error);
+      setShowCaughtError(true);
+      setShowBarLoader(false);
+    }
+  };
+
+  // checking conditions on submitting the form
+  const checkPasswordOnSubmittingForm = (e) => {
+    e.preventDefault();
+    checkPasswordLength() && checkPasswordMatch() && submitNewPassword(); // short hand for if statement
+  };
+
   return (
     <div className="reset-password-wrapper">
       {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
@@ -51,12 +103,19 @@ const ResetPassword = () => {
           <p>Sorry, something went wrong !</p>
         </div>
       ) : null}
-      <form onSubmit={submitNewPassword} className="reset-password-form">
-        <p className="form-heading">Enter Your New Password</p>
+      <form
+        onSubmit={checkPasswordOnSubmittingForm}
+        className="reset-password-form"
+      >
+        <h4 className="form-heading">Enter Your New Password</h4>
+        <p className="password-match">{passwordMatch}</p>
+        <p className="password-length">{passwordLength}</p>
+        <p className="password-length">{passwordResetStatusMsg}</p>{" "}
+        {/*className to change*/}
         <label className="reset-password-label">New Password:</label>
         <br />
         <input
-          type="text"
+          type="password"
           id="newPassword"
           className="reset-password-input-field"
           onChange={(e) => handlePasswordResetChange(e)}
@@ -67,7 +126,7 @@ const ResetPassword = () => {
         <label className="reset-password-label">confirm Password:</label>
         <br />
         <input
-          type="text"
+          type="password"
           id="confirmPassword"
           className="reset-password-input-field"
           onChange={(e) => handlePasswordResetChange(e)}

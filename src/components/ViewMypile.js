@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
-import { CopyToClipboard } from "react-copy-to-clipboard";
 import HomeLink from "./links/HomeLink";
 import AddPileLink from "./links/AddPileLink";
 import LogoutLink from "./links/LogoutLink";

@@ -98,6 +98,9 @@
 .authenticate-msg {
   color: hsl(180, 100%, 30%);
 }
+.forgot-password {
+  text-align: center;
+}
 
 /* MEDIA QUERY */
 @media screen and (max-width: 540px) {

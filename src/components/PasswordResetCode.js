@@ -8,12 +8,15 @@ const PasswordResetCode = () => {
   const [passwordResetCode, setPasswordResetCode] = useState();
   const [showBarLoader, setShowBarLoader] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
+  const [passwordResetCodeMsg, setPasswordResetCodeMsg] = useState("");
   let history = useHistory();
   // function to submit user email
   const submitPasswordResetCode = async (e) => {
     e.preventDefault();
-    setShowBarLoader(true);
     try {
+      setPasswordResetCodeMsg("");
+      setShowCaughtError("");
+      setShowBarLoader(true);
       if (passwordResetCode !== null) {
         const response = await axios.post(
           "http://localhost:5000/password-reset-code",
@@ -23,8 +26,13 @@ const PasswordResetCode = () => {
         );
         console.log(response); // to be removed wen in production
         setShowBarLoader(false);
-        if (response.data.verification_code === passwordResetCode) {
+        if (response.data.verification_code === parseInt(passwordResetCode)) {
           history.push("/reset-password");
+        } else {
+          // some error here
+          setPasswordResetCodeMsg(
+            response.data.PasswordRestCodeVerificationMsg
+          );
         }
       }
     } catch (error) {
@@ -44,10 +52,12 @@ const PasswordResetCode = () => {
   // Resend the password Reset Code
   const resendPasswordResetCode = async (e) => {
     e.preventDefault();
-    setShowBarLoader(true);
     try {
-      const userEmail = localStorage.get("userEmail");
-      const userId = localStorage.get("userId");
+      setPasswordResetCodeMsg("");
+      setShowBarLoader(true);
+      setShowCaughtError("");
+      const userEmail = localStorage.getItem("userEmail");
+      const userId = localStorage.getItem("userId");
       if (userEmail !== null && userId !== null) {
         const response = await axios.post(
           "http://localhost:5000/resend-password-reset-code",
@@ -56,7 +66,14 @@ const PasswordResetCode = () => {
             userEmail: userEmail,
           }
         );
-        console.log(response);
+        console.log(response); // to be removed
+        if (response.data.email === userEmail) {
+          setPasswordResetCodeMsg(
+            "password reset code sent to " + response.data.email
+          );
+        } else {
+          setPasswordResetCodeMsg(response.data.passwordResetCodeMsg);
+        }
       }
       setShowBarLoader(false);
     } catch (error) {
@@ -74,6 +91,10 @@ const PasswordResetCode = () => {
           <p>Sorry something went wrong !</p>
         </div>
       ) : null}
+      <div className="password-resend-code-msg">
+        <p>{passwordResetCodeMsg}</p>{" "}
+        {/*to be styled custom colors according msg communicated next time*/}
+      </div>
       <form
         onSubmit={submitPasswordResetCode}
         className="password-reset-code-form"

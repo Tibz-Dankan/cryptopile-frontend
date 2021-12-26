@@ -1,42 +1,36 @@
-import React, { Fragment, useState, useContext } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeLink from "./links/HomeLink";
 import axios from "axios";
-// import {Redirect} from 'react-router-dom'
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
-import { css } from "@emotion/react";
 import "./../css/Login.css";
+import ResendVerificationLink from "./ResendVerificationLink";
 
-const Login = (isLoggedIn) => {
+const Login = () => {
   const [userLoginInfo, setUserLoginInfo] = useState({
     email: "",
     password: "",
   });
   const [displayLoginErrors, SetDisplayLoginErrors] = useState("");
   const [displayLoginSuccess, SetDisplayLoginSuccess] = useState("");
-  const [hideLoginForm, setHideLoginForm] = useState(false);
   const [displayFadeLoader, setDisplayFadeLoader] = useState(false);
   const [catchError, setCatchError] = useState("");
   const [isloggedIn, setIsLoggedIn] = useState(false);
-  // const { globalUserId, setGlobalUserId } = useContext(TokenContext);
+  const [didNotReceiveVerificationEmail, setDidNotReceiveVerificationEmail] =
+    useState(false);
 
   let history = useHistory();
-  // const laoder
-  const LoaderCSS = css`
-    margin-top: 40px;
-    margin-bottom: 10px;
-    color: red;
-  `;
+
   // submit the user login details
   const submitLoginInfo = async (e) => {
     e.preventDefault();
     try {
-      // on submitting display the beatloader
       setDisplayFadeLoader(true);
-      //hide the error and success messages
       SetDisplayLoginSuccess("");
       SetDisplayLoginErrors("");
+      setDidNotReceiveVerificationEmail(false);
+
       const response = await axios.post(
         // "https://stockpile-backend.herokuapp.com/login",
         "http://localhost:5000/login",
@@ -46,27 +40,29 @@ const Login = (isLoggedIn) => {
         }
       );
       console.log(response);
-      // if the login is a success then make the input fields empty
       if (response.status === 200) {
-        // stop the loading indicator
         setDisplayFadeLoader(false);
-        // alert the user input anything geoes wrong
-        SetDisplayLoginErrors(response.data.msg);
+        // alert the user input anything goes wrong
+        SetDisplayLoginErrors(response.data.loginStatusMsg);
         SetDisplayLoginSuccess(response.data.success);
         setCatchError(""); // should not display
-        if (response.data.success === "You have successfully logged in") {
-          // hide login form
-          setHideLoginForm(true);
-
-          setUserLoginInfo({ email: "", password: "" }); //makes the input fields empty
+        if (
+          response.data.loginStatusMsg === "You have successfully logged in"
+        ) {
           setIsLoggedIn(true);
-          //store the state in the local storage
           localStorage.setItem("isLoggedIn", "isLoggedIn");
-          // set the token to the local storage
           localStorage.setItem("accessToken", response.data.accessToken);
-          // store the userid in the local storage
           localStorage.setItem("userId", response.data.userId);
           history.push("/addpile");
+        }
+        //when not verified
+        if (response.data.partlyRegisteredEmail) {
+          localStorage.setItem(
+            "partlyRegisteredEmail",
+            response.data.partlyRegisteredEmail
+          );
+          setDidNotReceiveVerificationEmail(true);
+          window.scrollTo(0, 0);
         }
       }
     } catch (error) {
@@ -75,15 +71,16 @@ const Login = (isLoggedIn) => {
       setDisplayFadeLoader(false);
     }
   };
-  // pass the token from the accessToken to the context hook
-  //  setStoreAccessTokenGlobally(accessToken)
+
   // Handle the changes
   const handleLoginInfo = (e) => {
     const checkLoginInfo = { ...userLoginInfo };
     checkLoginInfo[e.target.id] = e.target.value; // some RS
     setUserLoginInfo(checkLoginInfo);
-    console.log(checkLoginInfo);
   };
+
+  // component to guide thw user who is not verified should be created
+
   return (
     <Fragment>
       <div className="login-page-wrapper">
@@ -92,6 +89,7 @@ const Login = (isLoggedIn) => {
             <HomeLink />
           </div>
         </div>
+        {didNotReceiveVerificationEmail ? <ResendVerificationLink /> : null}
         <div className="login-form-wrapper">
           <form onSubmit={(e) => submitLoginInfo(e)} className="login-form">
             <div className="login-form-heading">
@@ -116,47 +114,45 @@ const Login = (isLoggedIn) => {
                 </div>
               ) : null}
             </div>
-            {hideLoginForm ? (
-              <div>
-                <p>Login form hiding</p>
-              </div>
-            ) : (
-              <div>
-                <label>Email Address:</label>
-                <br />
-                <input
-                  type="email"
-                  className="login-input-field"
-                  id="email"
-                  value={userLoginInfo.email}
-                  onChange={(e) => handleLoginInfo(e)}
-                  required
-                />
-                <br />
-                <br />
-                <label>Password:</label>
-                <br />
-                <input
-                  type="password"
-                  className="login-input-field"
-                  id="password"
-                  value={userLoginInfo.password}
-                  onChange={(e) => handleLoginInfo(e)}
-                  required
-                />
-              </div>
-            )}
+            <div>
+              <label>Email Address:</label>
+              <br />
+              <input
+                type="email"
+                className="login-input-field"
+                id="email"
+                value={userLoginInfo.email}
+                onChange={(e) => handleLoginInfo(e)}
+                required
+              />
+              <br />
+              <br />
+              <label>Password:</label>
+              <br />
+              <input
+                type="password"
+                className="login-input-field"
+                id="password"
+                value={userLoginInfo.password}
+                onChange={(e) => handleLoginInfo(e)}
+                required
+              />
+            </div>
             <br />
             <br />
             <button type="submit" className="login-btn">
               Login
             </button>
           </form>
-          {/* <p>{storeAccessTokenGloabally}</p> for trail purposes */}
           <p>
             Is this your first time here?{" "}
             <Link to="/signup" className="link">
               signup
+            </Link>
+          </p>
+          <p className="forgot-password">
+            <Link to="forgot-password" className="link  forgot-password">
+              Forgot Password
             </Link>
           </p>
         </div>

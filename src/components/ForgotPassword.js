@@ -8,12 +8,16 @@ const ForgotPassword = () => {
   const [userEmail, setUserEmail] = useState("");
   const [showBarLoader, setShowBarLoader] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
+  const [errorInSendingPasswordResetCode, setErrorInSendingPasswordResetCode] =
+    useState("");
   let history = useHistory();
   // function to submit user email
   const submitEmailToResetPassword = async (e) => {
     e.preventDefault();
-    setShowBarLoader(true);
     try {
+      setShowBarLoader(false);
+      setShowBarLoader(true);
+      setErrorInSendingPasswordResetCode("");
       const response = await axios.post(
         "http://localhost:5000/forgot-password",
         {
@@ -25,6 +29,7 @@ const ForgotPassword = () => {
       if (response.data.email === userEmail) {
         localStorage.setItem("userEmail", response.data.email);
         localStorage.setItem("userId", response.data.id);
+        setErrorInSendingPasswordResetCode(response.data.forgotPasswordMsg);
         history.push("/password-reset-code");
       }
     } catch (error) {
@@ -41,12 +46,25 @@ const ForgotPassword = () => {
 
   return (
     <div className="forgot-password-wrapper">
-      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
+      <div className="forgot-password-heading">
+        <h2>Forgot Password</h2>
+      </div>
       {showCaughtError ? (
         <div className="caught-error">
           <p>Sorry, something went wrong !</p>
         </div>
       ) : null}
+      <div className="forgot-password-msg">
+        <p>
+          Incase you forget your password or you just want to reset it, we
+          usually ask for an email associated with your account where a{" "}
+          <b>Password Reset Code</b> required in the next step, is sent
+        </p>
+      </div>
+      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
+      <div className="errors-in-sending-pwsd-reset-code">
+        <p>{errorInSendingPasswordResetCode}</p> {/* to be styled next day*/}
+      </div>
       <form onSubmit={submitEmailToResetPassword} className="user-email-form">
         <p className="form-heading">Enter Email Associated With Your Account</p>
         <label className="email-label">Email Address:</label>
