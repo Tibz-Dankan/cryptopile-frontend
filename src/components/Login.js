@@ -4,6 +4,7 @@ import HomeLink from "./links/HomeLink";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
+import { Eye, EyeSlash } from "react-bootstrap-icons";
 import "./../css/Login.css";
 import ResendVerificationLink from "./ResendVerificationLink";
 
@@ -19,8 +20,17 @@ const Login = () => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const [didNotReceiveVerificationEmail, setDidNotReceiveVerificationEmail] =
     useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   let history = useHistory();
+
+  //  function to show password first by changing the state to true
+  const showingPassword = () => {
+    setShowPassword(true);
+    setTimeout(() => {
+      setShowPassword(false);
+    }, 1000);
+  };
 
   // submit the user login details
   const submitLoginInfo = async (e) => {
@@ -114,7 +124,7 @@ const Login = () => {
                 </div>
               ) : null}
             </div>
-            <div>
+            <div className="fields">
               <label>Email Address:</label>
               <br />
               <input
@@ -129,14 +139,19 @@ const Login = () => {
               <br />
               <label>Password:</label>
               <br />
-              <input
-                type="password"
-                className="login-input-field"
-                id="password"
-                value={userLoginInfo.password}
-                onChange={(e) => handleLoginInfo(e)}
-                required
-              />
+              <div className="password-input-field-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="login-input-field login-input-field-password"
+                  id="password"
+                  value={userLoginInfo.password}
+                  onChange={(e) => handleLoginInfo(e)}
+                  required
+                />
+                <div className="login-eye-icon" onClick={showingPassword}>
+                  {showPassword ? <EyeSlash /> : <Eye />}
+                </div>
+              </div>
             </div>
             <br />
             <br />
