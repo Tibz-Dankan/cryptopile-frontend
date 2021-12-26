@@ -14,12 +14,15 @@ const ResetPassword = () => {
   const [passwordMatch, setPasswordMatch] = useState("");
   const [passwordLength, setPasswordLength] = useState("");
   const [passwordResetStatusMsg, setPasswordResetStatusMsg] = useState("");
+  const [showWhenPasswordIsInvalid, setShowWhenPasswordIsInvalid] =
+    useState(false);
   let history = useHistory();
 
   //check password match
   const checkPasswordMatch = () => {
-    setShowCaughtError(false);
     setPasswordLength("");
+    setShowCaughtError(false);
+    setShowWhenPasswordIsInvalid(true);
     const newPassword = document.getElementById("newPassword").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
     if (newPassword === confirmPassword) {
@@ -32,8 +35,9 @@ const ResetPassword = () => {
 
   //check password length
   const checkPasswordLength = () => {
-    setShowCaughtError(false);
     setPasswordMatch("");
+    setShowCaughtError(false);
+    setShowWhenPasswordIsInvalid(true);
     const newPassword = document.getElementById("newPassword").value;
     if (newPassword.length >= 6 && newPassword.length <= 15) {
       return true;
@@ -57,8 +61,10 @@ const ResetPassword = () => {
     try {
       const userEmail = localStorage.getItem("userEmail");
       const userId = localStorage.getItem("userId");
-      if (userEmail == null || userId == null)
+      if (userEmail == null || userId == null) {
+        setShowWhenPasswordIsInvalid(true);
         return setPasswordResetStatusMsg("**Cannot reset password !");
+      }
       setShowCaughtError(false);
       setPasswordMatch("");
       setPasswordLength("");
@@ -80,6 +86,7 @@ const ResetPassword = () => {
         setPasswordResetStatusMsg("The password has been successfully changed");
         history.push("/login");
       } else {
+        //  some comment for clarification
         setPasswordResetStatusMsg(response.data.passwordResetMsg);
       }
     } catch (error) {
@@ -108,10 +115,13 @@ const ResetPassword = () => {
         className="reset-password-form"
       >
         <h4 className="form-heading">Enter Your New Password</h4>
-        <p className="password-match">{passwordMatch}</p>
-        <p className="password-length">{passwordLength}</p>
-        <p className="password-length">{passwordResetStatusMsg}</p>{" "}
-        {/*className to change*/}
+        {showWhenPasswordIsInvalid ? (
+          <div className="show-when-password-is-invalid">
+            <p className="password-match">{passwordMatch}</p>
+            <p className="password-length">{passwordLength}</p>
+            <p className="password-length">{passwordResetStatusMsg}</p>{" "}
+          </div>
+        ) : null}
         <label className="reset-password-label">New Password:</label>
         <br />
         <input
