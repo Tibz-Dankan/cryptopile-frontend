@@ -104,7 +104,7 @@ const SignUp = () => {
       setPasswordMatch("");
       setPasswordLength("");
       setCatchError("");
-      const response = await axiosApi.post("/register", {
+      const response = await axiosApi.post("/signup", {
         firstName: registrationInfo.firstName,
         lastName: registrationInfo.lastName,
         email: registrationInfo.email,
