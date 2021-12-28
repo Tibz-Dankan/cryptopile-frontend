@@ -29,14 +29,19 @@ const VerifyEmail = () => {
     }, 10000);
   };
 
+  const axiosApi = axios.create({
+    baseURL:
+      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
+  });
+
   const verifyCode = async () => {
     try {
       if (userId == null || verificationCode == null)
         return setErrorMsg("Invalid link !");
       setShowCaughtError(false);
       setShowFadeLoader(true);
-      const response = await axios.post(
-        ` http://localhost:5000/verify-user-email/${parseInt(userId)}`,
+      const response = await axiosApi.post(
+        ` /verify-user-email/${parseInt(userId)}`,
         {
           verificationCode: parseInt(verificationCode),
         }

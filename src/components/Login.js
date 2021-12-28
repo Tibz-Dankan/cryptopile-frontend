@@ -41,14 +41,15 @@ const Login = () => {
       SetDisplayLoginErrors("");
       setDidNotReceiveVerificationEmail(false);
 
-      const response = await axios.post(
-        // "https://stockpile-backend.herokuapp.com/login",
-        "http://localhost:5000/login",
-        {
-          email: userLoginInfo.email,
-          password: userLoginInfo.password,
-        }
-      );
+      const axiosApi = axios.create({
+        baseURL:
+          "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
+      });
+
+      const response = await axiosApi.post("/login", {
+        email: userLoginInfo.email,
+        password: userLoginInfo.password,
+      });
       console.log(response);
       if (response.status === 200) {
         setDisplayFadeLoader(false);

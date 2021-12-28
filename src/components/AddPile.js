@@ -8,7 +8,6 @@ import axios from "axios";
 import "./../css/AddPile.css";
 import { PacmanLoader } from "react-spinners";
 import NotLoggedIn from "./NotLoggedIn";
-// import { TokenContext } from "./context/TokenContext";
 const AddPile = () => {
   const [pile, setPile] = useState({ title: "", description: "" });
   // const date = new Date();
@@ -29,8 +28,9 @@ const AddPile = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const axiosApi = axios.create({
-    // baseURL: "https://stockpile-backend.herokuapp.com/api",
-    baseURL: "http://localhost:5000/api",
+    baseURL:
+      "http://localhost:5000/api" ||
+      "https://stockpile-backend.herokuapp.com/api",
     headers: {
       Authorization: "Bearer " + localStorage.getItem("accessToken"),
     },

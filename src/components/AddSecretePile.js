@@ -16,7 +16,9 @@ const AddSecretePile = () => {
   //request along the token
   //https://stockpile-backend.herokuapp.com/
   const axiosApi = axios.create({
-    baseURL: "http://localhost:5000/api",
+    baseURL:
+      "http://localhost:5000/api" ||
+      "https://stockpile-backend.herokuapp.com/api",
     headers: {
       Authorization: "Bearer " + tokenFromLocalStorage,
     },

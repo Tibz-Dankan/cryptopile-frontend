@@ -10,10 +10,10 @@ const ViewSecretePile = () => {
 
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
 
-  //https://stockpile-backend.herokuapp.com/
   const axiosApi = axios.create({
-    baseURL: "http://localhost:5000/api",
-    // baseURL: "https://stockpile-backend.herokuapp.com/api",
+    baseURL:
+      "http://localhost:5000/api" ||
+      "https://stockpile-backend.herokuapp.com/api",
     headers: {
       Authorization: "Bearer " + tokenFromLocalStorage,
     },

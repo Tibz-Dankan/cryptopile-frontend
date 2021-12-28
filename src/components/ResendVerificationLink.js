@@ -11,18 +11,20 @@ const ResendVerificationLink = () => {
   const [showBarLoader, setShowBarLoader] = useState(false);
   const partlyRegisteredEmail = localStorage.getItem("partlyRegisteredEmail");
 
+  const axiosApi = axios.create({
+    baseURL:
+      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
+  });
+
   // function to resend the verification link
   const resendingVerificationLink = async () => {
     try {
       setVerificationLinkStatusMsg("");
       setShowBarLoader(true);
       setShowCaughtError(false);
-      const response = await axios.post(
-        "http://localhost:5000/resend-verification-link",
-        {
-          partlyRegisteredEmail: partlyRegisteredEmail,
-        }
-      );
+      const response = await axiosApi.post("/resend-verification-link", {
+        partlyRegisteredEmail: partlyRegisteredEmail,
+      });
       console.log(response); // to be comment wen pushing to production
       setShowBarLoader(false); // stop react spinners
       if (response.status === 200) {
@@ -63,7 +65,11 @@ const ResendVerificationLink = () => {
           </button>
         </div>
       )}
-      {showCaughtError ? <p style={{color:"hsl(0, 100%, 50%)"}}>sorry ,something went wrong</p> : null}
+      {showCaughtError ? (
+        <p style={{ color: "hsl(0, 100%, 50%)" }}>
+          sorry ,something went wrong
+        </p>
+      ) : null}
     </div>
   );
 };

@@ -10,6 +10,12 @@ const PasswordResetCode = () => {
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [passwordResetCodeMsg, setPasswordResetCodeMsg] = useState("");
   let history = useHistory();
+
+  const axiosApi = axios.create({
+    baseURL:
+      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
+  });
+
   // function to submit user email
   const submitPasswordResetCode = async (e) => {
     e.preventDefault();
@@ -18,12 +24,9 @@ const PasswordResetCode = () => {
       setShowCaughtError("");
       setShowBarLoader(true);
       if (passwordResetCode !== null) {
-        const response = await axios.post(
-          "http://localhost:5000/password-reset-code",
-          {
-            passwordResetCode: passwordResetCode,
-          }
-        );
+        const response = await axiosApi.post("/password-reset-code", {
+          passwordResetCode: passwordResetCode,
+        });
         console.log(response); // to be removed wen in production
         setShowBarLoader(false);
         if (response.data.verification_code === parseInt(passwordResetCode)) {

@@ -11,6 +11,12 @@ const ForgotPassword = () => {
   const [errorInSendingPasswordResetCode, setErrorInSendingPasswordResetCode] =
     useState("");
   let history = useHistory();
+
+  const axiosApi = axios.create({
+    baseURL:
+      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
+  });
+
   // function to submit user email
   const submitEmailToResetPassword = async (e) => {
     e.preventDefault();
@@ -18,12 +24,9 @@ const ForgotPassword = () => {
       setShowBarLoader(false);
       setShowBarLoader(true);
       setErrorInSendingPasswordResetCode("");
-      const response = await axios.post(
-        "http://localhost:5000/forgot-password",
-        {
-          userEmail: userEmail,
-        }
-      );
+      const response = await axiosApi.post("/forgot-password", {
+        userEmail: userEmail,
+      });
       console.log(response); // to be removed wen in production
       setShowBarLoader(false); // stop BarLoader
       if (response.data.email === userEmail) {

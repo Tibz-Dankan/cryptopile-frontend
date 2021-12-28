@@ -89,6 +89,11 @@ const SignUp = () => {
     setRegistrationInfo(newRegistrationInfo);
   };
 
+  const axiosApi = axios.create({
+    baseURL:
+      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
+  });
+
   // submit registration details
   const submitRegistrationInfo = async (e) => {
     try {
@@ -99,19 +104,15 @@ const SignUp = () => {
       setPasswordMatch("");
       setPasswordLength("");
       setCatchError("");
-      const response = await axios.post(
-        // "https://stockpile-backend.herokuapp.com/register",
-        "http://localhost:5000/register",
-        {
-          firstName: registrationInfo.firstName,
-          lastName: registrationInfo.lastName,
-          email: registrationInfo.email,
-          gender: registrationInfo.gender, // to be dropped
-          password: registrationInfo.password,
-          confirmPassword: registrationInfo.confirmPassword,
-          isVerifiedEmail: isVerifiedEmail,
-        }
-      );
+      const response = await axiosApi.post("/register", {
+        firstName: registrationInfo.firstName,
+        lastName: registrationInfo.lastName,
+        email: registrationInfo.email,
+        gender: registrationInfo.gender, // to be dropped
+        password: registrationInfo.password,
+        confirmPassword: registrationInfo.confirmPassword,
+        isVerifiedEmail: isVerifiedEmail,
+      });
       console.log(response); // to be removed
       if (response.status === 200) {
         setShowBarLoader(false);
