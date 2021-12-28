@@ -19,14 +19,14 @@ const VerifyEmail = () => {
     useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [count, setCount] = useState(20);
+  const [count, setCount] = useState(10);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
 
   const redirectToLoginAfterFiveSeconds = () => {
     setTimeout(() => {
       history.push("/login");
-    }, 5000);
+    }, 10000);
   };
 
   const verifyCode = async () => {
@@ -90,11 +90,12 @@ const VerifyEmail = () => {
           <FadeLoader color="lightseagreen" />
         </div>
       ) : null}
-      {/* {showSuccessVerificationMsg ? ( */}
-      <p>{successMsg}</p>
-      {/* <p onLoad={decreaseCounterEverySecond}>Redirects to login in {count}s</p> */}
-      <p>Redirects to login in {count}s</p>
-      {/* ) : null} */}
+      {showSuccessVerificationMsg ? (
+        <div className="success-msg">
+          <p style={{ color: "green" }}>{successMsg}</p>
+          <p>Redirects to login in {count}s</p>
+        </div>
+      ) : null}
       <div className="verify-email-footer">
         <Footer />
       </div>
