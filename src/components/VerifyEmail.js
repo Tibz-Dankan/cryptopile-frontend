@@ -11,6 +11,7 @@ const VerifyEmail = () => {
   const userId = queryParams.get("userId");
   const verificationCode = queryParams.get("verificationCode");
   // cater for the cases when the url parameters have been changed for security purposes
+  // also cater for when the user email already been verified
 
   let history = useHistory();
   const [showFadeLoader, setShowFadeLoader] = useState(false);
@@ -26,12 +27,6 @@ const VerifyEmail = () => {
     setTimeout(() => {
       history.push("/login");
     }, 5000);
-  };
-
-  const decreaseCounterEverySecond = () => {
-    return setInterval(() => {
-      setCount(count - 1);
-    }, 1000);
   };
 
   const verifyCode = async () => {
@@ -60,27 +55,25 @@ const VerifyEmail = () => {
       console.log(error);
       setShowFadeLoader(false);
       setShowCaughtError(true);
-      setShowTimer(true);
+      setShowTimer(true); // to be removed
       // provide with a button to reload in case of a server error
     }
   };
 
   useEffect(() => {
     verifyCode();
-    // decreaseCounterEverySecond();
   }, []);
 
   useEffect(() => {
-    // if (showTimer == true) {
+    // starts counting while decreasing when the user is successfully verified
     const counter =
       count > 0 &&
-      // setShowTimer(true) &&
+      showTimer &&
       setInterval(() => {
         setCount(count - 1);
       }, 1000);
     return () => clearInterval(counter);
-    // }
-  }, [count]);
+  }, [count, showTimer]);
 
   return (
     <div className="verify-email-wrapper">

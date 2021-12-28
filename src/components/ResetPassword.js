@@ -6,6 +6,8 @@ import axios from "axios";
 import "./../css/ResetPassword.css";
 
 const ResetPassword = () => {
+  // this component should reseting password when the user has logged in or not
+
   const [passwordObject, setPasswordObject] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -75,7 +77,7 @@ const ResetPassword = () => {
     setPasswordObject(newPasswordObject);
   };
 
-  // function to submit user email
+  // function to submit user's new password (when not logged in)
   const submitNewPassword = async (e) => {
     try {
       const userEmail = localStorage.getItem("userEmail");
@@ -114,6 +116,8 @@ const ResetPassword = () => {
       setShowBarLoader(false);
     }
   };
+
+  // function to submit user's new password (when logged in)
 
   // checking conditions on submitting the form
   const checkPasswordOnSubmittingForm = (e) => {
@@ -171,7 +175,7 @@ const ResetPassword = () => {
           </div>
         </div>
         <br />
-        <button className="reset-password-btn">Get Code</button>
+        <button className="reset-password-btn">Send</button>
       </form>
     </div>
   );
