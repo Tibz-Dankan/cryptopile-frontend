@@ -23,7 +23,7 @@ const VerifyEmail = () => {
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [showTimer, setShowTimer] = useState(false);
 
-  const redirectToLoginAfterFiveSeconds = () => {
+  const redirectToLoginAfterTenSeconds = () => {
     setTimeout(() => {
       history.push("/login");
     }, 10000);
@@ -41,7 +41,7 @@ const VerifyEmail = () => {
       setShowCaughtError(false);
       setShowFadeLoader(true);
       const response = await axiosApi.post(
-        ` /verify-user-email/${parseInt(userId)}`,
+        `/verify-user-email/${parseInt(userId)}`,
         {
           verificationCode: parseInt(verificationCode),
         }
@@ -50,17 +50,18 @@ const VerifyEmail = () => {
       console.log(response); //to be commented out
       if (response.status === 200) {
         setShowFadeLoader(false);
-        setShowTimer(true);
-        setShowSuccessVerificationMsg(true);
-        redirectToLoginAfterFiveSeconds();
-      } else {
-        //   an error occurred during email verification
+        if (response.data.code === parseInt(verificationCode)) {
+          setShowTimer(true);
+          setShowSuccessVerificationMsg(true);
+          redirectToLoginAfterTenSeconds();
+        } else {
+          setShowSuccessVerificationMsg(true);
+        }
       }
     } catch (error) {
       console.log(error);
       setShowFadeLoader(false);
       setShowCaughtError(true);
-      setShowTimer(true); // to be removed
       // provide with a button to reload in case of a server error
     }
   };
@@ -98,9 +99,9 @@ const VerifyEmail = () => {
       {showSuccessVerificationMsg ? (
         <div className="success-msg">
           <p style={{ color: "green" }}>{successMsg}</p>
-          <p>Redirects to login in {count}s</p>
         </div>
       ) : null}
+      {showTimer ? <p>Redirects to login in {count}s</p> : null}
       <div className="verify-email-footer">
         <Footer />
       </div>
