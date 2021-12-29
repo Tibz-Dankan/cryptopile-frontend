@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axiosApiAuthorized from "./axiosAuthorized";
 import React, { useState } from "react";
 import Modal from "react-modal";
 // import { ClipLoader, PropagateLoader } from "react-spinners";
@@ -40,15 +41,6 @@ const EditPileTitle = ({ pile }) => {
     // subtitle.style.color = "black";
   };
 
-  const tokenFromLocalStorage = localStorage.getItem("accessToken");
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000/api" ||
-      "https://stockpile-backend.herokuapp.com/api",
-    headers: {
-      Authorization: "Bearer " + tokenFromLocalStorage,
-    },
-  });
   // function to update data in the database
   const updatePileTitle = async (e) => {
     e.preventDefault();
@@ -56,9 +48,12 @@ const EditPileTitle = ({ pile }) => {
     // setDisplayClipLoader(true);
     try {
       console.log(pile.pile_id);
-      const response = await axiosApi.put(`/edit-pile-title/${pile.pile_id}`, {
-        title: pileTitle,
-      });
+      const response = await axiosApiAuthorized.put(
+        `/api/edit-pile-title/${pile.pile_id}`,
+        {
+          title: pileTitle,
+        }
+      );
       if (response.status === 200) {
         // And end the close modal
         closeModal();

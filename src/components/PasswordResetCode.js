@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import axios from "axios";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import "./../css/PasswordResetCode.css";
 
 const PasswordResetCode = () => {
@@ -11,11 +11,6 @@ const PasswordResetCode = () => {
   const [passwordResetCodeMsg, setPasswordResetCodeMsg] = useState("");
   let history = useHistory();
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-  });
-
   // function to submit user email
   const submitPasswordResetCode = async (e) => {
     e.preventDefault();
@@ -24,9 +19,12 @@ const PasswordResetCode = () => {
       setShowCaughtError("");
       setShowBarLoader(true);
       if (passwordResetCode !== null) {
-        const response = await axiosApi.post("/password-reset-code", {
-          passwordResetCode: passwordResetCode,
-        });
+        const response = await axiosApiUnAuthorized.post(
+          "/password-reset-code",
+          {
+            passwordResetCode: passwordResetCode,
+          }
+        );
         console.log(response); // to be removed wen in production
         setShowBarLoader(false);
         if (response.data.verification_code === parseInt(passwordResetCode)) {
@@ -62,7 +60,7 @@ const PasswordResetCode = () => {
       const userEmail = localStorage.getItem("userEmail");
       const userId = localStorage.getItem("userId");
       if (userEmail !== null && userId !== null) {
-        const response = await axios.post(
+        const response = await axiosApiUnAuthorized.post(
           "http://localhost:5000/resend-password-reset-code",
           {
             userId: userId,

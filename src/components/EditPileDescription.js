@@ -1,4 +1,4 @@
-import axios from "axios";
+import axiosApiAuthorized from "./axiosAuthorized";
 import React, { useState } from "react";
 import Modal from "react-modal";
 // import { ClipLoader, PropagateLoader } from "react-spinners";
@@ -40,23 +40,14 @@ const EditPileDescription = ({ pile }) => {
     // subtitle.style.color = "black";
   };
 
-  const tokenFromLocalStorage = localStorage.getItem("accessToken");
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000/api" ||
-      "https://stockpile-backend.herokuapp.com/api",
-    headers: {
-      Authorization: "Bearer " + tokenFromLocalStorage,
-    },
-  });
   // function to update data in the database
   const updatePileDescription = async (e) => {
     e.preventDefault();
     // start the spinner here
     setDisplayClipLoader(true);
     try {
-      const response = await axiosApi.put(
-        `/edit-pile-description/${pile.pile_id}`,
+      const response = await axiosApiAuthorized.put(
+        `/api/edit-pile-description/${pile.pile_id}`,
         {
           description: pileDescription,
         }

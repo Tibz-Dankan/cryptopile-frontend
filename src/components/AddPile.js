@@ -4,7 +4,8 @@ import ViewPileLink from "./links/ViewPileLink";
 import ViewLink from "./links/ViewLink";
 import LoginLink from "./links/LoginLink";
 import LogoutLink from "./links/LogoutLink";
-import axios from "axios";
+import axiosApiAuthorized from "./axiosAuthorized";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import "./../css/AddPile.css";
 import { PacmanLoader } from "react-spinners";
 import NotLoggedIn from "./NotLoggedIn";
@@ -27,19 +28,11 @@ const AddPile = () => {
   const [catchError, setCatchError] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000/api" ||
-      "https://stockpile-backend.herokuapp.com/api",
-    headers: {
-      Authorization: "Bearer " + localStorage.getItem("accessToken"),
-    },
-  });
   // get the user profile
   const getUserProfile = async (e) => {
     try {
-      const response = await axiosApi.get(
-        `/getusername/${localStorage.getItem("userId")}`
+      const response = await axiosApiUnAuthorized.get(
+        `api/getusername/${localStorage.getItem("userId")}`
       );
       console.log(response.data);
       setUserName(response.data);
@@ -65,8 +58,8 @@ const AddPile = () => {
     try {
       // to be removed
       console.log(dateOfPileStorage); // this line will be removed
-      const postPile = await axiosApi.post(
-        `/pile/${localStorage.getItem("userId")}`,
+      const postPile = await axiosApiAuthorized.post(
+        `api/pile/${localStorage.getItem("userId")}`,
         {
           title: pile.title,
           description: pile.description,

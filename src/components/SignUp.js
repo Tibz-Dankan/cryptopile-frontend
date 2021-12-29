@@ -1,7 +1,7 @@
 import { React, Fragment, useState } from "react";
 import "./../App.css";
 import HomeLink from "./links/HomeLink";
-import axios from "axios";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import { BarLoader } from "react-spinners";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -89,11 +89,6 @@ const SignUp = () => {
     setRegistrationInfo(newRegistrationInfo);
   };
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-  });
-
   // submit registration details
   const submitRegistrationInfo = async (e) => {
     try {
@@ -104,7 +99,7 @@ const SignUp = () => {
       setPasswordMatch("");
       setPasswordLength("");
       setCatchError("");
-      const response = await axiosApi.post("/signup", {
+      const response = await axiosApiUnAuthorized.post("/signup", {
         firstName: registrationInfo.firstName,
         lastName: registrationInfo.lastName,
         email: registrationInfo.email,

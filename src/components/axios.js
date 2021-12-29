@@ -1,11 +1,15 @@
 // import axios from "axios";
 
-// axios.create({
-//   baseURL: "http://localhost:5000/api",
+// // const axiosApiUnAuthorized = axios.create({
+// //   baseURL: "http://localhost:5000",
+// //   //   baseURL: "https://stockpile-backend.herokuapp.com",
+// // });
+
+// const axiosApiAuthorized = axios.create({
+//   baseURL: "http://localhost:5000",
+//   //   baseURL: "https://stockpile-backend.herokuapp.com",
 //   headers: {
-//     "Content-Type": "application/json",
-//     Authorization: "Bearer" + window.localStorage.getItem("accessToken"),
+//     Authorization: "Bearer " + localStorage.getItem("accessToken"),
 //   },
 // });
-
-// export default axios;
+// export default axiosApiAuthorized;

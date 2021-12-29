@@ -1,8 +1,8 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import HomeLink from "./links/HomeLink";
+import axiosApiAuthorized from "./axiosAuthorized";
 import AddPileLink from "./links/AddPileLink";
 import LogoutLink from "./links/LogoutLink";
 import NotLoggedIn from "./NotLoggedIn";
@@ -20,19 +20,11 @@ const ViewMypile = () => {
   const [displayTable, setDisplayTable] = useState(false);
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000/api" ||
-      "https://stockpile-backend.herokuapp.com/api",
-    headers: {
-      Authorization: "Bearer " + tokenFromLocalStorage,
-    },
-  });
   const getPile = async () => {
     try {
       setDisplayPropagateLoader(true);
-      const getMyPile = await axiosApi.get(
-        `/getpile/${localStorage.getItem("userId")}`
+      const getMyPile = await axiosApiAuthorized.get(
+        `api/getpile/${localStorage.getItem("userId")}`
       );
       if (!tokenFromLocalStorage) {
         setDisplayWhenNoToken(true);

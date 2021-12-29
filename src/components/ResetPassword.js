@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
-import axios from "axios";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
+
 import "./../css/ResetPassword.css";
 
 const ResetPassword = () => {
@@ -76,10 +77,6 @@ const ResetPassword = () => {
     newPasswordObject[e.target.id] = e.target.value;
     setPasswordObject(newPasswordObject);
   };
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-  });
 
   // function to submit user's new password (when not logged in)
   const submitNewPassword = async (e) => {
@@ -95,10 +92,13 @@ const ResetPassword = () => {
       setPasswordLength("");
       setShowBarLoader(true);
       setPasswordResetStatusMsg("");
-      const response = await axiosApi.post(`/reset-password/${userId}`, {
-        userEmail: userEmail,
-        newPassword: passwordObject.newPassword,
-      });
+      const response = await axiosApiUnAuthorized.post(
+        `/reset-password/${userId}`,
+        {
+          userEmail: userEmail,
+          newPassword: passwordObject.newPassword,
+        }
+      );
       console.log(response); // to be removed wen in production
       setShowBarLoader(false);
       if (response.data.passwordResetMsg === "password-reset-successful") {

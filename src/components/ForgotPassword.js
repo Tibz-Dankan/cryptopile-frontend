@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BarLoader } from "react-spinners";
-import axios from "axios";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import "./../css/ForgotPassword.css";
 
 const ForgotPassword = () => {
@@ -12,11 +12,6 @@ const ForgotPassword = () => {
     useState("");
   let history = useHistory();
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-  });
-
   // function to submit user email
   const submitEmailToResetPassword = async (e) => {
     e.preventDefault();
@@ -24,7 +19,7 @@ const ForgotPassword = () => {
       setShowBarLoader(false);
       setShowBarLoader(true);
       setErrorInSendingPasswordResetCode("");
-      const response = await axiosApi.post("/forgot-password", {
+      const response = await axiosApiUnAuthorized.post("/forgot-password", {
         userEmail: userEmail,
       });
       console.log(response); // to be removed wen in production

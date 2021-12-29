@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { BarLoader } from "react-spinners";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 
 const ResendVerificationLink = () => {
   const [verificationLinkStatusMsg, setVerificationLinkStatusMsg] =
@@ -11,20 +11,18 @@ const ResendVerificationLink = () => {
   const [showBarLoader, setShowBarLoader] = useState(false);
   const partlyRegisteredEmail = localStorage.getItem("partlyRegisteredEmail");
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-  });
-
   // function to resend the verification link
   const resendingVerificationLink = async () => {
     try {
       setVerificationLinkStatusMsg("");
       setShowBarLoader(true);
       setShowCaughtError(false);
-      const response = await axiosApi.post("/resend-verification-link", {
-        partlyRegisteredEmail: partlyRegisteredEmail,
-      });
+      const response = await axiosApiUnAuthorized.post(
+        "/resend-verification-link",
+        {
+          partlyRegisteredEmail: partlyRegisteredEmail,
+        }
+      );
       console.log(response); // to be comment wen pushing to production
       setShowBarLoader(false); // stop react spinners
       if (response.status === 200) {
@@ -54,9 +52,10 @@ const ResendVerificationLink = () => {
       ) : (
         <div>
           <p>
-            If did not get the verification link when signing up click the
+            If you did not get the verification link when signing up click the
             button below.
           </p>
+          {/* this button should be styled */}
           <button
             onClick={resendingVerificationLink}
             className="resend-verification-link-btn"
@@ -67,7 +66,7 @@ const ResendVerificationLink = () => {
       )}
       {showCaughtError ? (
         <p style={{ color: "hsl(0, 100%, 50%)" }}>
-          sorry ,something went wrong
+          sorry ,something went wrong!
         </p>
       ) : null}
     </div>

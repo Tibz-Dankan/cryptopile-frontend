@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeLink from "./links/HomeLink";
-import axios from "axios";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
@@ -16,7 +16,7 @@ const Login = () => {
   const [displayLoginErrors, SetDisplayLoginErrors] = useState("");
   const [displayLoginSuccess, SetDisplayLoginSuccess] = useState("");
   const [displayFadeLoader, setDisplayFadeLoader] = useState(false);
-  const [catchError, setCatchError] = useState("");
+  const [showCaughtError, setShowCaughtError] = useState(false);
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const [didNotReceiveVerificationEmail, setDidNotReceiveVerificationEmail] =
     useState(false);
@@ -38,15 +38,10 @@ const Login = () => {
     try {
       setDisplayFadeLoader(true);
       SetDisplayLoginSuccess("");
-      SetDisplayLoginErrors("");
+      setShowCaughtError(false);
       setDidNotReceiveVerificationEmail(false);
 
-      const axiosApi = axios.create({
-        baseURL:
-          "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-      });
-
-      const response = await axiosApi.post("/login", {
+      const response = await axiosApiUnAuthorized.post("/login", {
         email: userLoginInfo.email,
         password: userLoginInfo.password,
       });
@@ -56,7 +51,6 @@ const Login = () => {
         // alert the user input anything goes wrong
         SetDisplayLoginErrors(response.data.loginStatusMsg);
         SetDisplayLoginSuccess(response.data.success);
-        setCatchError(""); // should not display
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
         ) {
@@ -78,7 +72,7 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
-      setCatchError("Sorry, something went wrong!");
+      setShowCaughtError(true);
       setDisplayFadeLoader(false);
     }
   };
@@ -101,6 +95,13 @@ const Login = () => {
           </div>
         </div>
         {didNotReceiveVerificationEmail ? <ResendVerificationLink /> : null}
+        {showCaughtError ? (
+          <div className="login-catch-error" style={{ textAlign: "center" }}>
+            <p style={{ color: "hsl(0, 100%, 50%)" }}>
+              Sorry, something went !
+            </p>
+          </div>
+        ) : null}
         <div className="login-form-wrapper">
           <form onSubmit={(e) => submitLoginInfo(e)} className="login-form">
             <div className="login-form-heading">
@@ -109,9 +110,6 @@ const Login = () => {
             <div className="display-login-status">
               <p className="display-login-errors">{displayLoginErrors}</p>
               <p className="display-login-success">{displayLoginSuccess}</p>
-            </div>
-            <div className="login-catch-error" style={{ textAlign: "center" }}>
-              <p style={{ color: "lightyellow" }}>{catchError}</p>
             </div>
             <div className="beat-loader-component-wrapper">
               {displayFadeLoader ? (
@@ -167,7 +165,7 @@ const Login = () => {
             </Link>
           </p>
           <p className="forgot-password">
-            <Link to="forgot-password" className="link  forgot-password">
+            <Link to="/forgot-password" className="link  forgot-password">
               Forgot Password
             </Link>
           </p>
