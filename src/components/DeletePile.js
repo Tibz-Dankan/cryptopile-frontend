@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axiosApiAuthorized from "./axiosAuthorized";
 import Modal from "react-modal";
 import { X } from "react-bootstrap-icons";
 import "./../css/DeletePile.css";
@@ -38,23 +38,15 @@ const DeletePile = ({ pile }) => {
 
   const [pileId, setPileId] = useState(pile.pile_id);
 
-  const tokenFromLocalStorage = localStorage.getItem("accessToken");
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000/api" ||
-      "https://stockpile-backend.herokuapp.com/api",
-    headers: {
-      Authorization: "Bearer " + tokenFromLocalStorage,
-    },
-  });
-
   // function to delete the pile
   const deletePile = async () => {
     // e.preventDefault();
     try {
       // console.log(renderAllPile.pile_id);
       console.log(pileId); // to test whether it is working properly
-      const response = await axiosApi.delete(`/delete-pile/${pileId}`);
+      const response = await axiosApiAuthorized.delete(
+        `api/delete-pile/${pileId}`
+      );
       if (response.status === 200) {
         // And end the close modal
         closeModal();
