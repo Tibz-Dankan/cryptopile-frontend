@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./../css/VerifyEmail.css";
-import axios from "axios";
+// import axios from "axios";
+import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import { FadeLoader } from "react-spinners";
 import Footer from "./Footer";
 
@@ -29,18 +30,13 @@ const VerifyEmail = () => {
     }, 10000);
   };
 
-  const axiosApi = axios.create({
-    baseURL:
-      "http://localhost:5000" || "https://stockpile-backend.herokuapp.com",
-  });
-
   const verifyCode = async () => {
     try {
       if (userId == null || verificationCode == null)
         return setErrorMsg("Invalid link !");
       setShowCaughtError(false);
       setShowFadeLoader(true);
-      const response = await axiosApi.post(
+      const response = await axiosApiUnAuthorized.post(
         `/verify-user-email/${parseInt(userId)}`,
         {
           verificationCode: parseInt(verificationCode),
