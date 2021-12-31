@@ -14,6 +14,8 @@ jobs:
         with:
           node-version: 12
       - run: npm ci #Installs dependencies
+        env:
+          CI: false
       - run: npm run build #Runs the build script
       - name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.2.0 #Action for pushing build to netlify
