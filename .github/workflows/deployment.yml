@@ -1,0 +1,66 @@
+name: CryptoPile-frontend CI/CD
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+        uses: actions/checkout@v2     #Gets the react code 
+        uses: actions/setup-node@v1   #Sets up node environment
+        with:
+          node-version: 12
+        run: npm ci                   #Installs dependencies   
+        env:
+          CI: true
+        run: npm run build            #Runs the build script 
+      - name: Deploy production to Netlify
+        uses: South-Paw/action-netlify-deploy@v1.2.0  #Action for pushing build to netlify
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          netlify-site-id: ${{ secrets.NETLIFY_SITE_ID }}
+          build-dir: './build'
+          comment-on-commit: true     #The comment should contain deployment url
+      
+      
+      # Netlify deployment url
+      # Unique Deploy URL: https://61ce47869a1bec474941dcc2--cryptopile.netlify.app
+
+#  From netlify manual deployment
+#  Logs: https://app.netlify.com/sites/cryptopile/deploys/61ce47869a1bec474941dcc2
+# Unique Deploy URL: https://61ce47869a1bec474941dcc2--cryptopile.netlify.app
+# Website URL:       https://cryptopile.netlify.app
+
+
+
+      
+      
+      
+      
+      
+      
+      
+      
+      # # Share artifact inside workflow
+      # - name: Share artifact inside workflow
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: react-github-actions-build
+      #     path: build
+          
+          # deploy:
+          #   runs-on: ubuntu-latest
+          #   # When application is successfully tested and build has been generated
+          #   # Then we can start with deployment
+          #   needs: build
+          #   steps:
+          #     # Download previously shared build
+          #     - name: Get artifact
+          #       uses: actions/download-artifact@v1
+          #       with:
+          #         name: react-github-actions-build
+          #     # Set the credentials from repository settings/secretes
