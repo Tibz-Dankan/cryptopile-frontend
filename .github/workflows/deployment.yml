@@ -9,15 +9,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-        uses: actions/checkout@v2     #Gets the react code 
-        uses: actions/setup-node@v1   #Sets up node environment
+        -uses: actions/checkout@v2     #Gets the react code 
+        -uses: actions/setup-node@v1   #Sets up node environment
         with:
           node-version: 12
-        run: npm ci                   #Installs dependencies   
+        -run: npm ci                   #Installs dependencies   
         env:
           CI: true
-        run: npm run build            #Runs the build script 
-      - name: Deploy production to Netlify
+        -run: npm run build            #Runs the build script 
+        -name: Deploy production to Netlify
         uses: South-Paw/action-netlify-deploy@v1.2.0  #Action for pushing build to netlify
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
