@@ -4,6 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
+/.VSCodeCounter
 
 # testing
 /coverage
@@ -27,3 +28,4 @@ yarn-error.log*
 
 # vscode settings
 /.vscode
+/.env

@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useContext, useEffect } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import HomeLink from "./links/HomeLink";
 import ViewPileLink from "./links/ViewPileLink";
 import ViewLink from "./links/ViewLink";
@@ -7,10 +7,10 @@ import LogoutLink from "./links/LogoutLink";
 import axiosApiAuthorized from "./axiosAuthorized";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import "./../css/AddPile.css";
-import { PacmanLoader } from "react-spinners";
+import { PacmanLoader } from "react-spinners"; //another spinner
 import NotLoggedIn from "./NotLoggedIn";
 const AddPile = () => {
-  const [pile, setPile] = useState({ title: "", description: "" });
+  const [pile, setPile] = useState({ description: "" });
   // const date = new Date();
   const dateOfPileStorage = new Date();
   // const dateOfPileStorage = date.toString();
@@ -61,7 +61,6 @@ const AddPile = () => {
       const postPile = await axiosApiAuthorized.post(
         `api/pile/${localStorage.getItem("userId")}`,
         {
-          title: pile.title,
           description: pile.description,
           // storageDate: dateOfPileStorage, // more research here
         }
@@ -77,7 +76,7 @@ const AddPile = () => {
         //   // display msg jwt is tampered with
         //   setDisplayWhenTokenError(postPile.data.Error.message);
         else {
-          setPile({ title: "", description: "" });
+          setPile({ description: "" });
           setHidePileFormWhenAddedToDb(true);
         }
       }
@@ -143,7 +142,7 @@ const AddPile = () => {
               <div className="beat-loader-component-mypile-wrapper">
                 {displayPacmanLoader ? (
                   <div className="beat-loader-component-mypile-inner">
-                    <PacmanLoader color="lightseagreen" />
+                    <PacmanLoader color="lightseagreen" /> {/*To be changed*/}
                     <h1>...</h1>
                   </div>
                 ) : null}
@@ -163,16 +162,6 @@ const AddPile = () => {
                 <div className="pile-form">
                   {/* THE PILE FORM */}
                   <form onSubmit={(e) => submitPile(e)}>
-                    <label htmlFor="Title">Title:</label> <br />
-                    <input
-                      type="text"
-                      value={pile.title}
-                      onChange={(e) => handlePileChanges(e)}
-                      id="title"
-                      placeholder="Title"
-                      className=" mypile-input-field pile-title-input-field"
-                      required
-                    />
                     <br />
                     <br />
                     <label htmlFor="description">Description:</label>

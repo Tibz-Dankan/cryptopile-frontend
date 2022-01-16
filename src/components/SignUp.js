@@ -1,4 +1,5 @@
 import { React, Fragment, useState } from "react";
+
 import "./../App.css";
 import HomeLink from "./links/HomeLink";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
@@ -12,7 +13,6 @@ const SignUp = () => {
     firstName: "",
     lastName: "",
     email: "",
-    gender: "",
     password: "",
     confirmPassword: "",
   });
@@ -21,7 +21,7 @@ const SignUp = () => {
     useState(false);
   const [successfullyRegisteredInfo, setSuccessfullyRegisteredInfo] =
     useState("");
-  const [isVerifiedEmail, setIsVerifiedEmail] = useState(false);
+  let isVerifiedEmail = false;
   // checking the email to ensure that is unique
   const [emailValidityMsg, setEmailValidityMsg] = useState("");
   const [showCaughtError, setShowCaughtError] = useState(false);
@@ -103,7 +103,6 @@ const SignUp = () => {
         firstName: registrationInfo.firstName,
         lastName: registrationInfo.lastName,
         email: registrationInfo.email,
-        gender: registrationInfo.gender, // to be dropped
         password: registrationInfo.password,
         confirmPassword: registrationInfo.confirmPassword,
         isVerifiedEmail: isVerifiedEmail,
@@ -117,7 +116,6 @@ const SignUp = () => {
             firstName: "",
             lastName: "",
             email: "",
-            gender: "",
             password: "",
             confirm_password: "",
           });
@@ -210,19 +208,6 @@ const SignUp = () => {
                 className="signup-input-field"
                 id="email"
                 value={registrationInfo.email}
-                onChange={(e) => handleRegistrationInfoChange(e)}
-                required
-              />
-              <br />
-              <br />
-              {/* to be removed */}
-              <label>Gender:</label>
-              <br />
-              <input
-                type="text"
-                id="gender"
-                className="signup-input-field"
-                value={registrationInfo.gender}
                 onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />

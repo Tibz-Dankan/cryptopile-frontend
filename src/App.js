@@ -15,6 +15,7 @@ import VerifyEmail from "./components/VerifyEmail";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordResetCode from "./components/PasswordResetCode";
 import ResetPassword from "./components/ResetPassword";
+import ImageUploadToCloudinary from "./components/ImageUploadToCloudinary";
 import NotFound from "./components/NotFound";
 
 const App = () => {
@@ -37,6 +38,10 @@ const App = () => {
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/password-reset-code" component={PasswordResetCode} />
           <Route path="/reset-password" component={ResetPassword} />
+          <Route
+            path="/image-upload-to-cloudinary"
+            component={ImageUploadToCloudinary}
+          />
           <Route component={NotFound} /> {/*more research for this compoent*/}
         </Switch>
       </HashRouter>

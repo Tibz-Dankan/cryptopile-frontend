@@ -7,7 +7,6 @@ import AddPileLink from "./links/AddPileLink";
 import LogoutLink from "./links/LogoutLink";
 import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
-import EditPileTitle from "./EditPileTitle";
 import DeletePile from "./DeletePile";
 import "./../css/Viewpile.css";
 
@@ -126,9 +125,6 @@ const ViewMypile = () => {
                   <tr key={pile.pile_id}>
                     {/* <td>{pile.date_of_add}</td> */}
                     {/* <td>{pile.time_of_add}</td> */}
-                    <td id="pile-title-id">
-                      {pile.title} {<EditPileTitle pile={pile} />}
-                    </td>
                     <td id="pile-description-id">
                       {pile.description} {<EditPileDescription pile={pile} />}
                     </td>
