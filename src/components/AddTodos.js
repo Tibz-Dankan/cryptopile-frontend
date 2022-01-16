@@ -15,7 +15,7 @@ const AddTodos = () => {
   const dateOfPileStorage = new Date();
   // const dateOfPileStorage = date.toString();
 
-  const [displayWhenTokenError, setDisplayWhenTokenError] = useState("");
+  let displayWhenTokenError;
   const [displayWhenUserNotLoggedIn, setDisplayWhenUserNotLoggedIn] =
     useState(false);
   const [userName, setUserName] = useState({});
