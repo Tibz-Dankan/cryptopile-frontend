@@ -10,10 +10,9 @@ import "./../css/EditPileDescription.css";
 
 const EditPileDescription = ({ pile }) => {
   const [pileDescription, setPileDescription] = useState([pile.description]);
-  const [displayClipLoader, setDisplayClipLoader] = useState(false);
 
   // console.log(pileTitle);
-  let subtitle;
+  // let subtitle;
   const customStyles = {
     content: {
       top: "50%",
@@ -43,11 +42,9 @@ const EditPileDescription = ({ pile }) => {
   // function to update data in the database
   const updatePileDescription = async (e) => {
     e.preventDefault();
-    // start the spinner here
-    setDisplayClipLoader(true);
     try {
       const response = await axiosApiAuthorized.put(
-        `/api/edit-pile-description/${pile.pile_id}`,
+        `/api/edit-pile-description/${pile.todoid}`,
         {
           description: pileDescription,
         }
@@ -55,10 +52,8 @@ const EditPileDescription = ({ pile }) => {
       if (response.status === 200) {
         // And end the close modal
         closeModal();
-      } else {
-        // when some thing goes wrong
       }
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -70,7 +65,7 @@ const EditPileDescription = ({ pile }) => {
   return (
     <div>
       <button className="edit-button edit-button-1" onClick={openModal}>
-        edit
+        Edit
       </button>
       <Modal
         isOpen={isModalOpen}
@@ -80,7 +75,7 @@ const EditPileDescription = ({ pile }) => {
         contentLabel="Edit Pile"
       >
         <form className="edit-form">
-          <h4>Edit pile Description</h4>
+          <h4>Edit Todo Description</h4>
           <div onClick={closeModal} className="close-modal">
             <X size={30} />
           </div>

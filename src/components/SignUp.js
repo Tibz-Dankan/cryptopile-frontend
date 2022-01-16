@@ -37,18 +37,28 @@ const SignUp = () => {
 
   //  function to show password first by changing the state to true
   const showingPasswordOne = () => {
-    setShowPasswordOne(true);
-    setTimeout(() => {
-      setShowPasswordOne(false);
-    }, 1000);
+    switch (showPasswordOne) {
+      case true:
+        setShowPasswordOne(false);
+        break;
+      case false:
+        setShowPasswordOne(true);
+        break;
+      default:
+    }
   };
 
   //  function to show password second by changing the state to true
   const showingPasswordTwo = () => {
-    setShowPasswordTwo(true);
-    setTimeout(() => {
-      setShowPasswordTwo(false);
-    }, 1000);
+    switch (showPasswordTwo) {
+      case true:
+        setShowPasswordTwo(false);
+        break;
+      case false:
+        setShowPasswordTwo(true);
+        break;
+      default:
+    }
   };
 
   //check password match
@@ -155,7 +165,7 @@ const SignUp = () => {
         {showWhenSuccessfullyRegistered ? (
           <div className="show-when-successfully-registered">
             <p>
-              A confirmation link has been sent to{" "}
+              A confirmation email has been sent to{" "}
               {successfullyRegisteredInfo.email}
             </p>
           </div>

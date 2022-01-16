@@ -7,7 +7,7 @@ import "./../css/DeletePile.css";
 const DeletePile = ({ pile }) => {
   // the modal state
   const [isModalOpen, setIsOpenModal] = useState(false);
-  let subtitle;
+  // let subtitle;
   // styles
   const customStyles = {
     content: {
@@ -36,7 +36,7 @@ const DeletePile = ({ pile }) => {
   // the modal element
   Modal.setAppElement(document.getElementsByClassName("user-pile"));
 
-  const [pileId, setPileId] = useState(pile.pile_id);
+  const [pileId, setPileId] = useState(pile.todoid);
 
   // function to delete the pile
   const deletePile = async () => {

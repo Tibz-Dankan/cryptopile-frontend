@@ -113,7 +113,6 @@ const SeeTodos = () => {
               <tr>
                 {/* <th>Date</th> */}
                 {/* <th>Time</th> */}
-                <th>Title</th>
                 <th>Description</th>
                 {/* <th>Edit Title</th> */}
                 {/* <th>Edit Description</th> */}

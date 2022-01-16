@@ -26,10 +26,15 @@ const Login = () => {
 
   //  function to show password first by changing the state to true
   const showingPassword = () => {
-    setShowPassword(true);
-    setTimeout(() => {
-      setShowPassword(false);
-    }, 1000);
+    switch (showPassword) {
+      case true:
+        setShowPassword(false);
+        break;
+      case false:
+        setShowPassword(true);
+        break;
+      default:
+    }
   };
 
   // submit the user login details
@@ -58,7 +63,7 @@ const Login = () => {
           localStorage.setItem("isLoggedIn", "isLoggedIn");
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("userId", response.data.userId);
-          history.push("/addpile");
+          history.push("/addtodos");
         }
         //when not verified
         if (response.data.partlyRegisteredEmail) {
@@ -98,7 +103,7 @@ const Login = () => {
         {showCaughtError ? (
           <div className="login-catch-error" style={{ textAlign: "center" }}>
             <p style={{ color: "hsl(0, 100%, 50%)" }}>
-              Sorry, something went !
+              Sorry, something went wrong!
             </p>
           </div>
         ) : null}
