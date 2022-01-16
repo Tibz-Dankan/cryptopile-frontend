@@ -7,11 +7,11 @@ const Header = () => {
     <div>
       <nav>
         <header className="header-nav-links">
-          <NavLink to="/addpile" className="header-link">
-            MyPile
+          <NavLink to="/addtodos" className="header-link">
+            AddTodos
           </NavLink>
-          <NavLink to="/viewmypile" className="header-link">
-            ViewPile
+          <NavLink to="/seetodos" className="header-link">
+            SeeTodos
           </NavLink>
           <NavLink to="/about" className="header-link">
             About

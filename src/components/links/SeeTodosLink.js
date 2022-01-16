@@ -1,14 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./../../App.css";
 
-const ViewLink = () => {
+const SeeTodosLink = () => {
   return (
     <div>
-      <Link to="viewmypile" className="navigation-link">
-        Checkout Pile
-      </Link>
+      <nav>
+        <NavLink to="/seetodos" className="navigation-link">
+          SeeTodos
+        </NavLink>
+      </nav>
     </div>
   );
 };
 
-export default ViewLink;
+export default SeeTodosLink;

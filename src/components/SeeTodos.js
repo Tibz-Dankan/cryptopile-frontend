@@ -3,14 +3,14 @@ import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
 import HomeLink from "./links/HomeLink";
 import axiosApiAuthorized from "./axiosAuthorized";
-import AddPileLink from "./links/AddPileLink";
+import AddTodosLink from "./links/AddTodosLink";
 import LogoutLink from "./links/LogoutLink";
 import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
 import DeletePile from "./DeletePile";
-import "./../css/Viewpile.css";
+import "./../css/SeeTodos.css";
 
-const ViewMypile = () => {
+const SeeTodos = () => {
   const [renderAllPile, setRenderAllPile] = useState([]);
   const [displayWhenNoToken, setDisplayWhenNoToken] = useState(false);
   const [displayCatchError, setDisplayCatchError] = useState(false);
@@ -68,7 +68,7 @@ const ViewMypile = () => {
               <HomeLink />
             </div>
             <div className="viewpile-mypile-link header-link">
-              <AddPileLink />
+              <AddTodosLink />
             </div>
             <div className="viewpile-logout-link header-link">
               <LogoutLink />
@@ -142,4 +142,4 @@ const ViewMypile = () => {
   );
 };
 
-export default ViewMypile;
+export default SeeTodos;

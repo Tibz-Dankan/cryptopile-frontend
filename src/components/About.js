@@ -1,6 +1,6 @@
 import React from "react";
 import HomeLink from "./links/HomeLink";
-import ViewPileLink from "./links/ViewPileLink";
+import SeeTodosLink from "./links/SeeTodosLink";
 import "./../css/About.css";
 const About = () => {
   return (
@@ -10,7 +10,7 @@ const About = () => {
           <HomeLink />
         </div>
         <div className="about-viewpile-link header-link">
-          <ViewPileLink />
+          <SeeTodosLink />
         </div>
       </div>
       <div className="about-page-content-wrapper">

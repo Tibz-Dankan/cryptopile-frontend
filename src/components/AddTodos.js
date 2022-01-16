@@ -1,15 +1,15 @@
 import React, { useState, Fragment, useEffect } from "react";
 import HomeLink from "./links/HomeLink";
-import ViewPileLink from "./links/ViewPileLink";
-import ViewLink from "./links/ViewLink";
+import SeeTodos from "./SeeTodos";
+import SeeTodosLink from "./links/SeeTodosLink";
 import LoginLink from "./links/LoginLink";
 import LogoutLink from "./links/LogoutLink";
 import axiosApiAuthorized from "./axiosAuthorized";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
-import "./../css/AddPile.css";
+import "./../css/AddTodos.css";
 import { PacmanLoader } from "react-spinners"; //another spinner
 import NotLoggedIn from "./NotLoggedIn";
-const AddPile = () => {
+const AddTodos = () => {
   const [pile, setPile] = useState({ description: "" });
   // const date = new Date();
   const dateOfPileStorage = new Date();
@@ -105,7 +105,7 @@ const AddPile = () => {
                 <HomeLink />
               </div>
               <div className="mypile-viewpile-link header-link">
-                <ViewPileLink />
+                <SeeTodos />
               </div>
               <div className="mypile-logout-link">
                 <LogoutLink />
@@ -155,7 +155,7 @@ const AddPile = () => {
                     <p> click to checkout pile to see the pile</p>
                   </div>
                   <div className="view-pile-link-in-mypile">
-                    <ViewLink />
+                    <SeeTodosLink />
                   </div>
                 </div>
               ) : (
@@ -190,4 +190,4 @@ const AddPile = () => {
   );
 };
 
-export default AddPile;
+export default AddTodos;

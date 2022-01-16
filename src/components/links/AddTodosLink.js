@@ -7,7 +7,7 @@ const AddTodosLink = () => {
     <div>
       <nav>
         <NavLink to="/addtodos" className="navigation-link">
-          AddPile
+          AddTodos
         </NavLink>
       </nav>
     </div>

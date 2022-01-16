@@ -3,11 +3,11 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import About from "./components/About";
-import AddPile from "./components/AddPile";
+import AddTodos from "./components/AddTodos";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
-import ViewMypile from "./components/ViewMypile";
+import SeeTodos from "./components/SeeTodos";
 import ScrollToTop from "./components/ScrollToTop";
 import AddSecretePile from "./components/AddSecretePile";
 import ViewSecretePile from "./components/ViewSecretePile";
@@ -30,8 +30,8 @@ const App = () => {
           <Route path="/signup" component={SignUp} />
           <Route path="/logout" component={Logout} />
           <Route path="/login" component={Login} />
-          <Route path="/addpile" component={AddPile} />
-          <Route path="/viewmypile" component={ViewMypile} />
+          <Route path="/addtodos" component={AddTodos} />
+          <Route path="/seetodos" component={SeeTodos} />
           <Route path="/addsecretepile" component={AddSecretePile} />
           <Route path="/viewsecretepile" component={ViewSecretePile} />
           <Route path="/verify-user-email/" component={VerifyEmail} />
