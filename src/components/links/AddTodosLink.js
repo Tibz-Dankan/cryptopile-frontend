@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./../../App.css";
 
-const AddPileLink = () => {
+const AddTodosLink = () => {
   return (
     <div>
       <nav>
-        <NavLink to="/addpile" className="navigation-link">
+        <NavLink to="/addtodos" className="navigation-link">
           AddPile
         </NavLink>
       </nav>
@@ -14,4 +14,4 @@ const AddPileLink = () => {
   );
 };
 
-export default AddPileLink;
+export default AddTodosLink;
