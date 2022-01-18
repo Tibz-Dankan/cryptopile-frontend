@@ -110,27 +110,29 @@ const SeeTodos = () => {
           )}
           {displayTable ? (
             <table>
-              <tr>
-                {/* <th>Date</th> */}
-                {/* <th>Time</th> */}
-                <th>Description</th>
-                {/* <th>Edit Title</th> */}
-                {/* <th>Edit Description</th> */}
-                <th>Delete</th>
-              </tr>
-              {/* map method here */}
-              {renderAllPile.map((pile) => {
-                return (
-                  <tr key={pile.pile_id}>
-                    {/* <td>{pile.date_of_add}</td> */}
-                    {/* <td>{pile.time_of_add}</td> */}
-                    <td id="pile-description-id">
-                      {pile.description} {<EditPileDescription pile={pile} />}
-                    </td>
-                    <td>{<DeletePile pile={pile} />}</td>
-                  </tr>
-                );
-              })}
+              <tbody>
+                <tr>
+                  {/* <th>Date</th> */}
+                  {/* <th>Time</th> */}
+                  <th>Description</th>
+                  {/* <th>Edit Title</th> */}
+                  {/* <th>Edit Description</th> */}
+                  <th>Delete</th>
+                </tr>
+                {/* map method here */}
+                {renderAllPile.map((pile) => {
+                  return (
+                    <tr key={pile.todoid}>
+                      {/* <td>{pile.date_of_add}</td> */}
+                      {/* <td>{pile.time_of_add}</td> */}
+                      <td id="pile-description-id">
+                        {pile.description} {<EditPileDescription pile={pile} />}
+                      </td>
+                      <td>{<DeletePile pile={pile} />}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
             </table>
           ) : null}
         </div>

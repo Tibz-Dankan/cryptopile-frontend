@@ -16,13 +16,14 @@ import ForgotPassword from "./components/ForgotPassword";
 import PasswordResetCode from "./components/PasswordResetCode";
 import ResetPassword from "./components/ResetPassword";
 import ImageUploadToCloudinary from "./components/ImageUploadToCloudinary";
+import Admin from "./components/Admin";
 import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
     <div>
       <HashRouter>
-        {/* scroll to the top copmponent here please */}
+        {/* scroll to the top components here please */}
         <ScrollToTop />
         <Switch>
           <Route path="/" component={Home} exact />
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/password-reset-code" component={PasswordResetCode} />
           <Route path="/reset-password" component={ResetPassword} />
+          <Route path="/authorized-cryptopile-admin" component={Admin} />
           <Route
             path="/image-upload-to-cloudinary"
             component={ImageUploadToCloudinary}
