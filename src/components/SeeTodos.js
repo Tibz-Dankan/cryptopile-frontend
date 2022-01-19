@@ -9,6 +9,7 @@ import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
 import DeletePile from "./DeletePile";
 import "./../css/SeeTodos.css";
+import UserProfile from "./UserProfile";
 
 const SeeTodos = () => {
   const [renderAllPile, setRenderAllPile] = useState([]);
@@ -17,7 +18,24 @@ const SeeTodos = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayPropagateLoader, setDisplayPropagateLoader] = useState(false);
   const [displayTable, setDisplayTable] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
+  const [profileButtonText, setProfileButtonText] = useState("show my profile");
   const tokenFromLocalStorage = localStorage.getItem("accessToken");
+
+  // show user profile on click
+  const showUserProfile = () => {
+    switch (showProfile) {
+      case true:
+        setShowProfile(false);
+        setProfileButtonText("show my profile");
+        break;
+      case false:
+        setShowProfile(true);
+        setProfileButtonText("hide profile");
+        break;
+      default:
+    }
+  };
 
   const getPile = async () => {
     try {
@@ -100,6 +118,10 @@ const SeeTodos = () => {
           ) : (
             // display the react spinner
             <div className="pile-wrapper">
+              <button className="btn-showing-profile" onClick={showUserProfile}>
+                {profileButtonText}
+              </button>
+              {showProfile ? <UserProfile /> : null}
               {displayPropagateLoader ? (
                 <div className="propagate-loader-wrapper">
                   <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />

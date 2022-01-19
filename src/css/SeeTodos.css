@@ -51,6 +51,10 @@
 .pile-wrapper {
   width: 40%;
 }
+.btn-showing-profile {
+  text-align: center;
+  /* More styling here  */
+}
 .propagate-loader-wrapper {
   position: relative;
   display: flex;
