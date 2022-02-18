@@ -2,7 +2,7 @@ import axiosApiAuthorized from "./axiosAuthorized";
 import React, { useState } from "react";
 import Modal from "react-modal";
 // import { ClipLoader, PropagateLoader } from "react-spinners";
-import { X } from "react-bootstrap-icons";
+import { FlagFill, X } from "react-bootstrap-icons";
 import "./../css/EditPileDescription.css";
 
 // More features to be added here
@@ -10,6 +10,11 @@ import "./../css/EditPileDescription.css";
 
 const EditPileDescription = ({ pile }) => {
   const [pileDescription, setPileDescription] = useState([pile.description]);
+  const [todoChangeMsg, setTodoChangeMsg] = useState("");
+  const [showTodoChangeMsg, setShowTodoChangeMsg] = useState(false);
+
+  const dateOfUpdate = new Date().toDateString();
+  const timeOfUpdate = new Date().toLocaleTimeString();
 
   // console.log(pileTitle);
   // let subtitle;
@@ -29,31 +34,55 @@ const EditPileDescription = ({ pile }) => {
   // open modal function
   const openModal = () => {
     setIsOpenModal(true);
+    localStorage.setItem("description", pile.description);
+    hasTodoChanged();
+    setTodoChangeMsg("");
   };
   // close modal function
   const closeModal = () => {
     setIsOpenModal(false);
+    localStorage.removeItem("description");
+    setTodoChangeMsg("");
   };
   // On opening the modal function
   const afterOpenModal = () => {
     // subtitle.style.color = "black";
   };
 
+  // function to check for changes in the todos before making a request to the backend
+  const hasTodoChanged = () => {
+    const originalTodoDescription = localStorage.getItem("description");
+    // eslint-disable-next-line eqeqeq
+    if (pileDescription != originalTodoDescription) {
+      setShowTodoChangeMsg(false);
+      return true;
+    } else {
+      setShowTodoChangeMsg(true);
+      return false;
+    }
+  };
+
   // function to update data in the database
   const updatePileDescription = async (e) => {
     e.preventDefault();
     try {
-      const response = await axiosApiAuthorized.put(
-        `/api/edit-pile-description/${pile.todoid}`,
-        {
-          description: pileDescription,
+      if (hasTodoChanged()) {
+        const response = await axiosApiAuthorized.put(
+          `/api/edit-pile-description/${pile.todoid}`,
+          {
+            description: pileDescription,
+            dateOfUpdate: dateOfUpdate,
+            timeOfUpdate: timeOfUpdate,
+          }
+        );
+        if (response.status === 200) {
+          // And end the close modal
+          closeModal();
         }
-      );
-      if (response.status === 200) {
-        // And end the close modal
-        closeModal();
+        // console.log(response);
+      } else {
+        setTodoChangeMsg("can't update unchanged todo!");
       }
-      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -78,6 +107,11 @@ const EditPileDescription = ({ pile }) => {
           <h4>Edit Todo Description</h4>
           <div onClick={closeModal} className="close-modal">
             <X size={30} />
+          </div>
+          <div>
+            {showTodoChangeMsg ? (
+              <p className="todo-change-msg"> {todoChangeMsg}</p>
+            ) : null}
           </div>
           <textarea
             className="textarea"
