@@ -3,7 +3,7 @@ import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home";
 import About from "./components/About";
-import AddTodos from "./components/AddTodos";
+import Todos from "./components/Todos";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
@@ -27,11 +27,11 @@ const App = () => {
         <ScrollToTop />
         <Switch>
           <Route path="/" component={Home} exact />
+          <Route path="/todos" component={Todos} exact />
           <Route path="/about" component={About} />
           <Route path="/signup" component={SignUp} />
           <Route path="/logout" component={Logout} />
           <Route path="/login" component={Login} />
-          <Route path="/addtodos" component={AddTodos} />
           <Route path="/seetodos" component={SeeTodos} />
           <Route path="/addsecretepile" component={AddSecretePile} />
           <Route path="/viewsecretepile" component={ViewSecretePile} />
@@ -44,7 +44,7 @@ const App = () => {
             path="/image-upload-to-cloudinary"
             component={ImageUploadToCloudinary}
           />
-          <Route component={NotFound} /> {/*more research for this compoent*/}
+          <Route component={NotFound} /> {/*more research for this component*/}
         </Switch>
       </HashRouter>
     </div>
