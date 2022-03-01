@@ -7,20 +7,17 @@ const Header = () => {
     <div>
       <nav>
         <header className="header-nav-links">
-          <NavLink to="/addtodos" className="header-link">
-            AddTodos
-          </NavLink>
-          <NavLink to="/seetodos" className="header-link">
-            SeeTodos
+          <NavLink to="/todos" className="header-link">
+            Todos
           </NavLink>
           <NavLink to="/about" className="header-link">
             About
           </NavLink>
-          <NavLink to="/signup" className="header-link">
-            SignUp
-          </NavLink>
           <NavLink to="/login" className="header-link">
             Login
+          </NavLink>
+          <NavLink to="/signup" className="header-link">
+            SignUp
           </NavLink>
         </header>
       </nav>
