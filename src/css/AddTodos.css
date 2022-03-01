@@ -1,141 +1,100 @@
 /* THE MYPILE COMPONENT */
-.mypile-wrapper {
-  position: relative;
-  background-color: var(--backgroundColor-1);
+.add-todos-wrapper {
   width: 100%;
-  height: 800px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.add-todo-form {
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-}
-.mypile-header-wrapper {
-  position: absolute;
-  top: 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 6%;
-  background-color: var(--steelblue);
+  background-color: hsl(0, 0%, 99%);
+  border: hsl(0, 0%, 99%);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 85%);
   padding: 10px;
 }
-.mypile-home-link,
-.mypile-viewpile-link,
-.mypile-logout-link {
-  margin: 0% 5% 0% 5%;
-}
-.mypile-content-wrapper {
-  width: 50%;
-  height: auto;
-  color: hsl(240, 100%, 10%);
-  background-color: hsl(240, 100%, 100%);
-  border: 1px solid hsl(240, 100%, 100%);
+.todo-form-heading {
+  background-color: var(--steelblue);
+  border: 1px solid var(--steelblue);
   border-radius: 5px;
-  box-shadow: 1px 1px 10px 1px hsl(0, 0%, 80%);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.pile-form {
+  padding: 6px 0px 6px 0px;
+  margin-bottom: 10px;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-self: center;
-  align-items: center;
-  background-color: lightyellow;
+  text-align: center;
+  /* color: hsl(180, 100%, 40%); */
+  color: hsl(0, 0%, 100%);
 }
-.mypile-input-field {
+.todo-added-successfully {
+  text-align: center;
+  color: hsl(120, 80%, 30%);
+  border: 1px solid hsl(120, 30%, 60%);
+  border-radius: 4px;
+  background-color: hsl(120, 80%, 95%);
+  width: 100%;
+}
+.catch-error-msg {
+  background-color: hsl(0, 100%, 96%);
+  border: 1px solid hsl(0, 100%, 85%);
+  border-radius: 4px;
+  padding: 10px 0px 10px 0px;
+  width: 100%;
+  text-align: center;
+  color: hsl(0, 100%, 25%);
+}
+.add-todo-input-field {
   background-color: hsl(207, 44%, 95%);
-  border: 1px solid hsl(207, 44%, 95%);
+  border: 1px solid hsl(207, 44%, 85%);
   border-radius: 4px;
   color: hsl(240, 100%, 10%);
-  width: 100%;
+  text-align: center;
+  width: 99%;
+  height: 60px;
+  resize: none;
+  outline: none;
+  margin-bottom: 10px;
 }
-.pile-description-input-field {
-  height: 80px;
+.add-todo-input-field:focus {
+  border: 1px solid hsl(207, 44%, 85%);
+  border-radius: 4px;
+  box-shadow: 1px 1px 1px hsl(180, 100%, 30%), -1px -1px 1px hsl(180, 100%, 30%);
+  transition: 0.35s;
 }
-.pile-title-input-field {
-  height: 25px;
-}
-.mypile-btn {
+
+.add-todo-btn {
   background-color: hsl(180, 100%, 25%);
   border: 1px solid hsl(180, 100%, 25%);
   box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
   border-radius: 3px;
   color: hsl(240, 100%, 93%);
-  width: 80%;
-  padding: 8px;
-  margin-bottom: 20px;
+  width: 100%;
+  padding: 8px 0px 8px 0px;
+  outline: none;
 }
-.mypile-btn:hover {
+.add-todo-btn:hover {
   color: white;
   background-color: hsl(180, 100%, 40%);
   border: 1px solid hsl(180, 100%, 40%);
   box-shadow: 1px 1px 8px 1px hsl(180, 100%, 20%);
   transition: 0.35s;
 }
-.pile-added-successfully {
-  background-color: hsl(240, 100%, 85%);
-  border: 1px solid hsl(240, 100%, 85%);
-  border-radius: 20px;
-  width: 80%;
-  margin: 5% 10% 5% 10%;
-  padding: 10px;
-  text-align: center;
-}
-.pile-added-successfully .pile-added {
-  color: green;
-}
-.beat-loader-component-mypile-wrapper {
-  margin-bottom: 3em;
-}
-.beat-loader-component-mypile-inner {
-  position: relative;
-  left: 35%;
-}
-
-/* USER PROFILE */
-.user-profile {
-  margin: 14% 45% 0% 35%;
+.add-todo-btn:focus {
   color: white;
-}
-.user-profile-picture {
-  border: 1px solid lightgrey;
-  border-radius: 20px;
-  text-align: center;
-  padding: 5px;
-  margin-top: 40px;
-  background-color: hsl(240, 100%, 15%);
-  width: 100px;
-  height: 90px;
-}
-.user-profile .user-name {
-  text-align: center;
-  color: lightseagreen;
-  width: 20%;
-}
-
-/* THE PILE INPUT FIELDS */
-.display-when-not-logged-in {
-  padding-top: 12%;
-  text-align: center;
-}
-
-.display-when-not-logged-in h3 {
-  color: rgb(226, 19, 19);
+  background-color: hsl(180, 100%, 40%);
+  border: 1px solid hsl(180, 100%, 40%);
+  box-shadow: 1px 1px 8px 1px hsl(180, 100%, 20%);
+  transition: 0.35s;
 }
 
 /* MEDIA QUERY */
 @media screen and (max-width: 540px) {
   /* THE  MYPILE PAGE */
-  .mypile-content-wrapper {
+  .add-todos-wrapper {
     width: 80%;
     margin: 5% 10% 5% 10%;
-  }
-  .user-profile-picture {
-    width: 40%;
-    margin: 0% 0% 0% -10%;
   }
 }
