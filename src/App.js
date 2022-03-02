@@ -9,8 +9,6 @@ import Login from "./components/Login";
 import Logout from "./components/Logout";
 import SeeTodos from "./components/SeeTodos";
 import ScrollToTop from "./components/ScrollToTop";
-import AddSecretePile from "./components/AddSecretePile";
-import ViewSecretePile from "./components/ViewSecretePile";
 import VerifyEmail from "./components/VerifyEmail";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordResetCode from "./components/PasswordResetCode";
@@ -33,8 +31,6 @@ const App = () => {
           <Route path="/logout" component={Logout} />
           <Route path="/login" component={Login} />
           <Route path="/seetodos" component={SeeTodos} />
-          <Route path="/addsecretepile" component={AddSecretePile} />
-          <Route path="/viewsecretepile" component={ViewSecretePile} />
           <Route path="/verify-user-email/" component={VerifyEmail} />
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/password-reset-code" component={PasswordResetCode} />
