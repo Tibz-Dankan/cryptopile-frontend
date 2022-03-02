@@ -37,3 +37,9 @@ body {
   box-shadow: 1px 1px 4px var(--steelblue-2);
   transition: 0.3s;
 }
+.header-link-icon {
+  display: flex;
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: start;
+}
