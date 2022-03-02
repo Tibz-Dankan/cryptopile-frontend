@@ -34,6 +34,10 @@
   box-shadow: 1px 1px 4px var(--steelblue-2);
   transition: 0.3s;
 }
+.header-nav-links {
+  display: flex;
+  flex-direction: row;
+}
 .desktop-home-header-links {
   margin-left: 4em;
 }
