@@ -1,0 +1,42 @@
+.todo-wrapper {
+  position: relative;
+}
+
+.todo-header {
+  background-color: var(--steelblue);
+  /* position: fixed; */
+  position: sticky;
+  top: 0px;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.todo-home-link {
+  display: inherit;
+  margin-left: 7%;
+}
+.todo-home-link:hover,
+.todo-home-link:focus {
+  outline: none;
+  padding: 0.3rem;
+  background-color: var(--steelblue-2);
+  border: 1px solid var(--steelblue-2);
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px var(--steelblue-2);
+  transition: 0.3s;
+}
+.todo-logout-link {
+  display: inherit;
+  margin-right: 7%;
+}
+.todo-logout-link:hover,
+.todo-logout-link:focus {
+  padding: 0.3rem;
+  background-color: var(--steelblue-2);
+  border: 1px solid var(--steelblue-2);
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px var(--steelblue-2);
+  transition: 0.3s;
+}
