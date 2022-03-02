@@ -1,61 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { PropagateLoader } from "react-spinners";
 import { Link } from "react-router-dom";
-import HomeLink from "./links/HomeLink";
 import axiosApiAuthorized from "./axiosAuthorized";
-import AddTodosLink from "./links/AddTodosLink";
-import LogoutLink from "./links/LogoutLink";
-import NotLoggedIn from "./NotLoggedIn";
 import EditPileDescription from "./EditPileDescription";
 import DeletePile from "./DeletePile";
 import "./../css/SeeTodos.css";
-import UserProfile from "./UserProfile";
 
 const SeeTodos = () => {
-  const [renderAllPile, setRenderAllPile] = useState([]);
-  const [displayWhenNoToken, setDisplayWhenNoToken] = useState(false);
+  const [todos, setTodos] = useState([]);
   const [displayCatchError, setDisplayCatchError] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayPropagateLoader, setDisplayPropagateLoader] = useState(false);
   const [displayTable, setDisplayTable] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
-  const [profileButtonText, setProfileButtonText] = useState("show my profile");
-  const tokenFromLocalStorage = localStorage.getItem("accessToken");
 
-  // show user profile on click
-  const showUserProfile = () => {
-    switch (showProfile) {
-      case true:
-        setShowProfile(false);
-        setProfileButtonText("show my profile");
-        break;
-      case false:
-        setShowProfile(true);
-        setProfileButtonText("hide profile");
-        break;
-      default:
-    }
-  };
-
-  const getPile = async () => {
+  // "getpile" in the url below should renamed to "get-todos"
+  const getUserTodos = async () => {
     try {
       setDisplayPropagateLoader(true);
-      const getMyPile = await axiosApiAuthorized.get(
+      const getTodos = await axiosApiAuthorized.get(
         `api/getpile/${localStorage.getItem("userId")}`
       );
-      if (!tokenFromLocalStorage) {
-        setDisplayWhenNoToken(true);
-      } else {
-        setDisplayPropagateLoader(false);
-        console.log(getMyPile); // to be removed
-        const arrayPile = getMyPile.data.rows;
-        console.log(arrayPile);
-        setRenderAllPile(arrayPile);
-        setDisplayCatchError(false);
-        window.scrollTo(0, 0); // scrolling to the top
-        if (getMyPile.status === 200) {
-          setDisplayTable(true);
-        }
+
+      setDisplayPropagateLoader(false);
+      console.log(getTodos); // to be removed
+      let arrayOfTodos = getTodos.data;
+      console.log(arrayOfTodos); // to be removed
+      setTodos(arrayOfTodos);
+      setDisplayCatchError(false);
+      window.scrollTo(0, 0); // scrolling to the top
+      if (getTodos.status === 200 && getTodos.data[0] !== null) {
+        setDisplayTable(true);
       }
     } catch (err) {
       console.log(err);
@@ -67,100 +40,60 @@ const SeeTodos = () => {
 
   // show pile on rendering and after every update
   useEffect(() => {
-    let isActive = true;
-    if (isActive) {
-      if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
-        getPile();
-        setIsLoggedIn(true);
-      }
-    }
-    return (isActive = false);
+    getUserTodos();
+    return setTodos([]);
   }, []);
 
   return (
     <div>
-      {isLoggedIn ? (
-        <div className="view-pile-wrapper">
-          <div className="viewpile-header-wrapper">
-            <div className="viewpile-home-link header-link">
-              <HomeLink />
-            </div>
-            <div className="viewpile-mypile-link header-link">
-              <AddTodosLink />
-            </div>
-            <div className="viewpile-logout-link header-link">
-              <LogoutLink />
-            </div>
+      <div className="view-pile-wrapper">
+        {displayCatchError ? (
+          <div className="view-pile-error-msg">
+            <p>Sorry, something went wrong!</p>
           </div>
-          {/* display an error to user wen backend has the problem */}
-          {displayCatchError ? (
-            <div className="view-pile-error-msg">
-              <p>Sorry, something went wrong!</p>
+        ) : null}
+
+        <div className="pile-wrapper">
+          {displayPropagateLoader ? (
+            <div className="propagate-loader-wrapper">
+              <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />
+              <h5>Loading...</h5>
             </div>
-          ) : null}
-          {displayWhenNoToken ? (
-            <div className="view-pile-when-not-loggedin">
-              <p>You have no token!</p>
-              <p>
-                Is this your first time here?
-                <Link to="/signup" className="view-link">
-                  {" "}
-                  Create Account
-                </Link>
-              </p>
-              <p>
-                Do you already have an Account?{" "}
-                <Link to="/login" className="view-link">
-                  Login
-                </Link>
-              </p>
-            </div>
-          ) : (
-            // display the react spinner
-            <div className="pile-wrapper">
-              <button className="btn-showing-profile" onClick={showUserProfile}>
-                {profileButtonText}
-              </button>
-              {showProfile ? <UserProfile /> : null}
-              {displayPropagateLoader ? (
-                <div className="propagate-loader-wrapper">
-                  <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />
-                  <h5>Loading...</h5>
-                </div>
-              ) : null}
-            </div>
-          )}
-          {displayTable ? (
-            <table>
-              <tbody>
-                <tr>
-                  {/* <th>Date</th> */}
-                  {/* <th>Time</th> */}
-                  <th>Description</th>
-                  {/* <th>Edit Title</th> */}
-                  {/* <th>Edit Description</th> */}
-                  <th>Delete</th>
-                </tr>
-                {/* map method here */}
-                {renderAllPile.map((pile) => {
-                  return (
-                    <tr key={pile.todoid}>
-                      {/* <td>{pile.date_of_add}</td> */}
-                      {/* <td>{pile.time_of_add}</td> */}
-                      <td id="pile-description-id">
-                        {pile.description} {<EditPileDescription pile={pile} />}
-                      </td>
-                      <td>{<DeletePile pile={pile} />}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
           ) : null}
         </div>
-      ) : (
-        <NotLoggedIn />
-      )}
+
+        {displayTable ? (
+          <table>
+            <tbody>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Description</th>
+                <th>Delete</th>
+              </tr>
+              {todos.map((pile) => {
+                return (
+                  <tr key={pile.todoid}>
+                    <td>{pile.dateofadd}</td>
+                    <td>{pile.timeofadd}</td>
+                    <td id="pile-description-id">
+                      {pile.description} {<EditPileDescription pile={pile} />}
+                    </td>
+                    <td>{<DeletePile pile={pile} />}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : (
+          <div className="you-have-no-todos">
+            <p>You have no Todos yet!</p>
+            <p>
+              To add <b>Todos</b> click <Link to="/addtodos">here</Link>
+            </p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
