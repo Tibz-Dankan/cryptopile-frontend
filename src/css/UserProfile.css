@@ -1,9 +1,10 @@
 .user-profile-wrapper {
-  margin: 10px;
-  /* background-color: hsl(0, 0%, 75%); */
+  margin-top: 10px;
   display: grid;
   place-items: center;
-  padding: 10px;
+  /* padding: 10px; */
+  width: 100%;
+  align-items: center;
 }
 
 .btn-showing-profile {
@@ -11,11 +12,11 @@
   border: 1px solid hsl(0, 0%, 100%);
   border-radius: 4px;
   box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 80%);
-  padding: 5px;
+  padding: 5px 0px 5px 0px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  /* width: 60%; */
   font-weight: bold;
   outline: none;
 }
@@ -30,7 +31,7 @@
   border: 1px solid hsl(0, 0%, 100%);
   border-radius: 5px;
   box-shadow: 1px 1px 2px hsl(0, 0%, 90%), -1px -1px 2px hsl(0, 0%, 90%);
-  width: 100%;
+  width: 60%;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
@@ -53,4 +54,39 @@
   display: "flex";
   align-items: center;
   margin-left: 10px;
+}
+/* MEDIA QUERIES */
+@media screen and (max-width: 400px) {
+  .btn-showing-profile,
+  .user-info {
+    width: 90%;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 540px) {
+  .btn-showing-profile,
+  .user-info {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 541px) and (max-width: 800px) {
+  .btn-showing-profile,
+  .user-info {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+  .btn-showing-profile,
+  .user-info {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 1001px) {
+  .btn-showing-profile,
+  .user-info {
+    width: 40%;
+  }
 }

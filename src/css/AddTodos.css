@@ -1,4 +1,4 @@
-/* THE MYPILE COMPONENT */
+/* THE AddTodos COMPONENT */
 .add-todos-wrapper {
   width: 100%;
   margin-top: 20px;
@@ -8,7 +8,7 @@
   align-items: center;
 }
 .add-todo-form {
-  width: 80%;
+  /* width: 58%; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,6 @@
   margin-bottom: 10px;
   width: 100%;
   text-align: center;
-  /* color: hsl(180, 100%, 40%); */
   color: hsl(0, 0%, 100%);
 }
 .todo-added-successfully {
@@ -91,10 +90,30 @@
 }
 
 /* MEDIA QUERY */
-@media screen and (max-width: 540px) {
-  /* THE  MYPILE PAGE */
-  .add-todos-wrapper {
-    width: 80%;
-    margin: 5% 10% 5% 10%;
+@media screen and (max-width: 400px) {
+  .add-todo-form {
+    width: 85%;
+  }
+}
+@media screen and (min-width: 401px) and (max-width: 540px) {
+  .add-todo-form {
+    width: 76%;
+  }
+}
+
+@media screen and (min-width: 541px) and (max-width: 800px) {
+  .add-todo-form {
+    width: 58%;
+  }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+  .add-todo-form {
+    width: 48%;
+  }
+}
+@media screen and (min-width: 1001px) {
+  .add-todo-form {
+    width: 38%;
   }
 }
