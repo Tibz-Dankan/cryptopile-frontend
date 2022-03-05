@@ -40,9 +40,11 @@ const Todos = () => {
               <LogoutLink />
             </div>
           </header>
-          <UserProfile />
-          <AddTodos />
-          <SeeTodos />
+          <div className="the-component-wrapper">
+            <UserProfile />
+            <AddTodos />
+            <SeeTodos />
+          </div>
         </div>
       ) : (
         <NotLoggedIn />
