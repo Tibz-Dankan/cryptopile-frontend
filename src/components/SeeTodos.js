@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { PropagateLoader } from "react-spinners";
-import { Link } from "react-router-dom";
 import axiosApiAuthorized from "./axiosAuthorized";
 import EditPileDescription from "./EditPileDescription";
 import DeletePile from "./DeletePile";
@@ -8,33 +7,33 @@ import "./../css/SeeTodos.css";
 
 const SeeTodos = () => {
   const [todos, setTodos] = useState([]);
-  const [displayCatchError, setDisplayCatchError] = useState(false);
-  const [displayPropagateLoader, setDisplayPropagateLoader] = useState(false);
-  const [displayTable, setDisplayTable] = useState(false);
+  const [showCatchError, setShowCatchError] = useState(false);
+  const [showPropagateLoader, setShowPropagateLoader] = useState(false);
+  const [showTableOfTodos, setShowTableOfTodos] = useState(false);
 
   // "getpile" in the url below should renamed to "get-todos"
   const getUserTodos = async () => {
     try {
-      setDisplayPropagateLoader(true);
+      setShowPropagateLoader(true);
       const getTodos = await axiosApiAuthorized.get(
         `api/getpile/${localStorage.getItem("userId")}`
       );
 
-      setDisplayPropagateLoader(false);
+      setShowPropagateLoader(false);
       console.log(getTodos); // to be removed
       let arrayOfTodos = getTodos.data;
       console.log(arrayOfTodos); // to be removed
       setTodos(arrayOfTodos);
-      setDisplayCatchError(false);
+      setShowCatchError(false);
       window.scrollTo(0, 0); // scrolling to the top
       if (getTodos.status === 200 && getTodos.data[0] !== null) {
-        setDisplayTable(true);
+        setShowTableOfTodos(true);
       }
     } catch (err) {
       console.log(err);
       window.scrollTo(0, 0); // scrolling to the top
-      setDisplayCatchError(true);
-      setDisplayPropagateLoader(false);
+      setShowCatchError(true);
+      setShowPropagateLoader(false);
     }
   };
 
@@ -46,29 +45,27 @@ const SeeTodos = () => {
 
   return (
     <div>
-      <div className="view-pile-wrapper">
-        {displayCatchError ? (
-          <div className="view-pile-error-msg">
+      <div className="see-todos-wrapper">
+        {showCatchError ? (
+          <div className="catch-error-msg">
             <p>Sorry, something went wrong!</p>
           </div>
         ) : null}
 
-        <div className="pile-wrapper">
-          {displayPropagateLoader ? (
-            <div className="propagate-loader-wrapper">
-              <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />
-              <h5>Loading...</h5>
-            </div>
-          ) : null}
-        </div>
+        {showPropagateLoader ? (
+          <div className="propagate-loader-wrapper">
+            <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />
+            <h5>Loading...</h5>
+          </div>
+        ) : null}
 
-        {displayTable ? (
+        {showTableOfTodos ? (
           <table>
             <tbody>
               <tr>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Description</th>
+                <th>TodoDescription</th>
                 <th>Delete</th>
               </tr>
               {todos.map((pile) => {
@@ -87,10 +84,7 @@ const SeeTodos = () => {
           </table>
         ) : (
           <div className="you-have-no-todos">
-            <p>You have no Todos yet!</p>
-            <p>
-              To add <b>Todos</b> click <Link to="/addtodos">here</Link>
-            </p>
+            <p>No Todos loaded yet!</p>
           </div>
         )}
       </div>
