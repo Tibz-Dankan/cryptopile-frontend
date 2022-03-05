@@ -4,7 +4,7 @@ import HomeLink from "./links/HomeLink";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
-import { Eye, EyeSlash } from "react-bootstrap-icons";
+import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import "./../css/Login.css";
 import ResendVerificationLink from "./ResendVerificationLink";
 
@@ -13,11 +13,10 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [displayLoginErrors, SetDisplayLoginErrors] = useState("");
-  const [displayLoginSuccess, SetDisplayLoginSuccess] = useState("");
-  const [displayFadeLoader, setDisplayFadeLoader] = useState(false);
+  const [showLoginErrors, SetShowLoginErrors] = useState("");
+  const [showLoginSuccess, SetShowLoginSuccess] = useState("");
+  const [showFadeLoader, setShowFadeLoader] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
-  const [isloggedIn, setIsLoggedIn] = useState(false);
   const [didNotReceiveVerificationEmail, setDidNotReceiveVerificationEmail] =
     useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -41,10 +40,11 @@ const Login = () => {
   const submitLoginInfo = async (e) => {
     e.preventDefault();
     try {
-      setDisplayFadeLoader(true);
-      SetDisplayLoginSuccess("");
+      setShowFadeLoader(true);
+      SetShowLoginSuccess("");
       setShowCaughtError(false);
       setDidNotReceiveVerificationEmail(false);
+      SetShowLoginErrors("");
 
       const response = await axiosApiUnAuthorized.post("/login", {
         email: userLoginInfo.email,
@@ -52,20 +52,18 @@ const Login = () => {
       });
       console.log(response);
       if (response.status === 200) {
-        setDisplayFadeLoader(false);
-        // alert the user input anything goes wrong
-        SetDisplayLoginErrors(response.data.loginStatusMsg);
-        SetDisplayLoginSuccess(response.data.success);
+        setShowFadeLoader(false);
+        SetShowLoginErrors(response.data.loginStatusMsg);
+        SetShowLoginSuccess(response.data.success);
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
         ) {
-          setIsLoggedIn(true);
           localStorage.setItem("isLoggedIn", "isLoggedIn");
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("userId", response.data.userId);
-          history.push("/addtodos");
+          history.push("/todos");
         }
-        //when not verified
+        //when user is not verified
         if (response.data.partlyRegisteredEmail) {
           localStorage.setItem(
             "partlyRegisteredEmail",
@@ -78,7 +76,7 @@ const Login = () => {
     } catch (error) {
       console.log(error);
       setShowCaughtError(true);
-      setDisplayFadeLoader(false);
+      setShowFadeLoader(false);
     }
   };
 
@@ -96,6 +94,11 @@ const Login = () => {
       <div className="login-page-wrapper">
         <div className="login-header-wrapper">
           <div className="login-home-link">
+            <HouseFill
+              size={18}
+              color={"hsl(0, 0%, 100%)"}
+              style={{ marginRight: "3px" }}
+            />
             <HomeLink />
           </div>
         </div>
@@ -113,11 +116,11 @@ const Login = () => {
               <h3>Log Into Your Account</h3>
             </div>
             <div className="display-login-status">
-              <p className="display-login-errors">{displayLoginErrors}</p>
-              <p className="display-login-success">{displayLoginSuccess}</p>
+              <p className="display-login-errors">{showLoginErrors}</p>
+              <p className="display-login-success">{showLoginSuccess}</p>
             </div>
             <div className="beat-loader-component-wrapper">
-              {displayFadeLoader ? (
+              {showFadeLoader ? (
                 <div className="beat-loader-component-wrapper">
                   <FadeLoader
                     className="beat-loader"
