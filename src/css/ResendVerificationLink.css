@@ -1,0 +1,82 @@
+.resend-verification-link-wrapper {
+  width: 38%;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 90%);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px hsl(0, 0%, 90%), -1px -1px 2px hsl(0, 0%, 90%);
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.react-spinner-beat-loader {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0px;
+  margin-bottom: 2px;
+  background-color: hsl(180, 100%, 95%);
+  border: 1px solid hsl(180, 100%, 30%);
+  border-radius: 3px;
+  padding: 4px 0px 0px 0px;
+}
+.verification-link-status-msg {
+  text-align: center;
+  color: hsl(120, 100%, 20%);
+  background-color: hsl(120, 100%, 90%);
+  border: 1px solid hsl(120, 100%, 30%);
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.did-not-receive-link-msg {
+  text-align: center;
+  width: 100%;
+  background-color: hsl(240, 50%, 20%);
+  color: hsl(0, 0%, 80%);
+  border: 1px solid hsl(240, 100%, 90%);
+  border-radius: 5px;
+  box-shadow: 1px 1px 2px hsl(240, 100%, 90%);
+  padding: 10px 0px 10px 0px;
+  margin-top: 0px;
+}
+.catch-error {
+  color: hsl(0, 100%, 50%);
+  background-color: hsl(0, 100%, 90%);
+  border: 1px solid hsl(0, 100%, 80%);
+  padding: 10px;
+  border-radius: 3px;
+}
+.resend-verification-link-btn {
+  width: 100%;
+  height: 25px;
+  font-weight: bold;
+  text-align: center;
+  background-color: hsl(180, 100%, 25%);
+  border: 1px solid hsl(180, 100%, 25%);
+  box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
+  border-radius: 2px;
+  color: hsl(240, 100%, 93%);
+  outline: none;
+}
+.resend-verification-link-btn:hover,
+.resend-verification-link-btn:focus {
+  color: white;
+  background-color: hsl(180, 100%, 40%);
+  border: 1px solid hsl(180, 100%, 40%);
+  box-shadow: 1px 1px 8px 1px hsl(180, 100%, 20%);
+  transition: 0.35s;
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 540px) {
+  /* THE LOGIN PAGE */
+  .resend-verification-link-wrapper {
+    width: 68%;
+    margin-top: 20px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .resend-verification-link-wrapper {
+    width: 29%;
+  }
+}
