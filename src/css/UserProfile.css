@@ -2,7 +2,6 @@
   margin-top: 10px;
   display: grid;
   place-items: center;
-  /* padding: 10px; */
   width: 100%;
   align-items: center;
 }
@@ -16,7 +15,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* width: 60%; */
   font-weight: bold;
   outline: none;
 }
@@ -27,21 +25,23 @@
   transition: 0.3s;
 }
 .user-info {
-  background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 98%);
+  border: 1px solid hsl(0, 0%, 98%);
   border-radius: 5px;
-  box-shadow: 1px 1px 2px hsl(0, 0%, 90%), -1px -1px 2px hsl(0, 0%, 90%);
+  box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 80%);
   width: 60%;
   margin-top: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
+
 .default-profile-image {
   position: relative;
-  top: 2px;
-  left: 48%;
+  top: 5px;
+  left: 35%;
 }
 .profile-verification-status {
   display: flex;
