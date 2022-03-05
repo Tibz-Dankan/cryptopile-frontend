@@ -169,7 +169,7 @@ const Login = () => {
           <p>
             Is this your first time here?{" "}
             <Link to="/signup" className="link">
-              signup
+              SignUp
             </Link>
           </p>
           <p className="forgot-password">
