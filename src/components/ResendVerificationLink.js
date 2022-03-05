@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { BarLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
+import "./../css/ResendVerificationLink.css";
 
 const ResendVerificationLink = () => {
   const [verificationLinkStatusMsg, setVerificationLinkStatusMsg] =
@@ -8,14 +9,14 @@ const ResendVerificationLink = () => {
   const [showVerificationLinkStatusMsg, setShowVerificationLinkStatusMsg] =
     useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
-  const [showBarLoader, setShowBarLoader] = useState(false);
+  const [showBeatLoader, setShowBeatLoader] = useState(false);
   const partlyRegisteredEmail = localStorage.getItem("partlyRegisteredEmail");
 
   // function to resend the verification link
   const resendingVerificationLink = async () => {
     try {
       setVerificationLinkStatusMsg("");
-      setShowBarLoader(true);
+      setShowBeatLoader(true);
       setShowCaughtError(false);
       const response = await axiosApiUnAuthorized.post(
         "/resend-verification-link",
@@ -24,14 +25,15 @@ const ResendVerificationLink = () => {
         }
       );
       console.log(response); // to be comment wen pushing to production
-      setShowBarLoader(false); // stop react spinners
+      setShowBeatLoader(false); // stop react spinners
       if (response.status === 200) {
         setVerificationLinkStatusMsg(response.data.verificationLinkStatus);
         setShowVerificationLinkStatusMsg(true);
+        localStorage.removeItem("partlyRegisteredEmail");
       }
     } catch (error) {
       console.log(error);
-      setShowBarLoader(false);
+      setShowBeatLoader(false);
       setVerificationLinkStatusMsg("");
       setShowCaughtError(true);
       setShowVerificationLinkStatusMsg(false);
@@ -39,23 +41,26 @@ const ResendVerificationLink = () => {
   };
 
   return (
-    <div
-      className="resend-verification-link-wrapper"
-      style={{ textAlign: "center", padding: "10px" }}
-    >
-      {/* {showBarLoader ?  */}
-      <BarLoader color="red" size={5} /> {/*this bug should be fixed*/}
-      {/* : null} */}
+    <div className="resend-verification-link-wrapper">
+      {showBeatLoader ? (
+        <div className="react-spinner-beat-loader">
+          <BeatLoader color={"hsl(180, 100%, 30%)"} />
+        </div>
+      ) : null}
       {/* show the verification msg and hide the button when the request is successful */}
       {showVerificationLinkStatusMsg ? (
-        <p style={{ color: "green" }}>{verificationLinkStatusMsg}</p>
+        <p className="verification-link-status-msg">
+          {verificationLinkStatusMsg}
+        </p>
       ) : (
         <div>
-          <p>
-            If you did not get the verification link when signing up click the
+          <p className="did-not-receive-link-msg">
+            If you didn't get the verification link when signing up click the
             button below.
           </p>
-          {/* this button should be styled */}
+          {showCaughtError ? (
+            <p className="catch-error">Sorry, something went wrong!</p>
+          ) : null}
           <button
             onClick={resendingVerificationLink}
             className="resend-verification-link-btn"
@@ -64,11 +69,6 @@ const ResendVerificationLink = () => {
           </button>
         </div>
       )}
-      {showCaughtError ? (
-        <p style={{ color: "hsl(0, 100%, 50%)" }}>
-          sorry ,something went wrong!
-        </p>
-      ) : null}
     </div>
   );
 };
