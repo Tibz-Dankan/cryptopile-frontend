@@ -163,7 +163,7 @@ const SignUp = () => {
           <div className="signup-home-link">
             <HouseFill
               color={"hsl(0, 0%, 100%)"}
-              size={19}
+              size={18}
               style={{ marginRight: "3px" }}
             />
             <HomeLink />
