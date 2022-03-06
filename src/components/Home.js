@@ -47,8 +47,8 @@ const Home = () => {
           purpose
         </p>
         <p>
-          Therefore we are refering <b>Pile</b> as some piece of information you
-          keep with stockpile.com for future use or special purpose
+          Therefore we are referring <b>Pile</b> as some piece of information
+          you keep with stockpile.com for future use or special purpose
         </p>
         <p>
           If this is your first time here{" "}
