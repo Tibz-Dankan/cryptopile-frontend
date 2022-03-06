@@ -3,8 +3,8 @@ import { React, Fragment, useState } from "react";
 import "./../App.css";
 import HomeLink from "./links/HomeLink";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
-import { BarLoader } from "react-spinners";
-import { Eye, EyeSlash } from "react-bootstrap-icons";
+import { SquareLoader } from "react-spinners";
+import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./../css/Signup.css";
 
@@ -26,7 +26,7 @@ const SignUp = () => {
   const [emailValidityMsg, setEmailValidityMsg] = useState("");
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [hideRegistrationForm, setHideRegistrationForm] = useState(false);
-  const [showBarLoader, setShowBarLoader] = useState(false);
+  const [showSquareLoader, setShowSquareLoader] = useState(false);
   const [catchError, setCatchError] = useState("");
 
   const [passwordMatch, setPasswordMatch] = useState("");
@@ -90,6 +90,8 @@ const SignUp = () => {
     }
   };
 
+  // check for spaces in the password  // to be done
+
   // function to ensure that password contains symbols here
 
   // Handle the changes
@@ -104,7 +106,7 @@ const SignUp = () => {
     try {
       // e.preventDefault();
       window.scrollTo(0, 0);
-      setShowBarLoader(true);
+      setShowSquareLoader(true);
       setEmailValidityMsg("");
       setPasswordMatch("");
       setPasswordLength("");
@@ -119,7 +121,7 @@ const SignUp = () => {
       });
       console.log(response); // to be removed
       if (response.status === 200) {
-        setShowBarLoader(false);
+        setShowSquareLoader(false);
         if (response.data.email === registrationInfo.email) {
           // frontend email === backend email
           setRegistrationInfo({
@@ -140,7 +142,7 @@ const SignUp = () => {
         }
       }
     } catch (err) {
-      setShowBarLoader(false);
+      setShowSquareLoader(false);
       window.scrollTo(0, 0); // scroll to top
       console.log(err);
       setShowCaughtError(true);
@@ -159,6 +161,11 @@ const SignUp = () => {
       <div className="signup-page-wrapper">
         <div className="signup-header-wrapper">
           <div className="signup-home-link">
+            <HouseFill
+              color={"hsl(0, 0%, 100%)"}
+              size={19}
+              style={{ marginRight: "3px" }}
+            />
             <HomeLink />
           </div>
         </div>
@@ -171,14 +178,18 @@ const SignUp = () => {
           </div>
         ) : null}
         {showCaughtError ? (
-          <div className="catch-error">
+          <div className="signup-catch-error">
             <p>{catchError}</p>
           </div>
         ) : null}
-        {showBarLoader ? (
-          <div className="bar-loader">
-            <BarLoader color="lightseagreen" />
-            <h4>checking email existence...</h4>
+        {showSquareLoader ? (
+          <div className="square-loader">
+            <SquareLoader
+              color="hsl(180, 100%, 30%)"
+              size={30}
+              style={{ marginRight: "3px" }}
+            />
+            <h4>Validating Your Email...</h4>
           </div>
         ) : null}
         {hideRegistrationForm ? null : (
@@ -186,7 +197,6 @@ const SignUp = () => {
             <form onSubmit={validatePasswordOnSubmittingForm}>
               <h3 className="registration-form-heading">Create An Account</h3>
               <label>Firstname:</label>
-              <br />
               <input
                 type="text"
                 id="firstName"
@@ -195,10 +205,7 @@ const SignUp = () => {
                 onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
-              <br />
-              <br />
               <label>Lastname:</label>
-              <br />
               <input
                 type="text"
                 className="signup-input-field"
@@ -207,12 +214,8 @@ const SignUp = () => {
                 onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
-              <br />
-              <br />
               <p className="email-validity-msg">{emailValidityMsg}</p>
-              {/* <br /> */}
               <label>Email Address:</label>
-              <br />
               <input
                 type="email"
                 className="signup-input-field"
@@ -221,16 +224,13 @@ const SignUp = () => {
                 onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
-              <br />
-              <br />
               <p className="check-password-match">{passwordMatch}</p>
               <p className="check-password-length">{passwordLength}</p>
               <label>Password:</label>
-              <br />
               <div className="signup-input-field-wrapper-1">
                 <input
                   type={showPasswordOne ? "text" : "password"}
-                  className="signup-input-field signup-input-field-password"
+                  className="signup-input-field-password"
                   id="password"
                   value={registrationInfo.password}
                   onChange={(e) => handleRegistrationInfoChange(e)}
@@ -240,14 +240,11 @@ const SignUp = () => {
                   {showPasswordOne ? <EyeSlash /> : <Eye />}
                 </div>
               </div>
-              <br />
-              <br />
               <label>Confirm Password:</label>
-              <br />
               <div className="signup-input-field-wrapper-2">
                 <input
                   type={showPasswordTwo ? "text" : "password"}
-                  className="signup-input-field signup-input-field-password"
+                  className="signup-input-field-password"
                   id="confirmPassword"
                   value={registrationInfo.confirmPassword}
                   onChange={(e) => handleRegistrationInfoChange(e)}
@@ -257,14 +254,12 @@ const SignUp = () => {
                   {showPasswordTwo ? <EyeSlash /> : <Eye />}
                 </div>
               </div>
-              <br />
-              <br />
               <button className="signup-btn">Create</button>
             </form>
             <p>
-              Do you already have an account?{" "}
+              Already have an account?{" "}
               <Link to="/login" className="link">
-                login
+                Login
               </Link>
             </p>
           </div>
