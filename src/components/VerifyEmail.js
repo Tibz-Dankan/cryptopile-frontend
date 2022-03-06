@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import "./../css/VerifyEmail.css";
-// import axios from "axios";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import { FadeLoader } from "react-spinners";
 import Footer from "./Footer";
+import { CheckCircleFill } from "react-bootstrap-icons";
 
 const VerifyEmail = () => {
   const location = useLocation();
@@ -64,6 +64,7 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     verifyCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -83,9 +84,11 @@ const VerifyEmail = () => {
         <h1>Email Verification</h1>
       </header>
       {showCaughtError ? (
-        <p style={{ color: "red" }}>Sorry, something went wrong!</p>
+        <p className="verify-email-catch-error">Sorry, something went wrong!</p>
       ) : null}
-      <p style={{ color: "red", textAlign: "center" }}>{errorMsg}</p>
+      <p className="error-msg" style={{ color: "red", textAlign: "center" }}>
+        {errorMsg}
+      </p>
       {showFadeLoader ? (
         <div className="fade-loader">
           <h4>verifying your email...</h4>
@@ -93,8 +96,11 @@ const VerifyEmail = () => {
         </div>
       ) : null}
       {showSuccessVerificationMsg ? (
+        // more styling to different types of messages depending on their color
         <div className="success-msg">
-          <p style={{ color: "green" }}>{successMsg}</p>
+          <p>
+            {successMsg} <CheckCircleFill />
+          </p>
         </div>
       ) : null}
       {showTimer ? <p>Redirects to login in {count}s</p> : null}
