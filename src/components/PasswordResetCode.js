@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { BarLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
+import { HouseFill } from "react-bootstrap-icons";
+import HomeLink from "./links/HomeLink";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
 import "./../css/PasswordResetCode.css";
 
@@ -9,6 +11,16 @@ const PasswordResetCode = () => {
   const [showBarLoader, setShowBarLoader] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [passwordResetCodeMsg, setPasswordResetCodeMsg] = useState("");
+  const [
+    isPassWordResetCodeMsgSuccessful,
+    setIsPassWordResetCodeMsgSuccessful,
+  ] = useState(false);
+  const [isPassWordResetCodeMsgError, setIsPassWordResetCodeMsgError] =
+    useState(false);
+  const [
+    passwordResetCodeSentSuccessfully,
+    setPasswordResetCodeSentSuccessfully,
+  ] = useState("");
   let history = useHistory();
 
   // function to submit user email
@@ -17,6 +29,7 @@ const PasswordResetCode = () => {
     try {
       setPasswordResetCodeMsg("");
       setShowCaughtError("");
+      setPasswordResetCodeSentSuccessfully("");
       setShowBarLoader(true);
       if (passwordResetCode !== null) {
         const response = await axiosApiUnAuthorized.post(
@@ -27,13 +40,14 @@ const PasswordResetCode = () => {
         );
         console.log(response); // to be removed wen in production
         setShowBarLoader(false);
-        if (response.data.verification_code === parseInt(passwordResetCode)) {
+        if (response.data.verificationcode === parseInt(passwordResetCode)) {
           history.push("/reset-password");
         } else {
           // some error here
           setPasswordResetCodeMsg(
             response.data.PasswordRestCodeVerificationMsg
           );
+          setIsPassWordResetCodeMsgError(true);
         }
       }
     } catch (error) {
@@ -55,6 +69,8 @@ const PasswordResetCode = () => {
     e.preventDefault();
     try {
       setPasswordResetCodeMsg("");
+      setIsPassWordResetCodeMsgSuccessful(false);
+      setIsPassWordResetCodeMsgError(false);
       setShowBarLoader(true);
       setShowCaughtError("");
       const userEmail = localStorage.getItem("userEmail");
@@ -69,11 +85,13 @@ const PasswordResetCode = () => {
         );
         console.log(response); // to be removed
         if (response.data.email === userEmail) {
-          setPasswordResetCodeMsg(
-            "password reset code sent to " + response.data.email
+          setPasswordResetCodeSentSuccessfully(
+            "Password Reset Code sent to " + response.data.email
           );
+          setIsPassWordResetCodeMsgSuccessful(true);
         } else {
           setPasswordResetCodeMsg(response.data.passwordResetCodeMsg);
+          setIsPassWordResetCodeMsgError(true);
         }
       }
       setShowBarLoader(false);
@@ -86,22 +104,43 @@ const PasswordResetCode = () => {
 
   return (
     <div className="password-reset-code-wrapper">
-      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
+      <div className="password-reset-code-header">
+        <div className="password-reset-code-home-link">
+          <HouseFill
+            color={"hsl(0, 0%, 100%)"}
+            size={17}
+            style={{ marginRight: "3px" }}
+          />
+          <HomeLink />
+        </div>
+        <h4>Password Reset Code</h4>
+      </div>
+      {showBarLoader ? (
+        <div className="show-beat-loader">
+          <BeatLoader color="hsl(180, 50%, 20%)" />
+        </div>
+      ) : null}
       {showCaughtError ? (
         <div className="caught-error">
           <p>Sorry something went wrong !</p>
         </div>
       ) : null}
-      <div className="password-resend-code-msg">
-        <p>{passwordResetCodeMsg}</p>{" "}
-        {/*to be styled custom colors according msg communicated next time*/}
+      <div className="password-reset-code-msg">
+        {isPassWordResetCodeMsgSuccessful ? (
+          <p style={{ color: "hsl(120, 100%, 35%)" }}>
+            {passwordResetCodeSentSuccessfully}
+          </p>
+        ) : null}
+        {isPassWordResetCodeMsgError ? (
+          <p style={{ color: "hsl(0, 100%, 60%)" }}>{passwordResetCodeMsg}</p>
+        ) : null}
       </div>
       <form
         onSubmit={submitPasswordResetCode}
         className="password-reset-code-form"
       >
         <p className="form-heading">
-          Enter Password Reset Code Sent your Email
+          Enter Password Reset Code sent to your Email
         </p>
         <label className="reset-code-label">Password Reset code:</label>
         <br />
