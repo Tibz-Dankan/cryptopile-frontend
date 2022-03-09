@@ -62,11 +62,22 @@ const EditPileDescription = ({ pile }) => {
     }
   };
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   // function to update data in the database
   const updatePileDescription = async (e) => {
     e.preventDefault();
     try {
       if (hasTodoChanged()) {
+        disableButton();
         const response = await axiosApiAuthorized.put(
           `/api/edit-pile-description/${pile.todoid}`,
           {
@@ -76,6 +87,7 @@ const EditPileDescription = ({ pile }) => {
           }
         );
         if (response.status === 200) {
+          enableButton();
           // And end the close modal
           closeModal();
         }
@@ -84,6 +96,7 @@ const EditPileDescription = ({ pile }) => {
         setTodoChangeMsg("can't update unchanged todo!");
       }
     } catch (error) {
+      enableButton();
       console.log(error);
     }
   };
@@ -121,6 +134,7 @@ const EditPileDescription = ({ pile }) => {
           />
           <button
             className="edit-button edit-button-2"
+            id="button"
             onClick={updatePileDescription}
           >
             Edit

@@ -23,6 +23,16 @@ const Login = () => {
 
   let history = useHistory();
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   //  function to show password first by changing the state to true
   const showingPassword = () => {
     switch (showPassword) {
@@ -40,6 +50,7 @@ const Login = () => {
   const submitLoginInfo = async (e) => {
     e.preventDefault();
     try {
+      disableButton();
       setShowFadeLoader(true);
       SetShowLoginSuccess("");
       setShowCaughtError(false);
@@ -55,6 +66,7 @@ const Login = () => {
         setShowFadeLoader(false);
         SetShowLoginErrors(response.data.loginStatusMsg);
         SetShowLoginSuccess(response.data.success);
+        enableButton();
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
         ) {
@@ -74,9 +86,10 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      enableButton();
       setShowCaughtError(true);
       setShowFadeLoader(false);
+      console.log(error);
     }
   };
 
@@ -162,7 +175,7 @@ const Login = () => {
             </div>
             <br />
             <br />
-            <button type="submit" className="login-btn">
+            <button type="submit" className="login-btn" id="button">
               Login
             </button>
           </form>

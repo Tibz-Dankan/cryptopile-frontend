@@ -24,6 +24,16 @@ const ResetPassword = () => {
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
   let history = useHistory();
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   //  function to show password one first by changing the state to true
   const showingPasswordOne = () => {
     switch (showPasswordOne) {
@@ -97,6 +107,7 @@ const ResetPassword = () => {
         setShowWhenPasswordIsInvalid(true);
         return setPasswordResetStatusMsg("**Cannot reset password !");
       }
+      disableButton();
       setShowCaughtError(false);
       setPasswordMatch("");
       setPasswordLength("");
@@ -120,8 +131,10 @@ const ResetPassword = () => {
       } else {
         //  some comment for clarification
         setPasswordResetStatusMsg(response.data.passwordResetMsg);
+        enableButton();
       }
     } catch (error) {
+      enableButton();
       console.log(error);
       setShowCaughtError(true);
       setShowBarLoader(false);
@@ -195,7 +208,9 @@ const ResetPassword = () => {
           </div>
         </div>
         <br />
-        <button className="reset-password-btn">Send</button>
+        <button className="reset-password-btn" id="button">
+          Send
+        </button>
       </form>
     </div>
   );

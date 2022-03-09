@@ -38,24 +38,37 @@ const DeletePile = ({ pile }) => {
 
   const [pileId, setPileId] = useState(pile.todoid);
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   // function to delete the pile
   const deletePile = async () => {
     // e.preventDefault();
     try {
       // console.log(renderAllPile.pile_id);
       console.log(pileId); // to test whether it is working properly
+      disableButton();
       const response = await axiosApiAuthorized.delete(
         `api/delete-pile/${pileId}`
       );
       if (response.status === 200) {
         // And end the close modal
         closeModal();
+        enableButton();
         // also refresh automatically the whole page for a user to visualize the changes
       } else {
         // when some thing goes wrong
       }
       console.log(response);
     } catch (error) {
+      enableButton();
       console.log(error);
       // some state to capture error and alert the user when there is a problem on the server
     }
@@ -80,6 +93,7 @@ const DeletePile = ({ pile }) => {
           </div>
           <button
             className="delete-button delete-button-2"
+            id="button"
             onClick={deletePile}
           >
             Delete

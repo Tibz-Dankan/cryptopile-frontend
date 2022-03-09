@@ -35,6 +35,16 @@ const SignUp = () => {
   const [showPasswordOne, setShowPasswordOne] = useState(false);
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   //  function to show password first by changing the state to true
   const showingPasswordOne = () => {
     switch (showPasswordOne) {
@@ -106,6 +116,7 @@ const SignUp = () => {
     try {
       // e.preventDefault();
       window.scrollTo(0, 0);
+      disableButton();
       setShowSquareLoader(true);
       setEmailValidityMsg("");
       setPasswordMatch("");
@@ -122,6 +133,7 @@ const SignUp = () => {
       console.log(response); // to be removed
       if (response.status === 200) {
         setShowSquareLoader(false);
+        enableButton();
         if (response.data.email === registrationInfo.email) {
           // frontend email === backend email
           setRegistrationInfo({
@@ -143,10 +155,11 @@ const SignUp = () => {
       }
     } catch (err) {
       setShowSquareLoader(false);
+      enableButton();
       window.scrollTo(0, 0); // scroll to top
       console.log(err);
       setShowCaughtError(true);
-      setCatchError("sorry, something went wrong!");
+      setCatchError("Sorry, something went wrong!");
     }
   };
 
@@ -254,7 +267,9 @@ const SignUp = () => {
                   {showPasswordTwo ? <EyeSlash /> : <Eye />}
                 </div>
               </div>
-              <button className="signup-btn">Create</button>
+              <button className="signup-btn" id="button">
+                Create
+              </button>
             </form>
             <p>
               Already have an account?{" "}

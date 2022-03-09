@@ -23,10 +23,21 @@ const PasswordResetCode = () => {
   ] = useState("");
   let history = useHistory();
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   // function to submit user email
   const submitPasswordResetCode = async (e) => {
     e.preventDefault();
     try {
+      disableButton();
       setPasswordResetCodeMsg("");
       setShowCaughtError("");
       setPasswordResetCodeSentSuccessfully("");
@@ -43,6 +54,7 @@ const PasswordResetCode = () => {
         if (response.data.verificationcode === parseInt(passwordResetCode)) {
           history.push("/reset-password");
         } else {
+          enableButton();
           // some error here
           setPasswordResetCodeMsg(
             response.data.PasswordRestCodeVerificationMsg
@@ -51,6 +63,7 @@ const PasswordResetCode = () => {
         }
       }
     } catch (error) {
+      enableButton();
       console.log(error);
       setShowCaughtError(true);
       setShowBarLoader(false);
@@ -68,6 +81,7 @@ const PasswordResetCode = () => {
   const resendPasswordResetCode = async (e) => {
     e.preventDefault();
     try {
+      disableButton();
       setPasswordResetCodeMsg("");
       setIsPassWordResetCodeMsgSuccessful(false);
       setIsPassWordResetCodeMsgError(false);
@@ -90,12 +104,14 @@ const PasswordResetCode = () => {
           );
           setIsPassWordResetCodeMsgSuccessful(true);
         } else {
+          enableButton();
           setPasswordResetCodeMsg(response.data.passwordResetCodeMsg);
           setIsPassWordResetCodeMsgError(true);
         }
       }
       setShowBarLoader(false);
     } catch (error) {
+      enableButton();
       setShowBarLoader(false);
       setShowCaughtError(true);
       console.log(error);
@@ -152,13 +168,18 @@ const PasswordResetCode = () => {
           required
         />
         <br />
-        <button type="submit" className="reset-code-btn reset-code-btn-1">
+        <button
+          type="submit"
+          className="reset-code-btn reset-code-btn-1"
+          id="button"
+        >
           Verify Code
         </button>
         <br />
         <button
           onClick={resendPasswordResetCode}
           className="reset-code-btn reset-code-btn-2"
+          id="button"
         >
           Resend Code
         </button>

@@ -16,6 +16,16 @@ const AddTodos = () => {
 
   const [showCatchError, setShowCatchError] = useState(false);
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   // function to remove the todo added successfully message after 3 seconds
   const removeTodoAddedSuccessfullyMsg = () => {
     setTimeout(() => {
@@ -26,6 +36,7 @@ const AddTodos = () => {
   // Post or submit the todo
   const addUserTodos = (e) => {
     e.preventDefault();
+    disableButton();
     setShowPulseLoader(true);
     setShowCatchError(false);
     axiosApiAuthorized
@@ -40,12 +51,15 @@ const AddTodos = () => {
         if (response.status === 200) {
           setShowTodoAddedSuccessfullyMsg(true);
           removeTodoAddedSuccessfullyMsg();
+          enableButton();
+          setTodo({ description: "" });
         }
       })
       .catch((error) => {
         console.log(error);
         setShowPulseLoader(false);
         setShowCatchError(true);
+        enableButton();
       });
   };
 
@@ -73,7 +87,9 @@ const AddTodos = () => {
           </div>
         ) : null}
         {showCatchError ? (
-          <p className="catch-error-msg">Sorry something went wrong!</p>
+          <p className="add-todo-catch-error-msg">
+            Sorry something went wrong!
+          </p>
         ) : null}
         <label htmlFor="description">Description</label>
         <textarea
@@ -84,7 +100,9 @@ const AddTodos = () => {
           placeholder=" Add Short Description"
           required
         ></textarea>
-        <button className="btn add-todo-btn">Add</button>
+        <button className="btn add-todo-btn" id="button">
+          Add
+        </button>
       </form>
     </div>
   );

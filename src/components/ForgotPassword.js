@@ -14,10 +14,21 @@ const ForgotPassword = () => {
     useState("");
   let history = useHistory();
 
+  // function to disable a button
+  const disableButton = () => {
+    document.getElementById("button").disabled = true;
+  };
+
+  // function to enable a button
+  const enableButton = () => {
+    document.getElementById("button").disabled = false;
+  };
+
   // function to submit user email
   const submitEmailToResetPassword = async (e) => {
     e.preventDefault();
     try {
+      disableButton();
       setShowBarLoader(false);
       setShowBarLoader(true);
       setShowCaughtError(false);
@@ -29,6 +40,7 @@ const ForgotPassword = () => {
       setShowBarLoader(false); // stop BarLoader
       if (response.status === 200) {
         setErrorInSendingPasswordResetCode(response.data.forgotPasswordMsg);
+        enableButton();
         if (response.data.email === userEmail) {
           localStorage.setItem("userEmail", response.data.email);
           localStorage.setItem("userId", response.data.userid);
@@ -36,6 +48,7 @@ const ForgotPassword = () => {
         }
       }
     } catch (error) {
+      enableButton();
       console.log(error);
       setShowCaughtError(true);
       setShowBarLoader(false);
@@ -89,7 +102,9 @@ const ForgotPassword = () => {
           required
         />
         <br />
-        <button className="email-btn">Get Code</button>
+        <button className="email-btn" id="button">
+          Get Code
+        </button>
       </form>
     </div>
   );
