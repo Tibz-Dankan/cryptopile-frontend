@@ -6,6 +6,7 @@
   flex-direction: column;
   align-items: center;
   min-height: 800px;
+  position: relative;
 }
 .home-header-wrapper {
   top: 0px;
@@ -22,6 +23,32 @@
 .logo-wrapper {
   padding: 1.5rem;
   margin-left: 1em;
+  font-weight: bold;
+}
+.logo-animation {
+  animation-name: logo-colors;
+  animation-duration: 8s;
+  animation-iteration-count: infinite;
+}
+@keyframes logo-colors {
+  0% {
+    color: hsl(0, 100%, 100%);
+  }
+  20% {
+    color: hsl(0, 100%, 50%);
+  }
+  40% {
+    color: hsl(120, 100%, 50%);
+  }
+  60% {
+    color: hsl(240, 80%, 60%);
+  }
+  80% {
+    color: hsl(180, 100%, 50%);
+  }
+  100% {
+    color: hsl(60, 100%, 50%);
+  }
 }
 .header-link {
   text-decoration: none;
@@ -52,6 +79,34 @@
 .link {
   color: hsl(240, 100%, 50%);
 }
+.spinning-circular-logo {
+  display: grid;
+  place-items: center;
+  color: hsl(180, 100%, 25%);
+  background-color: hsl(0, 0%, 100%);
+  width: 80px;
+  height: 80px;
+  border: 1px solid hsl(0, 0%, 100%);
+  box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 80%);
+  border-radius: 40px;
+  /* positioning here */
+  /* position: absolute; */
+  position: fixed;
+  top: 15%;
+  right: 6%;
+  animation-name: spinning-logo;
+  animation-duration: 500s;
+  animation-iteration-count: infinite;
+}
+@keyframes spinning-logo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    /* transform: rotate(359deg); */
+    transform: rotate(10000deg);
+  }
+}
 
 .home-page-content {
   position: relative;
@@ -60,6 +115,20 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+.cryptopile-short-description {
+  text-align: center;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 100%);
+  border-radius: 5px;
+  box-shadow: 1px 1px 4px hsl(0, 0%, 90%), -1px -1px 4px hsl(0, 0%, 90%);
+}
+.blank-div {
+  background-color: hsl(0, 60%, 70%);
+  height: 10px;
+  margin: 0px 0px auto 0px;
+  border-top: 1px solid hsl(0, 60%, 70%);
+  /* border-radius: 5px; */
 }
 .home-page-welcome-heading {
   text-align: center;
@@ -137,6 +206,9 @@
     top: 17.5px;
     position: absolute;
     transition: 0.55s;
+  }
+  .spinning-circular-logo {
+    display: none;
   }
   .mobile-home-header-component {
     position: absolute;
