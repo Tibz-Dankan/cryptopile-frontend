@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { BarLoader } from "react-spinners";
+import { HouseFill } from "react-bootstrap-icons";
+import HomeLink from "./links/HomeLink";
 import { Eye, EyeSlash } from "react-bootstrap-icons";
 import axiosApiUnAuthorized from "./axiosUnAuthorized";
-
 import "./../css/ResetPassword.css";
 
+// The header  should also be added to this component as well
 const ResetPassword = () => {
-  // this component should reseting password when the user has logged in or not
-
   const [passwordObject, setPasswordObject] = useState({
     newPassword: "",
     confirmPassword: "",
@@ -24,20 +24,30 @@ const ResetPassword = () => {
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
   let history = useHistory();
 
-  //  function to show password first by changing the state to true
+  //  function to show password one first by changing the state to true
   const showingPasswordOne = () => {
-    setShowPasswordOne(true);
-    setTimeout(() => {
-      setShowPasswordOne(false);
-    }, 1000);
+    switch (showPasswordOne) {
+      case true:
+        setShowPasswordOne(false);
+        break;
+      case false:
+        setShowPasswordOne(true);
+        break;
+      default:
+    }
   };
 
-  //  function to show password second by changing the state to true
+  //  function to show password two by changing the state to true
   const showingPasswordTwo = () => {
-    setShowPasswordTwo(true);
-    setTimeout(() => {
-      setShowPasswordTwo(false);
-    }, 1000);
+    switch (showPasswordTwo) {
+      case true:
+        setShowPasswordTwo(false);
+        break;
+      case false:
+        setShowPasswordTwo(true);
+        break;
+      default:
+    }
   };
 
   //check password match
@@ -118,8 +128,6 @@ const ResetPassword = () => {
     }
   };
 
-  // function to submit user's new password (when logged in)
-
   // checking conditions on submitting the form
   const checkPasswordOnSubmittingForm = (e) => {
     e.preventDefault();
@@ -128,7 +136,18 @@ const ResetPassword = () => {
 
   return (
     <div className="reset-password-wrapper">
-      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
+      <div className="reset-password-header">
+        <div className="reset-password-home-link">
+          <HouseFill
+            color={"hsl(0, 0%, 100%)"}
+            size={17}
+            style={{ marginRight: "3px" }}
+          />
+          <HomeLink />
+        </div>
+        <h4>New Password</h4>
+      </div>
+      {showBarLoader ? <BarLoader color="hsl(180, 40%, 40%)" /> : null}
       {showCaughtError ? (
         <div className="caught-error">
           <p>Sorry, something went wrong !</p>
