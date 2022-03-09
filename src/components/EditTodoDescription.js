@@ -1,22 +1,19 @@
 import axiosApiAuthorized from "./axiosAuthorized";
 import React, { useState } from "react";
 import Modal from "react-modal";
-// import { ClipLoader, PropagateLoader } from "react-spinners";
-import { FlagFill, X } from "react-bootstrap-icons";
+import { HashLoader } from "react-spinners";
+import { X } from "react-bootstrap-icons";
 import "./../css/EditTodoDescription.css";
-
-// More features to be added here
-// Look for appropriate react spinners for react modal
 
 const EditTodoDescription = ({ todo }) => {
   const [todoDescription, setTodoDescription] = useState([todo.description]);
   const [todoChangeMsg, setTodoChangeMsg] = useState("");
   const [showTodoChangeMsg, setShowTodoChangeMsg] = useState(false);
+  const [showHashLoader, setShowHashLoader] = useState(false);
 
   const dateOfUpdate = new Date().toDateString();
   const timeOfUpdate = new Date().toLocaleTimeString();
 
-  // console.log(todoTitle);
   // let subtitle;
   const customStyles = {
     content: {
@@ -78,6 +75,7 @@ const EditTodoDescription = ({ todo }) => {
     try {
       if (hasTodoChanged()) {
         disableButton();
+        setShowHashLoader(true);
         const response = await axiosApiAuthorized.put(
           `/api/edit-todo-description/${todo.todoid}`,
           {
@@ -88,6 +86,8 @@ const EditTodoDescription = ({ todo }) => {
         );
         if (response.status === 200) {
           enableButton();
+          setShowHashLoader(false);
+
           // And end the close modal
           closeModal();
         }
@@ -103,7 +103,7 @@ const EditTodoDescription = ({ todo }) => {
 
   // binding the modal to the app
   //   Modal.setAppElement("#Todo-description-id");
-  Modal.setAppElement(document.getElementById("todo-description-id")); // some bugs here
+  Modal.setAppElement(document.getElementById("todo-description-id"));
   return (
     <div>
       <button className="edit-button edit-button-1" onClick={openModal}>
@@ -121,7 +121,12 @@ const EditTodoDescription = ({ todo }) => {
           <div onClick={closeModal} className="close-modal">
             <X size={30} />
           </div>
-          <div>
+          {showHashLoader ? (
+            <div className="hash-loader">
+              <HashLoader color="hsl(180, 100%, 50%)" />
+            </div>
+          ) : null}
+          <div className="todo-change-msg-wrapper">
             {showTodoChangeMsg ? (
               <p className="todo-change-msg"> {todoChangeMsg}</p>
             ) : null}
