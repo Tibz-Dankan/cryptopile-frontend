@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { PropagateLoader } from "react-spinners";
 import axiosApiAuthorized from "./axiosAuthorized";
-import EditPileDescription from "./EditPileDescription";
-import DeletePile from "./DeletePile";
+import EditTodoDescription from "./EditTodoDescription";
+import DeleteTodo from "./DeleteTodo";
 import "./../css/SeeTodos.css";
 
 const SeeTodos = () => {
@@ -11,12 +11,12 @@ const SeeTodos = () => {
   const [showPropagateLoader, setShowPropagateLoader] = useState(false);
   const [showTableOfTodos, setShowTableOfTodos] = useState(false);
 
-  // "getpile" in the url below should renamed to "get-todos"
+  // "getpile" in the url below should renamed to "get-todos" (Done)
   const getUserTodos = async () => {
     try {
       setShowPropagateLoader(true);
       const getTodos = await axiosApiAuthorized.get(
-        `api/getpile/${localStorage.getItem("userId")}`
+        `api/get-todos/${localStorage.getItem("userId")}`
       );
 
       setShowPropagateLoader(false);
@@ -37,7 +37,7 @@ const SeeTodos = () => {
     }
   };
 
-  // show pile on rendering and after every update
+  // show todos on rendering and after every update
   useEffect(() => {
     getUserTodos();
     return setTodos([]);
@@ -68,15 +68,15 @@ const SeeTodos = () => {
                 <th>TodoDescription</th>
                 <th>Delete</th>
               </tr>
-              {todos.map((pile) => {
+              {todos.map((todo) => {
                 return (
-                  <tr key={pile.todoid}>
-                    <td>{pile.dateofadd}</td>
-                    <td>{pile.timeofadd}</td>
-                    <td id="pile-description-id">
-                      {pile.description} {<EditPileDescription pile={pile} />}
+                  <tr key={todo.todoid}>
+                    <td>{todo.dateofadd}</td>
+                    <td>{todo.timeofadd}</td>
+                    <td id="todo-description-id">
+                      {todo.description} {<EditTodoDescription todo={todo} />}
                     </td>
-                    <td>{<DeletePile pile={pile} />}</td>
+                    <td>{<DeleteTodo todo={todo} />}</td>
                   </tr>
                 );
               })}

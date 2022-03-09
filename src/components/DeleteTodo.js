@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 import axiosApiAuthorized from "./axiosAuthorized";
 import Modal from "react-modal";
 import { X } from "react-bootstrap-icons";
-import "./../css/DeletePile.css";
+import "./../css/DeleteTodo.css";
 
-const DeletePile = ({ pile }) => {
+const DeleteTodo = ({ todo }) => {
   // the modal state
   const [isModalOpen, setIsOpenModal] = useState(false);
   // let subtitle;
@@ -34,9 +35,9 @@ const DeletePile = ({ pile }) => {
     // subtitle.style.color = "green";
   };
   // the modal element
-  Modal.setAppElement(document.getElementsByClassName("user-pile"));
+  Modal.setAppElement(document.getElementsByClassName("user-todo"));
 
-  const [pileId, setPileId] = useState(pile.todoid);
+  const [todoId, setTodoId] = useState(todo.todoid);
 
   // function to disable a button
   const disableButton = () => {
@@ -48,15 +49,15 @@ const DeletePile = ({ pile }) => {
     document.getElementById("button").disabled = false;
   };
 
-  // function to delete the pile
-  const deletePile = async () => {
+  // function to delete the todo
+  const deleteTodo = async () => {
     // e.preventDefault();
     try {
-      // console.log(renderAllPile.pile_id);
-      console.log(pileId); // to test whether it is working properly
+      // console.log(renderAllTodo.todo_id);
+      console.log(todoId); // to test whether it is working properly
       disableButton();
       const response = await axiosApiAuthorized.delete(
-        `api/delete-pile/${pileId}`
+        `api/delete-todo/${todoId}`
       );
       if (response.status === 200) {
         // And end the close modal
@@ -84,7 +85,7 @@ const DeletePile = ({ pile }) => {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Delete Pile"
+        contentLabel="Delete Todo"
       >
         <div className="modal-wrapper">
           <h4>This will be deleted permanently</h4>
@@ -94,7 +95,7 @@ const DeletePile = ({ pile }) => {
           <button
             className="delete-button delete-button-2"
             id="button"
-            onClick={deletePile}
+            onClick={deleteTodo}
           >
             Delete
           </button>
@@ -104,4 +105,4 @@ const DeletePile = ({ pile }) => {
   );
 };
 
-export default DeletePile;
+export default DeleteTodo;

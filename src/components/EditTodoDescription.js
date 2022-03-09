@@ -3,20 +3,20 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 // import { ClipLoader, PropagateLoader } from "react-spinners";
 import { FlagFill, X } from "react-bootstrap-icons";
-import "./../css/EditPileDescription.css";
+import "./../css/EditTodoDescription.css";
 
 // More features to be added here
 // Look for appropriate react spinners for react modal
 
-const EditPileDescription = ({ pile }) => {
-  const [pileDescription, setPileDescription] = useState([pile.description]);
+const EditTodoDescription = ({ todo }) => {
+  const [todoDescription, setTodoDescription] = useState([todo.description]);
   const [todoChangeMsg, setTodoChangeMsg] = useState("");
   const [showTodoChangeMsg, setShowTodoChangeMsg] = useState(false);
 
   const dateOfUpdate = new Date().toDateString();
   const timeOfUpdate = new Date().toLocaleTimeString();
 
-  // console.log(pileTitle);
+  // console.log(todoTitle);
   // let subtitle;
   const customStyles = {
     content: {
@@ -34,7 +34,7 @@ const EditPileDescription = ({ pile }) => {
   // open modal function
   const openModal = () => {
     setIsOpenModal(true);
-    localStorage.setItem("description", pile.description);
+    localStorage.setItem("description", todo.description);
     hasTodoChanged();
     setTodoChangeMsg("");
   };
@@ -53,7 +53,7 @@ const EditPileDescription = ({ pile }) => {
   const hasTodoChanged = () => {
     const originalTodoDescription = localStorage.getItem("description");
     // eslint-disable-next-line eqeqeq
-    if (pileDescription != originalTodoDescription) {
+    if (todoDescription != originalTodoDescription) {
       setShowTodoChangeMsg(false);
       return true;
     } else {
@@ -73,15 +73,15 @@ const EditPileDescription = ({ pile }) => {
   };
 
   // function to update data in the database
-  const updatePileDescription = async (e) => {
+  const updateTodoDescription = async (e) => {
     e.preventDefault();
     try {
       if (hasTodoChanged()) {
         disableButton();
         const response = await axiosApiAuthorized.put(
-          `/api/edit-pile-description/${pile.todoid}`,
+          `/api/edit-todo-description/${todo.todoid}`,
           {
-            description: pileDescription,
+            description: todoDescription,
             dateOfUpdate: dateOfUpdate,
             timeOfUpdate: timeOfUpdate,
           }
@@ -102,8 +102,8 @@ const EditPileDescription = ({ pile }) => {
   };
 
   // binding the modal to the app
-  //   Modal.setAppElement("#pile-description-id");
-  Modal.setAppElement(document.getElementById("pile-description-id")); // some bugs here
+  //   Modal.setAppElement("#Todo-description-id");
+  Modal.setAppElement(document.getElementById("todo-description-id")); // some bugs here
   return (
     <div>
       <button className="edit-button edit-button-1" onClick={openModal}>
@@ -114,7 +114,7 @@ const EditPileDescription = ({ pile }) => {
         onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Edit Pile"
+        contentLabel="Edit Todo"
       >
         <form className="edit-form">
           <h4>Edit Todo Description</h4>
@@ -129,13 +129,13 @@ const EditPileDescription = ({ pile }) => {
           <textarea
             className="textarea"
             type="text"
-            onChange={(e) => setPileDescription(e.target.value)}
-            value={pileDescription}
+            onChange={(e) => setTodoDescription(e.target.value)}
+            value={todoDescription}
           />
           <button
             className="edit-button edit-button-2"
             id="button"
-            onClick={updatePileDescription}
+            onClick={updateTodoDescription}
           >
             Edit
           </button>
@@ -145,4 +145,4 @@ const EditPileDescription = ({ pile }) => {
   );
 };
 
-export default EditPileDescription;
+export default EditTodoDescription;
