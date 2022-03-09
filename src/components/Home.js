@@ -1,9 +1,7 @@
 import React, { useState, useCallback } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-// import HomeHeaderLogoutLink from "./links/HomeHeaderLogoutLink";
 import "./../css/Home.css";
-import { Link } from "react-router-dom";
 import { List, X } from "react-bootstrap-icons";
 
 const Home = () => {
@@ -11,7 +9,7 @@ const Home = () => {
   return (
     <div className="home-page-wrapper">
       <div className="home-header-wrapper">
-        <div className="logo-wrapper">CrytoPile</div>
+        <div className="logo-wrapper logo-animation">CryptoPile</div>
         <div className="desktop-home-header-links">
           <Header />
         </div>
@@ -30,39 +28,18 @@ const Home = () => {
           )}
         </div>
       </div>
+      <div className="spinning-circular-logo logo-animation">CryptoPile</div>
       <div className="home-page-content">
-        <div className="home-page-welcome-heading">
-          <h2>Welcome To Cryptopile </h2>
+        <div className="cryptopile-short-description">
+          <div className="blank-div"></div>
+          <h3>Welcome To CryptoPile</h3>
+          <p>A Todo Application </p>
+          <p>WITH</p>
+          <p>Authentication,</p>
+          <p>Authorization</p>
+          <p> AND </p>
+          <p> Encryption </p>
         </div>
-        <p>This is a place where everything you store with us is called pile</p>
-        <p>
-          <b>Pile</b> is common term used through the whole site.
-        </p>
-        <p>
-          So having a better understanding of pile is vital to effectively use
-          the stockpile.com
-        </p>
-        <p>
-          <b>stockpile</b> is something saved for future use or a special
-          purpose
-        </p>
-        <p>
-          Therefore we are referring <b>Pile</b> as some piece of information
-          you keep with stockpile.com for future use or special purpose
-        </p>
-        <p>
-          If this is your first time here{" "}
-          <Link to="/signup" className="link">
-            signup
-          </Link>{" "}
-        </p>
-        <p>
-          {" "}
-          Already have an account{" "}
-          <Link to="/login" className="link">
-            login
-          </Link>
-        </p>
       </div>
       <div className="home-footer-wrapper">
         <Footer />
