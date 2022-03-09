@@ -17,6 +17,13 @@ const Admin = () => {
   const [hasNoToken, setHasNoToken] = useState(false);
   const token = localStorage.getItem("accessToken");
 
+  //   calling methods on page loading
+  useEffect(() => {
+    getUserAccounts();
+    getAdminProfile();
+    return setUserAccounts([]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   //   get to get user accounts
   const getUserAccounts = async () => {
     try {
@@ -58,15 +65,11 @@ const Admin = () => {
     }
   };
 
-  //   calling methods on page loading
-  useEffect(() => {
-    getUserAccounts();
-    getAdminProfile();
-  }, []);
-
-  const checkUserVerificationStatus = () => {
+  // let userStatus = false;
+  const checkUserVerificationStatus = (userStatus) => {
     // let status = false;
-    switch (userAccounts.isverifiedemail) {
+    // switch (userAccounts.isverifiedemail) {
+    switch (userStatus) {
       // switch (status) {
       case true:
         setIsUserVerified(true);
@@ -110,7 +113,7 @@ const Admin = () => {
                 <td>{accounts.lastname}</td>
                 <td>{accounts.email}</td>
                 <td>
-                  {checkUserVerificationStatus ? (
+                  {checkUserVerificationStatus(accounts.isverifiedemail) ? (
                     <div className="verified-user">
                       Verified
                       <CheckCircleFill color="hsl(120,100%, 60%)" />
