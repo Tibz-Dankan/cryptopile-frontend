@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState } from "react";
 import axiosApiAuthorized from "./axiosAuthorized";
 import {
   CheckCircleFill,
@@ -9,6 +10,7 @@ import {
 } from "react-bootstrap-icons";
 import { ScaleLoader } from "react-spinners";
 import "./../css/UserProfile.css";
+import UploadProfileImage from "./UploadProfileImage";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
@@ -17,6 +19,23 @@ const UserProfile = () => {
   const [showProfile, setShowProfile] = useState(false);
   const [showChevronDownIcon, setShowChevronDownIcon] = useState(true);
   const [showScaleLoader, setShowScaleLoader] = useState(false);
+  const [showProfileImageIcon, setShowProfileImageIcon] = useState(true);
+  const [imageUrl, setImageUrl] = useState("");
+  const [showUploadProfileImageForm, setShowUploadProfileImageForm] =
+    useState(false);
+
+  // show the form  for uploading user profile image
+  const showImageUploadForm = () => {
+    switch (showUploadProfileImageForm) {
+      case true:
+        setShowUploadProfileImageForm(false);
+        break;
+      case false:
+        setShowUploadProfileImageForm(true);
+        break;
+      default:
+    }
+  };
 
   // show user profile on click
   const showUserProfile = () => {
@@ -24,10 +43,25 @@ const UserProfile = () => {
       case true:
         setShowProfile(false);
         setShowChevronDownIcon(true);
+        setUserInfo([]);
         break;
       case false:
+        getUserInfo(); //getting user profile details
         setShowProfile(true);
         setShowChevronDownIcon(false);
+        break;
+      default:
+    }
+  };
+
+  const isProfileImageUrlNull = (showProfileImageIcon, imageUrl) => {
+    switch (showProfileImageIcon) {
+      case true:
+        setShowProfileImageIcon(true);
+        break;
+      case false:
+        setShowProfileImageIcon(false);
+        setImageUrl(imageUrl);
         break;
       default:
     }
@@ -37,10 +71,15 @@ const UserProfile = () => {
     setShowScaleLoader(true);
     axiosApiAuthorized
       .get(`/get-user-info/${userId}`)
-      .then((res) => {
+      .then((response) => {
         setShowScaleLoader(false);
-        console.log(res);
-        setUserInfo(res.data);
+        setUserInfo(response.data);
+        const imageUrlFromDatabase = response.data[0].imageUrl;
+        isProfileImageUrlNull(
+          imageUrlFromDatabase == null,
+          imageUrlFromDatabase
+        );
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -48,7 +87,7 @@ const UserProfile = () => {
   };
 
   const checkUserVerificationStatus = () => {
-    switch (userInfo.isverifiedemail) {
+    switch (userInfo[0].isverifiedemail) {
       case true:
         setIsUserVerified(true);
         break;
@@ -59,12 +98,6 @@ const UserProfile = () => {
     }
     return isUserVerified;
   };
-
-  // getting user info on loading and  after every update
-  useEffect(() => {
-    getUserInfo();
-    return setUserInfo([]);
-  }, []);
 
   return (
     <div className="user-profile-wrapper">
@@ -87,13 +120,31 @@ const UserProfile = () => {
           {showScaleLoader ? <ScaleLoader color="hsl(180, 100%, 30%)" /> : null}
           {userInfo.map((info) => {
             return (
-              <div key={info.userid} className="user-profile-details">
-                <div className="default-profile-image">
-                  {/* the icon below should be changed a link to allow upload of profile pictures */}
-                  <PersonCircle size={60} color="hsl(0, 0%, 50%)" />
-                </div>
-                <p>Firstname: {info.firstname}</p>
-                <p>Lastname: {info.lastname}</p>
+              <div key={info.userId} className="user-profile-details">
+                {showUploadProfileImageForm ? (
+                  <div>
+                    <UploadProfileImage />
+                  </div>
+                ) : null}
+                {showProfileImageIcon ? (
+                  <div
+                    className="default-profile-image tooltip"
+                    onClick={showImageUploadForm}
+                  >
+                    <p className="tooltiptext">Upload Profile Image</p>
+                    <PersonCircle size={60} color="hsl(0, 0%, 50%)" />
+                  </div>
+                ) : (
+                  <div className="user-profile-image-wrapper">
+                    <img
+                      src={imageUrl}
+                      className="user-profile-image"
+                      alt="Profile Pic"
+                    />
+                  </div>
+                )}
+                <p>Firstname: {info.firstName}</p>
+                <p>Lastname: {info.lastName}</p>
                 <p>Email: {info.email}</p>
                 <div className="profile-verification-status">
                   <p>Status: </p>
