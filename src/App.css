@@ -1,13 +1,14 @@
 :root {
   --steelblue: hsl(207, 44%, 33%);
   --steelblue-2: hsl(207, 60%, 20%);
-  --backgroundColor-1: hsl(207, 60%, 99%);
+  --backgroundColor-1: hsl(0, 0%, 100%);
 }
 
 body {
-  font-family: Helvetica;
+  font-family: Helvetica, Sans-serif;
   color: black;
   margin: 0px 0px 0px 0px;
+  overflow-x: hidden;
 }
 
 /* NAVIGATION-LINKS */
