@@ -1,0 +1,36 @@
+.footer-wrapper {
+  /* background-color: var(--steelblue); */
+  background-color: hsl(207, 44%, 15%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(0, 0%, 50%);
+}
+.footer-content {
+  text-align: center;
+  width: 80%;
+  height: auto;
+  color: hsl(0, 0%, 100%);
+}
+.copyright-msg {
+  margin-top: 2em;
+}
+.cryptopile-manager {
+  height: auto;
+}
+.footer-links-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+  margin-left: 3em;
+}
+.footer-link-with-icon {
+  margin-right: 4em;
+}
+
+.footer-link {
+  text-decoration: none;
+  margin-left: 3px;
+  color: hsl(0, 0%, 100%);
+}
