@@ -2,10 +2,22 @@
   width: 100%;
   height: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-
+.beat-loader {
+  background-color: hsl(0, 0%, 50%);
+  width: 60%;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid hsl(0, 0%, 50%);
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+.beat-loader p {
+  color: hsl(0, 0%, 100%);
+}
 .image-upload-form {
   background-color: hsl(0, 0%, 50%);
   width: auto;
