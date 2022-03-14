@@ -52,10 +52,11 @@ const UploadProfileImage = () => {
         }
       );
       console.log(response);
-      if (response === 200) {
+      if (response.status === 200) {
         setShowBeatLoader(false);
         setImageUrl(response.data.secure_url);
         setImageUploadMsg("Uploaded successfully");
+        setImageSelected("");
       }
     } catch (error) {
       setShowBeatLoader(false);
