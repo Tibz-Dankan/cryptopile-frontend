@@ -6,7 +6,6 @@
   flex-direction: column;
   align-items: center;
   min-height: 800px;
-  position: relative;
 }
 .home-header-wrapper {
   top: 0px;
@@ -18,7 +17,7 @@
   color: white;
   background-color: var(--steelblue);
   box-shadow: 1px 1px 2px hsl(240, 40%, 15%);
-  z-index: 2;
+  z-index: 4;
 }
 .logo-wrapper {
   padding: 1.5rem;
@@ -29,25 +28,26 @@
   animation-name: logo-colors;
   animation-duration: 8s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 @keyframes logo-colors {
   0% {
-    color: hsl(0, 100%, 100%);
-  }
-  20% {
     color: hsl(0, 100%, 50%);
   }
-  40% {
+  20% {
     color: hsl(120, 100%, 50%);
   }
-  60% {
+  40% {
     color: hsl(240, 80%, 60%);
   }
-  80% {
+  60% {
     color: hsl(180, 100%, 50%);
   }
-  100% {
+  80% {
     color: hsl(60, 100%, 50%);
+  }
+  100% {
+    color: hsl(0, 100%, 100%);
   }
 }
 .header-link {
@@ -82,78 +82,209 @@
 .spinning-circular-logo {
   display: grid;
   place-items: center;
-  color: hsl(180, 100%, 25%);
-  background-color: hsl(0, 0%, 100%);
-  width: 80px;
-  height: 80px;
-  border: 1px solid hsl(0, 0%, 100%);
+  color: hsl(180, 100%, 50%);
+  background-color: hsl(0, 0%, 80%);
+  width: 30px;
+  height: 30px;
+  border: 1px solid hsl(0, 0%, 80%);
   box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 80%);
-  border-radius: 40px;
-  /* positioning here */
-  /* position: absolute; */
+  border-radius: 15px;
   position: fixed;
-  top: 15%;
-  right: 6%;
+  top: 1.5%;
+  right: 4%;
+  z-index: 5;
   animation-name: spinning-logo;
   animation-duration: 500s;
   animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 @keyframes spinning-logo {
   from {
     transform: rotate(0deg);
   }
   to {
-    /* transform: rotate(359deg); */
-    transform: rotate(10000deg);
+    transform: rotate(9980deg);
   }
 }
 
 .home-page-content {
   position: relative;
-  width: 40%;
-  height: 100vh;
+  width: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
+  filter: opacity(0.9);
 }
 .cryptopile-short-description {
+  /* font-size: larger; */
+  margin-top: 6em;
+  width: 60%;
   text-align: center;
   background-color: hsl(0, 0%, 100%);
   border: 1px solid hsl(0, 0%, 100%);
   border-radius: 5px;
-  box-shadow: 1px 1px 4px hsl(0, 0%, 90%), -1px -1px 4px hsl(0, 0%, 90%);
+  /* box-shadow: 1px 1px 4px hsl(0, 0%, 90%), -1px -1px 4px hsl(0, 0%, 90%); */
 }
 .blank-div {
   background-color: hsl(0, 60%, 70%);
-  height: 10px;
+  height: 50px;
   margin: 0px 0px auto 0px;
   border-top: 1px solid hsl(0, 60%, 70%);
-  /* border-radius: 5px; */
+  margin: 4px;
+  border-radius: 5px;
 }
 .home-page-welcome-heading {
   text-align: center;
 }
+.cards-container {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  margin-top: 6em;
+  margin-bottom: 15em;
+  position: relative;
+  animation-name: animated-cards;
+  animation-iteration-count: infinite;
+  animation-duration: 15s;
+  animation-direction: alternate;
+  animation-timing-function: linear;
+  z-index: 1;
+}
+@keyframes animated-cards {
+  0% {
+    margin-left: 50%;
+  }
+  100% {
+    margin-left: -10%;
+  }
+}
+.cover-left {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 100%);
+  border-right: 1px solid hsl(0, 0%, 100%);
+  /* box-shadow: 0px 1px 2px 2px hsl(0, 0%, 90%); */
+  width: 19%;
+  height: 150px;
+  position: absolute;
+  left: 0%;
+  top: 32.5em;
+  z-index: 2;
+}
+.cover-right {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 100%);
+  border-left: 1px solid hsl(0, 0%, 100%);
+  position: absolute;
+  right: -1%;
+  top: 31.9em;
+  width: 19%;
+  height: 150px;
+  margin-top: 10px;
+  z-index: 2;
+}
+.cards-showing-functionality-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.cards-showing-functionality-2 {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.cards {
+  width: 150px;
+  height: 150px;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 100%);
+  border-radius: 4px;
+  /* box-shadow: 1px 1px 5px 3px hsl(0, 0%, 90%); */
+  position: relative;
+}
+.cards p {
+  width: 80%;
+  height: 80%;
+  background-color: hsl(240, 100%, 25%);
+  border: 1px solid hsl(240, 100%, 25%);
+  border-radius: 4px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  left: 10%;
+  position: absolute;
+  top: 0%;
+  font-weight: 700;
+}
+.add-todos-card {
+  margin: 10px;
+  border-radius: 4px;
+}
+.add-todos-card p {
+  background-color: hsl(120, 50%, 30%);
+  border: 1px solid hsl(120, 50%, 30%);
+  color: hsl(0, 0%, 80%);
+}
+.see-todos-card {
+  margin: 10px;
+}
+.see-todos-card p {
+  background-color: hsl(240, 50%, 30%);
+  border: 1px solid hsl(240, 50%, 30%);
+  color: hsl(0, 0%, 80%);
+}
+.edit-todos-card {
+  margin: 10px;
+}
+.edit-todos-card p {
+  background-color: hsl(60, 40%, 30%);
+  border: 1px solid hsl(60, 40%, 30%);
+  color: hsl(0, 0%, 80%);
+}
+.delete-todos-card {
+  margin: 10px;
+}
+.delete-todos-card p {
+  background-color: hsl(0, 50%, 30%);
+  color: hsl(0, 0%, 80%);
+  border: 1px solid hsl(0, 50%, 30%);
+}
+.encrypted-todos-card {
+  margin: 10px;
+}
+.encrypted-todos-card p {
+  background-color: hsl(180, 50%, 30%);
+  border: 1px solid hsl(180, 50%, 30%);
+  color: hsl(0, 0%, 80%);
+}
+
 /* THE FOOTER */
 .home-footer-wrapper {
   width: 100%;
-  position: relative;
-  background-color: var(--steelblue);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   bottom: 0px;
-}
-.footer-wrapper {
-  text-align: center;
-  width: 80%;
-  height: auto;
-  color: hsl(240, 100%, 100%);
 }
 
 /* MORE MEDIA QUERIES */
 @media screen and (min-width: 700px) {
   .logo-wrapper {
     margin-left: 6em;
+  }
+}
+@media screen and (max-width: 950px) {
+  .cover-left,
+  .cover-right {
+    display: none;
   }
 }
 @media screen and (min-width: 900px) {
@@ -228,5 +359,14 @@
   }
   .bootstrap-x-icon {
     width: 100%;
+  }
+  .cryptopile-short-description {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .spinning-circular-logo {
+    display: none;
   }
 }
