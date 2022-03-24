@@ -1,21 +1,21 @@
 import React from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Home from "./components/Home";
-import About from "./components/About";
-import Todos from "./components/Todos";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
-import Logout from "./components/Logout";
-import SeeTodos from "./components/SeeTodos";
-import ScrollToTop from "./components/ScrollToTop";
-import VerifyEmail from "./components/VerifyEmail";
-import ForgotPassword from "./components/ForgotPassword";
-import PasswordResetCode from "./components/PasswordResetCode";
-import ResetPassword from "./components/ResetPassword";
-import ImageUploadToCloudinary from "./components/ImageUploadToCloudinary";
-import Admin from "./components/Admin";
-import NotFound from "./components/NotFound";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Todos from "./pages/Todos/Todos";
+import SignUp from "./pages/Signup/SignUp";
+import Login from "./pages/Login/Login";
+import Logout from "./components/layouts/Logout/Logout";
+import SeeTodos from "./components/layouts/SeeTodos/SeeTodos";
+import ScrollToTop from "./utils/ScrollToTop";
+import VerifyEmail from "./components/layouts/VerifyEmail/VerifyEmail";
+import ForgotPassword from "./components/layouts/ForgotPassword/ForgotPassword";
+import PasswordResetCode from "./components/layouts/PasswordResetcode/PasswordResetCode";
+import ResetPassword from "./components/layouts/ResetPassword/ResetPassword";
+import ImageUploadToCloudinary from "./components/layouts/ImageUploadToCloudinary/ImageUploadToCloudinary";
+import Admin from "./pages/Admin/Admin";
+import NotFound from "./components/layouts/NotFound/NotFound";
 
 const App = () => {
   return (

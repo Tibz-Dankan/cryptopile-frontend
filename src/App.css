@@ -9,7 +9,7 @@ body {
   font-size: large;
   color: black;
   margin: 0px 0px 0px 0px;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   scroll-behavior: smooth;
 }
 
