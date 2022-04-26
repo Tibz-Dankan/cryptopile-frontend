@@ -10,7 +10,7 @@ const Footer = () => {
           Copyright &copy; 2022 CryptoPile. All rights reserved
         </p>
         <p className="cryptopile-founder-manager">
-          CryptoPile is managed by Tibesigwa Dankan aka Tibz Dankan
+          CryptoPile is managed by Tibz Dankan
         </p>
         <p className="follow-msg">Follow Dankan on</p>
         <div className="footer-links-wrapper">

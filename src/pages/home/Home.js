@@ -65,7 +65,6 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div className="spinning-circular-logo">CP</div>
       <div className="home-page-content">
         <div className="cryptopile-short-description">
           <div className="blank-div"></div>
@@ -78,22 +77,20 @@ const Home = () => {
           <p> Encryption </p>
         </div>
         <div className="cards-container">
-          <div className="cards-showing-functionality-1">
-            <div className="cards add-todos-card">
-              <p>Add Todos </p>
-            </div>
-            <div className="cards see-todos-card">
-              <p> See Todos</p>
-            </div>
-            <div className="cards edit-todos-card">
-              <p>Edit Todos</p>
-            </div>
-            <div className="cards delete-todos-card">
-              <p>Delete Todos</p>
-            </div>
-            <div className="cards encrypted-todos-card">
-              <p>All Todos are Encrypted</p>
-            </div>
+          <div className="cards add-todos-card">
+            <p>Add Todos </p>
+          </div>
+          <div className="cards see-todos-card">
+            <p> See Todos</p>
+          </div>
+          <div className="cards edit-todos-card">
+            <p>Edit Todos</p>
+          </div>
+          <div className="cards delete-todos-card">
+            <p>Delete Todos</p>
+          </div>
+          <div className="cards encrypted-todos-card">
+            <p>All Todos are Encrypted</p>
           </div>
         </div>
       </div>

@@ -1,26 +1,29 @@
 /* THE ABOUT COMPONENT */
 .about-page-wrapper {
   width: 100%;
+  min-height: 700px;
   height: auto;
-  background-color: hsl(0, 0%, 100%);
+  /* background-color: hsl(0, 0%, 100%); */
+  background-color: hsl(197.4, 71.4%, 95%);
   color: hsl(0 0% 0%);
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin: 0px;
+  /* margin: 0px; */
 }
 .about-header-wrapper {
   background-color: var(--steelblue);
   width: 100%;
   height: 70px;
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
+  position: fixed;
 }
 .about-home-link,
 .about-todos-link {
-  margin: 0% 25% 0% 23%;
+  margin: 0% 2% 0% 2%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,12 +38,21 @@
   box-shadow: 1px 1px 2px hsl(207, 60%, 19%);
   padding: 5px;
 }
+.about-home-link {
+  position: fixed;
+  left: 8%;
+}
+.about-todos-link {
+  position: fixed;
+  right: 8%;
+}
+
 .header-link-in-about-page {
   text-decoration: none;
   color: hsl(0, 0%, 100%);
 }
 .about-page-content-wrapper {
-  margin-top: 6em;
+  margin-top: 8em;
   padding: 10px;
   text-align: center;
   background-color: hsl(0, 0%, 100%);
@@ -48,11 +60,12 @@
   border-radius: 5px;
   box-shadow: 1px 1px 5px hsl(0, 0%, 90%);
   width: 60%;
-  height: vh;
+  /* min-height: 100vh; */
+  /* height: 800px; */
+  height: auto;
 }
 .about-page-footer-wrapper {
-  position: static;
-  margin-top: 6em;
+  position: fixed;
   width: 100%;
   bottom: 0px;
 }

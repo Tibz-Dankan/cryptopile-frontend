@@ -1,11 +1,13 @@
 import { React, Fragment, useState } from "react";
 
 import HomeLink from "../../links/HomeLink";
-import axiosApiUnAuthorized from "../../AxiosApi/axiosUnAuthorized";
+import axiosApiUnAuthorized from "../../constants/AxiosApi/axiosUnAuthorized";
+import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
 import { SquareLoader } from "react-spinners";
 import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./Signup.css";
+import { enableButton, disableButton } from "../../utils/ButtonState";
 
 const SignUp = () => {
   const [registrationInfo, setRegistrationInfo] = useState({
@@ -33,16 +35,6 @@ const SignUp = () => {
 
   const [showPasswordOne, setShowPasswordOne] = useState(false);
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
-
-  // function to disable a button
-  const disableButton = () => {
-    document.getElementById("button").disabled = true;
-  };
-
-  // function to enable a button
-  const enableButton = () => {
-    document.getElementById("button").disabled = false;
-  };
 
   //  function to show password first by changing the state to true
   const showingPasswordOne = () => {
@@ -115,7 +107,7 @@ const SignUp = () => {
     try {
       // e.preventDefault();
       window.scrollTo(0, 0);
-      disableButton();
+      disableButton("button");
       setShowSquareLoader(true);
       setEmailValidityMsg("");
       setPasswordMatch("");
@@ -132,7 +124,7 @@ const SignUp = () => {
       console.log(response); // to be removed
       if (response.status === 200) {
         setShowSquareLoader(false);
-        enableButton();
+        enableButton("button");
         if (response.data.email === registrationInfo.email) {
           // frontend email === backend email
           setRegistrationInfo({
@@ -154,7 +146,7 @@ const SignUp = () => {
       }
     } catch (err) {
       setShowSquareLoader(false);
-      enableButton();
+      enableButton("button");
       window.scrollTo(0, 0); // scroll to top
       console.log(err);
       setShowCaughtError(true);
@@ -279,6 +271,7 @@ const SignUp = () => {
           </div>
         )}
       </div>
+      <MiniFooter />
     </Fragment>
   );
 };

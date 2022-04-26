@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import axiosApiAuthorized from "../../AxiosApi/axiosAuthorized.js";
+import axiosApiAuthorized from "../../constants/AxiosApi/axiosAuthorized.js";
 import "./Admin.css";
-import AdminVerifyUser from "../../components/layouts/AdminVerifyUser/AdminVerifyUser";
-import AdminDeleteUser from "../../components/layouts/AdminDeleteUser/AdminDeleteUser";
+import AdminVerifyUser from "../../components/UI/AdminVerifyUser/AdminVerifyUser";
+import AdminDeleteUser from "../../components/UI/AdminDeleteUser/AdminDeleteUser";
 import {
   CheckCircleFill,
   ExclamationTriangleFill,

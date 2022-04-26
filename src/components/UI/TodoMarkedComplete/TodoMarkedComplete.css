@@ -1,0 +1,10 @@
+.todo-marked-complete-form {
+  position: relative;
+}
+#check-box {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: 0%;
+  bottom: 0%;
+}

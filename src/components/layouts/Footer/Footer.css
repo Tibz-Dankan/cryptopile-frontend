@@ -1,5 +1,4 @@
 .footer-wrapper {
-  /* background-color: var(--steelblue); */
   background-color: hsl(207, 44%, 15%);
   display: flex;
   align-items: center;
@@ -33,4 +32,18 @@
   text-decoration: none;
   margin-left: 3px;
   color: hsl(0, 0%, 100%);
+}
+
+@media screen and (max-width: 600px) {
+  .footer-links-wrapper {
+    background-color: hsl(0, 0%, 10%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0px;
+  }
+  .footer-link-with-icon {
+    margin: 10px;
+  }
 }

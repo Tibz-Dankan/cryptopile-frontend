@@ -6,16 +6,16 @@ import About from "./pages/About/About";
 import Todos from "./pages/Todos/Todos";
 import SignUp from "./pages/Signup/SignUp";
 import Login from "./pages/Login/Login";
-import Logout from "./components/layouts/Logout/Logout";
-import SeeTodos from "./components/layouts/SeeTodos/SeeTodos";
+import Logout from "./components/UI/Logout/Logout";
+import SeeTodos from "./components/UI/SeeTodos/SeeTodos";
 import ScrollToTop from "./utils/ScrollToTop";
-import VerifyEmail from "./components/layouts/VerifyEmail/VerifyEmail";
-import ForgotPassword from "./components/layouts/ForgotPassword/ForgotPassword";
-import PasswordResetCode from "./components/layouts/PasswordResetcode/PasswordResetCode";
-import ResetPassword from "./components/layouts/ResetPassword/ResetPassword";
-import ImageUploadToCloudinary from "./components/layouts/ImageUploadToCloudinary/ImageUploadToCloudinary";
+import VerifyEmail from "./components/UI/VerifyEmail/VerifyEmail";
+import ForgotPassword from "./components/UI/ForgotPassword/ForgotPassword";
+import PasswordResetCode from "./components/UI/PasswordResetCode/PasswordResetCode";
+import ResetPassword from "./components/UI/ResetPassword/ResetPassword";
+import ImageUploadToCloudinary from "./components/UI/ImageUploadToCloudinary/ImageUploadToCloudinary";
 import Admin from "./pages/Admin/Admin";
-import NotFound from "./components/layouts/NotFound/NotFound";
+import NotFound from "./components/UI/NotFound/NotFound";
 
 const App = () => {
   return (

@@ -1,12 +1,14 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import HomeLink from "../../links/HomeLink";
-import axiosApiUnAuthorized from "../../AxiosApi/axiosUnAuthorized";
+import axiosApiUnAuthorized from "../../constants/AxiosApi/axiosUnAuthorized";
 import { useHistory } from "react-router-dom";
 import { FadeLoader } from "react-spinners";
 import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import "./Login.css";
-import ResendVerificationLink from "../../components/layouts/ResendVerificationLink/ResendVerificationLink";
+import ResendVerificationLink from "../../components/UI/ResendVerificationLink/ResendVerificationLink";
+import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
+import { enableButton, disableButton } from "../../utils/ButtonState";
 
 const Login = () => {
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -22,16 +24,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   let history = useHistory();
-
-  // function to disable a button
-  const disableButton = () => {
-    document.getElementById("button").disabled = true;
-  };
-
-  // function to enable a button
-  const enableButton = () => {
-    document.getElementById("button").disabled = false;
-  };
 
   //  function to show password first by changing the state to true
   const showingPassword = () => {
@@ -50,7 +42,7 @@ const Login = () => {
   const submitLoginInfo = async (e) => {
     e.preventDefault();
     try {
-      disableButton();
+      disableButton("button");
       setShowFadeLoader(true);
       SetShowLoginSuccess("");
       setShowCaughtError(false);
@@ -66,7 +58,7 @@ const Login = () => {
         setShowFadeLoader(false);
         SetShowLoginErrors(response.data.loginStatusMsg);
         SetShowLoginSuccess(response.data.success);
-        enableButton();
+        enableButton("button");
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
         ) {
@@ -86,7 +78,7 @@ const Login = () => {
         }
       }
     } catch (error) {
-      enableButton();
+      enableButton("button");
       setShowCaughtError(true);
       setShowFadeLoader(false);
       console.log(error);
@@ -192,6 +184,7 @@ const Login = () => {
           </p>
         </div>
       </div>
+      <MiniFooter />
     </Fragment>
   );
 };

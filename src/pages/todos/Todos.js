@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
-import AddTodos from "../../components/layouts/AddTodos/AddTodos";
-import SeeTodos from "../../components/layouts/SeeTodos/SeeTodos";
-import UserProfile from "../../components/layouts/UserProfile/UserProfile";
-import NotLoggedIn from "../../components/layouts/NotLoggedIn/NotLoggedIn";
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect, useMemo } from "react";
+import AddTodos from "../../components/UI/AddTodos/AddTodos";
+import SeeTodos from "../../components/UI/SeeTodos/SeeTodos";
+import UserProfile from "../../components/UI/UserProfile/UserProfile";
+import NotLoggedIn from "../../components/UI/NotLoggedIn/NotLoggedIn";
+import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
 import HomeLink from "../../links/HomeLink";
 import LogoutLink from "../../links/LogoutLink";
 import { HouseFill, BoxArrowRight } from "react-bootstrap-icons";
+import { TodoChangeContext } from "../../context/TodoChangeContext/TodoChangeContext";
 import "./Todos.css";
 
 const Todos = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hasTodosChanged, setHasTodosChanged] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
@@ -41,9 +45,14 @@ const Todos = () => {
             </div>
           </header>
           <div className="the-component-wrapper">
-            <UserProfile />
-            <AddTodos />
-            <SeeTodos />
+            <TodoChangeContext.Provider
+              value={[hasTodosChanged, setHasTodosChanged]}
+            >
+              <UserProfile />
+              <AddTodos />
+              <SeeTodos />
+              <MiniFooter />
+            </TodoChangeContext.Provider>
           </div>
         </div>
       ) : (

@@ -1,0 +1,10 @@
+.mini-footer-wrapper {
+  width: 100%;
+  background-color: hsl(207, 44%, 15%);
+  color: rgb(255, 255, 255);
+  height: 60px;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  bottom: 0px;
+}

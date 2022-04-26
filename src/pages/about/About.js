@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { HouseFill, FileTextFill } from "react-bootstrap-icons";
-import Footer from "../../components/layouts/Footer/Footer";
+import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
 import "./About.css";
 const About = () => {
   return (
@@ -44,8 +44,9 @@ const About = () => {
           with Crypto class inbuilt nodejs for encryption
         </p>
       </div>
+
       <div className="about-page-footer-wrapper">
-        <Footer />
+        <MiniFooter />
       </div>
     </div>
   );
