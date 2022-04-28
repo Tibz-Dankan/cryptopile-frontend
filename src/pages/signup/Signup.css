@@ -3,12 +3,10 @@
   position: relative;
   width: 100%;
   height: auto;
-  /* background-color: hsl(0, 0%, 100%); */
   background-color: hsl(197.4, 71.4%, 95%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-bottom: 50px; */
   position: relative;
 }
 .signup-header-wrapper {
@@ -25,9 +23,6 @@
   margin-left: 8%;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: start;
-  width: 65px;
 }
 .signup-home-link:hover {
   background-color: var(--steelblue-2);
@@ -91,7 +86,7 @@
 .signup-input-field-wrapper-1,
 .signup-input-field-wrapper-2 {
   position: relative;
-  width: 83.5%;
+  width: 82.5%;
   height: 25px;
   margin: 1% 10% 4% 10%;
   display: flex;
@@ -118,14 +113,16 @@
   box-shadow: 0px 0px 3px hsl(180, 100%, 30%);
 }
 .signup-btn {
+  font-size: medium;
   color: hsl(240, 100%, 90%);
   background-color: hsl(180, 100%, 25%);
   border: 1px solid hsl(180, 100%, 25%);
   box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
   border-radius: 3px;
   width: 50%;
-  height: 28px;
-  margin: 1% 25% 0% 25%;
+  width: 82%;
+  height: 32px;
+  margin: 4% 9% 1% 10%;
   padding: 4px;
   outline: none;
 }
@@ -187,12 +184,10 @@
     width: 80%;
     padding: 20px 0px 20px 60px;
   }
-  .signup-input-field {
-    height: 20px;
-  }
+
   .signup-btn {
-    width: 83%;
-    margin: 1% 10% 1% 10%;
+    width: 82%;
+    margin: 4% 10% 1% 10%;
     padding: 4px;
   }
 }

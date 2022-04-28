@@ -9,14 +9,17 @@ import "./Login.css";
 import ResendVerificationLink from "../../components/UI/ResendVerificationLink/ResendVerificationLink";
 import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
 import { enableButton, disableButton } from "../../utils/ButtonState";
+import { log } from "../../utils/ConsoleLog";
+import FeatureUnderMaintenance from "../../components/UI/FeatureUnderMaintenance/FeatureUnderMaintenance";
 
 const Login = () => {
   const [userLoginInfo, setUserLoginInfo] = useState({
     email: "",
     password: "",
   });
-  const [showLoginErrors, SetShowLoginErrors] = useState("");
-  const [showLoginSuccess, SetShowLoginSuccess] = useState("");
+  const [loginErrorsMsg, SetLoginErrorsMsg] = useState("");
+  const [loginSuccessMsg, SetLoginSuccessMsg] = useState("");
+  const [showLoginStatusMsg, setShowLoginStatusMsg] = useState(false);
   const [showFadeLoader, setShowFadeLoader] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [didNotReceiveVerificationEmail, setDidNotReceiveVerificationEmail] =
@@ -44,20 +47,22 @@ const Login = () => {
     try {
       disableButton("button");
       setShowFadeLoader(true);
-      SetShowLoginSuccess("");
+      SetLoginSuccessMsg("");
       setShowCaughtError(false);
       setDidNotReceiveVerificationEmail(false);
-      SetShowLoginErrors("");
+      SetLoginErrorsMsg("");
 
       const response = await axiosApiUnAuthorized.post("/login", {
         email: userLoginInfo.email,
         password: userLoginInfo.password,
       });
-      console.log(response);
+
+      log(response);
       if (response.status === 200) {
+        setShowLoginStatusMsg(true);
         setShowFadeLoader(false);
-        SetShowLoginErrors(response.data.loginStatusMsg);
-        SetShowLoginSuccess(response.data.success);
+        SetLoginErrorsMsg(response.data.loginStatusMsg);
+        SetLoginSuccessMsg(response.data.success);
         enableButton("button");
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
@@ -65,7 +70,8 @@ const Login = () => {
           localStorage.setItem("isLoggedIn", "isLoggedIn");
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("userId", response.data.userId);
-          history.push("/todos");
+          const token = await localStorage.getItem("accessToken");
+          if (token) return history.push("/todos");
         }
         //when user is not verified
         if (response.data.partlyRegisteredEmail) {
@@ -81,7 +87,7 @@ const Login = () => {
       enableButton("button");
       setShowCaughtError(true);
       setShowFadeLoader(false);
-      console.log(error);
+      log(error);
     }
   };
 
@@ -107,37 +113,37 @@ const Login = () => {
             <HomeLink />
           </div>
         </div>
-        {didNotReceiveVerificationEmail ? <ResendVerificationLink /> : null}
-        {showCaughtError ? (
+        {didNotReceiveVerificationEmail && <ResendVerificationLink />}
+        {showCaughtError && (
           <div className="login-catch-error" style={{ textAlign: "center" }}>
             <p style={{ color: "hsl(0, 100%, 50%)" }}>
               Sorry, something went wrong!
             </p>
           </div>
-        ) : null}
+        )}
         <div className="login-form-wrapper">
           <form onSubmit={(e) => submitLoginInfo(e)} className="login-form">
             <div className="login-form-heading">
               <h3>Log Into Your Account</h3>
             </div>
-            <div className="display-login-status">
-              <p className="display-login-errors">{showLoginErrors}</p>
-              <p className="display-login-success">{showLoginSuccess}</p>
-            </div>
-            <div className="beat-loader-component-wrapper">
-              {showFadeLoader ? (
-                <div className="beat-loader-component-wrapper">
-                  <FadeLoader
-                    className="beat-loader"
-                    color="hsl(180, 100%, 30%)"
-                    size={5}
-                  />
-                  <h5 className="authenticate-msg">Authenticating...</h5>
-                </div>
-              ) : null}
-            </div>
+            {showLoginStatusMsg && (
+              <div className="display-login-status">
+                <p className="display-login-errors">{loginErrorsMsg}</p>
+                <p className="display-login-success">{loginSuccessMsg}</p>
+              </div>
+            )}
+            {showFadeLoader && (
+              <div className="fade-loader-wrapper">
+                <FadeLoader
+                  className="fade-loader"
+                  color="hsl(180, 100%, 30%)"
+                  size={5}
+                />
+                <h5 className="authenticate-msg">Authenticating...</h5>
+              </div>
+            )}
             <div className="fields">
-              <label>Email Address:</label>
+              <label>Email*</label>
               <br />
               <input
                 type="email"
@@ -148,8 +154,7 @@ const Login = () => {
                 required
               />
               <br />
-              <br />
-              <label>Password:</label>
+              <label>Password*</label>
               <br />
               <div className="password-input-field-wrapper">
                 <input
@@ -168,7 +173,7 @@ const Login = () => {
             <br />
             <br />
             <button type="submit" className="login-btn" id="button">
-              Login
+              Log In
             </button>
           </form>
           <p>
@@ -178,9 +183,12 @@ const Login = () => {
             </Link>
           </p>
           <p className="forgot-password">
-            <Link to="/forgot-password" className="link  forgot-password">
+            {/* <Link to="/forgot-password" className="link  forgot-password">
               Forgot Password
-            </Link>
+            </Link> */}
+            <FeatureUnderMaintenance
+              targetInfo={<p className="supposed-to-be-link">ForgotPassword</p>}
+            />
           </p>
         </div>
       </div>

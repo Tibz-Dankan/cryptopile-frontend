@@ -12,7 +12,7 @@ const FeatureUnderMaintenance = ({ targetInfo }) => {
     openModal();
     setTimeout(() => {
       closeModal();
-    }, 5000);
+    }, 10000);
   };
   // let subtitle;
   // styles

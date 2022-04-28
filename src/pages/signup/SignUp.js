@@ -1,5 +1,4 @@
 import { React, Fragment, useState } from "react";
-
 import HomeLink from "../../links/HomeLink";
 import axiosApiUnAuthorized from "../../constants/AxiosApi/axiosUnAuthorized";
 import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
@@ -8,6 +7,7 @@ import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
 import "./Signup.css";
 import { enableButton, disableButton } from "../../utils/ButtonState";
+import { log } from "../../utils/ConsoleLog";
 
 const SignUp = () => {
   const [registrationInfo, setRegistrationInfo] = useState({
@@ -121,7 +121,7 @@ const SignUp = () => {
         confirmPassword: registrationInfo.confirmPassword,
         isVerifiedEmail: isVerifiedEmail,
       });
-      console.log(response); // to be removed
+      log(response);
       if (response.status === 200) {
         setShowSquareLoader(false);
         enableButton("button");
@@ -148,7 +148,7 @@ const SignUp = () => {
       setShowSquareLoader(false);
       enableButton("button");
       window.scrollTo(0, 0); // scroll to top
-      console.log(err);
+      log(err);
       setShowCaughtError(true);
       setCatchError("Sorry, something went wrong!");
     }
@@ -173,20 +173,30 @@ const SignUp = () => {
             <HomeLink />
           </div>
         </div>
-        {showWhenSuccessfullyRegistered ? (
+        {showWhenSuccessfullyRegistered && (
           <div className="show-when-successfully-registered">
             <p>
-              A confirmation email has been sent to{" "}
+              You has been successfully registered using the email:{" "}
               {successfullyRegisteredInfo.email}
             </p>
+            <p>
+              And you can log into your Account{" "}
+              <Link className="link" to="/login">
+                Log In
+              </Link>
+            </p>
+            {/* <p>
+              A confirmation email has been sent to{" "}
+              {successfullyRegisteredInfo.email}
+            </p> */}
           </div>
-        ) : null}
-        {showCaughtError ? (
+        )}
+        {showCaughtError && (
           <div className="signup-catch-error">
             <p>{catchError}</p>
           </div>
-        ) : null}
-        {showSquareLoader ? (
+        )}
+        {showSquareLoader && (
           <div className="square-loader">
             <SquareLoader
               color="hsl(180, 100%, 30%)"
@@ -195,12 +205,12 @@ const SignUp = () => {
             />
             <h4>Validating Your Email...</h4>
           </div>
-        ) : null}
+        )}
         {hideRegistrationForm ? null : (
           <div className="registration-form">
             <form onSubmit={validatePasswordOnSubmittingForm}>
               <h3 className="registration-form-heading">Create An Account</h3>
-              <label>Firstname:</label>
+              <label>FirstName*</label>
               <input
                 type="text"
                 id="firstName"
@@ -209,7 +219,7 @@ const SignUp = () => {
                 onChange={(e) => handleRegistrationInfoChange(e)}
                 required
               />
-              <label>Lastname:</label>
+              <label>LastName*</label>
               <input
                 type="text"
                 className="signup-input-field"
@@ -219,7 +229,7 @@ const SignUp = () => {
                 required
               />
               <p className="email-validity-msg">{emailValidityMsg}</p>
-              <label>Email Address:</label>
+              <label>Email*</label>
               <input
                 type="email"
                 className="signup-input-field"
@@ -230,7 +240,7 @@ const SignUp = () => {
               />
               <p className="check-password-match">{passwordMatch}</p>
               <p className="check-password-length">{passwordLength}</p>
-              <label>Password:</label>
+              <label>Password*</label>
               <div className="signup-input-field-wrapper-1">
                 <input
                   type={showPasswordOne ? "text" : "password"}
@@ -244,7 +254,7 @@ const SignUp = () => {
                   {showPasswordOne ? <EyeSlash /> : <Eye />}
                 </div>
               </div>
-              <label>Confirm Password:</label>
+              <label>Confirm Password*</label>
               <div className="signup-input-field-wrapper-2">
                 <input
                   type={showPasswordTwo ? "text" : "password"}
@@ -265,7 +275,7 @@ const SignUp = () => {
             <p>
               Already have an account?{" "}
               <Link to="/login" className="link">
-                Login
+                Log In
               </Link>
             </p>
           </div>

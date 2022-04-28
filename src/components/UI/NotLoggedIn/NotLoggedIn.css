@@ -1,25 +1,27 @@
 .not-logged-in-wrapper {
   display: relative;
-  background-color: var(--steelblue);
-  height: 700px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-.not-logged-in-message {
-  position: relative;
+.not-logged-in-wrapper {
   text-align: center;
-  width: auto;
-  height: auto;
-  padding: 10px;
-  color: hsl(0, 100%, 35%);
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 4px;
+  background-color: hsl(0, 0%, 95%);
+}
+.not-logged-in-heading {
+  margin-top: 0px;
+  padding: 5px;
   background-color: var(--steelblue);
   border: 1px solid var(--steelblue);
-  border-radius: 5px;
-  box-shadow: 1px 1px 4px 1px hsl(207, 44%, 20%);
+  border-radius: 2px;
+  color: hsl(70, 100%, 80%);
+}
+.not-logged-login-link,
+.not-logged-signup-link {
+  color: hsl(240, 100%, 50%);
 }
 
-/* MEDIA QUERY */
-@media screen and (max-width: 540px) {
-  /* some code for mobile devices */
+.not-logged-in-close-modal {
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
