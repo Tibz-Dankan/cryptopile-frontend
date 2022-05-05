@@ -35,13 +35,13 @@
   place-items: center;
   position: relative;
 }
-.Reload-button-near-table {
+.reload-button-near-table {
   margin-bottom: 10px;
   position: absolute;
   top: 5px;
   left: 25%;
 }
-/* TODOS IN THE TABLE */
+
 table {
   color: hsl(240, 100%, 10%);
   background-color: hsl(240, 100%, 100%);
@@ -79,7 +79,7 @@ td {
   justify-content: center;
   align-items: center;
 }
-.Reload-button {
+.reload-button {
   background-color: hsl(70, 100%, 40%);
   border: 2px solid hsl(70, 100%, 30%);
   border-radius: 4px;
@@ -87,8 +87,8 @@ td {
   margin-right: 4px;
   outline: none;
 }
-.Reload-button:hover,
-.Reload-button:focus {
+.reload-button:hover,
+.reload-button:focus {
   background-color: hsl(70, 100%, 50%);
   transition: 0.35s;
   box-shadow: 1px 1px 0.5px 1px hsl(70, 100%, 30%),
@@ -99,11 +99,32 @@ td {
   .see-todo-catch-error-msg {
     width: 90%;
   }
-  .Reload-button-near-table {
+  .reload-button-near-table {
     left: 5%;
   }
   table {
-    width: 90%;
+    width: 100%;
+  }
+  .table-wrapper {
+    width: 98%;
+    margin: 0% 1% 0% 1%;
+    overflow-x: scroll;
+  }
+  /* Styling the scroll bar */
+  /* On firefox */
+  .table-wrapper * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(180, 100%, 30%);
+  }
+  /* On Chrome,Edge and Safari  */
+  .table-wrapper * ::-webkit-scrollbar {
+    width: 7px;
+  }
+  .table-wrapper * ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .table-wrapper * ::-webkit-scrollbar-thumb {
+    background-color: hsl(240, 100%, 80%);
   }
 }
 
@@ -111,7 +132,7 @@ td {
   .see-todo-catch-error-msg {
     width: 80%;
   }
-  .Reload-button-near-table {
+  .reload-button-near-table {
     left: 10%;
   }
   table {
@@ -123,7 +144,7 @@ td {
   .see-todo-catch-error-msg {
     width: 60%;
   }
-  .Reload-button-near-table {
+  .reload-button-near-table {
     left: 20%;
   }
   table {
@@ -144,7 +165,7 @@ td {
   .see-todo-catch-error-msg {
     width: 40%;
   }
-  .Reload-button-near-table {
+  .reload-button-near-table {
     left: 30%;
   }
   table {

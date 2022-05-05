@@ -35,18 +35,18 @@ const Home = () => {
   return (
     <div
       className="home-page-wrapper"
-      style={{
-        // backgroundImage: `url("https://res.cloudinary.com/dlmv4ot9h/image/upload/v1641992849/pn2aozlq0zulc2yz25ho.jpg")`,
-        backgroundImage: `url(https://res.cloudinary.com/dlmv4ot9h/image/upload/v1647263806/xwi9r12edlnqlov9cewh.jpg)`,
-        // backgroundImage: `url(${backgroundImageUrl})`,
-        width: "100%",
-        height: "100%",
-        backgroundSize: "cover",
-        filter: "opacity(0.9)",
-      }}
+      // style={{
+      //   // backgroundImage: `url("https://res.cloudinary.com/dlmv4ot9h/image/upload/v1641992849/pn2aozlq0zulc2yz25ho.jpg")`,
+      //   backgroundImage: `url(https://res.cloudinary.com/dlmv4ot9h/image/upload/v1647263806/xwi9r12edlnqlov9cewh.jpg)`,
+      //   // backgroundImage: `url(${backgroundImageUrl})`,
+      //   width: "100%",
+      //   height: "100%",
+      //   backgroundSize: "cover",
+      //   filter: "opacity(0.9)",
+      // }}
     >
       <div className="home-header-wrapper">
-        <div className="logo-wrapper logo-animation">CryptoPile</div>
+        <div className="logo-wrapper">CryptoPile</div>
         <div className="desktop-home-header-links">
           <Header />
         </div>
@@ -67,14 +67,15 @@ const Home = () => {
       </div>
       <div className="home-page-content">
         <div className="cryptopile-short-description">
-          <div className="blank-div"></div>
-          <h3>Welcome To CryptoPile</h3>
-          <p>A Todo Application </p>
-          <p>WITH</p>
-          <p>Authentication,</p>
-          <p>Authorization</p>
-          <p> AND </p>
-          <p> Encryption </p>
+          <div className="description-content">
+            <h3>Welcome To CryptoPile</h3>
+            <p>A Todo Application </p>
+            <p>WITH</p>
+            <p>Authentication,</p>
+            <p>Authorization</p>
+            <p> AND </p>
+            <p> Encryption </p>
+          </div>
         </div>
         <div className="cards-container">
           <div className="cards add-todos-card">

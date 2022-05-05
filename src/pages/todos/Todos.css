@@ -1,6 +1,7 @@
 .todo-wrapper {
   position: relative;
   background-color: hsl(197.4, 71.4%, 95%);
+  overflow-x: hidden;
 }
 
 .todo-header {

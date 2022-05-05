@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import AddTodos from "../../components/UI/AddTodos/AddTodos";
 import SeeTodos from "../../components/UI/SeeTodos/SeeTodos";
 import UserProfile from "../../components/UI/UserProfile/UserProfile";
@@ -20,6 +20,19 @@ const Todos = () => {
       setIsLoggedIn(true);
     }
   }, []);
+
+  // const reloadPage = () => {
+  //   window.location.reload();
+  // };
+  // useEffect(
+  //   // () => {
+
+  //   // reloadPage()
+  //   // const Interval = setInterval(reloadPage, 100);
+  //   // clearInterval(Interval);
+  //   // },
+  //   [reloadPage]
+  // );
 
   return (
     <div>

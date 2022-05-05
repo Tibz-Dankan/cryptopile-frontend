@@ -70,7 +70,7 @@ const SeeTodos = () => {
           <div className="table-wrapper">
             <button
               onClick={getUserTodos}
-              className="Reload-button Reload-button-near-table"
+              className="reload-button reload-button-near-table"
               id="button"
             >
               RELOAD
@@ -103,7 +103,7 @@ const SeeTodos = () => {
           <div className="you-have-no-todos">
             <button
               onClick={getUserTodos}
-              className="Reload-button"
+              className="reload-button"
               id="button"
             >
               RELOAD
