@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/forgot-password" component={ForgotPassword} />
           <Route path="/password-reset-code" component={PasswordResetCode} />
           <Route path="/reset-password" component={ResetPassword} />
-          <Route path="/authorized-cryptopile-admin" component={Admin} />
+          <Route path="/admin" component={Admin} />
           <Route
             path="/image-upload-to-cloudinary"
             component={ImageUploadToCloudinary}
