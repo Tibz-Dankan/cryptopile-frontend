@@ -18,7 +18,7 @@ const GenerateAdminKey = () => {
       setShowSuccessMsg(false);
     }, 3000);
   };
-  const generateAdminKey = async () => {
+  const generateKey = async () => {
     try {
       const response = await axiosApiAuthorized(
         `/generate-admin-key/${userId}`,
@@ -40,7 +40,7 @@ const GenerateAdminKey = () => {
         ) : (
           <p className="failure-msg">Failed to generate key</p>
         ))}
-      <button onClick={generateAdminKey}>Generate Key</button>
+      <button onClick={() => generateKey()}>Generate Key</button>
     </div>
   );
 };

@@ -57,10 +57,6 @@ const SignupAdmin = () => {
   };
 
   useEffect(() => {
-    changeShowLoginFormState();
-  }, [showLoginForm]);
-
-  useEffect(() => {
     isAdminKeyVerified && setShowSignupForm(true);
   }, [isAdminKeyVerified]);
 
@@ -274,7 +270,7 @@ const SignupAdmin = () => {
                     />
                     <div
                       className="signup-eye-icon"
-                      onClick={showingPasswordOne}
+                      onClick={() => showingPasswordOne()}
                     >
                       {showPasswordOne ? <EyeSlash /> : <Eye />}
                     </div>
@@ -291,7 +287,7 @@ const SignupAdmin = () => {
                     />
                     <div
                       className="signup-eye-icon"
-                      onClick={showingPasswordTwo}
+                      onClick={() => showingPasswordTwo()}
                     >
                       {showPasswordTwo ? <EyeSlash /> : <Eye />}
                     </div>
@@ -303,7 +299,7 @@ const SignupAdmin = () => {
                 <p>
                   Already have an account?{" "}
                   <span
-                    onClick={changeShowLoginFormState}
+                    onClick={() => changeShowLoginFormState()}
                     className="supposed-to-be-link"
                   >
                     Log In

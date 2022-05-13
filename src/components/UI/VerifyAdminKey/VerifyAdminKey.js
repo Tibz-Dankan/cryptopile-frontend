@@ -34,8 +34,8 @@ const VerifyAdminKey = () => {
     isAdminKeyVerified && setShowVerifyAdminKeyForm(true);
   }, [isAdminKeyVerified]);
 
-  const handleAdminKeyChange = (e) => {
-    setAdminKey(e.target.value);
+  const handleAdminKeyChange = () => {
+    setAdminKey((e) => e.target.value);
   };
 
   const showResponse = () => {
@@ -44,7 +44,7 @@ const VerifyAdminKey = () => {
       setShowSuccessMsg(true);
     }, 3000);
   };
-  const verifyAdminKey = async () => {
+  const verifyKey = async () => {
     try {
       const response = await axiosApiUnAuthorized("/verify-admin-key", {
         key: adminKey,
@@ -67,12 +67,12 @@ const VerifyAdminKey = () => {
           <p className="failure-msg">Incorrect key</p>
         ))}
       {showVerifyAdminKeyForm && (
-        <form onSubmit={verifyAdminKey}>
+        <form onSubmit={() => verifyKey()}>
           <h3>Enter Admin Verification Key</h3>
           <input
             type="text"
             value={adminKey}
-            onChange={handleAdminKeyChange}
+            onChange={() => handleAdminKeyChange()}
             className="verify-admin-key-input-field"
           />
           <button type="submit" id="button" className="verify-admin-key-btn">
@@ -82,7 +82,7 @@ const VerifyAdminKey = () => {
           <p>
             Already have an account?{" "}
             <span
-              onClick={changeShowLoginFormState}
+              onClick={() => changeShowLoginFormState()}
               className="supposed-to-be-link"
             >
               Log In

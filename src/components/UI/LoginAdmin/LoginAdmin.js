@@ -82,8 +82,8 @@ const LoginAdmin = () => {
           localStorage.setItem("isLoggedIn", "isLoggedIn");
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("userId", response.data.userId);
-          const token = await localStorage.getItem("accessToken");
-          // if (token) return history.push("/todos");
+          localStorage.setItem("role", response.data.role);
+          // do some thing here please
         }
         //when user is not verified
         if (response.data.partlyRegisteredEmail) {
@@ -167,7 +167,10 @@ const LoginAdmin = () => {
                   onChange={(e) => handleLoginInfo(e)}
                   required
                 />
-                <div className="login-eye-icon" onClick={showingPassword}>
+                <div
+                  className="login-eye-icon"
+                  onClick={() => showingPassword()}
+                >
                   {showPassword ? <EyeSlash /> : <Eye />}
                 </div>
               </div>
@@ -182,7 +185,7 @@ const LoginAdmin = () => {
             Is this your first time here?{" "}
             <span
               className="supposed-to-be-link"
-              onClick={changeShowLoginFormState}
+              onClick={() => changeShowLoginFormState()}
             >
               SignUp
             </span>

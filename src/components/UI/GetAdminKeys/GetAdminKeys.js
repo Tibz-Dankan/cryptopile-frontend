@@ -19,7 +19,7 @@ const GetAdminKeys = () => {
       setShowSuccessMsg(false);
     }, 3000);
   };
-  const getAdminKeys = async () => {
+  const getKeys = async () => {
     try {
       const response = await axiosApiAuthorized(`/get-admin-key/${userId}`);
       if (response.status === 200) {
@@ -39,7 +39,7 @@ const GetAdminKeys = () => {
   };
 
   useEffect(() => {
-    getAdminKeys();
+    getKeys();
     return setAdminKeys([]);
   }, []);
 
@@ -54,7 +54,7 @@ const GetAdminKeys = () => {
       {showKeys ? (
         <div className="table-wrapper">
           <button
-            onClick={getAdminKeys}
+            onClick={() => getKeys()}
             className="Reload-button Reload-button-near-table"
             id="button"
           >
@@ -85,7 +85,11 @@ const GetAdminKeys = () => {
         </div>
       ) : (
         <div className="you-have-no-keys">
-          <button onClick={getAdminKeys} className="Reload-button" id="button">
+          <button
+            onClick={() => getKeys()}
+            className="Reload-button"
+            id="button"
+          >
             RELOAD
           </button>
           <p>No keys loaded yet!</p>

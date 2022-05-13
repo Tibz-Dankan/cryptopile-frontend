@@ -9,12 +9,14 @@ import HomeLink from "../../links/HomeLink";
 import LogoutLink from "../../links/LogoutLink";
 import { HouseFill, BoxArrowRight } from "react-bootstrap-icons";
 import { TodoChangeContext } from "../../context/TodoChangeContext/TodoChangeContext";
+import UserRole from "../../components/UI/UserRole/UserRole";
 import "./Todos.css";
 
 const Todos = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hasTodosChanged, setHasTodosChanged] = useState(false);
-
+  const role = localStorage.getItem("role");
+  const [userRole, setUserRole] = useState(role);
   useEffect(() => {
     if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
       setIsLoggedIn(true);
@@ -48,6 +50,7 @@ const Todos = () => {
             <TodoChangeContext.Provider
               value={[hasTodosChanged, setHasTodosChanged]}
             >
+              <UserRole theUserRole={userRole} />
               <UserProfile />
               <AddTodos />
               <SeeTodos />

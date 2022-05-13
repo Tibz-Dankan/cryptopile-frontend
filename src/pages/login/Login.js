@@ -70,6 +70,7 @@ const Login = () => {
           localStorage.setItem("isLoggedIn", "isLoggedIn");
           localStorage.setItem("accessToken", response.data.accessToken);
           localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("role", response.data.role);
           const token = await localStorage.getItem("accessToken");
           if (token) return history.push("/todos");
         }
