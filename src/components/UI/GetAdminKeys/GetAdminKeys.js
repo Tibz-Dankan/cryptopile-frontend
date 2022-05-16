@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from "react";
 import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
 import { log } from "../../../utils/ConsoleLog";
@@ -21,7 +22,8 @@ const GetAdminKeys = () => {
   };
   const getKeys = async () => {
     try {
-      const response = await axiosApiAuthorized(`/get-admin-key/${userId}`);
+      const response = await axiosApiAuthorized.get(`/get-admin-key/${userId}`);
+      log(response);
       if (response.status === 200) {
         showResponse();
         if (
@@ -72,8 +74,10 @@ const GetAdminKeys = () => {
                 return (
                   <tr key={adminKey.adminkeyid}>
                     <td>{adminKey.createdon}</td>
-                    <td>{adminKey.adminKey}</td>
-                    <td>{adminKey.description}</td>
+                    <td style={{ color: "hsl(140 100% 55%)" }}>
+                      {adminKey.adminkey}
+                    </td>
+                    <td>{adminKey.usedby}</td>
                     <td>
                       <p>Delete key</p>
                     </td>

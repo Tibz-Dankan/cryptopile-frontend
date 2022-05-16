@@ -80,19 +80,19 @@ const ForgotPassword = () => {
           <b>Password Reset Code</b> required in the next step, is sent
         </p>
       </div>
-      {showBarLoader ? <BarLoader color="hsl(180, 40%, 50%)" /> : null}
+      {showBarLoader && <BarLoader color="hsl(180, 40%, 50%)" />}
 
-      {showCaughtError ? (
+      {showCaughtError && (
         <div className="caught-error">
           <p>Sorry, something went wrong!</p>
         </div>
-      ) : null}
+      )}
       <div className="errors-in-sending-pwsd-reset-code">
         <p>{errorInSendingPasswordResetCode}</p> {/* to be styled next day*/}
       </div>
       <form onSubmit={submitEmailToResetPassword} className="user-email-form">
         <p className="form-heading">Enter Email Associated With Your Account</p>
-        <label className="email-label">Email Address:</label>
+        <label className="email-label">Email Address*</label>
         <br />
         <input
           type="email"

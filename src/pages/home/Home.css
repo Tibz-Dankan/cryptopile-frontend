@@ -1,13 +1,11 @@
 /* THE HOME PAGE */
 .home-page-wrapper {
-  position: relative;
-  /* background-color: hsl(240, 100%, 100%); */
-  background-color: hsl(0, 0%, 80%);
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 800px;
   overflow-y: hidden;
+  background: hsl(230, 60%, 14%);
 }
 .home-header-wrapper {
   top: 0px;
@@ -25,32 +23,6 @@
   padding: 1.5rem;
   margin-left: 1em;
   font-weight: bold;
-}
-.logo-animation {
-  animation-name: logo-colors;
-  animation-duration: 8s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
-@keyframes logo-colors {
-  0% {
-    color: hsl(0, 100%, 50%);
-  }
-  20% {
-    color: hsl(120, 100%, 50%);
-  }
-  40% {
-    color: hsl(240, 80%, 60%);
-  }
-  60% {
-    color: hsl(180, 100%, 50%);
-  }
-  80% {
-    color: hsl(60, 100%, 50%);
-  }
-  100% {
-    color: hsl(0, 100%, 100%);
-  }
 }
 .header-link {
   text-decoration: none;
@@ -94,19 +66,48 @@
 }
 .cryptopile-short-description {
   margin-top: 6em;
-  width: 60%;
-  text-align: center;
-  background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 100%);
+  width: 50%;
+  height: 22em;
   border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.blank-div {
-  background-color: hsl(0, 60%, 70%);
-  height: 50px;
-  margin: 0px 0px auto 0px;
-  border-top: 1px solid hsl(0, 60%, 70%);
-  margin: 4px;
-  border-radius: 5px;
+
+.cryptopile-short-description::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  transform: skewX(2deg) skewY(4deg);
+  background: linear-gradient(315deg, #00ccff, #0e1538, #d400d4);
+}
+.cryptopile-short-description:after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  transform: skewX(2deg) skewY(4deg);
+  background: linear-gradient(315deg, #00ccff, #0e1538, #d400d4);
+  filter: blur(30px);
+}
+.description-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: hsl(0, 0%, 100%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsl(230, 60%, 20%);
+  z-index: 10;
 }
 .home-page-welcome-heading {
   text-align: center;
@@ -117,33 +118,29 @@
   flex-direction: row;
   justify-content: center;
   margin-top: 6em;
-  margin-bottom: 10em;
+  margin-bottom: 8em;
   position: relative;
   height: auto;
 }
 
-/* .cards { */
-.cards-container > * {
+.cards {
   margin: 10px;
-  padding: 0.4rem;
   font-size: larger;
-  aspect-ratio: 3/2;
   width: 40%;
-  /* height: 40vh; */
+  height: 12em;
   color: hsl(0, 0%, 100%);
-  background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 100%);
-  border-radius: 4px;
   display: grid;
   place-items: center;
   visibility: hidden;
   opacity: 0;
+  position: relative;
   animation-name: slide-in-cards;
   animation-duration: 25s;
   animation-iteration-count: infinite;
   animation-direction: initial;
   animation-timing-function: ease-in;
 }
+
 @keyframes slide-in-cards {
   0% {
     visibility: visible;
@@ -165,77 +162,79 @@
     visibility: hidden;
   }
 }
-/* .cards p { */
-.cards-container > * p {
-  width: 100%;
-  height: 100%;
-  color: hsl(0, 0%, 100%);
-  /* border-radius: 4px; */
+
+.cards::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  transform: skewX(2deg) skewY(4deg);
+  background: linear-gradient(315deg, hsl(0, 0%, 40%), #0e1538, hsl(0, 0%, 40));
+}
+.cards::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  transform: skewX(2deg) skewY(4deg);
+  background: linear-gradient(
+    315deg,
+    hsl(0, 0%, 40%),
+    #0e1538,
+    hsl(0, 0%, 40%)
+  );
+}
+
+.cards p {
   text-align: center;
   display: inherit;
   place-items: center;
-  top: 0%;
   font-weight: 700;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0e1538;
+  z-index: 10;
 }
 
 .add-todos-card {
   animation-delay: 0s;
 }
 .add-todos-card p {
-  /* .cards-container > *:nth-child(1) p { */
   background-color: hsl(120, 50%, 30%);
-  border: 1px solid hsl(120, 50%, 30%);
-  border-radius: 4px;
-  box-shadow: inset 1px 1px 8px 10px hsl(120, 50%, 25%),
-    inset -1px -1px 8px 10px hsl(120, 50%, 25%);
 }
 
 .see-todos-card {
   animation-delay: 5s;
 }
 .see-todos-card p {
-  /* .cards-container > *:nth-child(2) p { */
   background-color: hsl(240, 50%, 30%);
-  border: 1px solid hsl(240, 50%, 30%);
-  border-radius: 4px;
-  box-shadow: inset 1px 1px 8px 10px hsl(240, 50%, 25%),
-    inset -1px -1px 8px 10px hsl(240, 50%, 25%);
 }
 
 .edit-todos-card {
   animation-delay: 10s;
 }
 .edit-todos-card p {
-  /* .cards-container > *:nth-child(3) p { */
   background-color: hsl(60, 40%, 30%);
-  border: 1px solid hsl(60, 40%, 30%);
-  border-radius: 4px;
-  box-shadow: inset 1px 1px 8px 10px hsl(60, 40%, 25%),
-    inset -1px -1px 8px 10px hsl(60, 40%, 25%);
 }
 
 .delete-todos-card {
   animation-delay: 15s;
 }
 .delete-todos-card p {
-  /* .cards-container > *:nth-child(4) p { */
   background-color: hsl(0, 50%, 30%);
-  border: 1px solid hsl(0, 50%, 30%);
-  border-radius: 4px;
-  box-shadow: inset 1px 1px 8px 10px hsl(0, 50%, 25%),
-    inset -1px -1px 8px 10px hsl(0, 50%, 25%);
 }
 
 .encrypted-todos-card {
   animation-delay: 20s;
 }
 .encrypted-todos-card p {
-  /* .cards-container > *:nth-child(5) p { */
   background-color: hsl(180, 50%, 30%);
-  border: 1px solid hsl(180, 50%, 30%);
-  border-radius: 4px;
-  box-shadow: inset 1px 1px 8px 10px hsl(180, 50%, 25%),
-    inset -1px -1px 8px 10px hsl(180, 50%, 25%);
 }
 
 /* THE FOOTER */

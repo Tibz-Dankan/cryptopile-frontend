@@ -176,11 +176,11 @@ const SignUp = () => {
         {showWhenSuccessfullyRegistered && (
           <div className="show-when-successfully-registered">
             <p>
-              You has been successfully registered using the email:{" "}
+              You has been successfully registered and an Admin using the email,{" "}
               {successfullyRegisteredInfo.email}
             </p>
             <p>
-              And you can log into your Account{" "}
+              You can now log into your Account{" "}
               <Link className="link" to="/login">
                 Log In
               </Link>

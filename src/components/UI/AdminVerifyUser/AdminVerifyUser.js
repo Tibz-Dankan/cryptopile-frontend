@@ -5,10 +5,8 @@ import { X } from "react-bootstrap-icons";
 import "./AdminVerifyUser.css";
 
 const AdminVerifyUser = ({ account }) => {
-  //   const [userAccount, setUserAccount] = useState([account]);
-  // const userAccount = [account];
   const [userAccountVerified, setUserAccountVerified] = useState(false);
-  const [isUserVerified, setIsUserVerified] = useState(false);
+  const isUserVerified = true;
 
   // let subtitle;
   const customStyles = {
@@ -35,19 +33,6 @@ const AdminVerifyUser = ({ account }) => {
   // On opening the modal function
   const afterOpenModal = () => {
     // subtitle.style.color = "black";
-  };
-
-  const checkUserVerificationStatus = () => {
-    switch (account.isverifiedemail) {
-      case true:
-        setIsUserVerified(false);
-        break;
-      case false:
-        setIsUserVerified(true);
-        break;
-      default:
-    }
-    return isUserVerified;
   };
 
   const showUserAccountVerifiedMsg = () => {
@@ -81,13 +66,13 @@ const AdminVerifyUser = ({ account }) => {
   Modal.setAppElement(document.getElementById("account-id"));
   return (
     <div>
-      {userAccountVerified ? (
+      {userAccountVerified && (
         <p className="user-account-verify-msg">
           User account successfully verified
         </p>
-      ) : null}
+      )}
       <div className="verify-user-button-1-wrapper">
-        {checkUserVerificationStatus ? (
+        {isUserVerified === account.isverifiedemail ? (
           <p className="user-verify-msg">No Action</p>
         ) : (
           <button className="admin-verify-user-button-1" onClick={openModal}>

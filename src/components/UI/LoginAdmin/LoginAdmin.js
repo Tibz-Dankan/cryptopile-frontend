@@ -84,6 +84,9 @@ const LoginAdmin = () => {
           localStorage.setItem("userId", response.data.userId);
           localStorage.setItem("role", response.data.role);
           // do some thing here please
+          setTimeout(() => {
+            window.location.reload(); // To be changed to something better
+          }, 2000);
         }
         //when user is not verified
         if (response.data.partlyRegisteredEmail) {
@@ -181,7 +184,7 @@ const LoginAdmin = () => {
               Log In
             </button>
           </form>
-          <p>
+          <div>
             Is this your first time here?{" "}
             <span
               className="supposed-to-be-link"
@@ -189,15 +192,17 @@ const LoginAdmin = () => {
             >
               SignUp
             </span>
-          </p>
-          <p className="forgot-password">
+          </div>
+          <div className="forgot-password">
             {/* <Link to="/forgot-password" className="link  forgot-password">
               Forgot Password
             </Link> */}
             <FeatureUnderMaintenance
-              targetInfo={<p className="supposed-to-be-link">ForgotPassword</p>}
+              targetInfo={
+                <span className="supposed-to-be-link">ForgotPassword</span>
+              }
             />
-          </p>
+          </div>
         </div>
       </div>
     </Fragment>

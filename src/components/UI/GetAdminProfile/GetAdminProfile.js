@@ -12,10 +12,10 @@ const GetAdminProfile = () => {
   const [userAccounts, setUserAccounts] = useState([]);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [adminProfile, setAdminProfile] = useState([]);
-  const [isUserVerified, setIsUserVerified] = useState(false);
-  //   const [tokenErrorMsg, setTokenErrorMsg] = useState("");
-  //   const [hasNoToken, setHasNoToken] = useState(false);
+  const [adminVerificationStatus, setAdminVerificationStatus] = useState(false);
   const token = localStorage.getItem("accessToken");
+  const userId = localStorage.getItem("userId");
+  const isVerified = true;
 
   //   get to get user accounts
   const getUserAccounts = async () => {
@@ -33,15 +33,29 @@ const GetAdminProfile = () => {
     }
   };
 
+  const verificationStatus = (value) => {
+    switch (value) {
+      case true:
+        setAdminVerificationStatus("Verified");
+        break;
+      case false:
+        setAdminVerificationStatus("Not Verified");
+        break;
+      default:
+    }
+  };
+
   //   function to get admin profile details
   const getAdminProfile = async () => {
     try {
       if (!token) return;
-      const response = await axiosApiAuthorized.get("/get-admin-profile");
+      const response = await axiosApiAuthorized.get(
+        `/get-admin-profile/${userId}`
+      );
       console.log(response);
       if (response.status === 200) {
         setAdminProfile(response.data);
-        // some react spinner
+        verificationStatus(response.data[0].isverifiedemail);
       }
     } catch (error) {
       console.log(error);
@@ -55,38 +69,34 @@ const GetAdminProfile = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const checkUserVerificationStatus = () => {
-    // let status = false;
-    switch (userAccounts.isverifiedemail) {
-      // switch (status) {
-      case true:
-        setIsUserVerified(true);
-        break;
-      case false:
-        setIsUserVerified(false);
-        break;
-      default:
-    }
-    return isUserVerified;
-    // return false; // to be removed
-  };
-
   return (
     <div className="admin-wrapper">
-      {showCaughtError ? <p>sorry something went wrong</p> : null}
+      {showCaughtError && <p>sorry something went wrong</p>}
       {/* Admin profile*/}
-      <div className="admin-profile">
-        {/* <p>Admin firstname: {adminProfile.adminfirstname}</p>
-        <p>Admin lastname: {adminProfile.adminlastname}</p>
-        <p>Admin email: {adminProfile.adminemail}</p> */}
-      </div>
+      {adminProfile.map((admin) => {
+        return (
+          <div className="admin-profile" key={admin.userid}>
+            <h3>Admin profile</h3>
+            <p>
+              Name: {admin.firstname} {admin.lastname}
+            </p>
+            <p> Email: {admin.email}</p>
+            <p> Role: {admin.roles}</p>
+            <p>
+              {" "}
+              status: {adminVerificationStatus}{" "}
+              <ExclamationTriangleFill color="hsl(60,100%,45%)" />
+            </p>
+          </div>
+        );
+      })}
       {/* user accounts */}
       <table className="user-account-table">
         <tbody>
           <tr>
             <th>User ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
+            <th>FirstName</th>
+            <th>LastName</th>
             <th>Email</th>
             <th>Verification Status</th>
             <th>Verify User</th>
@@ -100,7 +110,7 @@ const GetAdminProfile = () => {
                 <td>{accounts.lastname}</td>
                 <td>{accounts.email}</td>
                 <td>
-                  {checkUserVerificationStatus ? (
+                  {isVerified === accounts.isverifiedemail ? (
                     <div className="verified-user">
                       Verified
                       <CheckCircleFill color="hsl(120,100%, 60%)" />

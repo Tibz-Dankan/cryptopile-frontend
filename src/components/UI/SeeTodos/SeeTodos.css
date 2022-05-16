@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
 }
 
 .see-todo-catch-error-msg {
@@ -34,6 +35,7 @@
   display: grid;
   place-items: center;
   position: relative;
+  overflow-x: auto;
 }
 .Reload-button-near-table {
   margin-bottom: 10px;
@@ -48,9 +50,8 @@ table {
   border: 1px solid hsl(240, 100%, 100%);
   border-radius: 5px;
   box-shadow: 1px 1px 3px 1px hsl(0, 0%, 80%), -1px -1px 3px 1px hsl(0, 0%, 80%);
-  /* width: 60%; */
   padding: 5px;
-  margin-bottom: 60px;
+  margin-bottom: 1.5em;
   margin-top: 40px;
 }
 th {
@@ -98,6 +99,10 @@ td {
 @media screen and (max-width: 400px) {
   .see-todo-catch-error-msg {
     width: 90%;
+  }
+  .table-wrapper {
+    width: 94%;
+    margin: 0% 3% 0% 3%;
   }
   .Reload-button-near-table {
     left: 5%;

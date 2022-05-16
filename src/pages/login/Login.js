@@ -183,14 +183,16 @@ const Login = () => {
               SignUp
             </Link>
           </p>
-          <p className="forgot-password">
+          <div className="forgot-password">
             {/* <Link to="/forgot-password" className="link  forgot-password">
               Forgot Password
             </Link> */}
             <FeatureUnderMaintenance
-              targetInfo={<p className="supposed-to-be-link">ForgotPassword</p>}
+              targetInfo={
+                <span className="supposed-to-be-link">ForgotPassword</span>
+              }
             />
-          </p>
+          </div>
         </div>
       </div>
       <MiniFooter />

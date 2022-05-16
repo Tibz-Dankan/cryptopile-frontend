@@ -14,7 +14,7 @@ import UploadProfileImage from "../UploadProfileImage/UploadProfileImage";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
-  const [isUserVerified, setIsUserVerified] = useState(false);
+  const isUserVerified = true;
   const userId = localStorage.getItem("userId");
   const [showProfile, setShowProfile] = useState(false);
   const [showChevronDownIcon, setShowChevronDownIcon] = useState(true);
@@ -86,19 +86,6 @@ const UserProfile = () => {
       });
   };
 
-  const checkUserVerificationStatus = () => {
-    switch (userInfo[0].isverifiedemail) {
-      case true:
-        setIsUserVerified(true);
-        break;
-      case false:
-        setIsUserVerified(false);
-        break;
-      default:
-    }
-    return isUserVerified;
-  };
-
   return (
     <div className="user-profile-wrapper">
       <button className="btn-showing-profile" onClick={showUserProfile}>
@@ -115,17 +102,17 @@ const UserProfile = () => {
           />
         )}
       </button>
-      {showProfile ? (
+      {showProfile && (
         <div className="user-info">
           {showScaleLoader ? <ScaleLoader color="hsl(180, 100%, 30%)" /> : null}
           {userInfo.map((info) => {
             return (
               <div key={info.userId} className="user-profile-details">
-                {showUploadProfileImageForm ? (
+                {showUploadProfileImageForm && (
                   <div>
                     <UploadProfileImage />
                   </div>
-                ) : null}
+                )}
                 {showProfileImageIcon ? (
                   <div
                     className="default-profile-image tooltip"
@@ -143,12 +130,13 @@ const UserProfile = () => {
                     />
                   </div>
                 )}
-                <p>Firstname: {info.firstName}</p>
-                <p>Lastname: {info.lastName}</p>
+                <p>
+                  Name: {info.firstName} {info.lastName}
+                </p>
                 <p>Email: {info.email}</p>
                 <div className="profile-verification-status">
                   <p>Status: </p>
-                  {checkUserVerificationStatus ? (
+                  {isUserVerified === info.isverifiedemail ? (
                     <div className="verified-user">
                       Verified
                       <CheckCircleFill
@@ -167,7 +155,7 @@ const UserProfile = () => {
             );
           })}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

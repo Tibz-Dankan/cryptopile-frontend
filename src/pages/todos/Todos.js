@@ -9,7 +9,7 @@ import HomeLink from "../../links/HomeLink";
 import LogoutLink from "../../links/LogoutLink";
 import { HouseFill, BoxArrowRight } from "react-bootstrap-icons";
 import { TodoChangeContext } from "../../context/TodoChangeContext/TodoChangeContext";
-import UserRole from "../../components/UI/UserRole/UserRole";
+import SwitchAdmin from "../../components/UI/SwitchAdmin/SwitchAdmin";
 import "./Todos.css";
 
 const Todos = () => {
@@ -50,7 +50,7 @@ const Todos = () => {
             <TodoChangeContext.Provider
               value={[hasTodosChanged, setHasTodosChanged]}
             >
-              <UserRole theUserRole={userRole} />
+              <SwitchAdmin roleAsProp={"user"} />
               <UserProfile />
               <AddTodos />
               <SeeTodos />

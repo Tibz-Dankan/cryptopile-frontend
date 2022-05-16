@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-
 import "./Admin.css";
 import GetAdminProfile from "../../components/UI/GetAdminProfile/GetAdminProfile";
 import SignupAdmin from "../../components/UI/SignupAdmin/SignupAdmin";
@@ -10,17 +9,17 @@ import GetAdminKeys from "../../components/UI/GetAdminKeys/GetAdminKeys";
 import VerifyAdminKey from "../../components/UI/VerifyAdminKey/VerifyAdminKey";
 import AdminKeyVerifiedContext from "../../context/AdminKeyVerifiedContext/AdminKeyVerifiedContext";
 import ShowLoginFormContext from "../../context/ShowLoginFormContext/ShowLoginFormContext";
-import UserRole from "../../components/UI/UserRole/UserRole";
+import SwitchAdmin from "../../components/UI/SwitchAdmin/SwitchAdmin";
 
 const Admin = () => {
   const [isAdminKeyVerified, setIsAdminKeyVerified] = useState(false);
   const [showLoginForm, setShowLogin] = useState(true);
   const role = localStorage.getItem("role");
-  const [userRole, setUserRole] = useState(role);
 
   const token = localStorage.getItem("accessToken");
+  const adminToken = token && role === "admin";
   const [showLoginAndSignupForms, setShowLoginAndSignupForms] = useState(
-    !token ? true : false
+    !adminToken ? true : false
   );
   return (
     <div className="admin-wrapper">
@@ -43,10 +42,10 @@ const Admin = () => {
         </ShowLoginFormContext.Provider>
       ) : (
         <>
-          <UserRole theUserRole={userRole} />
+          <SwitchAdmin roleAsProp={"admin"} />
+          <GetAdminProfile />
           <GetAdminKeys />
           <GenerateAdminKey />
-          <GetAdminProfile />
         </>
       )}
     </div>

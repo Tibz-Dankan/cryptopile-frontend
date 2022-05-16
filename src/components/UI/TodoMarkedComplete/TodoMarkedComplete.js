@@ -10,7 +10,6 @@ import "./TodoMarkedComplete.css";
 
 const TodoMarkedComplete = ({ todo }) => {
   const [isModalOpen, setIsOpenModal] = useState(false);
-  const [todoMarkedComplete, setTodoMarkedComplete] = useState(false);
   const [
     showTodoMarkedCompleteSuccessfully,
     setShowTodoMarkedCompleteSuccessfully,
@@ -18,6 +17,7 @@ const TodoMarkedComplete = ({ todo }) => {
   const [showFailedToMarkTodo, setShowFailedToMarkTodo] = useState(false);
   const [hasTodoChanged, setHasTodoChanged] = useContext(TodoChangeContext);
   const [todoId, setTodoId] = useState(todo.todoid);
+  const isBoxChecked = true;
 
   const TodoChanged = (value, setValue) => {
     switch (value) {
@@ -30,32 +30,18 @@ const TodoMarkedComplete = ({ todo }) => {
       default:
     }
   };
-  const markOrUnMarkTodo = () => {
-    const checkBoxStatus = document.getElementById("check-box");
-    // switch (checkBoxStatus) {
-    //   case true:
-    //     setTodoMarkedComplete(false);
-    //     log(`check box status is : ${todoMarkedComplete}`);
-    //     break;
-    //   case false:
-    //     setTodoMarkedComplete(true);
-    //     log(`check box status is : ${todoMarkedComplete}`);
-    //     break;
-    //   default:
-    // }
-    if (todo.todomarkedcomplete === true) {
-      setTodoMarkedComplete(false);
-      log(`check box status is : ${todoMarkedComplete}`);
-    } else {
-      setTodoMarkedComplete(true);
-      log(`check box status is : ${todoMarkedComplete}`);
-    }
-    log(`The check box status is :  ${todoMarkedComplete}`);
+
+  const todoCompletionStatusFromDb = todo.todomarkedcomplete;
+
+  let todoMarkedComplete;
+  const getTodoCompletionStatusAndChangeIt = () => {
+    todoMarkedComplete = !todoCompletionStatusFromDb;
+    log(" The boolean value of the check box: " + todoMarkedComplete);
     return true;
   };
 
   const submitCurrentCheckBoxStatus = () => {
-    markOrUnMarkTodo() && submitTodoCompletionStatus();
+    getTodoCompletionStatusAndChangeIt() && submitTodoCompletionStatus();
   };
 
   const openAndCloseModal = () => {
@@ -80,7 +66,6 @@ const TodoMarkedComplete = ({ todo }) => {
         setShowTodoMarkedCompleteSuccessfully(true);
         enableButton("check-box");
         openAndCloseModal();
-        // TodoChanged(hasTodoChanged, setHasTodoChanged);
       }
       log(response.data.rows);
     } catch (error) {
@@ -90,19 +75,6 @@ const TodoMarkedComplete = ({ todo }) => {
       log(error);
     }
   };
-
-  useEffect(() => {
-    let checkBoxStatus = document.getElementById("check-box");
-    if (
-      todo.todomarkedcomplete == null ||
-      todo.todomarkedcomplete === undefined
-    ) {
-      return;
-    }
-    if (todo.todomarkedcomplete === true) {
-      checkBoxStatus.checked = true;
-    }
-  }, [todo.todomarkedcomplete]);
 
   // let subtitle;
   // styles
@@ -138,12 +110,22 @@ const TodoMarkedComplete = ({ todo }) => {
   return (
     <div>
       <form className="todo-marked-complete-form">
-        <input
-          type="checkbox"
-          id="check-box"
-          value={todoMarkedComplete}
-          onClick={submitCurrentCheckBoxStatus}
-        />
+        {isBoxChecked === todoCompletionStatusFromDb ? (
+          <input
+            type="checkbox"
+            id="check-box"
+            value={todoMarkedComplete}
+            onClick={() => submitCurrentCheckBoxStatus()}
+            defaultChecked
+          />
+        ) : (
+          <input
+            type="checkbox"
+            id="check-box"
+            value={todoMarkedComplete}
+            onClick={() => submitCurrentCheckBoxStatus()}
+          />
+        )}
       </form>
       <Modal
         isOpen={isModalOpen}
@@ -153,14 +135,14 @@ const TodoMarkedComplete = ({ todo }) => {
         contentLabel="Todo Completed"
       >
         <div className="modal-wrapper">
-          {showTodoMarkedCompleteSuccessfully ? (
+          {showTodoMarkedCompleteSuccessfully && (
             <p className="todo-marked-complete-successfully">
               Todo marked complete successfully
             </p>
-          ) : null}
-          {showFailedToMarkTodo ? (
+          )}
+          {showFailedToMarkTodo && (
             <p className="failed-to-mark-todo">Failed to marked as complete</p>
-          ) : null}
+          )}
           <div className="close-modal" onClick={closeModal}>
             <X size={30} />
           </div>

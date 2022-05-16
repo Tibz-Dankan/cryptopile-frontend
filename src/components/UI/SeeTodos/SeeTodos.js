@@ -3,7 +3,7 @@ import { PropagateLoader } from "react-spinners";
 import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
 import EditTodoDescription from "../EditTodoDescription/EditTodoDescription";
 import DeleteTodo from "../DeleteTodo/DeleteTodo";
-// import TodoMarkedComplete from "../TodoMarkedComplete/TodoMarkedComplete";
+import TodoMarkedComplete from "../TodoMarkedComplete/TodoMarkedComplete";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import { log } from "../../../utils/ConsoleLog";
@@ -53,18 +53,18 @@ const SeeTodos = () => {
   return (
     <div>
       <div className="see-todos-wrapper">
-        {showCatchError ? (
+        {showCatchError && (
           <div className="see-todo-catch-error-msg">
             <p>Sorry, something went wrong!</p>
           </div>
-        ) : null}
+        )}
 
-        {showPropagateLoader ? (
+        {showPropagateLoader && (
           <div className="propagate-loader-wrapper">
             <PropagateLoader size={12} color="hsl(180, 100%, 30%)" />
             <h5>Loading...</h5>
           </div>
-        ) : null}
+        )}
 
         {showTableOfTodos ? (
           <div className="table-wrapper">
@@ -89,8 +89,16 @@ const SeeTodos = () => {
                       <td>{todo.dateofadd}</td>
                       <td>{todo.timeofadd}</td>
                       <td id="todo-description-id">
-                        {todo.description} {<EditTodoDescription todo={todo} />}{" "}
-                        {/* {<TodoMarkedComplete todo={todo} />} */}
+                        <span
+                          style={{
+                            textDecoration:
+                              todo.todomarkedcomplete && "line-through",
+                          }}
+                        >
+                          {todo.description}
+                        </span>
+                        {<EditTodoDescription todo={todo} />}
+                        {<TodoMarkedComplete todo={todo} />}
                       </td>
                       <td>{<DeleteTodo todo={todo} />}</td>
                     </tr>

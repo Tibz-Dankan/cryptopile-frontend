@@ -20,7 +20,7 @@ const GenerateAdminKey = () => {
   };
   const generateKey = async () => {
     try {
-      const response = await axiosApiAuthorized(
+      const response = await axiosApiAuthorized.post(
         `/generate-admin-key/${userId}`,
         { createdOn: generatedOn }
       );
