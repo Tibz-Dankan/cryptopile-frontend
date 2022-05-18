@@ -12,9 +12,9 @@ const GetAdminProfile = () => {
   const [userAccounts, setUserAccounts] = useState([]);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [adminProfile, setAdminProfile] = useState([]);
-  const [adminVerificationStatus, setAdminVerificationStatus] = useState(false);
-  const token = localStorage.getItem("accessToken");
-  const userId = localStorage.getItem("userId");
+  const [isAdminVerified, setIsAdminVerified] = useState(false);
+  const token = sessionStorage.getItem("accessToken");
+  const userId = sessionStorage.getItem("userId");
   const isVerified = true;
 
   //   get to get user accounts
@@ -33,18 +33,6 @@ const GetAdminProfile = () => {
     }
   };
 
-  const verificationStatus = (value) => {
-    switch (value) {
-      case true:
-        setAdminVerificationStatus("Verified");
-        break;
-      case false:
-        setAdminVerificationStatus("Not Verified");
-        break;
-      default:
-    }
-  };
-
   //   function to get admin profile details
   const getAdminProfile = async () => {
     try {
@@ -55,7 +43,7 @@ const GetAdminProfile = () => {
       console.log(response);
       if (response.status === 200) {
         setAdminProfile(response.data);
-        verificationStatus(response.data[0].isverifiedemail);
+        setIsAdminVerified(response.data[0].isverifiedemail);
       }
     } catch (error) {
       console.log(error);
@@ -82,11 +70,19 @@ const GetAdminProfile = () => {
             </p>
             <p> Email: {admin.email}</p>
             <p> Role: {admin.roles}</p>
-            <p>
-              {" "}
-              status: {adminVerificationStatus}{" "}
-              <ExclamationTriangleFill color="hsl(60,100%,45%)" />
-            </p>
+            {isAdminVerified ? (
+              <p>
+                {" "}
+                status: {<span>Verified</span>}{" "}
+                <CheckCircleFill color="hsl(120,100%, 60%)" />
+              </p>
+            ) : (
+              <p>
+                {" "}
+                status: {<span>Not Verified</span>}{" "}
+                <ExclamationTriangleFill color="hsl(60,100%,45%)" />
+              </p>
+            )}
           </div>
         );
       })}

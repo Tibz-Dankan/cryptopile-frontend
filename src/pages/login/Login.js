@@ -67,16 +67,17 @@ const Login = () => {
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
         ) {
-          localStorage.setItem("isLoggedIn", "isLoggedIn");
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("userId", response.data.userId);
-          localStorage.setItem("role", response.data.role);
-          const token = await localStorage.getItem("accessToken");
+          sessionStorage.setItem("isLoggedIn", "isLoggedIn");
+          sessionStorage.setItem("accessToken", response.data.accessToken);
+          sessionStorage.setItem("userId", response.data.userId);
+          sessionStorage.setItem("role", response.data.role);
+          sessionStorage.setItem("userInfoToken", response.data.userInfoToken);
+          const token = await sessionStorage.getItem("accessToken");
           if (token) return history.push("/todos");
         }
         //when user is not verified
         if (response.data.partlyRegisteredEmail) {
-          localStorage.setItem(
+          sessionStorage.setItem(
             "partlyRegisteredEmail",
             response.data.partlyRegisteredEmail
           );

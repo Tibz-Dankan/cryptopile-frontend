@@ -9,15 +9,13 @@ const Logout = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const logoutUser = async () => {
-    await localStorage.removeItem("accessToken");
-    await localStorage.removeItem("userId");
-    await localStorage.removeItem("isLoggedIn");
+    sessionStorage.clear();
     history.push("/login");
   };
   // logout user on loading the component
   useEffect(() => {
     // first check whether the user is logged in
-    if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
+    if (sessionStorage.getItem("isLoggedIn") === "isLoggedIn") {
       // logout the user
       logoutUser();
       setIsLoggedIn(true);

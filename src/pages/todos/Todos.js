@@ -15,10 +15,10 @@ import "./Todos.css";
 const Todos = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [hasTodosChanged, setHasTodosChanged] = useState(false);
-  const role = localStorage.getItem("role");
+  const role = sessionStorage.getItem("role");
   const [userRole, setUserRole] = useState(role);
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "isLoggedIn") {
+    if (sessionStorage.getItem("isLoggedIn") === "isLoggedIn") {
       setIsLoggedIn(true);
     }
   }, []);

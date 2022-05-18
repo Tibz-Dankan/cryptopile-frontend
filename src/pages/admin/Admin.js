@@ -14,9 +14,9 @@ import SwitchAdmin from "../../components/UI/SwitchAdmin/SwitchAdmin";
 const Admin = () => {
   const [isAdminKeyVerified, setIsAdminKeyVerified] = useState(false);
   const [showLoginForm, setShowLogin] = useState(true);
-  const role = localStorage.getItem("role");
+  const role = sessionStorage.getItem("role");
 
-  const token = localStorage.getItem("accessToken");
+  const token = sessionStorage.getItem("accessToken");
   const adminToken = token && role === "admin";
   const [showLoginAndSignupForms, setShowLoginAndSignupForms] = useState(
     !adminToken ? true : false

@@ -101,8 +101,8 @@ const ResetPassword = () => {
   // function to submit user's new password (when not logged in)
   const submitNewPassword = async (e) => {
     try {
-      const userEmail = localStorage.getItem("userEmail");
-      const userId = localStorage.getItem("userId");
+      const userEmail = sessionStorage.getItem("userEmail");
+      const userId = sessionStorage.getItem("userId");
       if (userEmail == null || userId == null) {
         setShowWhenPasswordIsInvalid(true);
         return setPasswordResetStatusMsg("**Cannot reset password !");
@@ -123,8 +123,8 @@ const ResetPassword = () => {
       console.log(response); // to be removed wen in production
       setShowBarLoader(false);
       if (response.data.passwordResetMsg === "password-reset-successful") {
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("userId");
+        sessionStorage.removeItem("userEmail");
+        sessionStorage.removeItem("userId");
         //   alert the user about successful reset of password
         setPasswordResetStatusMsg("The password has been successfully changed");
         history.push("/login");

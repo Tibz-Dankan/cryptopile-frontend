@@ -3,7 +3,7 @@ import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
 import { log } from "../../../utils/ConsoleLog";
 
 const GenerateAdminKey = () => {
-  const userId = localStorage.getItem("userId");
+  const userId = sessionStorage.getItem("userId");
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showingResponse, setShowingResponseMsg] = useState(false);
   const timeOfGenerate = new Date().toLocaleTimeString();

@@ -15,7 +15,7 @@ import UploadProfileImage from "../UploadProfileImage/UploadProfileImage";
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
   const isUserVerified = true;
-  const userId = localStorage.getItem("userId");
+  const userId = sessionStorage.getItem("userId");
   const [showProfile, setShowProfile] = useState(false);
   const [showChevronDownIcon, setShowChevronDownIcon] = useState(true);
   const [showScaleLoader, setShowScaleLoader] = useState(false);

@@ -6,7 +6,7 @@ import { log } from "../../../utils/ConsoleLog";
 import "./GetAdminKeys.css";
 
 const GetAdminKeys = () => {
-  const userId = localStorage.getItem("userId");
+  const userId = sessionStorage.getItem("userId");
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showingResponse, setShowingResponseMsg] = useState(false);
   const [adminKeys, setAdminKeys] = useState([]);

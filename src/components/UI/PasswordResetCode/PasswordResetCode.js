@@ -87,8 +87,8 @@ const PasswordResetCode = () => {
       setIsPassWordResetCodeMsgError(false);
       setShowBarLoader(true);
       setShowCaughtError("");
-      const userEmail = localStorage.getItem("userEmail");
-      const userId = localStorage.getItem("userId");
+      const userEmail = sessionStorage.getItem("userEmail");
+      const userId = sessionStorage.getItem("userId");
       if (userEmail !== null && userId !== null) {
         const response = await axiosApiUnAuthorized.post(
           "http://localhost:5000/resend-password-reset-code",

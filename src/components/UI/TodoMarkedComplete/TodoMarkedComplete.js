@@ -10,10 +10,8 @@ import "./TodoMarkedComplete.css";
 
 const TodoMarkedComplete = ({ todo }) => {
   const [isModalOpen, setIsOpenModal] = useState(false);
-  const [
-    showTodoMarkedCompleteSuccessfully,
-    setShowTodoMarkedCompleteSuccessfully,
-  ] = useState(false);
+  const [showTodoMarkedCompleteStatus, setShowTodoMarkedCompleteStatus] =
+    useState(false);
   const [showFailedToMarkTodo, setShowFailedToMarkTodo] = useState(false);
   const [hasTodoChanged, setHasTodoChanged] = useContext(TodoChangeContext);
   const [todoId, setTodoId] = useState(todo.todoid);
@@ -32,6 +30,7 @@ const TodoMarkedComplete = ({ todo }) => {
   };
 
   const todoCompletionStatusFromDb = todo.todomarkedcomplete;
+  const showTodoMarked = !todoCompletionStatusFromDb;
 
   let todoMarkedComplete;
   const getTodoCompletionStatusAndChangeIt = () => {
@@ -63,7 +62,7 @@ const TodoMarkedComplete = ({ todo }) => {
         }
       );
       if (response.status === 200) {
-        setShowTodoMarkedCompleteSuccessfully(true);
+        setShowTodoMarkedCompleteStatus(true);
         enableButton("check-box");
         openAndCloseModal();
       }
@@ -135,13 +134,18 @@ const TodoMarkedComplete = ({ todo }) => {
         contentLabel="Todo Completed"
       >
         <div className="modal-wrapper">
-          {showTodoMarkedCompleteSuccessfully && (
-            <p className="todo-marked-complete-successfully">
-              Todo marked complete successfully
-            </p>
-          )}
+          {showTodoMarkedCompleteStatus &&
+            (showTodoMarked ? (
+              <p className="todo-marked-complete-successfully">
+                Todo Marked successfully
+              </p>
+            ) : (
+              <p className="todo-marked-complete-successfully">
+                Todo Unmarked successfully
+              </p>
+            ))}
           {showFailedToMarkTodo && (
-            <p className="failed-to-mark-todo">Failed to marked as complete</p>
+            <p className="failed-to-mark-todo">Failed to mark as complete</p>
           )}
           <div className="close-modal" onClick={closeModal}>
             <X size={30} />

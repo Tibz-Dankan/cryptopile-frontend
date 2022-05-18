@@ -48,14 +48,14 @@ const EditTodoDescription = ({ todo }) => {
 
   const openModal = () => {
     setIsOpenModal(true);
-    localStorage.setItem("description", todo.description);
+    sessionStorage.setItem("description", todo.description);
     hasATodoChanged();
     setTodoChangeMsg("");
   };
 
   const closeModal = () => {
     setIsOpenModal(false);
-    localStorage.removeItem("description");
+    sessionStorage.removeItem("description");
     setTodoChangeMsg("");
   };
   // On opening the modal function
@@ -65,7 +65,7 @@ const EditTodoDescription = ({ todo }) => {
 
   // function to check for changes in the todos before making a request to the backend
   const hasATodoChanged = () => {
-    const originalTodoDescription = localStorage.getItem("description");
+    const originalTodoDescription = sessionStorage.getItem("description");
     // eslint-disable-next-line eqeqeq
     if (todoDescription != originalTodoDescription) {
       setShowTodoChangeMsg(false);

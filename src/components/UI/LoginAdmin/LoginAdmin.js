@@ -79,10 +79,10 @@ const LoginAdmin = () => {
         if (
           response.data.loginStatusMsg === "You have successfully logged in"
         ) {
-          localStorage.setItem("isLoggedIn", "isLoggedIn");
-          localStorage.setItem("accessToken", response.data.accessToken);
-          localStorage.setItem("userId", response.data.userId);
-          localStorage.setItem("role", response.data.role);
+          sessionStorage.setItem("isLoggedIn", "isLoggedIn");
+          sessionStorage.setItem("accessToken", response.data.accessToken);
+          sessionStorage.setItem("userId", response.data.userId);
+          sessionStorage.setItem("role", response.data.role);
           // do some thing here please
           setTimeout(() => {
             window.location.reload(); // To be changed to something better
@@ -90,7 +90,7 @@ const LoginAdmin = () => {
         }
         //when user is not verified
         if (response.data.partlyRegisteredEmail) {
-          localStorage.setItem(
+          sessionStorage.setItem(
             "partlyRegisteredEmail",
             response.data.partlyRegisteredEmail
           );

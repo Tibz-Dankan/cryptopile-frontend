@@ -5,7 +5,7 @@ import "./SwitchAdmin.css";
 
 const SwitchAdmin = ({ roleAsProp }) => {
   //   consider using jwt-decode to get user from local Storage or session storage
-  const role = localStorage.getItem("role");
+  const role = sessionStorage.getItem("role");
   const adminOnUseSection = role === "admin" && roleAsProp === "user";
   const adminOnAdminSection = role === "admin" && roleAsProp === "admin";
   const [showSwitchToAdmin, setShowSwitchToAdmin] = useState(adminOnUseSection);

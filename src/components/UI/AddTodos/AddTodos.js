@@ -5,6 +5,7 @@ import { enableButton, disableButton } from "../../../utils/ButtonState";
 import { log } from "../../../utils/ConsoleLog";
 import "./AddTodos.css";
 import { PulseLoader } from "react-spinners";
+import jwt_decode from "jwt-decode";
 
 const AddTodos = () => {
   const [todo, setTodo] = useState({ description: "" });
@@ -12,7 +13,6 @@ const AddTodos = () => {
 
   const [showTodoAddedSuccessfullyMsg, setShowTodoAddedSuccessfullyMsg] =
     useState(false);
-  const userId = localStorage.getItem("userId");
 
   const dateOfAdd = new Date().toDateString();
   const timeOfAdd = new Date().toLocaleTimeString();
@@ -39,6 +39,19 @@ const AddTodos = () => {
       setShowTodoAddedSuccessfullyMsg(false);
     }, 3000);
   };
+
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  console.log(decodedUserInfo);
+  const userId = decodedUserInfo.userId;
+
+  // const firstName = decodedUserInfo.firstName;
+  // console.log(firstName);
+  // const lastName = decodedUserInfo.lastName;
+  // console.log(lastName);
+  // const userRole = decodedUserInfo.role;
+  // console.log(userRole);
 
   // Post or submit the todo
   const addUserTodos = (e) => {

@@ -10,7 +10,7 @@ const ResendVerificationLink = () => {
     useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [showBeatLoader, setShowBeatLoader] = useState(false);
-  const partlyRegisteredEmail = localStorage.getItem("partlyRegisteredEmail");
+  const partlyRegisteredEmail = sessionStorage.getItem("partlyRegisteredEmail");
 
   // function to resend the verification link
   const resendingVerificationLink = async () => {
@@ -29,7 +29,7 @@ const ResendVerificationLink = () => {
       if (response.status === 200) {
         setVerificationLinkStatusMsg(response.data.verificationLinkStatus);
         setShowVerificationLinkStatusMsg(true);
-        localStorage.removeItem("partlyRegisteredEmail");
+        sessionStorage.removeItem("partlyRegisteredEmail");
       }
     } catch (error) {
       console.log(error);

@@ -21,7 +21,7 @@ const SeeTodos = () => {
       setShowPropagateLoader(true);
       disableButton("button");
       const getTodos = await axiosApiAuthorized.get(
-        `api/get-todos/${localStorage.getItem("userId")}`
+        `api/get-todos/${sessionStorage.getItem("userId")}`
       );
 
       setShowPropagateLoader(false);
