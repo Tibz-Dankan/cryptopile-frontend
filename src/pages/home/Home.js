@@ -3,6 +3,7 @@ import Header from "../../components/layouts/Header/Header";
 import Footer from "../../components/layouts/Footer/Footer";
 import "./Home.css";
 import { List, X } from "react-bootstrap-icons";
+import LoggedInAs from "../../components/UI/LoggedInAs/LoggedInAs";
 const Home = () => {
   const [showMenuBar, setShowMenuBar] = useToggle();
 
@@ -39,6 +40,7 @@ const Home = () => {
           )}
         </div>
       </div>
+      <LoggedInAs />
       <div className="home-page-content">
         <div className="cryptopile-short-description">
           <div className="description-content">
