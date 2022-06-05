@@ -43,7 +43,7 @@ const AddTodos = () => {
   // jwt decode
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
-  console.log(decodedUserInfo);
+  log(decodedUserInfo);
   const userId = decodedUserInfo.userId;
 
   // const firstName = decodedUserInfo.firstName;

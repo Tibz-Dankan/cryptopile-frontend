@@ -69,8 +69,6 @@ const Login = () => {
         ) {
           sessionStorage.setItem("isLoggedIn", "isLoggedIn");
           sessionStorage.setItem("accessToken", response.data.accessToken);
-          sessionStorage.setItem("userId", response.data.userId);
-          sessionStorage.setItem("role", response.data.role);
           sessionStorage.setItem("userInfoToken", response.data.userInfoToken);
           const token = await sessionStorage.getItem("accessToken");
           if (token) return history.push("/todos");
@@ -117,47 +115,42 @@ const Login = () => {
         </div>
         {didNotReceiveVerificationEmail && <ResendVerificationLink />}
         {showCaughtError && (
-          <div className="login-catch-error" style={{ textAlign: "center" }}>
-            <p style={{ color: "hsl(0, 100%, 50%)" }}>
-              Sorry, something went wrong!
-            </p>
+          <div className="login-catch-error">
+            <p>Sorry, something went wrong!</p>
+          </div>
+        )}
+        {showFadeLoader && (
+          <div className="fade-loader-wrapper">
+            <FadeLoader
+              className="fade-loader"
+              color="hsl(180, 100%, 30%)"
+              size={5}
+            />
+            <h5 className="authenticate-msg">Authenticating...</h5>
           </div>
         )}
         <div className="login-form-wrapper">
           <form onSubmit={(e) => submitLoginInfo(e)} className="login-form">
-            <div className="login-form-heading">
-              <h3>Log Into Your Account</h3>
-            </div>
+            {/* <h3>Log Into Your Account</h3> */}
+            <h3 className="login-form-heading">Log In</h3>
             {showLoginStatusMsg && (
               <div className="display-login-status">
                 <p className="display-login-errors">{loginErrorsMsg}</p>
                 <p className="display-login-success">{loginSuccessMsg}</p>
               </div>
             )}
-            {showFadeLoader && (
-              <div className="fade-loader-wrapper">
-                <FadeLoader
-                  className="fade-loader"
-                  color="hsl(180, 100%, 30%)"
-                  size={5}
-                />
-                <h5 className="authenticate-msg">Authenticating...</h5>
-              </div>
-            )}
             <div className="fields">
-              <label>Email*</label>
-              <br />
+              {/* <label>Email*</label> */}
               <input
                 type="email"
                 className="login-input-field"
                 id="email"
                 value={userLoginInfo.email}
                 onChange={(e) => handleLoginInfo(e)}
+                placeholder="Email"
                 required
               />
-              <br />
-              <label>Password*</label>
-              <br />
+              {/* <label>Password*</label> */}
               <div className="password-input-field-wrapper">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -165,6 +158,7 @@ const Login = () => {
                   id="password"
                   value={userLoginInfo.password}
                   onChange={(e) => handleLoginInfo(e)}
+                  placeholder="Password"
                   required
                 />
                 <div className="login-eye-icon" onClick={showingPassword}>
@@ -172,29 +166,30 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <br />
-            <br />
             <button type="submit" className="login-btn" id="button">
               Log In
             </button>
           </form>
-          <p>
-            Is this your first time here?{" "}
-            <Link to="/signup" className="link">
-              SignUp
-            </Link>
-          </p>
-          <div className="forgot-password">
-            {/* <Link to="/forgot-password" className="link  forgot-password">
+        </div>
+        <div className="forgot-password">
+          {/* <Link to="/forgot-password" className="link  forgot-password">
               Forgot Password
             </Link> */}
-            <FeatureUnderMaintenance
-              targetInfo={
-                <span className="supposed-to-be-link">ForgotPassword</span>
-              }
-            />
-          </div>
+          <FeatureUnderMaintenance
+            targetInfo={
+              <span className="supposed-to-be-link site-link">
+                Forgot Password?
+              </span>
+            }
+          />
         </div>
+        <p>Or</p>
+        <p className="dont-have-account">
+          Don't have an account?{" "}
+          <Link to="/signup" className="site-link">
+            SignUp
+          </Link>
+        </p>
       </div>
       <MiniFooter />
     </Fragment>

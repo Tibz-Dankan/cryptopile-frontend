@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
 import { log } from "../../../utils/ConsoleLog";
+import jwt_decode from "jwt-decode";
 
 const GenerateAdminKey = () => {
-  const userId = sessionStorage.getItem("userId");
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showingResponse, setShowingResponseMsg] = useState(false);
   const timeOfGenerate = new Date().toLocaleTimeString();
@@ -18,6 +18,12 @@ const GenerateAdminKey = () => {
       setShowSuccessMsg(false);
     }, 3000);
   };
+
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const userId = decodedUserInfo.userId;
+
   const generateKey = async () => {
     try {
       const response = await axiosApiAuthorized.post(

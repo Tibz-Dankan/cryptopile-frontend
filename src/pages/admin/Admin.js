@@ -10,16 +10,27 @@ import VerifyAdminKey from "../../components/UI/VerifyAdminKey/VerifyAdminKey";
 import AdminKeyVerifiedContext from "../../context/AdminKeyVerifiedContext/AdminKeyVerifiedContext";
 import ShowLoginFormContext from "../../context/ShowLoginFormContext/ShowLoginFormContext";
 import SwitchAdmin from "../../components/UI/SwitchAdmin/SwitchAdmin";
+import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
+import jwt_decode from "jwt-decode";
 
 const Admin = () => {
   const [isAdminKeyVerified, setIsAdminKeyVerified] = useState(false);
   const [showLoginForm, setShowLogin] = useState(true);
-  const role = sessionStorage.getItem("role");
+
+  let userInfoToken = sessionStorage.getItem("userInfoToken");
+  let role;
+  if (!userInfoToken) {
+    role = null;
+  } else {
+    // jwt decode
+    const decodedUserInfo = jwt_decode(userInfoToken);
+    role = decodedUserInfo.role;
+  }
 
   const token = sessionStorage.getItem("accessToken");
-  const adminToken = token && role === "admin";
+  const isAdminToken = token && role === "admin";
   const [showLoginAndSignupForms, setShowLoginAndSignupForms] = useState(
-    !adminToken ? true : false
+    !isAdminToken ? true : false
   );
   return (
     <div className="admin-wrapper">
@@ -48,6 +59,7 @@ const Admin = () => {
           <GenerateAdminKey />
         </>
       )}
+      <MiniFooter />
     </div>
   );
 };

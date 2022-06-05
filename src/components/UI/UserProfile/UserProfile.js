@@ -9,13 +9,14 @@ import {
   PersonCircle,
 } from "react-bootstrap-icons";
 import { ScaleLoader } from "react-spinners";
+import jwt_decode from "jwt-decode";
+import { log } from "../../../utils/ConsoleLog";
 import "./UserProfile.css";
 import UploadProfileImage from "../UploadProfileImage/UploadProfileImage";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
   const isUserVerified = true;
-  const userId = sessionStorage.getItem("userId");
   const [showProfile, setShowProfile] = useState(false);
   const [showChevronDownIcon, setShowChevronDownIcon] = useState(true);
   const [showScaleLoader, setShowScaleLoader] = useState(false);
@@ -67,22 +68,29 @@ const UserProfile = () => {
     }
   };
 
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const userId = decodedUserInfo.userId;
+
   const getUserInfo = () => {
     setShowScaleLoader(true);
     axiosApiAuthorized
       .get(`/get-user-info/${userId}`)
       .then((response) => {
         setShowScaleLoader(false);
+        if (response.data[0] == null || response.data[0] === "undefined") {
+          return;
+        }
         setUserInfo(response.data);
         const imageUrlFromDatabase = response.data[0].imageUrl;
         isProfileImageUrlNull(
           imageUrlFromDatabase == null,
           imageUrlFromDatabase
         );
-        console.log(response);
+        log(response);
       })
       .catch((error) => {
-        console.log(error);
+        log(error);
       });
   };
 

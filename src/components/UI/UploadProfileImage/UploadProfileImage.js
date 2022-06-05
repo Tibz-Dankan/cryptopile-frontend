@@ -3,6 +3,7 @@ import axios from "axios";
 import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized.js";
 import "./UploadProfileImage.css";
 import { BeatLoader } from "react-spinners";
+import jwt_decode from "jwt-decode";
 
 const UploadProfileImage = () => {
   const [imageSelected, setImageSelected] = useState("");
@@ -37,13 +38,18 @@ const UploadProfileImage = () => {
       console.log(error);
     }
   };
+
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const userId = decodedUserInfo.userId;
+
   // react spinner when uploading an image
   // function to store url in the database
   const uploadImageUrlToBackend = async () => {
     try {
       setShowBeatLoader(true);
       setImageUploadMsg("Uploading url...");
-      const userId = localStorage.getItem("userId");
       const response = await axiosApiAuthorized.post(
         `/api/upload-profile-image-url/${userId}`,
         {

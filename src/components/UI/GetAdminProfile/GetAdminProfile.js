@@ -3,10 +3,12 @@ import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized.js";
 import "./GetAdminProfile.css";
 import AdminVerifyUser from "../AdminVerifyUser/AdminVerifyUser";
 import AdminDeleteUser from "../AdminDeleteUser/AdminDeleteUser";
+import { log } from "../../../utils/ConsoleLog.js";
 import {
   CheckCircleFill,
   ExclamationTriangleFill,
 } from "react-bootstrap-icons";
+import jwt_decode from "jwt-decode";
 
 const GetAdminProfile = () => {
   const [userAccounts, setUserAccounts] = useState([]);
@@ -14,7 +16,6 @@ const GetAdminProfile = () => {
   const [adminProfile, setAdminProfile] = useState([]);
   const [isAdminVerified, setIsAdminVerified] = useState(false);
   const token = sessionStorage.getItem("accessToken");
-  const userId = sessionStorage.getItem("userId");
   const isVerified = true;
 
   //   get to get user accounts
@@ -22,16 +23,21 @@ const GetAdminProfile = () => {
     try {
       if (!token) return;
       const response = await axiosApiAuthorized.get("/get-user-accounts");
-      console.log(response);
+      log(response);
       if (response.status === 200) {
         setUserAccounts(response.data);
         // some react spinner
       }
     } catch (error) {
-      console.log(error);
+      log(error);
       setShowCaughtError(true);
     }
   };
+
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const userId = decodedUserInfo.userId;
 
   //   function to get admin profile details
   const getAdminProfile = async () => {
@@ -40,13 +46,13 @@ const GetAdminProfile = () => {
       const response = await axiosApiAuthorized.get(
         `/get-admin-profile/${userId}`
       );
-      console.log(response);
+      log(response);
       if (response.status === 200) {
         setAdminProfile(response.data);
         setIsAdminVerified(response.data[0].isverifiedemail);
       }
     } catch (error) {
-      console.log(error);
+      log(error);
     }
   };
 

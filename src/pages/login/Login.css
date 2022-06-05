@@ -3,7 +3,8 @@
   position: relative;
   width: 100%;
   height: 800px;
-  background-color: hsl(197.4, 71.4%, 95%);
+  /* background-color: hsl(197.4, 71.4%, 95%); */
+  background-color: hsl(240, 30%, 80%);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,6 +18,7 @@
   height: 8%;
   padding-bottom: 10px;
   display: flex;
+  z-index: 10;
 }
 .login-home-link {
   margin-top: 10px;
@@ -32,33 +34,62 @@
   box-shadow: 1px 1px 4px var(--steelblue-2);
   transition: 0.3s;
 }
+.login-catch-error {
+  background-color: hsl(0, 100%, 95%);
+  /* border: 1px solid hsl(0, 100%, 80%); */
+  border-radius: 3px;
+  margin-top: 10px;
+  text-align: center;
+  color: hsl(0, 100%, 70%);
+  padding: 4px;
+  width: 40%;
+  margin-top: 3em;
+  margin-bottom: 1em;
+}
+.fade-loader-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* flex-direction: column; */
+  text-align: center;
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0% 100%);
+  border-radius: 5px;
+  width: 40%;
+  padding: 4px;
+  margin-bottom: 1em;
+}
+.authenticate-msg {
+  color: hsl(180, 100%, 30%);
+}
 .login-form-wrapper {
-  padding: 5px;
+  padding: 2em 0em;
   color: hsl(240, 100%, 10%);
   background-color: hsl(0, 0%, 100%);
-  border: 1px solid hsl(0, 0%, 85%);
+  border: 1px solid hsl(207, 44%, 90%);
   border-radius: 5px;
-  box-shadow: 1px 1px 10px 1px hsl(0, 0%, 80%);
   width: 40%;
 }
 
 .login-form-heading {
   display: grid;
-  grid-template-columns: 1;
-  align-items: center;
-  justify-content: center;
+  place-items: center;
   text-align: center;
-  color: hsl(180, 100%, 30%);
+  /* color: hsl(180, 100%, 30%); */
+  color: hsl(180, 100%, 40%);
   background-color: var(--steelblue-2);
   border: 1px solid var(--steelblue-2);
   border-radius: 5px;
-  height: 90px;
-  margin-bottom: 1.5em;
+  height: 60px;
+  width: 80%;
+  margin: 1% 11% 1% 9%;
+  padding: 4px;
 }
 .login-input-field {
-  height: 30px;
+  height: 25px;
   width: 80%;
-  margin: 1% 30% 1% 10%;
+  margin: 6% 11% 3% 9%;
+  padding: 4px;
   display: grid;
   color: hsl(240, 100%, 10%);
   background-color: hsl(207, 44%, 95%);
@@ -72,8 +103,11 @@
 }
 .password-input-field-wrapper {
   position: relative;
-  margin-left: 10%;
-  width: 81%;
+  width: 82.5%;
+  margin-left: 9%;
+  margin-right: 8.5%;
+  margin-top: 6%;
+  margin-bottom: 6%;
   display: flex;
   align-items: center;
   background-color: hsl(0, 0%, 95%);
@@ -93,10 +127,9 @@
 }
 .login-btn {
   font-size: medium;
-  width: 80%;
+  width: 82%;
   height: 32px;
-  margin: 1% 25% 1% 25%;
-  margin: 1% 30% 1% 10%;
+  margin: 1% 9% 1% 9%;
   padding: 5px;
   background-color: hsl(180, 100%, 25%);
   border: 1px solid hsl(180, 100%, 25%);
@@ -128,38 +161,48 @@
   color: green;
   font-weight: bold;
 }
-.fade-loader-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-}
-.authenticate-msg {
-  color: hsl(180, 100%, 25%);
-}
 .forgot-password {
   text-align: center;
 }
 .supposed-to-be-link {
-  text-decoration-line: underline;
-  color: hsl(240, 100%, 50%);
+  /* text-decoration-line: underline;
+  color: hsl(240, 100%, 50%); */
   cursor: pointer;
+}
+.dont-have-account {
+  text-align: center;
 }
 
 /* MEDIA QUERY */
 @media screen and (max-width: 540px) {
   /* THE LOGIN PAGE */
+  .login-catch-error {
+    width: 70%;
+  }
   .login-form-wrapper {
     width: 70%;
   }
+  .fade-loader-wrapper {
+    width: 70%;
+  }
+  .password-input-field-wrapper {
+    width: 83%;
+    margin-left: 9%;
+    margin-right: 8%;
+  }
   .login-btn {
-    width: 80%;
-    margin: 1% 30% 1% 10%;
+    width: 82%;
+    margin: 1% 9% 1% 9%;
   }
 }
 @media screen and (min-width: 1000px) {
+  .login-catch-error {
+    width: 30%;
+  }
   .login-form-wrapper {
+    width: 30%;
+  }
+  .fade-loader-wrapper {
     width: 30%;
   }
 }

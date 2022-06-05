@@ -2,13 +2,18 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "./SwitchAdmin.css";
+import jwt_decode from "jwt-decode";
 
 const SwitchAdmin = ({ roleAsProp }) => {
-  //   consider using jwt-decode to get user from local Storage or session storage
-  const role = sessionStorage.getItem("role");
-  const adminOnUseSection = role === "admin" && roleAsProp === "user";
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const role = decodedUserInfo.role;
+
+  const adminOnUserSection = role === "admin" && roleAsProp === "user";
   const adminOnAdminSection = role === "admin" && roleAsProp === "admin";
-  const [showSwitchToAdmin, setShowSwitchToAdmin] = useState(adminOnUseSection);
+  const [showSwitchToAdmin, setShowSwitchToAdmin] =
+    useState(adminOnUserSection);
   const [showSwitchToUser, setShowSwitchToUser] = useState(adminOnAdminSection);
 
   const history = useHistory();

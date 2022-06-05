@@ -25,13 +25,16 @@ const SignUp = () => {
   let isVerifiedEmail = false;
   // checking the email to ensure that is unique
   const [emailValidityMsg, setEmailValidityMsg] = useState("");
+  const [showEmailValidityMsg, setShowEmailValidityMsg] = useState(false);
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [hideRegistrationForm, setHideRegistrationForm] = useState(false);
   const [showSquareLoader, setShowSquareLoader] = useState(false);
-  const [catchError, setCatchError] = useState("");
 
   const [passwordMatch, setPasswordMatch] = useState("");
+  const [showPasswordDontMatchMsg, setShowPasswordDontMatchMsg] =
+    useState(false);
   const [passwordLength, setPasswordLength] = useState("");
+  const [showPasswordLengthMsg, setShowPasswordLengthMsg] = useState(false);
 
   const [showPasswordOne, setShowPasswordOne] = useState(false);
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
@@ -49,7 +52,7 @@ const SignUp = () => {
     }
   };
 
-  //  function to show password second by changing the state to true
+  //  function to show password second(confirm password) by changing the state to true
   const showingPasswordTwo = () => {
     switch (showPasswordTwo) {
       case true:
@@ -64,6 +67,7 @@ const SignUp = () => {
 
   //check password match
   const checkPasswordMatch = () => {
+    setShowPasswordDontMatchMsg(false);
     setShowCaughtError(false);
     setPasswordLength("");
     const password = document.getElementById("password").value;
@@ -71,6 +75,7 @@ const SignUp = () => {
     if (password === confirmPassword) {
       return true;
     } else {
+      setShowPasswordDontMatchMsg(true);
       setPasswordMatch("**Passwords don't match");
       return false;
     }
@@ -78,12 +83,14 @@ const SignUp = () => {
 
   //check password length
   const checkPasswordLength = () => {
+    setShowPasswordLengthMsg(false);
     setShowCaughtError(false);
     setPasswordMatch("");
     const password = document.getElementById("password").value;
     if (password.length >= 6 && password.length <= 15) {
       return true;
     } else {
+      setShowPasswordLengthMsg(true);
       setPasswordLength(
         "**Passwords must be at least 6 characters and must not exceed 15"
       );
@@ -109,10 +116,11 @@ const SignUp = () => {
       window.scrollTo(0, 0);
       disableButton("button");
       setShowSquareLoader(true);
+      setShowEmailValidityMsg(false);
       setEmailValidityMsg("");
       setPasswordMatch("");
       setPasswordLength("");
-      setCatchError("");
+      setShowCaughtError(false);
       const response = await axiosApiUnAuthorized.post("/signup", {
         firstName: registrationInfo.firstName,
         lastName: registrationInfo.lastName,
@@ -140,6 +148,7 @@ const SignUp = () => {
         } else {
           window.scrollTo(0, 0);
           // Email check after a successful request
+          setShowEmailValidityMsg(true);
           setEmailValidityMsg(response.data.emailValidationMsg);
           // Password check after a successful request
         }
@@ -150,7 +159,6 @@ const SignUp = () => {
       window.scrollTo(0, 0); // scroll to top
       log(err);
       setShowCaughtError(true);
-      setCatchError("Sorry, something went wrong!");
     }
   };
 
@@ -176,7 +184,7 @@ const SignUp = () => {
         {showWhenSuccessfullyRegistered && (
           <div className="show-when-successfully-registered">
             <p>
-              You has been successfully registered and an Admin using the email,{" "}
+              You has been successfully registered using the email,{" "}
               {successfullyRegisteredInfo.email}
             </p>
             <p>
@@ -193,7 +201,7 @@ const SignUp = () => {
         )}
         {showCaughtError && (
           <div className="signup-catch-error">
-            <p>{catchError}</p>
+            <p>Sorry, something went wrong!</p>
           </div>
         )}
         {showSquareLoader && (
@@ -207,61 +215,70 @@ const SignUp = () => {
           </div>
         )}
         {hideRegistrationForm ? null : (
-          <div className="registration-form">
-            <form onSubmit={validatePasswordOnSubmittingForm}>
-              <h3 className="registration-form-heading">Create An Account</h3>
-              <label>FirstName*</label>
+          <div className="registration-form-wrapper">
+            <form
+              onSubmit={validatePasswordOnSubmittingForm}
+              className="registration-form"
+            >
+              <h3 className="registration-form-heading">Create Account</h3>
               <input
                 type="text"
                 id="firstName"
                 className="signup-input-field"
                 value={registrationInfo.firstName}
                 onChange={(e) => handleRegistrationInfoChange(e)}
+                placeholder="First Name"
                 required
               />
-              <label>LastName*</label>
               <input
                 type="text"
                 className="signup-input-field"
                 id="lastName"
                 value={registrationInfo.lastName}
                 onChange={(e) => handleRegistrationInfoChange(e)}
+                placeholder="Last Name"
                 required
               />
-              <p className="email-validity-msg">{emailValidityMsg}</p>
-              <label>Email*</label>
+              {showEmailValidityMsg && (
+                <p className="email-validity-msg">{emailValidityMsg}</p>
+              )}
               <input
                 type="email"
                 className="signup-input-field"
                 id="email"
                 value={registrationInfo.email}
                 onChange={(e) => handleRegistrationInfoChange(e)}
+                placeholder="Email"
                 required
               />
-              <p className="check-password-match">{passwordMatch}</p>
-              <p className="check-password-length">{passwordLength}</p>
-              <label>Password*</label>
-              <div className="signup-input-field-wrapper-1">
+              {showPasswordDontMatchMsg && (
+                <p className="check-password-match">{passwordMatch}</p>
+              )}
+              {showPasswordLengthMsg && (
+                <p className="check-password-length">{passwordLength}</p>
+              )}
+              <div className="signup-input-field-wrapper">
                 <input
                   type={showPasswordOne ? "text" : "password"}
                   className="signup-input-field-password"
                   id="password"
                   value={registrationInfo.password}
                   onChange={(e) => handleRegistrationInfoChange(e)}
+                  placeholder="Password"
                   required
                 />
                 <div className="signup-eye-icon" onClick={showingPasswordOne}>
                   {showPasswordOne ? <EyeSlash /> : <Eye />}
                 </div>
               </div>
-              <label>Confirm Password*</label>
-              <div className="signup-input-field-wrapper-2">
+              <div className="signup-input-field-wrapper">
                 <input
                   type={showPasswordTwo ? "text" : "password"}
                   className="signup-input-field-password"
                   id="confirmPassword"
                   value={registrationInfo.confirmPassword}
                   onChange={(e) => handleRegistrationInfoChange(e)}
+                  placeholder="Confirm Password"
                   required
                 />
                 <div className="signup-eye-icon" onClick={showingPasswordTwo}>
@@ -272,9 +289,9 @@ const SignUp = () => {
                 Create
               </button>
             </form>
-            <p>
+            <p className="already-have-account">
               Already have an account?{" "}
-              <Link to="/login" className="link">
+              <Link to="/login" className="site-link">
                 Log In
               </Link>
             </p>

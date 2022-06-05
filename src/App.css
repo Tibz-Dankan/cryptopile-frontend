@@ -9,7 +9,6 @@ body {
   font-size: large;
   color: black;
   margin: 0px 0px 0px 0px;
-  /* overflow-x: hidden; */
   scroll-behavior: smooth;
 }
 
@@ -45,4 +44,15 @@ body {
   flex-direction: row;
   /* align-items: center; */
   justify-content: flex-start;
+}
+
+/* LINKS CLASSES USED IN VARIOUS COMPONENTS */
+.site-link {
+  color: hsl(240, 100%, 30%);
+  text-decoration: none;
+}
+.site-link:hover {
+  color: hsl(350, 100%, 40%);
+  text-decoration: underline;
+  transition: 0.3s;
 }

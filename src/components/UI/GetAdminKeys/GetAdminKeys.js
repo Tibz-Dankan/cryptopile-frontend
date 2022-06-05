@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
 import { log } from "../../../utils/ConsoleLog";
+import jwt_decode from "jwt-decode";
 import "./GetAdminKeys.css";
 
 const GetAdminKeys = () => {
-  const userId = sessionStorage.getItem("userId");
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showingResponse, setShowingResponseMsg] = useState(false);
   const [adminKeys, setAdminKeys] = useState([]);
@@ -20,8 +20,16 @@ const GetAdminKeys = () => {
       setShowSuccessMsg(false);
     }, 3000);
   };
+
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const userId = decodedUserInfo.userId;
+
+  const accessToken = sessionStorage.getItem("accessToken");
   const getKeys = async () => {
     try {
+      if (!accessToken) return;
       const response = await axiosApiAuthorized.get(`/get-admin-key/${userId}`);
       log(response);
       if (response.status === 200) {
@@ -104,3 +112,25 @@ const GetAdminKeys = () => {
 };
 
 export default GetAdminKeys;
+
+//THE COPY FUNCTIONALITY
+// <!-- The text field -->
+// <input type="text" value="Hello World" id="myInput">
+
+// <!-- The button used to copy the text -->
+// <button onclick="myFunction()">Copy text</button>
+
+// function myFunction() {
+//   /* Get the text field */
+//   var copyText = document.getElementById("myInput");
+
+//   /* Select the text field */
+//   copyText.select();
+//   copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+//    /* Copy the text inside the text field */
+//   navigator.clipboard.writeText(copyText.value);
+
+//   /* Alert the copied text */
+//   alert("Copied the text: " + copyText.value);
+// }

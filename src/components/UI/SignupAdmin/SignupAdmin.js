@@ -26,6 +26,7 @@ const SignupAdmin = () => {
     useState("");
   let isVerifiedEmail = false;
   // checking the email to ensure that is unique
+  const [showEmailValidityMsg, setShowEmailValidityMsg] = useState(false);
   const [emailValidityMsg, setEmailValidityMsg] = useState("");
   const [showCaughtError, setShowCaughtError] = useState(false);
   const [hideRegistrationForm, setHideRegistrationForm] = useState(false);
@@ -33,7 +34,10 @@ const SignupAdmin = () => {
   const [catchError, setCatchError] = useState("");
 
   const [passwordMatch, setPasswordMatch] = useState("");
+  const [showPasswordDontMatchMsg, setShowPasswordDontMatchMsg] =
+    useState(false);
   const [passwordLength, setPasswordLength] = useState("");
+  const [showPasswordLengthMsg, setShowPasswordLengthMsg] = useState(false);
 
   const [showPasswordOne, setShowPasswordOne] = useState(false);
   const [showPasswordTwo, setShowPasswordTwo] = useState(false);
@@ -88,6 +92,7 @@ const SignupAdmin = () => {
 
   //check password match
   const checkPasswordMatch = () => {
+    setShowPasswordDontMatchMsg(false);
     setShowCaughtError(false);
     setPasswordLength("");
     const password = document.getElementById("password").value;
@@ -95,6 +100,7 @@ const SignupAdmin = () => {
     if (password === confirmPassword) {
       return true;
     } else {
+      setShowPasswordDontMatchMsg(true);
       setPasswordMatch("**Passwords don't match");
       return false;
     }
@@ -102,12 +108,14 @@ const SignupAdmin = () => {
 
   //check password length
   const checkPasswordLength = () => {
+    setShowPasswordLengthMsg(false);
     setShowCaughtError(false);
     setPasswordMatch("");
     const password = document.getElementById("password").value;
     if (password.length >= 6 && password.length <= 15) {
       return true;
     } else {
+      setShowPasswordLengthMsg(true);
       setPasswordLength(
         "**Passwords must be at least 6 characters and must not exceed 15"
       );
@@ -133,7 +141,7 @@ const SignupAdmin = () => {
       window.scrollTo(0, 0);
       disableButton("button");
       setShowSquareLoader(true);
-      setEmailValidityMsg("");
+      setShowEmailValidityMsg(false);
       setPasswordMatch("");
       setPasswordLength("");
       setCatchError("");
@@ -164,6 +172,7 @@ const SignupAdmin = () => {
         } else {
           window.scrollTo(0, 0);
           // Email check after a successful request
+          setShowEmailValidityMsg(true);
           setEmailValidityMsg(response.data.emailValidationMsg);
           // Password check after a successful request
         }
@@ -190,7 +199,7 @@ const SignupAdmin = () => {
         {showWhenSuccessfullyRegistered && (
           <div className="show-when-successfully-registered">
             <p>
-              You has been successfully registered using the email:{" "}
+              You has been successfully registered as an admin using the email,{" "}
               {successfullyRegisteredInfo.email}
             </p>
             <p>
@@ -223,89 +232,97 @@ const SignupAdmin = () => {
         {hideRegistrationForm
           ? null
           : showSignupForm && (
-              <div className="registration-form">
-                <form onSubmit={validatePasswordOnSubmittingForm}>
-                  <h3 className="registration-form-heading">
-                    Create An Account
-                  </h3>
-                  <label>FirstName*</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    className="signup-input-field"
-                    value={registrationInfo.firstName}
-                    onChange={(e) => handleRegistrationInfoChange(e)}
-                    required
-                  />
-                  <label>LastName*</label>
-                  <input
-                    type="text"
-                    className="signup-input-field"
-                    id="lastName"
-                    value={registrationInfo.lastName}
-                    onChange={(e) => handleRegistrationInfoChange(e)}
-                    required
-                  />
-                  <p className="email-validity-msg">{emailValidityMsg}</p>
-                  <label>Email*</label>
-                  <input
-                    type="email"
-                    className="signup-input-field"
-                    id="email"
-                    value={registrationInfo.email}
-                    onChange={(e) => handleRegistrationInfoChange(e)}
-                    required
-                  />
-                  <p className="check-password-match">{passwordMatch}</p>
-                  <p className="check-password-length">{passwordLength}</p>
-                  <label>Password*</label>
-                  <div className="signup-input-field-wrapper-1">
+              <>
+                <div className="registration-form">
+                  <form onSubmit={validatePasswordOnSubmittingForm}>
+                    <h3 className="registration-form-heading">
+                      Create Admin Account
+                    </h3>
                     <input
-                      type={showPasswordOne ? "text" : "password"}
-                      className="signup-input-field-password"
-                      id="password"
-                      value={registrationInfo.password}
+                      type="text"
+                      id="firstName"
+                      className="signup-input-field"
+                      value={registrationInfo.firstName}
                       onChange={(e) => handleRegistrationInfoChange(e)}
+                      placeholder="First Name"
                       required
                     />
-                    <div
-                      className="signup-eye-icon"
-                      onClick={() => showingPasswordOne()}
-                    >
-                      {showPasswordOne ? <EyeSlash /> : <Eye />}
-                    </div>
-                  </div>
-                  <label>Confirm Password*</label>
-                  <div className="signup-input-field-wrapper-2">
                     <input
-                      type={showPasswordTwo ? "text" : "password"}
-                      className="signup-input-field-password"
-                      id="confirmPassword"
-                      value={registrationInfo.confirmPassword}
+                      type="text"
+                      className="signup-input-field"
+                      id="lastName"
+                      value={registrationInfo.lastName}
                       onChange={(e) => handleRegistrationInfoChange(e)}
+                      placeholder="Last Name"
                       required
                     />
-                    <div
-                      className="signup-eye-icon"
-                      onClick={() => showingPasswordTwo()}
-                    >
-                      {showPasswordTwo ? <EyeSlash /> : <Eye />}
+                    {showEmailValidityMsg && (
+                      <p className="email-validity-msg">{emailValidityMsg}</p>
+                    )}
+                    <input
+                      type="email"
+                      className="signup-input-field"
+                      id="email"
+                      value={registrationInfo.email}
+                      onChange={(e) => handleRegistrationInfoChange(e)}
+                      placeholder="Email"
+                      required
+                    />
+                    {showPasswordDontMatchMsg && (
+                      <p className="check-password-match">{passwordMatch}</p>
+                    )}
+                    {showPasswordLengthMsg && (
+                      <p className="check-password-length">{passwordLength}</p>
+                    )}
+                    <div className="signup-input-field-wrapper">
+                      <input
+                        type={showPasswordOne ? "text" : "password"}
+                        className="signup-input-field-password"
+                        id="password"
+                        value={registrationInfo.password}
+                        onChange={(e) => handleRegistrationInfoChange(e)}
+                        placeholder="Password"
+                        required
+                      />
+                      <div
+                        className="signup-eye-icon"
+                        onClick={() => showingPasswordOne()}
+                      >
+                        {showPasswordOne ? <EyeSlash /> : <Eye />}
+                      </div>
                     </div>
-                  </div>
-                  <button className="signup-btn" id="button">
-                    Create
-                  </button>
-                </form>
-                <p>
+                    <div className="signup-input-field-wrapper">
+                      <input
+                        type={showPasswordTwo ? "text" : "password"}
+                        className="signup-input-field-password"
+                        id="confirmPassword"
+                        value={registrationInfo.confirmPassword}
+                        onChange={(e) => handleRegistrationInfoChange(e)}
+                        placeholder="Confirm Password"
+                        required
+                      />
+                      <div
+                        className="signup-eye-icon"
+                        onClick={() => showingPasswordTwo()}
+                      >
+                        {showPasswordTwo ? <EyeSlash /> : <Eye />}
+                      </div>
+                    </div>
+                    <button className="signup-btn" id="button">
+                      Create
+                    </button>
+                  </form>
+                </div>
+                <p className="already-have-account">
                   Already have an account?{" "}
                   <span
                     onClick={() => changeShowLoginFormState()}
-                    className="supposed-to-be-link"
+                    className="supposed-to-be-link site-link"
                   >
                     Log In
                   </span>
                 </p>
-              </div>
+              </>
             )}
       </div>
     </Fragment>

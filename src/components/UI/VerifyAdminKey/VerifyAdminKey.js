@@ -1,9 +1,10 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext, useEffect } from "react";
+import { FadeLoader } from "react-spinners";
 import axiosApiUnAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
 import { log } from "../../../utils/ConsoleLog";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
-import "./VerifyAdminKey";
+import "./VerifyAdminKey.css";
 import AdminKeyVerifiedContext from "../../../context/AdminKeyVerifiedContext/AdminKeyVerifiedContext";
 import ShowLoginFormContext from "../../../context/ShowLoginFormContext/ShowLoginFormContext";
 
@@ -11,8 +12,9 @@ const VerifyAdminKey = () => {
   const [adminKey, setAdminKey] = useState("");
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
   const [showFailureMsg, setShowFailureMsg] = useState(false);
-  const [error, setError] = useState("");
+  const [showCatchError, setShowCatchError] = useState(false);
   const [showingResponseMsg, setShowingResponseMsg] = useState(false);
+  const [showFadeLoader, setShowFadeLoader] = useState(false);
   const [isAdminKeyVerified, setIsAdminKeyVerified] = useContext(
     AdminKeyVerifiedContext
   );
@@ -52,10 +54,13 @@ const VerifyAdminKey = () => {
   const verifyKey = async (e) => {
     e.preventDefault();
     try {
+      setShowFadeLoader(true);
       disableButton("button");
+      setShowCatchError(false);
       const response = await axiosApiUnAuthorized.post("/verify-admin-key", {
         key: adminKey,
       });
+      setShowFadeLoader(false);
       enableButton("button");
       log(response);
       if (response.data.status === "success") {
@@ -68,43 +73,65 @@ const VerifyAdminKey = () => {
         showResponse(setShowFailureMsg);
       }
     } catch (err) {
-      enableButton("button");
       log(err);
+      setShowCatchError(true);
+      setShowFadeLoader(false);
+      enableButton("button");
     }
   };
 
   return (
     <div className="verify-admin-key-wrapper">
+      {showCatchError && (
+        <p className="verify-admin-key-catch-error">
+          Sorry, something went wrong!
+        </p>
+      )}
       {showingResponseMsg && showSuccessMsg && (
-        <p className="success-msg"> Key successfully verified</p>
+        <p className="verify-admin-key-success-msg">
+          Key successfully verified
+        </p>
       )}
       {showingResponseMsg && showFailureMsg && (
-        <p className="failure-msg">Incorrect key</p>
+        <p className="verify-admin-key-failure-msg">Incorrect key</p>
+      )}
+      {showFadeLoader && (
+        <div className="verify-admin-key-fade-loader-wrapper">
+          <FadeLoader color="hsl(180, 100%, 30%)" size={5} />
+          <p>Verifying...</p>
+        </div>
       )}
       {showVerifyAdminKeyForm && (
-        <form onSubmit={(e) => verifyKey(e)}>
-          <h3>Enter Admin Verification Key</h3>
-          <input
-            type="text"
-            value={adminKey}
-            onChange={(e) => handleAdminKeyChange(e)}
-            className="verify-admin-key-input-field"
-            required
-          />
-          <button type="submit" id="button" className="verify-admin-key-btn">
-            Verify
-          </button>
-
+        <>
+          <form
+            onSubmit={(e) => verifyKey(e)}
+            className="verify-admin-key-form"
+          >
+            <h3 className="verify-admin-key-form-heading">
+              Enter Admin Verification Key
+            </h3>
+            <input
+              type="text"
+              value={adminKey}
+              onChange={(e) => handleAdminKeyChange(e)}
+              className="verify-admin-key-input-field"
+              placeholder="Admin Key"
+              required
+            />
+            <button type="submit" id="button" className="verify-admin-key-btn">
+              Verify
+            </button>
+          </form>
           <p>
             Already have an account?{" "}
             <span
               onClick={() => changeShowLoginFormState()}
-              className="supposed-to-be-link"
+              className="supposed-to-be-link site-link"
             >
               Log In
             </span>
           </p>
-        </form>
+        </>
       )}
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
 import { PropagateLoader } from "react-spinners";
 import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
@@ -7,6 +8,7 @@ import TodoMarkedComplete from "../TodoMarkedComplete/TodoMarkedComplete";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import { log } from "../../../utils/ConsoleLog";
+import jwt_decode from "jwt-decode";
 import "./SeeTodos.css";
 
 const SeeTodos = () => {
@@ -16,14 +18,16 @@ const SeeTodos = () => {
   const [showTableOfTodos, setShowTableOfTodos] = useState(false);
   const [hasTodoChanged, setHasTodoChanged] = useContext(TodoChangeContext);
 
+  // jwt decode
+  const userInfoToken = sessionStorage.getItem("userInfoToken");
+  const decodedUserInfo = jwt_decode(userInfoToken);
+  const userId = decodedUserInfo.userId;
+
   const getUserTodos = async () => {
     try {
       setShowPropagateLoader(true);
       disableButton("button");
-      const getTodos = await axiosApiAuthorized.get(
-        `api/get-todos/${sessionStorage.getItem("userId")}`
-      );
-
+      const getTodos = await axiosApiAuthorized.get(`api/get-todos/${userId}`);
       setShowPropagateLoader(false);
       log(getTodos);
       let arrayOfTodos = getTodos.data;
