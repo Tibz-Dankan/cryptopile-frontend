@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import React, { useState, useEffect } from "react";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import React, { useState, useEffect, useContext } from "react";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
+import axios from "axios";
 import { log } from "../../../utils/ConsoleLog";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import jwt_decode from "jwt-decode";
 import "./GetAdminKeys.css";
 
@@ -26,7 +28,22 @@ const GetAdminKeys = () => {
   const decodedUserInfo = jwt_decode(userInfoToken);
   const userId = decodedUserInfo.userId;
 
-  const accessToken = sessionStorage.getItem("accessToken");
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
+
+  // const accessToken = sessionStorage.getItem("accessToken");
   const getKeys = async () => {
     try {
       if (!accessToken) return;
@@ -52,6 +69,22 @@ const GetAdminKeys = () => {
     getKeys();
     return setAdminKeys([]);
   }, []);
+
+  // // Copy admin key
+  // const copyAdminKey = () => {
+  //   /* Get the text field */
+  //   var copyText = document.getElementById("adminKey");
+
+  //   // /* Select the text field */
+  //   // copyText.select();
+  //   // copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+  //   /* Copy the text inside the text field */
+  //   navigator.clipboard.writeText(copyText.value);
+
+  //   /* Alert the copied text */
+  //   alert("Copied the text: " + copyText.value);
+  // };
 
   return (
     <div className="get-admin-key-wrapper">
@@ -82,8 +115,14 @@ const GetAdminKeys = () => {
                 return (
                   <tr key={adminKey.adminkeyid}>
                     <td>{adminKey.createdon}</td>
-                    <td style={{ color: "hsl(140 100% 55%)" }}>
+                    <td style={{ color: "hsl(140 100% 55%)" }} id="adminKey">
                       {adminKey.adminkey}
+                      {/* <span
+                        style={{ marginLeft: "3px" }}
+                        onClick={() => copyAdminKey()}
+                      >
+                        copy
+                      </span> */}
                     </td>
                     <td>{adminKey.usedby}</td>
                     <td>

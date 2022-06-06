@@ -1,11 +1,13 @@
 import React, { useState, useContext } from "react";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import { log } from "../../../utils/ConsoleLog";
+import axios from "axios";
 import "./AddTodos.css";
 import { PulseLoader } from "react-spinners";
 import jwt_decode from "jwt-decode";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 
 const AddTodos = () => {
   const [todo, setTodo] = useState({ description: "" });
@@ -43,15 +45,25 @@ const AddTodos = () => {
   // jwt decode
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
-  log(decodedUserInfo);
+  // log(decodedUserInfo);
   const userId = decodedUserInfo.userId;
 
-  // const firstName = decodedUserInfo.firstName;
-  // console.log(firstName);
-  // const lastName = decodedUserInfo.lastName;
-  // console.log(lastName);
-  // const userRole = decodedUserInfo.role;
-  // console.log(userRole);
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+  console.log("AccessToken in the context " + accessToken);
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      // Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   // Post or submit the todo
   const addUserTodos = (e) => {
@@ -68,7 +80,8 @@ const AddTodos = () => {
       .then((response) => {
         log(response);
         setShowPulseLoader(false);
-        if (response.status === 200) {
+        // if (response.status === 200) {
+        if (response.data.status === "success") {
           setShowTodoAddedSuccessfullyMsg(true);
           removeTodoAddedSuccessfullyMsg();
           enableButton("button");

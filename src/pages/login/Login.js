@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from "react";
+/* eslint-disable no-unused-vars */
+import React, { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import HomeLink from "../../links/HomeLink";
 import axiosApiUnAuthorized from "../../constants/AxiosApi/axiosUnAuthorized";
@@ -11,6 +12,7 @@ import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
 import { enableButton, disableButton } from "../../utils/ButtonState";
 import { log } from "../../utils/ConsoleLog";
 import FeatureUnderMaintenance from "../../components/UI/FeatureUnderMaintenance/FeatureUnderMaintenance";
+import { AccessTokenContext } from "../../context/AccessTokenContext/AccessTokenContext";
 
 const Login = () => {
   const [userLoginInfo, setUserLoginInfo] = useState({
@@ -25,6 +27,7 @@ const Login = () => {
   const [didNotReceiveVerificationEmail, setDidNotReceiveVerificationEmail] =
     useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
 
   let history = useHistory();
 
@@ -70,6 +73,7 @@ const Login = () => {
           sessionStorage.setItem("isLoggedIn", "isLoggedIn");
           sessionStorage.setItem("accessToken", response.data.accessToken);
           sessionStorage.setItem("userInfoToken", response.data.userInfoToken);
+          setAccessToken(response.data.accessToken); // updating accessToken in the global context variable
           const token = await sessionStorage.getItem("accessToken");
           if (token) return history.push("/todos");
         }

@@ -1,23 +1,23 @@
 /* THE LOGOUT COMPONENT */
 .logout-wrapper {
-  position: absolute;
-  text-align: center;
-  background-color: hsl(240, 100%, 15%);
-  width: 100%;
-  height: 800px;
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(0, 0%, 10%);
+  color: hsl(0, 100%, 70%);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+  border: 1px solid hsl(0, 0%, 100%);
+  border-radius: 5px;
+  height: 1.6em;
 }
-.logout-message {
-  padding-top: 80px;
-  color: hsl(240, 100%, 98%);
-  font-weight: bold;
+.logout-wrapper:hover {
+  background-color: hsl(0, 100%, 98%);
+  border: 1px solid hsl(0, 100%, 98%);
+  transition: 0.3s;
 }
-
-/* MEDIA QUERY */
-@media screen and (max-width: 540px) {
-  /* THE LOGOUT PAGE */
-  .logout-message {
-    width: 80%;
-    margin: 10% 10% 1% 10%;
-    font-size: large;
-  }
+.box-arrow-right-icon {
+  color: hsl(0, 100%, 70%);
+  margin-right: 0.6em;
 }

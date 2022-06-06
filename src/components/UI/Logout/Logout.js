@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { useHistory } from "react-router-dom";
-import NotLoggedIn from "../NotLoggedIn/NotLoggedIn";
+import { BoxArrowRight } from "react-bootstrap-icons";
 import "./Logout.css";
 
 const Logout = () => {
   let history = useHistory();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const logoutUser = async () => {
+  const logOutUser = async () => {
     sessionStorage.clear();
     history.push("/login");
   };
-  // logout user on loading the component
-  useEffect(() => {
-    // first check whether the user is logged in
-    if (sessionStorage.getItem("isLoggedIn") === "isLoggedIn") {
-      // logout the user
-      logoutUser();
-      setIsLoggedIn(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   return (
-    <div>
-      {isLoggedIn ? (
-        <div className="logout-wrapper">
-          <h4 className="logout-message">Bye Bye See You Later !</h4>
-        </div>
-      ) : (
-        <NotLoggedIn />
-      )}
-    </div>
+    <Fragment>
+      <div className="logout-wrapper">
+        <BoxArrowRight className="box-arrow-right-icon" />
+        <p onClick={() => logOutUser()}>Logout</p>
+      </div>
+    </Fragment>
   );
 };
 

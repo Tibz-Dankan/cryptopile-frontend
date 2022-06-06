@@ -1,7 +1,9 @@
-import axiosApiAuthorized from "./../../../constants/AxiosApi/axiosAuthorized";
-import React, { useState } from "react";
+import backendBaseURL from "./../../../constants/AxiosApi/axiosAuthorized";
+import React, { useState, useContext } from "react";
+import axios from "axios";
 import Modal from "react-modal";
 import { X } from "react-bootstrap-icons";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import "./AdminVerifyUser.css";
 
 const AdminVerifyUser = ({ account }) => {
@@ -41,6 +43,21 @@ const AdminVerifyUser = ({ account }) => {
       setUserAccountVerified(false);
     }, 2000);
   };
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   const adminVerifyUserAccount = async (e) => {
     e.preventDefault();

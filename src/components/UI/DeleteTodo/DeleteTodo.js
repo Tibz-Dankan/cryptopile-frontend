@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext } from "react";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import axios from "axios";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import Modal from "react-modal";
 import { X } from "react-bootstrap-icons";
@@ -55,6 +57,20 @@ const DeleteTodo = ({ todo }) => {
 
   const [todoId, setTodoId] = useState(todo.todoid);
 
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
   // function to delete the todo
   const deleteTodo = async () => {
     try {

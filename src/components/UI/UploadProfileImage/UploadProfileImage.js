@@ -1,8 +1,11 @@
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useContext } from "react";
 import axios from "axios";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized.js";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized.js";
 import "./UploadProfileImage.css";
 import { BeatLoader } from "react-spinners";
+import { log } from "../../../utils/ConsoleLog.js";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext.js";
 import jwt_decode from "jwt-decode";
 
 const UploadProfileImage = () => {
@@ -13,47 +16,69 @@ const UploadProfileImage = () => {
 
   //   function to check for the image extensions
 
-  const uploadImage = async (e) => {
-    const formData = new FormData();
-    formData.append("file", imageSelected);
-    formData.append("upload_preset", "rxckqye9");
-    try {
-      e.preventDefault();
-      setShowBeatLoader(true);
-      setImageUploadMsg("Uploading image...");
-      const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/dlmv4ot9h/image/upload`,
-        formData
-      );
-      console.log(response);
-      if (response.status === 200) {
-        setImageUrl(response.data.secure_url);
-        // upload the image url to the backend
-        uploadImageUrlToBackend();
-        console.log(imageUrl);
-      }
-    } catch (error) {
-      setShowBeatLoader(false);
-      setImageUploadMsg("");
-      console.log(error);
-    }
-  };
+  // const uploadImage = async (e) => {
+  //   const formData = new FormData();
+  //   formData.append("file", imageSelected);
+  //   formData.append("upload_preset", "rxckqye9");
+  //   try {
+  //     e.preventDefault();
+  //     setShowBeatLoader(true);
+  //     setImageUploadMsg("Uploading image...");
+  //     const response = await axios.post(
+  //       `https://api.cloudinary.com/v1_1/dlmv4ot9h/image/upload`,
+  //       formData
+  //     );
+  //     console.log(response);
+  //     if (response.status === 200) {
+  //       setImageUrl(response.data.secure_url);
+  //       // upload the image url to the backend
+  //       uploadImageUrlToBackend();
+  //       console.log(imageUrl);
+  //     }
+  //   } catch (error) {
+  //     setShowBeatLoader(false);
+  //     setImageUploadMsg("");
+  //     console.log(error);
+  //   }
+  // };
 
   // jwt decode
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
   const userId = decodedUserInfo.userId;
 
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
+
+  const checkImageFile = () => {
+    const formData = new FormData();
+    formData.append("file", imageSelected);
+    log(imageSelected);
+    // check image extensions here
+  };
   // react spinner when uploading an image
   // function to store url in the database
-  const uploadImageUrlToBackend = async () => {
+  const uploadImageToBackend = async () => {
     try {
+      checkImageFile();
       setShowBeatLoader(true);
-      setImageUploadMsg("Uploading url...");
+      setImageUploadMsg("Uploading image...");
       const response = await axiosApiAuthorized.post(
         `/api/upload-profile-image-url/${userId}`,
         {
-          imageUrl: imageUrl,
+          imageUrl: imageSelected,
           imageCategory: "profile",
         }
       );
@@ -76,13 +101,16 @@ const UploadProfileImage = () => {
 
   return (
     <div className="upload-profile-image-wrapper">
-      <form onSubmit={uploadImage} className="upload-profile-image-form">
-        {showBeatLoader ? (
+      <form
+        onSubmit={() => uploadImageToBackend()}
+        className="upload-profile-image-form"
+      >
+        {showBeatLoader && (
           <div className="the-bar-loader">
             <BeatLoader color="hsl(180, 100%, 30%)" />
             <p>{imageUploadMsg}</p>
           </div>
-        ) : null}
+        )}
         <h4>Choose an Image file</h4>
         <input
           type="file"

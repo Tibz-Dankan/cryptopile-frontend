@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized.js";
+import { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized.js";
 import "./GetAdminProfile.css";
 import AdminVerifyUser from "../AdminVerifyUser/AdminVerifyUser";
 import AdminDeleteUser from "../AdminDeleteUser/AdminDeleteUser";
 import { log } from "../../../utils/ConsoleLog.js";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext.js";
 import {
   CheckCircleFill,
   ExclamationTriangleFill,
@@ -17,6 +19,21 @@ const GetAdminProfile = () => {
   const [isAdminVerified, setIsAdminVerified] = useState(false);
   const token = sessionStorage.getItem("accessToken");
   const isVerified = true;
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   //   get to get user accounts
   const getUserAccounts = async () => {

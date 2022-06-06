@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import axios from "axios";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import React, { useState, useContext } from "react";
 import Modal from "react-modal";
@@ -75,6 +77,23 @@ const EditTodoDescription = ({ todo }) => {
       return false;
     }
   };
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+  // console.log("AccessToken in the context " + accessToken);
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      // Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   // function to update data in the database
   const updateTodoDescription = async (e) => {

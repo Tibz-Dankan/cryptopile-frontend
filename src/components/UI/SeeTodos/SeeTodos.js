@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import { PropagateLoader } from "react-spinners";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import EditTodoDescription from "../EditTodoDescription/EditTodoDescription";
 import DeleteTodo from "../DeleteTodo/DeleteTodo";
 import TodoMarkedComplete from "../TodoMarkedComplete/TodoMarkedComplete";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import { log } from "../../../utils/ConsoleLog";
 import jwt_decode from "jwt-decode";
@@ -22,6 +24,23 @@ const SeeTodos = () => {
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
   const userId = decodedUserInfo.userId;
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+  // console.log("AccessToken in the context " + accessToken);
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      // Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   const getUserTodos = async () => {
     try {

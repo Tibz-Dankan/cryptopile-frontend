@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState } from "react";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import { useState, useContext } from "react";
+import axios from "axios";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import {
   CheckCircleFill,
   ExclamationTriangleFill,
@@ -13,6 +14,7 @@ import jwt_decode from "jwt-decode";
 import { log } from "../../../utils/ConsoleLog";
 import "./UserProfile.css";
 import UploadProfileImage from "../UploadProfileImage/UploadProfileImage";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState([]);
@@ -71,6 +73,21 @@ const UserProfile = () => {
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
   const userId = decodedUserInfo.userId;
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   const getUserInfo = () => {
     setShowScaleLoader(true);

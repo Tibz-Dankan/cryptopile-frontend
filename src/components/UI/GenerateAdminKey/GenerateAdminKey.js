@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import { log } from "../../../utils/ConsoleLog";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import jwt_decode from "jwt-decode";
 
 const GenerateAdminKey = () => {
@@ -23,6 +25,21 @@ const GenerateAdminKey = () => {
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
   const userId = decodedUserInfo.userId;
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   const generateKey = async () => {
     try {

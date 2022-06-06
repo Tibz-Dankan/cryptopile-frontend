@@ -11,6 +11,8 @@ import AdminKeyVerifiedContext from "../../context/AdminKeyVerifiedContext/Admin
 import ShowLoginFormContext from "../../context/ShowLoginFormContext/ShowLoginFormContext";
 import SwitchAdmin from "../../components/UI/SwitchAdmin/SwitchAdmin";
 import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
+import CustomHeader from "../../components/layouts/CustomHeader/CustomHeader";
+import SideBar from "../../components/layouts/SideBar/SideBar";
 import jwt_decode from "jwt-decode";
 
 const Admin = () => {
@@ -34,6 +36,7 @@ const Admin = () => {
   );
   return (
     <div className="admin-wrapper">
+      <CustomHeader sectionName={"Admin"} />
       {showLoginAndSignupForms ? (
         <ShowLoginFormContext.Provider value={[showLoginForm, setShowLogin]}>
           <>
@@ -53,6 +56,7 @@ const Admin = () => {
         </ShowLoginFormContext.Provider>
       ) : (
         <>
+          <SideBar />
           <SwitchAdmin roleAsProp={"admin"} />
           <GetAdminProfile />
           <GetAdminKeys />

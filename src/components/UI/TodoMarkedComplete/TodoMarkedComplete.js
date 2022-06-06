@@ -1,7 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext } from "react";
-import axiosApiAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import axios from "axios";
+import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
+import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import { log } from "../../../utils/ConsoleLog";
 import Modal from "react-modal";
@@ -50,6 +52,21 @@ const TodoMarkedComplete = ({ todo }) => {
       TodoChanged(hasTodoChanged, setHasTodoChanged);
     }, 3000);
   };
+
+  const [accessToken, setAccessToken] = useContext(AccessTokenContext);
+  const updateAccessTokenContextWhenNull = () => {
+    if (!accessToken) {
+      setAccessToken(sessionStorage.getItem("accessToken"));
+    }
+  };
+  updateAccessTokenContextWhenNull();
+
+  const axiosApiAuthorized = axios.create({
+    baseURL: backendBaseURL,
+    headers: {
+      Authorization: "Bearer " + accessToken,
+    },
+  });
 
   const submitTodoCompletionStatus = async () => {
     try {
