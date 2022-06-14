@@ -98,20 +98,23 @@ const SeeTodos = () => {
             >
               RELOAD
             </button>
-            <table>
+            <table className="todo-table">
               <tbody>
-                <tr>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>TodoDescription</th>
-                  <th>Delete</th>
+                <tr className="todo-table-heading">
+                  <th className="todo-table-heading">Date</th>
+                  <th className="todo-table-heading">Time</th>
+                  <th className="todo-table-heading">TodoDescription</th>
+                  <th className="todo-table-heading">Delete</th>
                 </tr>
                 {todos.map((todo) => {
                   return (
                     <tr key={todo.todoid}>
-                      <td>{todo.dateofadd}</td>
-                      <td>{todo.timeofadd}</td>
-                      <td id="todo-description-id">
+                      <td className="todo-table-column">{todo.dateofadd}</td>
+                      <td className="todo-table-column">{todo.timeofadd}</td>
+                      <td
+                        className="todo-table-column"
+                        id="todo-description-id"
+                      >
                         <span
                           style={{
                             textDecoration:
@@ -123,7 +126,9 @@ const SeeTodos = () => {
                         {<EditTodoDescription todo={todo} />}
                         {<TodoMarkedComplete todo={todo} />}
                       </td>
-                      <td>{<DeleteTodo todo={todo} />}</td>
+                      <td className="todo-table-column">
+                        {<DeleteTodo todo={todo} />}
+                      </td>
                     </tr>
                   );
                 })}

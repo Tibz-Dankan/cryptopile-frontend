@@ -14,6 +14,7 @@ import ForgotPassword from "./components/UI/ForgotPassword/ForgotPassword";
 import PasswordResetCode from "./components/UI/PasswordResetCode/PasswordResetCode";
 import ResetPassword from "./components/UI/ResetPassword/ResetPassword";
 import ImageUploadToCloudinary from "./components/UI/ImageUploadToCloudinary/ImageUploadToCloudinary";
+import UserProfile from "./components/UI/UserProfile/UserProfile";
 import Admin from "./pages/Admin/Admin";
 import NotFound from "./components/UI/NotFound/NotFound";
 import { AccessTokenContext } from "./context/AccessTokenContext/AccessTokenContext";
@@ -23,7 +24,6 @@ const App = () => {
   return (
     <div>
       <HashRouter>
-        {/* scroll to the top components here please */}
         <ScrollToTop />
         <Switch>
           <AccessTokenContext.Provider value={[accessToken, setAccessToken]}>
@@ -39,13 +39,14 @@ const App = () => {
             <Route path="/password-reset-code" component={PasswordResetCode} />
             <Route path="/reset-password" component={ResetPassword} />
             <Route path="/admin" component={Admin} />
+            <Route path="/profile" component={UserProfile} />
             <Route
               path="/image-upload-to-cloudinary"
               component={ImageUploadToCloudinary}
             />
-            <Route component={NotFound} />{" "}
             {/*more research for this component*/}
           </AccessTokenContext.Provider>
+          <Route component={NotFound} />{" "}
         </Switch>
       </HashRouter>
     </div>

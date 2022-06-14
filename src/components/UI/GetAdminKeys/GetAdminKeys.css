@@ -1,0 +1,57 @@
+.get-admin-key-wrapper {
+  background: linear-gradient(
+    to right,
+    hsl(240, 100%, 95%),
+    hsl(120, 80%, 30%),
+    hsl(180, 100%, 30%)
+  );
+  margin-top: 6em;
+  margin-bottom: 4em;
+  position: relative;
+  font-size: small;
+  display: inline-block;
+}
+.get-admin-key-catch-error {
+  background-color: hsl(0, 100%, 95%);
+  border: 1px solid hsl(0, 100%, 85%);
+  border-radius: 3px;
+  text-align: center;
+  color: hsl(0, 100%, 50%);
+  padding: 1em 0.5em;
+  position: absolute;
+  left: 35%;
+  top: -4em;
+}
+.admin-key-heading {
+  display: inline-block;
+  color: hsl(0, 0%, 40%);
+  background-color: hsl(0, 0%, 100%);
+  margin: 0.5em;
+  padding: 0em 0.5em;
+  border: 1px solid hsl(0, 0%, 100%);
+  border-radius: 3px;
+  text-align: center;
+}
+.get-admin-key-beat-loader {
+  color: hsl(120, 80%, 30%);
+  border: 1px solid hsl(120, 30%, 60%);
+  border-radius: 4px;
+  background-color: hsl(120, 80%, 95%);
+  text-align: center;
+  padding: 0.6em 2em;
+  position: absolute;
+  left: 35%;
+  top: -2.5em;
+}
+/* .admin-key-table-wrapper {
+} */
+
+.reload-button-near-key-table {
+  position: absolute;
+  top: -2.5em;
+  left: 0%;
+}
+
+.admin-key-wrapper {
+  color: hsl(180, 100%, 30%);
+}

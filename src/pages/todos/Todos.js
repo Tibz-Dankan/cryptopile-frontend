@@ -18,7 +18,7 @@ const Todos = () => {
   const role = sessionStorage.getItem("role");
   const [userRole, setUserRole] = useState(role);
   useEffect(() => {
-    if (sessionStorage.getItem("isLoggedIn") === "isLoggedIn") {
+    if (sessionStorage.getItem("accessToken") !== null) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -51,7 +51,7 @@ const Todos = () => {
               value={[hasTodosChanged, setHasTodosChanged]}
             >
               <SwitchAdmin roleAsProp={"user"} />
-              <UserProfile />
+              {/* <UserProfile /> */}
               <AddTodos />
               <SeeTodos />
               <MiniFooter />

@@ -1,0 +1,30 @@
+.delete-user-button-1 {
+  --reddish: hsl(0, 100%, 40%);
+  color: hsl(0, 0%, 100%);
+  width: 100%;
+  background-color: var(--reddish);
+  border: 1px solid var(--reddish);
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 1px hsl(0, 100%, 25%);
+  padding: 5px;
+}
+.delete-user-button-1:hover {
+  --reddish: hsl(0, 100%, 50%);
+  box-shadow: 1px 1px 8px 2px hsl(0, 100%, 25%);
+  transition: 0.35s;
+}
+.delete-user-button-2 {
+  --reddish: hsl(0, 100%, 40%);
+  color: hsl(0, 0%, 100%);
+  width: 100%;
+  background-color: var(--reddish);
+  border: 1px solid var(--reddish);
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px 1px hsl(0, 100%, 20%);
+  padding: 5px;
+}
+.delete-user-button-2:hover {
+  --reddish: hsl(0, 100%, 60%);
+  box-shadow: 1px 1px 8px 2px hsl(0, 100%, 20%);
+  transition: 0.35s;
+}

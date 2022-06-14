@@ -13,7 +13,7 @@ const NotLoggedIn = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === null) {
+    if (sessionStorage.getItem("accessToken") === null) {
       openModal();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

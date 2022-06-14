@@ -1,54 +1,81 @@
 .user-profile-wrapper {
   margin-top: 10px;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 100vh;
+  max-height: auto;
   width: 100%;
   align-items: center;
+  background-color: hsl(197.4, 71.4%, 95%);
+  /* background-color: hsl(240, 30%, 80%); */
+  /* background: linear-gradient(
+    to right,
+    hsl(120, 80%, 30%),
+    hsl(240, 100%, 90%),
+    hsl(180, 100%, 30%)
+  ); */
 }
-
-.btn-showing-profile {
-  background-color: hsl(0, 0%, 99%);
-  border: 1px solid hsl(0, 0%, 100%);
+@media screen and (max-width: 1000px) {
+  .user-profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    /* margin-bottom: 3em; */
+  }
+}
+.user-profile-info-wrapper {
+  background-color: hsl(0, 0%, 100%);
+  border: 1px solid hsl(0, 0%, 90%);
+  padding: 0.2em;
+  border-radius: 3px;
+  margin-top: 5em;
+}
+@media screen and (max-width: 1000px) {
+  .user-profile-info-wrapper {
+    width: 30%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .user-profile-info-wrapper {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .user-profile-info-wrapper {
+    width: 60%;
+  }
+}
+.user-name-and-image {
+  border: 1px solid hsl(0, 0%, 90%);
   border-radius: 4px;
-  box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 80%);
-  padding: 5px 0px 5px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  outline: none;
 }
-.btn-showing-profile:hover,
-.btn-showing-profile:focus {
-  background-color: hsl(0, 0%, 95%);
-  box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 3px hsl(0, 0%, 80%);
-  transition: 0.3s;
+.user-name {
+  text-align: center;
+  color: hsl(0, 0%, 0%);
+  margin-top: 0.2em;
+  margin-top: 0em;
 }
-.user-info {
-  background-color: hsl(0, 0%, 98%);
-  border: 1px solid hsl(0, 0%, 98%);
-  border-radius: 5px;
-  box-shadow: 1px 1px 2px hsl(0, 0%, 80%), -1px -1px 2px hsl(0, 0%, 80%);
-  width: 60%;
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+.profile-verification-status {
+  display: grid;
+  place-items: center;
 }
-
+.user-image {
+  display: grid;
+  place-items: center;
+}
 .default-profile-image {
   position: relative;
-  top: 5px;
-  left: 35%;
+  margin-top: 0.2em;
+  margin-bottom: 0.1em;
 }
 /* Tooltip container */
 .tooltip {
   position: relative;
-  display: inline-block;
-  top: 5px;
-  left: 35%;
+  display: grid;
+  place-items: center;
 }
 
 /* Tooltip text */
@@ -71,63 +98,55 @@
   visibility: visible;
 }
 
-.user-profile-image-wrapper {
-  margin-top: 5px;
-  width: 100%;
-  display: grid;
-  place-items: center;
-}
-
-.user-profile-image {
-  width: 80px;
-  height: 80px;
-  border-radius: 40px;
-}
-
-.profile-verification-status {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
 .verified-user,
 .not-verified-user {
-  display: "flex";
-  align-items: center;
-  margin-left: 10px;
-}
-/* MEDIA QUERIES */
-@media screen and (max-width: 400px) {
-  .btn-showing-profile,
-  .user-info {
-    width: 90%;
-  }
-}
-
-@media screen and (min-width: 401px) and (max-width: 540px) {
-  .btn-showing-profile,
-  .user-info {
-    width: 80%;
-  }
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1em;
+  background-color: hsl(0, 0%, 60%);
+  border: 1px solid hsl(0, 0%, 60%);
+  border-radius: 4px;
 }
 
-@media screen and (min-width: 541px) and (max-width: 800px) {
-  .btn-showing-profile,
-  .user-info {
-    width: 60%;
-  }
+.verification-status {
+  padding: 0.5em 0.2em;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  color: hsl(0, 0%, 0%);
+}
+.user-role-and-email-wrapper {
+  padding: 0.5em;
+  border: 1px solid hsl(0, 0%, 90%);
+  border-radius: 4px;
+  margin-top: 0.2em;
+}
+.user-email-label,
+.user-role-label {
+  color: hsl(0, 0%, 60%);
 }
 
-@media screen and (min-width: 801px) and (max-width: 1000px) {
-  .btn-showing-profile,
-  .user-info {
-    width: 50%;
-  }
+.edit-profile-button-wrapper {
+  padding: 0.5em;
+  text-align: center;
+  border: 1px solid hsl(0, 0%, 90%);
+  border-radius: 4px;
+  margin-top: 0.2em;
+}
+.edit-user-info-wrapper {
+  width: 31%;
+  /* background-color: blueviolet; To be removed */
 }
 
-@media screen and (min-width: 1001px) {
-  .btn-showing-profile,
-  .user-info {
-    width: 40%;
+@media screen and (max-width: 800px) {
+  .edit-user-info-wrapper {
+    width: 41%;
+  }
+}
+@media screen and (max-width: 540px) {
+  .edit-user-info-wrapper {
+    width: 61%;
   }
 }

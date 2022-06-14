@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized.js";
-import "./GetAdminProfile.css";
+import "./GetUserAccounts.css";
 import AdminVerifyUser from "../AdminVerifyUser/AdminVerifyUser";
 import AdminDeleteUser from "../AdminDeleteUser/AdminDeleteUser";
 import { log } from "../../../utils/ConsoleLog.js";
@@ -10,15 +10,14 @@ import {
   CheckCircleFill,
   ExclamationTriangleFill,
 } from "react-bootstrap-icons";
-import jwt_decode from "jwt-decode";
+import { BeatLoader } from "react-spinners";
 
 const GetAdminProfile = () => {
   const [userAccounts, setUserAccounts] = useState([]);
   const [showCaughtError, setShowCaughtError] = useState(false);
-  const [adminProfile, setAdminProfile] = useState([]);
-  const [isAdminVerified, setIsAdminVerified] = useState(false);
   const token = sessionStorage.getItem("accessToken");
   const isVerified = true;
+  const [showBeatLoader, setShowBeatLoader] = useState(false);
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
   const updateAccessTokenContextWhenNull = () => {
@@ -39,80 +38,63 @@ const GetAdminProfile = () => {
   const getUserAccounts = async () => {
     try {
       if (!token) return;
+      setShowBeatLoader(true);
       const response = await axiosApiAuthorized.get("/get-user-accounts");
       log(response);
+      setShowBeatLoader(false);
+      if (response.data[0] == null || response.data[0] === undefined) {
+        return;
+      }
       if (response.status === 200) {
         setUserAccounts(response.data);
         // some react spinner
       }
     } catch (error) {
       log(error);
+      setShowBeatLoader(false);
       setShowCaughtError(true);
     }
   };
 
-  // jwt decode
-  const userInfoToken = sessionStorage.getItem("userInfoToken");
-  const decodedUserInfo = jwt_decode(userInfoToken);
-  const userId = decodedUserInfo.userId;
-
-  //   function to get admin profile details
-  const getAdminProfile = async () => {
-    try {
-      if (!token) return;
-      const response = await axiosApiAuthorized.get(
-        `/get-admin-profile/${userId}`
-      );
-      log(response);
-      if (response.status === 200) {
-        setAdminProfile(response.data);
-        setIsAdminVerified(response.data[0].isverifiedemail);
-      }
-    } catch (error) {
-      log(error);
+  const changeBackgroundColorOfTableRow = (userId) => {
+    //ensure useId is even or zero
+    if (userId === 0 || userId % 2 === 0) {
+      log("userId even " + userId);
+      return true;
+    } else {
+      log("userId odd " + userId);
+      return false;
     }
   };
+  changeBackgroundColorOfTableRow();
 
-  //   calling methods on page loading
+  //   calling the method on page loading
   useEffect(() => {
     getUserAccounts();
-    getAdminProfile();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div className="admin-wrapper">
+    <div className="user-account-wrapper">
+      <button
+        onClick={() => getUserAccounts()}
+        className="Reload-button Reload-button-near-user-account-table"
+        id="button"
+      >
+        RELOAD
+      </button>
       {showCaughtError && <p>sorry something went wrong</p>}
-      {/* Admin profile*/}
-      {adminProfile.map((admin) => {
-        return (
-          <div className="admin-profile" key={admin.userid}>
-            <h3>Admin profile</h3>
-            <p>
-              Name: {admin.firstname} {admin.lastname}
-            </p>
-            <p> Email: {admin.email}</p>
-            <p> Role: {admin.roles}</p>
-            {isAdminVerified ? (
-              <p>
-                {" "}
-                status: {<span>Verified</span>}{" "}
-                <CheckCircleFill color="hsl(120,100%, 60%)" />
-              </p>
-            ) : (
-              <p>
-                {" "}
-                status: {<span>Not Verified</span>}{" "}
-                <ExclamationTriangleFill color="hsl(60,100%,45%)" />
-              </p>
-            )}
-          </div>
-        );
-      })}
-      {/* user accounts */}
-      <table className="user-account-table">
+      <div className="user-account-heading">
+        <p>Registered Users</p>
+      </div>
+      {showBeatLoader && (
+        <div className="user-account-beat-loader-wrapper">
+          <BeatLoader color="hsl(180, 100%, 30%)" size={8} />
+        </div>
+      )}
+      <table className="table">
         <tbody>
-          <tr>
+          <tr className="table-row-heading">
             <th>User ID</th>
             <th>FirstName</th>
             <th>LastName</th>
@@ -123,7 +105,17 @@ const GetAdminProfile = () => {
           </tr>
           {userAccounts.map((accounts) => {
             return (
-              <tr key={accounts.userid}>
+              <tr
+                key={accounts.userid}
+                className="table-row-content"
+                style={{
+                  backgroundColor: changeBackgroundColorOfTableRow(
+                    accounts.userid
+                  )
+                    ? "hsl(0, 0%, 96%)"
+                    : "hsl(0, 0%, 100%)",
+                }}
+              >
                 <td>{accounts.userid}</td>
                 <td>{accounts.firstname}</td>
                 <td>{accounts.lastname}</td>
@@ -150,7 +142,6 @@ const GetAdminProfile = () => {
           })}
         </tbody>
       </table>
-      {/* upload images by admin here */}
     </div>
   );
 };

@@ -1,4 +1,15 @@
 .admin-wrapper {
   background-color: hsl(197.4, 71.4%, 95%);
   position: relative;
+  min-height: 100vh;
+  height: auto;
+  /* height: 100%; */
+  bottom: 0px;
+}
+
+.admin-main-section {
+  margin-left: 18vw;
+  /* margin-bottom: 4em; */
+  display: block;
+  /* flex-direction: column; */
 }

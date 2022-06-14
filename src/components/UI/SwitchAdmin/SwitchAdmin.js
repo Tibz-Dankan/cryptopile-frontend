@@ -27,12 +27,16 @@ const SwitchAdmin = ({ roleAsProp }) => {
   };
 
   return (
-    <div>
+    <div className="switch-admin-wrapper">
       {showSwitchToAdmin && (
-        <button onClick={() => directToAdmin()}>Switch To Admin</button>
+        <button onClick={() => directToAdmin()} className="switch-admin-btn">
+          Switch To Admin
+        </button>
       )}
       {showSwitchToUser && (
-        <button onClick={() => directToTodos()}>Switch To User</button>
+        <button onClick={() => directToTodos()} className="switch-admin-btn">
+          Switch To User
+        </button>
       )}
     </div>
   );

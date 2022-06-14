@@ -1,0 +1,53 @@
+.admin-verify-user-button-1 {
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(180, 100%, 25%);
+  border: 1px solid hsl(180, 100%, 25%);
+  box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
+  border-radius: 3px;
+  padding: 0.3em 0.6em;
+}
+.admin-verify-user-button-1:hover {
+  color: white;
+  background-color: hsl(180, 100%, 40%);
+  border: 1px solid hsl(180, 100%, 40%);
+  box-shadow: 1px 1px 8px 1px hsl(180, 100%, 20%);
+  transition: 0.35s;
+}
+
+.verify-user-info-wrapper {
+  /* background-color: blue; */
+  display: grid;
+  place-items: center;
+}
+.user-info {
+  background-color: hsl(240, 100%, 95%);
+  background-color: hsl(120, 100%, 95%);
+  border: 1px solid hsl(120, 100%, 80%);
+  width: 100%;
+  margin-top: 1em;
+}
+.verify-user-name,
+.verify-user-email,
+.verify-user-id {
+  margin-left: 0px;
+}
+
+.verify-user-button-2 {
+  color: hsl(240, 100%, 93%);
+  background-color: hsl(180, 100%, 25%);
+  border: 1px solid hsl(180, 100%, 25%);
+  box-shadow: 1px 1px 2px 1px hsl(180, 100%, 20%);
+  border-radius: 3px;
+  width: 100%;
+  margin-top: 1em;
+  padding: 0.3em 0.6em;
+}
+.verify-user-button-2:hover {
+  color: white;
+  background-color: hsl(180, 100%, 40%);
+  border: 1px solid hsl(180, 100%, 40%);
+  box-shadow: 1px 1px 8px 1px hsl(180, 100%, 20%);
+  transition: 0.35s;
+}
+@media screen and (max-width: 850px) {
+}

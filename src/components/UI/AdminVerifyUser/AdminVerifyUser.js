@@ -20,7 +20,8 @@ const AdminVerifyUser = ({ account }) => {
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
       color: "black",
-      width: "60%",
+      width: "50%",
+      // height: "200px",
     },
   };
   const [isModalOpen, setIsOpenModal] = useState(false);
@@ -104,15 +105,27 @@ const AdminVerifyUser = ({ account }) => {
         style={customStyles}
         contentLabel="Verify User"
       >
-        <div className="verify-user">
-          <h4>Verify User With id: {account.userid}</h4>
+        <div className="verify-user-info-wrapper">
+          {/* <h4>Verify User With id: {account.userid}</h4> */}
           <div onClick={closeModal} className="close-modal">
             <X size={30} />
           </div>
           <div className="user-info">
-            <p>{account.firstname}</p>
-            <p>{account.lastname}</p>
-            <p>{account.email}</p>
+            <p>
+              <span className="verify-user-name">Name:</span>{" "}
+              <span>
+                {account.firstname} {account.lastname}
+              </span>
+            </p>
+            <p></p>
+            <p>
+              <span className="verify-user-email">Email:</span>{" "}
+              <span>{account.email}</span>
+            </p>
+            <p>
+              <span className="verify-user-id">userId:</span>{" "}
+              <span>{account.userid}</span>
+            </p>
           </div>
 
           <button

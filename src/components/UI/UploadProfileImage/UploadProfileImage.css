@@ -5,19 +5,56 @@
   border-radius: 4px;
   text-align: center;
   margin-top: 10px;
-  /* padding: 0px 10px 10px 10px; */
 }
 .upload-profile-image-form {
   width: 100%;
   /* background-color: hsl(180, 100%, 50%); */
   position: relative;
 }
-.the-bar-loader {
-  /* position: absolute; */
+.upload-profile-bar-loader-wrapper {
   margin-top: 2px;
+  color: hsl(120, 80%, 30%);
+  border: 1px solid hsl(120, 30%, 60%);
+  border-radius: 4px;
+  background-color: hsl(120, 80%, 95%);
+  text-align: center;
+  padding: 0.6em 2em;
+  margin: 0em 1em;
+}
+.upload-profile-bar-loader-wrapper p {
+  color: hsl(180, 100%, 30%);
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+.upload-profile-image-msg {
+  color: hsl(120, 80%, 30%);
+  border: 1px solid hsl(120, 30%, 60%);
+  border-radius: 4px;
+  background-color: hsl(120, 80%, 95%);
+  text-align: center;
+  padding: 0.8em 0em;
+  margin: 0em 1em;
+}
+.upload-profile-image-catch-error {
+  background-color: hsl(0, 100%, 95%);
+  border: 1px solid hsl(0, 100%, 85%);
+  border-radius: 3px;
+  text-align: center;
+  color: hsl(0, 100%, 50%);
+  padding: 1em 0.5em;
+  margin: 0em 1em;
 }
 .upload-profile-image-form h4 {
   color: hsl(180, 100%, 20%);
+}
+.image-validation-alert-msg {
+  text-align: center;
+  background-color: hsl(0, 100%, 95%);
+  border: 1px solid hsl(0, 100%, 80%);
+  border-radius: 3px;
+  color: hsl(0, 100%, 70%);
+  padding: 0.8em 0.1em;
+  margin: 0em 0.5em;
 }
 .choose-image-file-field {
   text-align: center;

@@ -7,41 +7,20 @@ import { BeatLoader } from "react-spinners";
 import { log } from "../../../utils/ConsoleLog.js";
 import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext.js";
 import jwt_decode from "jwt-decode";
+import { enableButton, disableButton } from "../../../utils/ButtonState.js";
+//TODO: close the upload form when the image is successfully uploaded and automat
 
 const UploadProfileImage = () => {
   const [imageSelected, setImageSelected] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
   const [imageUploadMsg, setImageUploadMsg] = useState("");
   const [showBeatLoader, setShowBeatLoader] = useState(false);
+  const [imageValidationAlertMsg, setImageValidationAlertMsg] = useState("");
+  const [showImageValidationAlert, setShowImageValidationAlertMsg] =
+    useState(false);
+  const [showImageUploadMsg, setShowImageUploadMsg] = useState(false);
+  const [showCatchError, setShowCaughtError] = useState(false);
 
   //   function to check for the image extensions
-
-  // const uploadImage = async (e) => {
-  //   const formData = new FormData();
-  //   formData.append("file", imageSelected);
-  //   formData.append("upload_preset", "rxckqye9");
-  //   try {
-  //     e.preventDefault();
-  //     setShowBeatLoader(true);
-  //     setImageUploadMsg("Uploading image...");
-  //     const response = await axios.post(
-  //       `https://api.cloudinary.com/v1_1/dlmv4ot9h/image/upload`,
-  //       formData
-  //     );
-  //     console.log(response);
-  //     if (response.status === 200) {
-  //       setImageUrl(response.data.secure_url);
-  //       // upload the image url to the backend
-  //       uploadImageUrlToBackend();
-  //       console.log(imageUrl);
-  //     }
-  //   } catch (error) {
-  //     setShowBeatLoader(false);
-  //     setImageUploadMsg("");
-  //     console.log(error);
-  //   }
-  // };
-
   // jwt decode
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   const decodedUserInfo = jwt_decode(userInfoToken);
@@ -62,59 +41,127 @@ const UploadProfileImage = () => {
     },
   });
 
+  const checkImageType = (imageType) => {
+    if (
+      imageType === "image/jpeg" ||
+      imageType === "image/jpg" ||
+      imageType === "image/png"
+    ) {
+      log("Valid image: " + imageSelected.type);
+      return true;
+    } else {
+      log("Invalid image type: " + imageSelected.type);
+      setShowImageValidationAlertMsg(true);
+      setImageValidationAlertMsg(
+        "Only accept image files that end with .jpeg, .jpg and .png"
+      );
+      // Remove the message after 5 seconds
+      setTimeout(() => {
+        setShowImageValidationAlertMsg(false);
+        setImageValidationAlertMsg("");
+      }, 5000);
+      return false;
+    }
+  };
+
+  const checkImageSize = (imageSize) => {
+    const maximumAcceptableImageSize = 5242880; // 5mb
+    if (imageSize < maximumAcceptableImageSize) {
+      log("Image size: " + imageSize + " Acceptable");
+      return true;
+    } else {
+      log("Too big image size: " + imageSize);
+      setShowImageValidationAlertMsg(true);
+      setImageValidationAlertMsg("Only accept image size less than 5mb");
+      // Remove the message after 5 seconds
+      setTimeout(() => {
+        setShowImageValidationAlertMsg(false);
+        setImageValidationAlertMsg("");
+      }, 5000);
+      return false;
+    }
+  };
+
   const checkImageFile = () => {
+    setShowImageValidationAlertMsg(false);
     const formData = new FormData();
     formData.append("file", imageSelected);
     log(imageSelected);
-    // check image extensions here
+    log("image name: " + imageSelected.name);
+    log("image size: " + imageSelected.size);
+    log("image type: " + imageSelected.type);
+    const imageType = imageSelected.type;
+    const imageSize = imageSelected.size;
+    return checkImageType(imageType) && checkImageSize(imageSize);
   };
-  // react spinner when uploading an image
-  // function to store url in the database
+
   const uploadImageToBackend = async () => {
     try {
-      checkImageFile();
+      if (!accessToken) return;
       setShowBeatLoader(true);
       setImageUploadMsg("Uploading image...");
+      setShowImageValidationAlertMsg(false);
+      setShowCaughtError(false);
+      disableButton("button");
       const response = await axiosApiAuthorized.post(
         `/api/upload-profile-image-url/${userId}`,
         {
-          imageUrl: imageSelected,
+          imageName: imageSelected.name,
           imageCategory: "profile",
         }
       );
       console.log(response);
+      enableButton("button");
       if (response.status === 200) {
         setShowBeatLoader(false);
-        setImageUrl(response.data.secure_url);
+        setImageUploadMsg(true);
         setImageUploadMsg("Uploaded successfully");
-        setImageSelected("");
+        // setImageSelected("");
       }
     } catch (error) {
       setShowBeatLoader(false);
-      setImageUploadMsg("");
+      setShowCaughtError(true);
+      enableButton("button");
       console.log(error);
     }
   };
 
+  const checkImageFileAndUploadToBackend = (e) => {
+    e.preventDefault();
+    checkImageFile() && uploadImageToBackend();
+  };
   // load the image on loading the page
   // checking for a file extension to ensure only images are selected
-
   return (
     <div className="upload-profile-image-wrapper">
       <form
-        onSubmit={() => uploadImageToBackend()}
+        onSubmit={(e) => checkImageFileAndUploadToBackend(e)}
         className="upload-profile-image-form"
       >
         {showBeatLoader && (
-          <div className="the-bar-loader">
-            <BeatLoader color="hsl(180, 100%, 30%)" />
-            <p>{imageUploadMsg}</p>
+          <div className="upload-profile-bar-loader-wrapper">
+            <BeatLoader color="hsl(180, 100%, 30%)" size={8} />
+            <p>uploading...</p>
           </div>
         )}
+        {showImageUploadMsg && (
+          <p className="upload-profile-image-msg">{imageUploadMsg}</p>
+        )}
+        {showCatchError && (
+          <p className="upload-profile-image-catch-error">
+            Sorry, something went wrong
+          </p>
+        )}
         <h4>Choose an Image file</h4>
+        {showImageValidationAlert && (
+          <p className="image-validation-alert-msg">
+            {imageValidationAlertMsg}
+          </p>
+        )}
         <input
           type="file"
           className="choose-image-file-field"
+          id="button"
           onChange={(e) => setImageSelected(e.target.files[0])}
           required
         />

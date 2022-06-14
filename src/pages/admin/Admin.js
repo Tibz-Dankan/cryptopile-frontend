@@ -1,16 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import "./Admin.css";
-import GetAdminProfile from "../../components/UI/GetAdminProfile/GetAdminProfile";
+import GetUserAccounts from "../../components/UI/GetUserAccounts/GetUserAccounts";
 import SignupAdmin from "../../components/UI/SignupAdmin/SignupAdmin";
 import LoginAdmin from "../../components/UI/LoginAdmin/LoginAdmin";
-import GenerateAdminKey from "../../components/UI/GenerateAdminKey/GenerateAdminKey";
 import GetAdminKeys from "../../components/UI/GetAdminKeys/GetAdminKeys";
 import VerifyAdminKey from "../../components/UI/VerifyAdminKey/VerifyAdminKey";
 import AdminKeyVerifiedContext from "../../context/AdminKeyVerifiedContext/AdminKeyVerifiedContext";
 import ShowLoginFormContext from "../../context/ShowLoginFormContext/ShowLoginFormContext";
 import SwitchAdmin from "../../components/UI/SwitchAdmin/SwitchAdmin";
-import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
 import CustomHeader from "../../components/layouts/CustomHeader/CustomHeader";
 import SideBar from "../../components/layouts/SideBar/SideBar";
 import jwt_decode from "jwt-decode";
@@ -57,13 +55,14 @@ const Admin = () => {
       ) : (
         <>
           <SideBar />
-          <SwitchAdmin roleAsProp={"admin"} />
-          <GetAdminProfile />
-          <GetAdminKeys />
-          <GenerateAdminKey />
+          <main className="admin-main-section">
+            <SwitchAdmin roleAsProp={"admin"} />
+            <GetUserAccounts />
+            <br />
+            <GetAdminKeys />
+          </main>
         </>
       )}
-      <MiniFooter />
     </div>
   );
 };

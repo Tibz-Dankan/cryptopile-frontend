@@ -30,3 +30,5 @@ yarn-error.log*
 /.vscode
 /.env
 /todo.txt
+# other files
+/src/components/UI/EditUserProfile

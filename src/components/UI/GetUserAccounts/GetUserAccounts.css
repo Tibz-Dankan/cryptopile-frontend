@@ -1,0 +1,57 @@
+.user-account-wrapper {
+  /* background-color: blue; */
+  margin-top: 8em;
+  font-size: small;
+  display: inline-block;
+  position: relative;
+}
+
+.user-account-heading {
+  color: hsl(0, 0%, 40%);
+  background-color: hsl(0, 0%, 100%);
+  display: inline-block;
+  margin: 0.5em;
+  padding: 0em 0.5em;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 3px;
+}
+.user-account-beat-loader-wrapper {
+  color: hsl(120, 80%, 30%);
+  border: 1px solid hsl(120, 30%, 60%);
+  border-radius: 4px;
+  background-color: hsl(120, 80%, 95%);
+  text-align: center;
+  padding: 0.6em 2em;
+  position: fixed;
+  position: absolute;
+  left: 35%;
+  top: 1em;
+}
+
+.table {
+  background-color: hsl(0, 100%, 100%);
+  padding: 1em;
+  border: 1px solid hsl(0, 100%, 100%);
+  border-radius: 2px;
+  margin-right: 0px;
+}
+.table-row-heading {
+  width: 100%;
+  background-color: hsl(120, 50%, 90%);
+  border: 1px solid hsl(120, 70%, 95%);
+  border-bottom: 1px solid hsl(0, 0%, 0%);
+  border-collapse: collapse;
+  border-radius: 4px;
+}
+.table-row-heading > * {
+  padding: 0.5em;
+  margin: 0px;
+}
+.table-row-content {
+  text-align: center;
+  background-color: hsl(0, 100%, 100%);
+}
+
+.table-row-content > * {
+  height: 0.5em;
+}

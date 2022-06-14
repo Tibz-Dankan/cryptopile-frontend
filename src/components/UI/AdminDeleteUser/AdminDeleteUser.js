@@ -102,7 +102,7 @@ const AdminDeleteUser = ({ account }) => {
             <p>{account.email}</p>
           </div>
           <button
-            className="delete-user-button Delete-user-button-2"
+            className="delete-user-button delete-user-button-2"
             onClick={adminDeleteUserAccount}
           >
             Delete User

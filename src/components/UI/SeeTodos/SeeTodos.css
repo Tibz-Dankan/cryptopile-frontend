@@ -44,7 +44,7 @@
   left: 25%;
 }
 /* TODOS IN THE TABLE */
-table {
+.todo-table {
   color: hsl(240, 100%, 10%);
   background-color: hsl(240, 100%, 100%);
   border: 1px solid hsl(240, 100%, 100%);
@@ -54,7 +54,7 @@ table {
   margin-bottom: 1.5em;
   margin-top: 40px;
 }
-th {
+.todo-table-heading {
   color: hsl(0, 0%, 100%);
   background-color: var(--steelblue-2);
   background-color: var(--steelblue);
@@ -67,7 +67,7 @@ th {
   font-weight: 400px;
 }
 
-td {
+.todo-table-column {
   padding: 5px;
   text-align: center;
   background-color: hsl(240, 100%, 100%);
