@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { BoxArrowRight } from "react-bootstrap-icons";
 import "./Logout.css";
