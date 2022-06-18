@@ -9,13 +9,6 @@
   width: 100%;
   align-items: center;
   background-color: hsl(197.4, 71.4%, 95%);
-  /* background-color: hsl(240, 30%, 80%); */
-  /* background: linear-gradient(
-    to right,
-    hsl(120, 80%, 30%),
-    hsl(240, 100%, 90%),
-    hsl(180, 100%, 30%)
-  ); */
 }
 @media screen and (max-width: 1000px) {
   .user-profile-wrapper {

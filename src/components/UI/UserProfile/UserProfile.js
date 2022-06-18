@@ -73,6 +73,8 @@ const UserProfile = () => {
     }
   };
 
+  // TODO: Add user role to http request fetching user info and not decoding from the token
+
   // decode jwt token with user info
   const userInfoToken = sessionStorage.getItem("userInfoToken");
   let decodedUserInfo, userId, userRole;
