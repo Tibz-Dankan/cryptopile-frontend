@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Home from "./pages/Home/Home";
@@ -18,9 +18,15 @@ import UserProfile from "./components/UI/UserProfile/UserProfile";
 import Admin from "./pages/Admin/Admin";
 import NotFound from "./components/UI/NotFound/NotFound";
 import { AccessTokenContext } from "./context/AccessTokenContext/AccessTokenContext";
+import { log } from "./utils/ConsoleLog";
 
 const App = () => {
   const [accessToken, setAccessToken] = useState(null);
+  useEffect(() => {
+    setAccessToken(() => sessionStorage.getItem("accessToken"));
+    log(accessToken);
+  }, [accessToken]);
+
   return (
     <div>
       <HashRouter>
@@ -28,7 +34,7 @@ const App = () => {
         <Switch>
           <AccessTokenContext.Provider value={[accessToken, setAccessToken]}>
             <Route path="/" component={Home} exact />
-            <Route path="/todos" component={Todos} exact />
+            <Route path="/todos" component={Todos} />
             <Route path="/about" component={About} />
             <Route path="/signup" component={SignUp} />
             <Route path="/logout" component={Logout} />
@@ -44,8 +50,8 @@ const App = () => {
               path="/image-upload-to-cloudinary"
               component={ImageUploadToCloudinary}
             />
-            {/*more research for this component*/}
           </AccessTokenContext.Provider>
+          {/*more research for this component*/}
           <Route component={NotFound} />{" "}
         </Switch>
       </HashRouter>

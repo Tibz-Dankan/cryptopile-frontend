@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useContext, useEffect, Fragment } from "react";
 import axios from "axios";
@@ -87,12 +88,9 @@ const UserProfile = () => {
   decodeJwtToken();
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
-  const updateAccessTokenContextWhenNull = () => {
-    if (!accessToken) {
-      setAccessToken(sessionStorage.getItem("accessToken"));
-    }
-  };
-  updateAccessTokenContextWhenNull();
+  useEffect(async () => {
+    await setAccessToken(sessionStorage.getItem("accessToken"));
+  }, []);
 
   const axiosApiAuthorized = axios.create({
     baseURL: backendBaseURL,

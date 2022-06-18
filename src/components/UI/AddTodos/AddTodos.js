@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useContext } from "react";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
 import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
@@ -49,18 +50,11 @@ const AddTodos = () => {
   const userId = decodedUserInfo.userId;
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
-  const updateAccessTokenContextWhenNull = () => {
-    if (!accessToken) {
-      setAccessToken(sessionStorage.getItem("accessToken"));
-    }
-  };
-  updateAccessTokenContextWhenNull();
-  console.log("AccessToken in the context " + accessToken);
+  console.log("AccessToken in the context: " + accessToken);
 
   const axiosApiAuthorized = axios.create({
     baseURL: backendBaseURL,
     headers: {
-      // Authorization: "Bearer " + sessionStorage.getItem("accessToken"),
       Authorization: "Bearer " + accessToken,
     },
   });
@@ -111,19 +105,19 @@ const AddTodos = () => {
         <div className="todo-form-heading">
           <p>Add TodoDescription</p>
         </div>
-        {showPulseLoader ? (
+        {showPulseLoader && (
           <PulseLoader size={12} color="hsl(180, 100%, 30%)" />
-        ) : null}
-        {showTodoAddedSuccessfullyMsg ? (
+        )}
+        {showTodoAddedSuccessfullyMsg && (
           <div className="todo-added-successfully">
             <p>Todo added successfully</p>
           </div>
-        ) : null}
-        {showCatchError ? (
+        )}
+        {showCatchError && (
           <p className="add-todo-catch-error-msg">
             Sorry, something went wrong!
           </p>
-        ) : null}
+        )}
         <label htmlFor="description">Description</label>
         <textarea
           className="add-todo-input-field"

@@ -22,12 +22,6 @@ const GetAdminKeys = () => {
   const userId = decodedUserInfo.userId;
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
-  const updateAccessTokenContextWhenNull = () => {
-    if (!accessToken) {
-      setAccessToken(sessionStorage.getItem("accessToken"));
-    }
-  };
-  updateAccessTokenContextWhenNull();
 
   const axiosApiAuthorized = axios.create({
     baseURL: backendBaseURL,
@@ -36,7 +30,6 @@ const GetAdminKeys = () => {
     },
   });
 
-  // const accessToken = sessionStorage.getItem("accessToken");
   const getKeys = async () => {
     try {
       if (!accessToken) return;

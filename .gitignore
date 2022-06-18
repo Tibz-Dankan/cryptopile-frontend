@@ -31,4 +31,3 @@ yarn-error.log*
 /.env
 /todo.txt
 # other files
-/src/components/UI/EditUserProfile

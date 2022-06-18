@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized.js";
@@ -20,12 +21,15 @@ const GetAdminProfile = () => {
   const [showBeatLoader, setShowBeatLoader] = useState(false);
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
-  const updateAccessTokenContextWhenNull = () => {
-    if (!accessToken) {
-      setAccessToken(sessionStorage.getItem("accessToken"));
-    }
-  };
-  updateAccessTokenContextWhenNull();
+  // const updateAccessTokenContextWhenNull = () => {
+  //   if (!accessToken) {
+  //     setAccessToken(sessionStorage.getItem("accessToken"));
+  //   }
+  // };
+  // updateAccessTokenContextWhenNull();
+  useEffect(() => {
+    setAccessToken(window.sessionStorage.getItem("accessToken"));
+  }, [accessToken]);
 
   const axiosApiAuthorized = axios.create({
     baseURL: backendBaseURL,
