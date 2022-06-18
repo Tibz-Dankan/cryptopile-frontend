@@ -11,7 +11,8 @@ import { enableButton, disableButton } from "../../../utils/ButtonState.js";
 //TODO: close the upload form when the image is successfully uploaded and automat
 
 const UploadProfileImage = () => {
-  const [imageSelected, setImageSelected] = useState("");
+  const [imageFile, setImageFile] = useState("");
+  const [imageFileName, setImageFileName] = useState("");
   const [imageUploadMsg, setImageUploadMsg] = useState("");
   const [showBeatLoader, setShowBeatLoader] = useState(false);
   const [imageValidationAlertMsg, setImageValidationAlertMsg] = useState("");
@@ -41,16 +42,21 @@ const UploadProfileImage = () => {
     },
   });
 
+  const handleImageOnChange = (e) => {
+    setImageFile(e.target.files[0]);
+    setImageFileName(e.target.files[0].name);
+  };
+
   const checkImageType = (imageType) => {
     if (
       imageType === "image/jpeg" ||
       imageType === "image/jpg" ||
       imageType === "image/png"
     ) {
-      log("Valid image: " + imageSelected.type);
+      log("Valid image: " + imageFile.type);
       return true;
     } else {
-      log("Invalid image type: " + imageSelected.type);
+      log("Invalid image type: " + imageFile.type);
       setShowImageValidationAlertMsg(true);
       setImageValidationAlertMsg(
         "Only accept image files that end with .jpeg, .jpg and .png"
@@ -82,16 +88,20 @@ const UploadProfileImage = () => {
     }
   };
 
+  let formData;
   const checkImageFile = () => {
     setShowImageValidationAlertMsg(false);
-    const formData = new FormData();
-    formData.append("file", imageSelected);
-    log(imageSelected);
-    log("image name: " + imageSelected.name);
-    log("image size: " + imageSelected.size);
-    log("image type: " + imageSelected.type);
-    const imageType = imageSelected.type;
-    const imageSize = imageSelected.size;
+    formData = new FormData();
+    formData.append("file", imageFile);
+    formData.append("imageFileName", imageFileName);
+    formData.append("ImageCategory", "Profile");
+    log(imageFile);
+    log("image name: " + imageFile.name);
+    log("image size: " + imageFile.size);
+    log("image type: " + imageFile.type);
+    log(imageFile);
+    const imageType = imageFile.type;
+    const imageSize = imageFile.size;
     return checkImageType(imageType) && checkImageSize(imageSize);
   };
 
@@ -105,17 +115,22 @@ const UploadProfileImage = () => {
       disableButton("button");
       const response = await axiosApiAuthorized.post(
         `/api/upload-profile-image-url/${userId}`,
-        {
-          imageName: imageSelected.name,
-          imageCategory: "profile",
-        }
+        // {
+        //   // imageName: imageSelected.name,
+        //   imageFile: imageFile,
+        //   imageCategory: "profile",
+        // }
+        formData
       );
       console.log(response);
       enableButton("button");
       if (response.status === 200) {
         setShowBeatLoader(false);
         setImageUploadMsg(true);
-        setImageUploadMsg("Uploaded successfully");
+        // setImageUploadMsg("Uploaded successfully");
+        setImageUploadMsg(
+          "This feature is being revised by the technical team"
+        ); //This is temporary
         // setImageSelected("");
       }
     } catch (error) {
@@ -162,7 +177,7 @@ const UploadProfileImage = () => {
           type="file"
           className="choose-image-file-field"
           id="button"
-          onChange={(e) => setImageSelected(e.target.files[0])}
+          onChange={(e) => handleImageOnChange(e)}
           required
         />
         <button className="upload-btn" type="submit">
