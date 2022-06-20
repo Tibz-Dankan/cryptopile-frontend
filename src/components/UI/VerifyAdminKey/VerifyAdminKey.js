@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useContext, useEffect } from "react";
 import { FadeLoader } from "react-spinners";
-import axiosApiUnAuthorized from "../../../constants/AxiosApi/axiosAuthorized";
+import axiosApiUnAuthorized from "../../../constants/AxiosApi/axiosUnAuthorized";
 import { log } from "../../../utils/ConsoleLog";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
 import "./VerifyAdminKey.css";
