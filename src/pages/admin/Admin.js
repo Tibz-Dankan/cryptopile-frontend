@@ -54,7 +54,7 @@ const Admin = () => {
         </ShowLoginFormContext.Provider>
       ) : (
         <>
-          <SideBar />
+          {/* <SideBar /> */}
           <main className="admin-main-section">
             <SwitchAdmin roleAsProp={"admin"} />
             <GetUserAccounts />

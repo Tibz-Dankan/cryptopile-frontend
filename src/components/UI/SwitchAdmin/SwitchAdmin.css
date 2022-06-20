@@ -1,8 +1,13 @@
 .switch-admin-wrapper {
   position: absolute;
-  top: 8em;
+  top: 6.5em;
   right: 2em;
   font-size: small;
+}
+@media screen and (max-width: 500px) {
+  .switch-admin-wrapper {
+    top: 10em;
+  }
 }
 
 .switch-admin-btn {

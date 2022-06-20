@@ -36,7 +36,7 @@
 
 .square-loader {
   width: 36%;
-  margin-top: 20px;
+  margin-top: 7em;
   color: hsl(180, 100%, 30%);
   background-color: hsl(0, 0%, 100%);
   border: 1px solid hsl(0, 0%, 90%);
@@ -55,6 +55,7 @@
   display: grid;
   place-items: center;
   width: 100%;
+  margin-top: 3em;
 }
 .registration-form {
   margin-top: 30px;
@@ -162,6 +163,7 @@
   background-color: hsl(0, 100%, 95%);
   border-radius: 3px;
   margin-top: 10px;
+  margin-top: 6em;
   text-align: center;
   color: hsl(0, 100%, 70%);
   padding: 0px 5px 0px 10px;
@@ -179,6 +181,17 @@
 }
 
 /* MEDIA QUERY */
+@media screen and (max-width: 540px) {
+  .signup-catch-error {
+    margin-top: 9em;
+  }
+  .square-loader {
+    margin-top: 9em;
+  }
+  .registration-form-wrapper {
+    margin-top: 6.5em;
+  }
+}
 @media screen and (max-width: 540px) {
   .square-loader {
     width: 66%;

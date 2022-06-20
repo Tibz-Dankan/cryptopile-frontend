@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { React, Fragment, useState } from "react";
 import HomeLink from "../../links/HomeLink";
 import axiosApiUnAuthorized from "../../constants/AxiosApi/axiosUnAuthorized";
 import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
+import CustomHeader from "../../components/layouts/CustomHeader/CustomHeader";
 import { SquareLoader } from "react-spinners";
 import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import { Link } from "react-router-dom";
@@ -171,7 +173,7 @@ const SignUp = () => {
   return (
     <Fragment>
       <div className="signup-page-wrapper">
-        <div className="signup-header-wrapper">
+        {/* <div className="signup-header-wrapper">
           <div className="signup-home-link">
             <HouseFill
               color={"hsl(0, 0%, 100%)"}
@@ -180,7 +182,8 @@ const SignUp = () => {
             />
             <HomeLink />
           </div>
-        </div>
+        </div> */}
+        <CustomHeader />
         {showWhenSuccessfullyRegistered && (
           <div className="show-when-successfully-registered">
             <p>

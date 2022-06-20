@@ -1,0 +1,152 @@
+.header-wrapper {
+  background-color: hsl(180, 100%, 25%);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+.header-logo-wrapper {
+  margin-left: 5em;
+  font-weight: bold;
+  color: hsl(0, 0%, 100%);
+}
+@media screen and (max-width: 500px) {
+  .header-logo-wrapper {
+    margin-left: 3em;
+    padding: 1.5em 0em;
+  }
+}
+
+.header-link-wrapper {
+  margin-right: 5em;
+}
+.header-unordered-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.header-list {
+  margin: 0em 0.8em;
+}
+.header-link {
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  align-items: center;
+  padding: 0.5em 0em;
+  outline: none;
+}
+.header-link-icon {
+  display: none;
+}
+.header-login-link {
+  border: 2px solid hsl(0, 0%, 100%);
+  border-radius: 30px;
+  padding: 0.5em 1.2em;
+  margin-left: 5em;
+}
+.header-login-link:hover,
+.header-login-link:focus {
+  background-color: hsl(0, 0%, 85%);
+  color: hsl(180, 100%, 25%);
+}
+.header-signup-link {
+  border: 2px solid hsl(0, 0%, 100%);
+  border-radius: 20px;
+  padding: 0.5em 0.8em;
+  background-color: hsl(0, 0%, 100%);
+  color: hsl(180, 100%, 25%);
+}
+.header-signup-link:hover,
+.header-signup-link:focus {
+  background-color: hsl(180, 100%, 35%);
+  color: hsl(0, 0%, 100%);
+}
+.header-todos-link:hover,
+.header-about-link:hover,
+.header-todos-link:focus,
+.header-about-link:focus {
+  border-bottom: 2px solid hsl(0, 0%, 100%);
+}
+
+/* MEDIA QUERY */
+@media screen and (max-width: 800px) {
+  .header-logo-wrapper {
+    padding: 1.5em 0em;
+  }
+  .header-link-wrapper {
+    background-color: hsl(180, 100%, 25%);
+    border: 1px solid hsl(180, 100%, 20%);
+    border-radius: 3px;
+    position: relative;
+    position: absolute;
+    top: 4em;
+    right: 2px;
+    z-index: 12;
+    width: 100%;
+    width: 50%;
+  }
+  .header-icon {
+    margin-right: 8em;
+    color: hsl(0, 0%, 100%);
+  }
+  .header-unordered-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .header-list {
+    margin: 0em 0.8em;
+  }
+  .header-link {
+    text-decoration: none;
+    color: hsl(0, 0%, 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5em 0em;
+    outline: none;
+  }
+  .header-link-icon {
+    display: visible;
+    margin-right: 3px;
+    color: hsl(0, 0%, 100%);
+  }
+  .header-login-link {
+    border: none;
+    border-radius: 30px;
+    padding: 0.5em 0em;
+    margin-left: 0em;
+  }
+  .header-login-link:hover,
+  .header-login-link:focus {
+    border-bottom: 2px solid hsl(0, 0%, 100%);
+  }
+  .header-signup-link {
+    border: 2px solid hsl(0, 0%, 100%);
+    border: none;
+    border-radius: 20px;
+    padding: 0.5em 0em;
+    background-color: hsl(180, 100%, 25%);
+    /* background-color: purple; */
+    color: hsl(0, 0%, 100%);
+  }
+  .header-signup-link:hover,
+  .header-signup-link:focus {
+    border-bottom: 2px solid hsl(0, 0%, 100%);
+  }
+  .header-todos-link:hover,
+  .header-about-link:hover,
+  .header-todos-link:focus,
+  .header-about-link:focus {
+    border-bottom: 2px solid hsl(0, 0%, 100%);
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .header-icon {
+    margin-right: 5em;
+  }
+}

@@ -3,8 +3,15 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   position: relative;
   margin-right: 5em;
+  padding: 0.5em 0em;
+}
+@media screen and (max-width: 500px) {
+  .logged-in-as-wrapper {
+    margin-right: 0em;
+  }
 }
 .logged-in-user-image {
   --height-width-size: 35px;
@@ -15,6 +22,7 @@
 }
 .logged-in-Person-circle {
   margin-right: 0.6em;
+  color: hsl(0, 0%, 100%);
 }
 .logged-in-username {
   color: hsl(0, 0%, 98%);
@@ -24,6 +32,7 @@
 }
 .chevron-down {
   margin-left: 0.6em;
+  color: hsl(0, 0%, 100%);
 }
 .logged-in-logout-wrapper {
   position: absolute;

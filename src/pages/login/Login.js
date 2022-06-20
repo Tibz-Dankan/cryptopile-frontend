@@ -9,6 +9,7 @@ import { Eye, EyeSlash, HouseFill } from "react-bootstrap-icons";
 import "./Login.css";
 import ResendVerificationLink from "../../components/UI/ResendVerificationLink/ResendVerificationLink";
 import MiniFooter from "../../components/layouts/MiniFooter/MiniFooter";
+import CustomHeader from "../../components/layouts/CustomHeader/CustomHeader";
 import { enableButton, disableButton } from "../../utils/ButtonState";
 import { log } from "../../utils/ConsoleLog";
 import FeatureUnderMaintenance from "../../components/UI/FeatureUnderMaintenance/FeatureUnderMaintenance";
@@ -107,7 +108,7 @@ const Login = () => {
   return (
     <Fragment>
       <div className="login-page-wrapper">
-        <div className="login-header-wrapper">
+        {/* <div className="login-header-wrapper">
           <div className="login-home-link">
             <HouseFill
               size={18}
@@ -116,7 +117,8 @@ const Login = () => {
             />
             <HomeLink />
           </div>
-        </div>
+        </div> */}
+        <CustomHeader />
         {didNotReceiveVerificationEmail && <ResendVerificationLink />}
         {showCaughtError && (
           <div className="login-catch-error">

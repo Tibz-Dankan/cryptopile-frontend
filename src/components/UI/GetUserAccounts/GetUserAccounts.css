@@ -1,9 +1,15 @@
 .user-account-wrapper {
-  /* background-color: blue; */
   margin-top: 8em;
   font-size: small;
   display: inline-block;
   position: relative;
+  overflow-x: auto;
+}
+
+@media screen and (max-width: 500px) {
+  .user-account-wrapper {
+    margin-top: 14em;
+  }
 }
 
 .user-account-heading {
@@ -54,4 +60,8 @@
 
 .table-row-content > * {
   height: 0.5em;
+}
+.user-account-verified,
+.user-account-not-verified {
+  text-align: center;
 }

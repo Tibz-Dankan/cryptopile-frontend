@@ -48,8 +48,8 @@
 .user-name {
   text-align: center;
   color: hsl(0, 0%, 0%);
-  margin-top: 0.2em;
-  margin-top: 0em;
+  margin-top: 0.5em;
+  font-size: larger;
 }
 .profile-verification-status {
   display: grid;

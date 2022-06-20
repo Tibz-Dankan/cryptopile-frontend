@@ -21,14 +21,9 @@ const GetAdminProfile = () => {
   const [showBeatLoader, setShowBeatLoader] = useState(false);
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
-  // const updateAccessTokenContextWhenNull = () => {
-  //   if (!accessToken) {
-  //     setAccessToken(sessionStorage.getItem("accessToken"));
-  //   }
-  // };
-  // updateAccessTokenContextWhenNull();
+
   useEffect(() => {
-    setAccessToken(window.sessionStorage.getItem("accessToken"));
+    setAccessToken(() => window.sessionStorage.getItem("accessToken"));
   }, [accessToken]);
 
   const axiosApiAuthorized = axios.create({
@@ -126,14 +121,20 @@ const GetAdminProfile = () => {
                 <td>{accounts.email}</td>
                 <td>
                   {isVerified === accounts.isverifiedemail ? (
-                    <div className="verified-user">
+                    <div className="user-account-verified">
                       Verified
-                      <CheckCircleFill color="hsl(120,100%, 60%)" />
+                      <CheckCircleFill
+                        color="hsl(120,100%, 60%)"
+                        style={{ marginLeft: "1px" }}
+                      />
                     </div>
                   ) : (
-                    <div className="not-verified-user">
+                    <div className="user-account-not-verified">
                       Not verified
-                      <ExclamationTriangleFill color="hsl(60,100%,45%)" />
+                      <ExclamationTriangleFill
+                        color="hsl(60,100%,45%)"
+                        style={{ marginLeft: "1px" }}
+                      />
                     </div>
                   )}
                 </td>

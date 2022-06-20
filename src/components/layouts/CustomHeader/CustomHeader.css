@@ -8,9 +8,41 @@
   top: 0px;
   width: 100%;
   z-index: 10;
-  /* filter: opacity(0.9); */
+}
+@media screen and (max-width: 500px) {
+  .custom-header-wrapper {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.section-name {
-  margin-left: 2.5em;
+.custom-header-link-wrapper {
+  margin-bottom: 0em;
+  margin-left: 4em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  padding: 0.5em;
+}
+@media screen and (max-width: 500px) {
+  .custom-header-link-wrapper {
+    margin-top: 1em;
+    margin-left: 0em;
+  }
+}
+
+.custom-header-home-link {
+  text-decoration: none;
+  color: hsl(0, 0%, 100%);
+  margin-top: 3px;
+}
+
+.custom-header-home-link:hover,
+.custom-header-home-link:focus {
+  outline: none;
+  border-bottom: 2px solid hsl(0, 0%, 100%);
+  transition: 0.3s;
 }
