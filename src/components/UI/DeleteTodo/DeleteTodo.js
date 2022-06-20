@@ -5,6 +5,7 @@ import backendBaseURL from "../../../constants/AxiosApi/axiosAuthorized";
 import { TodoChangeContext } from "../../../context/TodoChangeContext/TodoChangeContext";
 import { AccessTokenContext } from "../../../context/AccessTokenContext/AccessTokenContext";
 import { enableButton, disableButton } from "../../../utils/ButtonState";
+import { log } from "../../../utils/ConsoleLog";
 import Modal from "react-modal";
 import { X } from "react-bootstrap-icons";
 import "./DeleteTodo.css";
@@ -87,10 +88,10 @@ const DeleteTodo = ({ todo }) => {
       } else {
         // when some thing goes wrong
       }
-      console.log(response);
+      log(response);
     } catch (error) {
       enableButton("button");
-      console.log(error);
+      log(error);
       // some state to capture error and alert the user when there is a problem on the server
     }
   };

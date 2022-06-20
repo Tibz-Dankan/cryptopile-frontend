@@ -50,7 +50,7 @@ const AddTodos = () => {
   const userId = decodedUserInfo.userId;
 
   const [accessToken, setAccessToken] = useContext(AccessTokenContext);
-  console.log("AccessToken in the context: " + accessToken);
+  log("AccessToken in the context: " + accessToken);
 
   const axiosApiAuthorized = axios.create({
     baseURL: backendBaseURL,
