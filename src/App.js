@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/home/Home";
-import About from "./pages/about/About";
-import Todos from "./pages/todos/Todos";
-import SignUp from "./pages/signup/SignUp";
-import Login from "./pages/login/Login";
+import Home from "./pages/Home/Home";
+import About from "./pages/About/About";
+import Todos from "./pages/Todos/Todos";
+import SignUp from "./pages/Signup/SignUp";
+import Login from "./pages/Login/Login";
 import Logout from "./components/UI/Logout/Logout";
 import SeeTodos from "./components/UI/SeeTodos/SeeTodos";
 import ScrollToTop from "./utils/ScrollToTop";
@@ -15,7 +15,7 @@ import PasswordResetCode from "./components/UI/PasswordResetCode/PasswordResetCo
 import ResetPassword from "./components/UI/ResetPassword/ResetPassword";
 import ImageUploadToCloudinary from "./components/UI/ImageUploadToCloudinary/ImageUploadToCloudinary";
 import UserProfile from "./components/UI/UserProfile/UserProfile";
-import Admin from "./pages/admin/Admin";
+import Admin from "./pages/Admin/Admin";
 import NotFound from "./components/UI/NotFound/NotFound";
 import { AccessTokenContext } from "./context/AccessTokenContext/AccessTokenContext";
 import { log } from "./utils/ConsoleLog";
