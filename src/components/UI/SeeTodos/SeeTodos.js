@@ -115,6 +115,7 @@ const SeeTodos = () => {
                         className="todo-table-column todo-table-column-description "
                         id="todo-description-id"
                       >
+                        {/* Overflow fixed using word-wrap:break-all */}
                         <span
                           style={{
                             textDecoration:
