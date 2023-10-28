@@ -75,6 +75,9 @@
   border-radius: 5px;
   box-shadow: 1px 1px 4px 1px hsl(0, 0%, 70%);
 }
+.todo-table-column-description {
+  word-break: break-all;
+}
 .you-have-no-todos {
   display: flex;
   justify-content: center;

@@ -112,7 +112,7 @@ const SeeTodos = () => {
                       <td className="todo-table-column">{todo.dateofadd}</td>
                       <td className="todo-table-column">{todo.timeofadd}</td>
                       <td
-                        className="todo-table-column"
+                        className="todo-table-column todo-table-column-description "
                         id="todo-description-id"
                       >
                         <span
